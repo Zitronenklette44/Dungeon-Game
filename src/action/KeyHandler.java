@@ -34,6 +34,9 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_1 ) {
 			CreateRooms.createRoom(0);
 		}
+		if(e.getKeyCode() == KeyEvent.VK_2 ) {
+			CreateRooms.createRoom(1);
+		}
 		
 	}
 

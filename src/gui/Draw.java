@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import game.GameLogic;
+import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.Rechteck;
 
@@ -15,10 +16,12 @@ public class Draw extends JLabel {
 	public static Rechteck player;
 	public static ArrayList<Rechteck> spielObjekte;
 	public static ArrayList<Column> columns;
+	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static Color backgroundColor = Color.DARK_GRAY;
 	public static Color gameObjectsColor = Color.white;
 	public static Color columsColor = Color.gray;
 	public static Color playerColor = Color.white;
+	public static Color collisionRectanglesColor = Color.white;
 	
 	
 	@SuppressWarnings("static-access")
@@ -28,6 +31,7 @@ public class Draw extends JLabel {
 		spielObjekte = spiellogik.spielObjekte;
 		columns = spiellogik.columns;
 		player= spiellogik.player;
+		collisionRectangles = spiellogik.collisionRectangles;
 	}
 	
 	@Override
@@ -50,6 +54,12 @@ public class Draw extends JLabel {
 		for (int i = 0; i < columns.size(); i++) {
 			Column aktuellesObjekt = columns.get(i);
 			aktuellesObjekt.draw(g);
+		}
+		
+		g.setColor(collisionRectanglesColor);
+		for (int i = 0; i < collisionRectangles.size(); i++) {
+			CollisionRechteck aktuellesObjekt = collisionRectangles.get(i);
+			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
 		
 		g.setColor(playerColor);
