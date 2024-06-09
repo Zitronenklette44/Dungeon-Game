@@ -8,6 +8,11 @@ import javax.swing.border.EmptyBorder;
 
 import action.KeyHandler;
 import game.GameLogic;
+import rooms.CreateRooms;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class TestScreen extends JFrame {
 
@@ -15,7 +20,8 @@ public class TestScreen extends JFrame {
 	private JPanel contentPane;
 	static int screenHoehe = 800;
 	static int screenBreite = 1200;
-	GameLogic spiellogik = new GameLogic();
+	static GameLogic spiellogik = new GameLogic();
+	private static JLabel lbRoomNR;
 
 
 	/**
@@ -49,9 +55,17 @@ public class TestScreen extends JFrame {
 		Draw draw = new Draw(screenBreite,screenHoehe, spiellogik);
 		draw.setBounds(0,0,screenBreite,screenHoehe);
 		draw.setVisible(true);
+		
+		lbRoomNR = new JLabel("Room 1");
+		lbRoomNR.setHorizontalAlignment(SwingConstants.CENTER);
+		lbRoomNR.setForeground(Color.MAGENTA);
+		lbRoomNR.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lbRoomNR.setBounds(0, 11, 1184, 56);
+		contentPane.add(lbRoomNR);
 		contentPane.add(draw);
 
 		setContentPane(contentPane);
+		CreateRooms.createRoom(spiellogik.dungeon.getRoom());
 	}
 
 	public static int getScreenHoehe() {
@@ -61,5 +75,9 @@ public class TestScreen extends JFrame {
 	public static int getScreenBreite() {
 		return screenBreite;
 	}
-
+	
+	public static void updateRoomNr(int RoomNr) {
+		lbRoomNR.setText("Room "+RoomNr);
+	}
+	
 }

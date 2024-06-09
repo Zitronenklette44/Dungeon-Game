@@ -11,6 +11,8 @@ import gameObject.Column;
 import gameObject.DeathRechteck;
 import gameObject.Rechteck;
 import gui.TestScreen;
+import rooms.CreateDungeon;
+import rooms.CreateRooms;
 
 public class GameLogic {
 
@@ -30,9 +32,12 @@ public class GameLogic {
 	public static int jumpHight = 70;
 	public static int playerSpeed = 2;
 	public static int[] resetPos = {50,700};
+	public static int[] resetPos1 = {1100,700};
+	public static int directionRoom = 0;
 	private static int jumpStart;
 	public static boolean onGround=false;
 	private static boolean jumpInitialized = false;
+	public static CreateDungeon dungeon = new CreateDungeon();
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
@@ -45,7 +50,8 @@ public class GameLogic {
 		screenHoehe = TestScreen.getScreenHoehe();
 
 		createObjekts();
-
+		dungeon.createDungeon();
+		
 
 
 
@@ -106,16 +112,32 @@ public class GameLogic {
 					} else if (mob.dx < 0 && !checkCollision(mob, -mob.speed, 0)) {
 						mob.posX -= mob.speed;
 					}
-					
+
 					if(checkPlayer(mob, 1, 0)) {
 						resetLevel();
 					}
 				}
 
-
-
-
-
+				if(player.posX<=0&&dungeon.currentRoom>=1) {
+					CreateRooms.createRoom(dungeon.getLastRoom());
+					directionRoom = 1;
+					resetLevel();
+					dungeon.currentRoom--;
+					TestScreen.updateRoomNr(dungeon.currentRoom+1);
+				}else if(player.posX>screenBreite-player.breite&&dungeon.currentRoom<dungeon.DungeonLenght-1) {
+					CreateRooms.createRoom(dungeon.getNextRoom());
+					directionRoom=0;
+					resetLevel();
+					dungeon.currentRoom++;
+					TestScreen.updateRoomNr(dungeon.currentRoom+1);
+				}
+				
+				if(player.posX<0) {
+					player.posX = 0;
+				}else if(player.posX>screenBreite-player.breite) {
+					player.posX =1150;
+					
+				}
 
 
 			}
@@ -128,10 +150,16 @@ public class GameLogic {
 		FloorObject = new Rechteck(50, screenBreite, 0, screenHoehe-50);
 		spielObjekte.add(FloorObject);
 	}
-	
+
 	public static void resetLevel() {
-		player.posX = resetPos[0];
-		player.posY = resetPos[1];
+		if(directionRoom == 0) {
+			player.posX = resetPos[0];
+			player.posY = resetPos[1];
+		}else if(directionRoom == 1) {
+			player.posX = resetPos1[0];
+			player.posY = resetPos1[1];
+
+		}
 		for (int i = 0; i < mobs.size(); i++) {
 			mobs.get(i).posX = mobs.get(i).SpawnX;
 			mobs.get(i).posY = mobs.get(i).SpawnY;

@@ -47,7 +47,9 @@ public class CreateRooms {
 		Draw.gameObjectsColor = Color.red;
 		Draw.playerColor = Color.cyan;
 		Draw.collisionRectanglesColor = Color.white;
+		Draw.deathRechteckColor = Color.red;
 		spielLogic.resetPos = new int[] {50,701};
+		spielLogic.resetPos1 = new int[] {1150,651};
 		//zusätzliche Objekte erstellen/löschen
 		clearObjects();
 		GameLogic.createCollisionRechteck(50, 50, 100, 700);	//höhe brereite posX posY
@@ -74,9 +76,10 @@ public class CreateRooms {
 		spielLogic.resetPos = new int[] {50,701};
 		//zusätzliche Objekte erstellen/löschen
 		clearObjects();
-		GameLogic.createTestMob(30, 30, 1000, 722, 0, 1, 1000, 722); 	//höhe breite posX posY Dx Speed SpawnX SpawnY
+		GameLogic.createTestMob(30, 30, 1000, 720, 0, 1, 1000, 720); 	//höhe breite posX posY Dx Speed SpawnX SpawnY
 		GameLogic.createCollisionRechteck(50, 10, 200, 700);
-		GameLogic.createDeathReckteck(50, 50, 1100, 700);
+		GameLogic.createCollisionRechteck(50, 10, 1100, 700);
+		//GameLogic.createDeathReckteck(50, 50, 1100, 700);
 		
 		
 
