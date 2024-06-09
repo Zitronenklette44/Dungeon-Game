@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import entitys.TestMob;
 import game.GameLogic;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
+import gameObject.DeathRechteck;
 import gameObject.Rechteck;
 
 public class Draw extends JLabel {
@@ -17,11 +19,16 @@ public class Draw extends JLabel {
 	public static ArrayList<Rechteck> spielObjekte;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
+	public static ArrayList<DeathRechteck> deathRechtecks;
+	public static ArrayList<TestMob> mobs;
+	
 	public static Color backgroundColor = Color.DARK_GRAY;
 	public static Color gameObjectsColor = Color.white;
 	public static Color columsColor = Color.gray;
 	public static Color playerColor = Color.white;
 	public static Color collisionRectanglesColor = Color.white;
+	public static Color deathRechteckColor = Color.red;
+	public static Color mobsColor = Color.blue;
 	
 	
 	@SuppressWarnings("static-access")
@@ -32,6 +39,8 @@ public class Draw extends JLabel {
 		columns = spiellogik.columns;
 		player= spiellogik.player;
 		collisionRectangles = spiellogik.collisionRectangles;
+		deathRechtecks = spiellogik.deathRechteck;
+		mobs = spiellogik.mobs;
 	}
 	
 	@Override
@@ -59,6 +68,18 @@ public class Draw extends JLabel {
 		g.setColor(collisionRectanglesColor);
 		for (int i = 0; i < collisionRectangles.size(); i++) {
 			CollisionRechteck aktuellesObjekt = collisionRectangles.get(i);
+			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+		}
+		
+		g.setColor(deathRechteckColor);
+		for (int i = 0; i < deathRechtecks.size(); i++) {
+			DeathRechteck aktuellesObjekt = deathRechtecks.get(i);
+			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+		}
+		
+		g.setColor(mobsColor);
+		for (int i = 0; i < mobs.size(); i++) {
+			TestMob aktuellesObjekt = mobs.get(i);
 			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
 		

@@ -11,6 +11,7 @@ public class KeyHandler implements KeyListener {
 	GameLogic spieLogik;
 	public KeyHandler(GameLogic spielLogic) {
 		spieLogik = spielLogic;
+		CreateRooms.setSpielLogic(spielLogic);
 	}
 	
 	public void keyTyped(KeyEvent e) {
@@ -25,7 +26,7 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'd' || e.getKeyChar() == 'D' || e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			spieLogik.moveRight=true;
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE && spieLogik.player.posY == spieLogik.floor) {
+		if(e.getKeyCode() == KeyEvent.VK_SPACE && spieLogik.onGround) {
 			spieLogik.jump=true;
 			spieLogik.player.posY--;
 		}
@@ -37,7 +38,9 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_2 ) {
 			CreateRooms.createRoom(1);
 		}
-		
+		if(e.getKeyCode() == KeyEvent.VK_3 ) {
+			CreateRooms.createRoom(2);
+		}
 	}
 
 	@Override
