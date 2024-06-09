@@ -27,7 +27,12 @@ public class KeyHandler implements KeyListener {
 			spieLogik.moveRight=true;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_SPACE && spieLogik.onGround) {
-			spieLogik.jump=true;
+			if(spieLogik.isSpacePressed == false) {
+				spieLogik.jump=true;
+			}else {
+				spieLogik.jump =false;
+			}
+			spieLogik.isSpacePressed=true;
 			spieLogik.player.posY--;
 		}
 		
@@ -50,6 +55,10 @@ public class KeyHandler implements KeyListener {
 		}
 		if(e.getKeyChar() == 'd' || e.getKeyChar() == 'D'|| e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			spieLogik.moveRight=false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+			spieLogik.isSpacePressed=false;
+			spieLogik.jump=false;
 		}
 		
 	}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import entitys.Bullet;
 import entitys.TestMob;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
@@ -24,6 +25,8 @@ public class GameLogic {
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<DeathRechteck> deathRechteck;
 	public static ArrayList<TestMob> mobs;
+	public static ArrayList<Bullet> bullets;
+	
 	public static Rechteck player;
 	public static Rechteck FloorObject;
 	public static int screenHoehe;
@@ -34,9 +37,12 @@ public class GameLogic {
 	public static int[] resetPos = {50,700};
 	public static int[] resetPos1 = {1100,700};
 	public static int directionRoom = 0;
+	public static float playerVelY = 0;
+	public static float gravity = 0.1f;
 	private static int jumpStart;
 	public static boolean onGround=false;
 	private static boolean jumpInitialized = false;
+	public static boolean isSpacePressed = false;
 	public static CreateDungeon dungeon = new CreateDungeon();
 
 	public GameLogic() {
@@ -45,6 +51,8 @@ public class GameLogic {
 		columns = new ArrayList<Column>();
 		deathRechteck = new ArrayList<DeathRechteck>();
 		mobs =new ArrayList<TestMob>();
+		bullets = new ArrayList<Bullet>();
+		
 		collisionRectangles = new ArrayList<>();
 		screenBreite =TestScreen.getScreenBreite();
 		screenHoehe = TestScreen.getScreenHoehe();
@@ -70,7 +78,19 @@ public class GameLogic {
 				if (moveRight && !checkCollision(player, 2, 0)) {
 					player.posX += 2;
 				}
-
+				
+				if(jump&&onGround) {
+					playerVelY=-3.5f;
+				}
+				
+				if(!onGround) {
+					playerVelY = playerVelY+gravity;
+					
+				}
+				
+				player.posY += playerVelY;			
+				
+				/*
 				if (jump) {
 					if (!jumpInitialized && onGround) {
 						jumpStart = player.posY;
@@ -85,7 +105,7 @@ public class GameLogic {
 					if (!onGround && !checkCollision(player, 0, 1)) {
 						player.posY++;
 					}
-				}
+				}*/
 
 				// Kollisionserkennung für Spieler
 				updateOnGroundStatus();
@@ -179,7 +199,11 @@ public class GameLogic {
 	}
 
 	public static void createTestMob(int hoehe,int breite,int posX, int posY, int Dx, int Speed, int SpawnX, int SpawnY) {
-		mobs.add(new TestMob(hoehe, breite, posX, posY, Dx, Speed, SpawnX, SpawnY));
+		mobs.add(new TestMob(hoehe, breite, posX, posY, Dx, 0, Speed, SpawnX, SpawnY));
+	}
+	
+	public static void createBullet() {
+		
 	}
 
 	private boolean checkCollision(Rechteck rect, int deltaX, int deltaY) {
@@ -206,6 +230,7 @@ public class GameLogic {
 		if (player.posY >= floor) {
 			onGround = true;
 			jumpInitialized = false;
+			player.posY =floor;
 		} else {
 			onGround = false;
 			for (CollisionRechteck collisionRect : collisionRectangles) {

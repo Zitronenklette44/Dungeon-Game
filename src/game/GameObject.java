@@ -2,9 +2,6 @@ package game;
 
 public class GameObject {
 	
-	
-	// position in Vector ändern
-	// eine Update Methode machen
 	public int groesseX;
 	public int groesseY;
 	

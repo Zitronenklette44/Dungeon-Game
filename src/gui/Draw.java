@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import entitys.Bullet;
 import entitys.TestMob;
 import game.GameLogic;
 import gameObject.CollisionRechteck;
@@ -21,6 +22,7 @@ public class Draw extends JLabel {
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<DeathRechteck> deathRechtecks;
 	public static ArrayList<TestMob> mobs;
+	public static ArrayList<Bullet> bullets;
 	
 	public static Color backgroundColor = Color.DARK_GRAY;
 	public static Color gameObjectsColor = Color.white;
@@ -29,6 +31,7 @@ public class Draw extends JLabel {
 	public static Color collisionRectanglesColor = Color.white;
 	public static Color deathRechteckColor = Color.red;
 	public static Color mobsColor = Color.blue;
+	public static Color bulletColor = Color.magenta;
 	
 	
 	@SuppressWarnings("static-access")
@@ -41,6 +44,7 @@ public class Draw extends JLabel {
 		collisionRectangles = spiellogik.collisionRectangles;
 		deathRechtecks = spiellogik.deathRechteck;
 		mobs = spiellogik.mobs;
+		bullets = spiellogik.bullets;
 	}
 	
 	@Override
@@ -81,6 +85,13 @@ public class Draw extends JLabel {
 		for (int i = 0; i < mobs.size(); i++) {
 			TestMob aktuellesObjekt = mobs.get(i);
 			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+		}
+		
+		g.setColor(bulletColor);
+		for (int i = 0; i < bullets.size(); i++) {
+			Bullet aktuellesObjekt = bullets.get(i);
+			aktuellesObjekt.rotateToPlayerAndUpdate(player);
+			aktuellesObjekt.draw(g2d);
 		}
 		
 		g.setColor(playerColor);
