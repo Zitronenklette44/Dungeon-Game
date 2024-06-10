@@ -88,7 +88,17 @@ public class GameLogic {
 					
 				}
 				
-				player.posY += playerVelY;			
+				
+				if (!isCollisionAbovePlayer()) {
+		            if (!checkCollision(player, 0, (int) playerVelY)) {
+		                player.posY += playerVelY;
+		            } else {
+		                playerVelY = 0;
+		            }
+		        } else {
+		            playerVelY = 0;
+		        }			
+				
 				
 				/*
 				if (jump) {
@@ -224,25 +234,39 @@ public class GameLogic {
 		// Keine Kollision
 		return false;
 	}
+	
+	private boolean isCollisionAbovePlayer() {
+	    for (CollisionRechteck collisionRect : collisionRectangles) {
+	        if (player.posX < collisionRect.posX + collisionRect.breite &&
+	            player.posX + player.breite > collisionRect.posX &&
+	            player.posY > collisionRect.posY + collisionRect.hoehe &&
+	            player.posY + playerVelY <= collisionRect.posY + collisionRect.hoehe) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 
 	private void updateOnGroundStatus() {
-		// Überprüfe, ob der Spieler auf dem Boden oder einer Kollisionsbox steht
-		if (player.posY >= floor) {
-			onGround = true;
-			jumpInitialized = false;
-			player.posY =floor;
-		} else {
-			onGround = false;
-			for (CollisionRechteck collisionRect : collisionRectangles) {
-				if (player.posX < collisionRect.posX + collisionRect.breite &&
-						player.posX + player.breite > collisionRect.posX &&
-						player.posY + player.hoehe == collisionRect.posY) {
-					onGround = true;
-					jumpInitialized = false;
-					break;
-				}
-			}
-		}
+	    onGround = false;
+	    if (player.posY >= floor) {
+	        onGround = true;
+	        jumpInitialized = false;
+	        player.posY = floor;
+	    } else {
+	        for (CollisionRechteck collisionRect : collisionRectangles) {
+	            if (player.posX < collisionRect.posX + collisionRect.breite &&
+	                    player.posX + player.breite > collisionRect.posX &&
+	                    player.posY + player.hoehe <= collisionRect.posY &&
+	                    player.posY + player.hoehe + playerVelY >= collisionRect.posY) {
+	                onGround = true;
+	                jumpInitialized = false;
+	                player.posY = collisionRect.posY - player.hoehe;
+	                playerVelY = 0;
+	                break;
+	            }
+	        }
+	    }
 	}
 
 	private boolean checkDeathBlock(Rechteck rect, int deltaX, int deltaY) {
