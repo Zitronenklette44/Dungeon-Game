@@ -7,8 +7,8 @@ import gameObject.Rechteck;
 
 public class Bullet extends MobTemplate{
 	public double angle;
-	public Bullet(int hoehe, int breite, int posX, int posY, int dx, int dy, int speed, int SpawnX, int SpawnY) {
-		super(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY);
+	public Bullet(int hoehe, int breite, int posX, int posY, int dx, int dy, int speed, int SpawnX, int SpawnY, int damage) {
+		super(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, 1);
 	}
 	
 	public void rotateToPlayerAndUpdate(Rechteck player){

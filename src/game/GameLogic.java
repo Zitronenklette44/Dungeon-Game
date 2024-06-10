@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import entitys.Bullet;
+import entitys.Player;
 import entitys.TestMob;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
@@ -27,7 +28,7 @@ public class GameLogic {
 	public static ArrayList<TestMob> mobs;
 	public static ArrayList<Bullet> bullets;
 	
-	public static Rechteck player;
+	public static Player player;
 	public static Rechteck FloorObject;
 	public static int screenHoehe;
 	public static int screenBreite;
@@ -41,7 +42,7 @@ public class GameLogic {
 	public static float gravity = 0.1f;
 	private static int jumpStart;
 	public static boolean onGround=false;
-	private static boolean jumpInitialized = false;
+	static boolean jumpInitialized = false;
 	public static boolean isSpacePressed = false;
 	public static CreateDungeon dungeon = new CreateDungeon();
 
@@ -72,10 +73,10 @@ public class GameLogic {
 			public void run() {
 
 				// Spielerbewegung
-				if (moveLeft && !checkCollision(player, -2, 0)) {
+				if (moveLeft && !Collisions.checkCollision(player, -2, 0)) {
 					player.posX -= 2;
 				}
-				if (moveRight && !checkCollision(player, 2, 0)) {
+				if (moveRight && !Collisions.checkCollision(player, 2, 0)) {
 					player.posX += 2;
 				}
 				
@@ -89,8 +90,8 @@ public class GameLogic {
 				}
 				
 				
-				if (!isCollisionAbovePlayer()) {
-		            if (!checkCollision(player, 0, (int) playerVelY)) {
+				if (!Collisions.isCollisionAbovePlayer()) {
+		            if (!Collisions.checkCollision(player, 0, (int) playerVelY)) {
 		                player.posY += playerVelY;
 		            } else {
 		                playerVelY = 0;
@@ -98,29 +99,11 @@ public class GameLogic {
 		        } else {
 		            playerVelY = 0;
 		        }			
-				
-				
-				/*
-				if (jump) {
-					if (!jumpInitialized && onGround) {
-						jumpStart = player.posY;
-						jumpInitialized = true;
-					}
-					if (jumpInitialized && player.posY > jumpStart - jumpHight && !checkCollision(player, 0, -1)) {
-						player.posY--;
-					} else if (!onGround) {
-						jump = false;
-					}
-				} else {
-					if (!onGround && !checkCollision(player, 0, 1)) {
-						player.posY++;
-					}
-				}*/
 
 				// Kollisionserkennung für Spieler
-				updateOnGroundStatus();
+				Collisions.updateOnGroundStatus();
 
-				if (checkDeathBlock(player, 0, -1)) {
+				if (Collisions.checkDeathBlock(player, 0, -1)) {
 					resetLevel();
 				}
 
@@ -137,16 +120,29 @@ public class GameLogic {
 					}
 
 					// Bewege den Mob nur, wenn keine Kollision vorliegt
-					if (mob.dx > 0 && !checkCollision(mob, mob.speed, 0)) {
+					if (mob.dx > 0 && !Collisions.checkCollision(mob, mob.speed, 0)) {
 						mob.posX += mob.speed;
-					} else if (mob.dx < 0 && !checkCollision(mob, -mob.speed, 0)) {
+					} else if (mob.dx < 0 && !Collisions.checkCollision(mob, -mob.speed, 0)) {
 						mob.posX -= mob.speed;
 					}
 
-					if(checkPlayer(mob, 1, 0)) {
-						resetLevel();
+					if(Collisions.checkPlayer(mob, 1, 0)) {
+						if(player.HitCooldown==0) {
+							player.Hp -= mob.damage;
+							player.setHitCooldown();
+							System.out.println(player.Hp);
+						}
 					}
 				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
 				if(player.posX<=0&&dungeon.currentRoom>=1) {
 					CreateRooms.createRoom(dungeon.getLastRoom());
@@ -175,7 +171,7 @@ public class GameLogic {
 	}
 
 	private static void createObjekts() {
-		player = new Rechteck(50, 50, screenBreite/2, floor-2);
+		player = new Player(50, 50, screenBreite/2, floor-2, 0, 0, playerSpeed, 0, 0, 3, 20);
 
 		FloorObject = new Rechteck(50, screenBreite, 0, screenHoehe-50);
 		spielObjekte.add(FloorObject);
@@ -208,101 +204,13 @@ public class GameLogic {
 		deathRechteck.add(new DeathRechteck(hoehe, breite, posX, posY));
 	}
 
-	public static void createTestMob(int hoehe,int breite,int posX, int posY, int Dx, int Speed, int SpawnX, int SpawnY) {
-		mobs.add(new TestMob(hoehe, breite, posX, posY, Dx, 0, Speed, SpawnX, SpawnY));
+	public static void createTestMob(int hoehe,int breite,int posX, int posY, int Dx, int Speed, int SpawnX, int SpawnY, int damage, int Hp) {
+		mobs.add(new TestMob(hoehe, breite, posX, posY, Dx, 0, Speed, SpawnX, SpawnY, damage, Hp));
 	}
 	
 	public static void createBullet() {
 		
 	}
 
-	private boolean checkCollision(Rechteck rect, int deltaX, int deltaY) {
-		// Berechne die zukünftige Position des Rechtecks
-		int futurePosX = rect.posX + deltaX;
-		int futurePosY = rect.posY + deltaY;
-
-		// Überprüfe, ob eine Kollision auftreten würde
-		for (CollisionRechteck collisionRect : collisionRectangles) {
-			if (futurePosX < collisionRect.posX + collisionRect.breite &&
-					futurePosX + rect.breite > collisionRect.posX &&
-					futurePosY < collisionRect.posY + collisionRect.hoehe &&
-					futurePosY + rect.hoehe > collisionRect.posY) {
-				// Kollision gefunden
-				return true;
-			}
-		}
-		// Keine Kollision
-		return false;
-	}
 	
-	private boolean isCollisionAbovePlayer() {
-	    for (CollisionRechteck collisionRect : collisionRectangles) {
-	        if (player.posX < collisionRect.posX + collisionRect.breite &&
-	            player.posX + player.breite > collisionRect.posX &&
-	            player.posY > collisionRect.posY + collisionRect.hoehe &&
-	            player.posY + playerVelY <= collisionRect.posY + collisionRect.hoehe) {
-	            return true;
-	        }
-	    }
-	    return false;
-	}
-
-	private void updateOnGroundStatus() {
-	    onGround = false;
-	    if (player.posY >= floor) {
-	        onGround = true;
-	        jumpInitialized = false;
-	        player.posY = floor;
-	    } else {
-	        for (CollisionRechteck collisionRect : collisionRectangles) {
-	            if (player.posX < collisionRect.posX + collisionRect.breite &&
-	                    player.posX + player.breite > collisionRect.posX &&
-	                    player.posY + player.hoehe <= collisionRect.posY &&
-	                    player.posY + player.hoehe + playerVelY >= collisionRect.posY) {
-	                onGround = true;
-	                jumpInitialized = false;
-	                player.posY = collisionRect.posY - player.hoehe;
-	                playerVelY = 0;
-	                break;
-	            }
-	        }
-	    }
-	}
-
-	private boolean checkDeathBlock(Rechteck rect, int deltaX, int deltaY) {
-		// Berechne die zukünftige Position des Rechtecks
-		int futurePosX = rect.posX + deltaX;
-		int futurePosY = rect.posY + deltaY;
-
-		// Überprüfe, ob eine Kollision mit einem DeathRechteck auftreten würde
-		for (DeathRechteck deathRect : deathRechteck) {
-			if (futurePosX < deathRect.posX + deathRect.breite &&
-					futurePosX + rect.breite > deathRect.posX &&
-					futurePosY < deathRect.posY + deathRect.hoehe &&
-					futurePosY + rect.hoehe > deathRect.posY) {
-				// Kollision gefunden
-				return true;
-			}
-		}
-		// Keine Kollision
-		return false;
-	}
-
-	private boolean checkPlayer(Rechteck rect, int deltaX, int deltaY) {
-		// Berechne die zukünftige Position des Rechtecks
-		int futurePosX = rect.posX + deltaX;
-		int futurePosY = rect.posY + deltaY;
-
-		// Überprüfe, ob eine Kollision mit einem DeathRechteck auftreten würde
-		if (futurePosX < player.posX + player.breite &&
-				futurePosX + rect.breite > player.posX &&
-				futurePosY < player.posY + player.hoehe &&
-				futurePosY + rect.hoehe > player.posY) {
-			// Kollision gefunden
-			return true;
-
-		}
-		// Keine Kollision
-		return false;
-	}
 }
