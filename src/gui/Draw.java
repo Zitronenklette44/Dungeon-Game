@@ -17,6 +17,7 @@ public class Draw extends JLabel {
 	private int screenwidth;
 	private int screenheight;
 	public static Rechteck player;
+	static GameLogic spieLogic;
 	public static ArrayList<Rechteck> spielObjekte;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
@@ -45,6 +46,7 @@ public class Draw extends JLabel {
 		deathRechtecks = spiellogik.deathRechteck;
 		mobs = spiellogik.mobs;
 		bullets = spiellogik.bullets;
+		this.spieLogic = spiellogik;
 	}
 	
 	@Override
@@ -56,6 +58,8 @@ public class Draw extends JLabel {
 		//zeiche Hintergrund
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, screenwidth, screenheight);
+		
+		spieLogic.dungeon.drawRoom(g2d);
 		
 		g.setColor(gameObjectsColor);
 		for (int i = 0; i < spielObjekte.size(); i++) {

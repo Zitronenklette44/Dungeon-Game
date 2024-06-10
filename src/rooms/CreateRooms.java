@@ -76,7 +76,7 @@ public class CreateRooms {
 		spielLogic.resetPos = new int[] {50,701};
 		//zusätzliche Objekte erstellen/löschen
 		clearObjects();
-		GameLogic.createTestMob(30, 30, 1000, 720, 0, 1, 1000, 720, 1, 5); 	//höhe breite posX posY Dx Speed SpawnX SpawnY
+		GameLogic.createTestMob(30, 30, 1000, 720, 0, 1, 1000, 720, 2, 5); 	//höhe breite posX posY Dx Speed SpawnX SpawnY damage hp
 		GameLogic.createCollisionRechteck(50, 10, 200, 700);
 		GameLogic.createCollisionRechteck(50, 10, 1100, 700);
 		//GameLogic.createDeathReckteck(50, 50, 1100, 700);

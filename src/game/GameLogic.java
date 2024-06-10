@@ -130,13 +130,14 @@ public class GameLogic {
 						if(player.HitCooldown==0) {
 							player.Hp -= mob.damage;
 							player.setHitCooldown();
-							System.out.println(player.Hp);
+							System.out.println("Player HP: "+ player.Hp);
 						}
 					}
 				}
 				
-				
-				
+				if(player.HitCooldown>0) {
+				player.HitCooldown--;
+				}
 				
 				
 				
