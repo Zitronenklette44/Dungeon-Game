@@ -16,7 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 
-public class ShopTools extends JFrame {
+public class ShopTools_outdated extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private  JPanel contentPane;
@@ -37,7 +37,7 @@ public class ShopTools extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void erstellenShopTools(int DungeonFrei2) {
 		DungeonFrei = DungeonFrei2;
 		EventQueue.invokeLater(new Runnable() {
@@ -50,12 +50,12 @@ public class ShopTools extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public ShopTools() {
+	public ShopTools_outdated() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 679, 484);
 		contentPane = new JPanel();

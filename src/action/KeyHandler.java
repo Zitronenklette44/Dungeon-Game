@@ -21,19 +21,22 @@ public class KeyHandler implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyChar() == 'a' || e.getKeyChar() == 'A'|| e.getKeyCode() == KeyEvent.VK_LEFT) {
-			spieLogik.moveLeft= true;
+			GameLogic.moveLeft= true;
 		}
 		if(e.getKeyChar() == 'd' || e.getKeyChar() == 'D' || e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			spieLogik.moveRight=true;
+			GameLogic.moveRight=true;
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE && spieLogik.onGround) {
-			if(spieLogik.isSpacePressed == false) {
-				spieLogik.jump=true;
+		if(e.getKeyCode() == KeyEvent.VK_SPACE && GameLogic.onGround) {
+			if(GameLogic.isSpacePressed == false) {
+				GameLogic.jump=true;
 			}else {
-				spieLogik.jump =false;
+				GameLogic.jump =false;
 			}
-			spieLogik.isSpacePressed=true;
-			spieLogik.player.posY--;
+			GameLogic.isSpacePressed=true;
+			GameLogic.player.posY--;
+		}
+		if(e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
+			GameLogic.Interact=true;
 		}
 		
 		//temp
@@ -51,14 +54,14 @@ public class KeyHandler implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyChar() == 'a' || e.getKeyChar() == 'A'|| e.getKeyCode() == KeyEvent.VK_LEFT) {
-			spieLogik.moveLeft= false;
+			GameLogic.moveLeft= false;
 		}
 		if(e.getKeyChar() == 'd' || e.getKeyChar() == 'D'|| e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			spieLogik.moveRight=false;
+			GameLogic.moveRight=false;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-			spieLogik.isSpacePressed=false;
-			spieLogik.jump=false;
+			GameLogic.isSpacePressed=false;
+			GameLogic.jump=false;
 		}
 		
 	}

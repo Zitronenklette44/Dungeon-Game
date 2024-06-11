@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 public class TestScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private static JPanel contentPane;
 	static int screenHoehe = 800;
 	static int screenBreite = 1200;
 	static GameLogic spiellogik = new GameLogic();
@@ -78,6 +78,5 @@ public class TestScreen extends JFrame {
 	
 	public static void updateRoomNr(int RoomNr) {
 		lbRoomNR.setText("Room "+RoomNr);
-	}
-	
+	}	
 }

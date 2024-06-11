@@ -37,7 +37,7 @@ public class ShopPotions extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void erstellenShopPotions(int DungeonFrei2) {
 		DungeonFrei = DungeonFrei2;
 		EventQueue.invokeLater(new Runnable() {
@@ -50,7 +50,7 @@ public class ShopPotions extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.

@@ -1,8 +1,16 @@
 package game;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+
+import javax.swing.JLabel;
+
+import entitys.InteractableTemplate;
 import gameObject.CollisionRechteck;
 import gameObject.DeathRechteck;
 import gameObject.Rechteck;
+import gui.TestScreen;
 
 public class Collisions {
 	GameLogic spieLogic;
@@ -97,4 +105,30 @@ public class Collisions {
 		// Keine Kollision
 		return false;
 	}
+	
+	public static void checkInteractable(Graphics2D g, Color color) {
+        for (InteractableTemplate interactable : GameLogic.interactables) {
+            int playerCenterX = GameLogic.player.posX + GameLogic.player.breite / 2;
+            int playerCenterY = GameLogic.player.posY + GameLogic.player.hoehe / 2;
+
+            int interactableCenterX = interactable.posX + interactable.breite / 2;
+            int interactableCenterY = interactable.posY + interactable.hoehe / 2;
+
+            int dx = playerCenterX - interactableCenterX;
+            int dy = playerCenterY - interactableCenterY;
+            int distanceSquared = dx * dx + dy * dy;
+            int rangeSquared = interactable.range * interactable.range;
+
+            if (distanceSquared <= rangeSquared) {
+            	interactable.actionEnabled = true;
+                g.setColor(color);
+                g.drawString("[E] "+interactable.interactionString, interactable.posX, interactable.posY-10);
+                
+            }else {
+            	interactable.actionEnabled = false;
+            }
+        }
+    }
+
+	
 }

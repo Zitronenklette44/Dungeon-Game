@@ -6,7 +6,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import entitys.Bullet;
+import entitys.DungeonChooser;
+import entitys.InteractableTemplate;
 import entitys.Player;
+import entitys.ShopOpen;
 import entitys.TestMob;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
@@ -18,15 +21,17 @@ import rooms.CreateRooms;
 
 public class GameLogic {
 
-	public boolean moveLeft = false;
-	public boolean moveRight = false;
-	public boolean jump = false;
+	public static boolean moveLeft = false;
+	public static boolean moveRight = false;
+	public static boolean jump = false;
+	public static boolean Interact = false;
 	public static ArrayList<Rechteck> spielObjekte;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<DeathRechteck> deathRechteck;
 	public static ArrayList<TestMob> mobs;
 	public static ArrayList<Bullet> bullets;
+	public static ArrayList<InteractableTemplate> interactables;
 	
 	public static Player player;
 	public static Rechteck FloorObject;
@@ -44,7 +49,7 @@ public class GameLogic {
 	public static boolean onGround=false;
 	static boolean jumpInitialized = false;
 	public static boolean isSpacePressed = false;
-	public static CreateDungeon dungeon = new CreateDungeon();
+	public CreateDungeon dungeon = new CreateDungeon();
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
@@ -53,6 +58,7 @@ public class GameLogic {
 		deathRechteck = new ArrayList<DeathRechteck>();
 		mobs =new ArrayList<TestMob>();
 		bullets = new ArrayList<Bullet>();
+		interactables = new ArrayList<InteractableTemplate>();
 		
 		collisionRectangles = new ArrayList<>();
 		screenBreite =TestScreen.getScreenBreite();
@@ -72,87 +78,23 @@ public class GameLogic {
 
 			public void run() {
 
-				// Spielerbewegung
-				if (moveLeft && !Collisions.checkCollision(player, -2, 0)) {
-					player.posX -= 2;
-				}
-				if (moveRight && !Collisions.checkCollision(player, 2, 0)) {
-					player.posX += 2;
-				}
+				playerMovement();
+				mobMovement();
 				
-				if(jump&&onGround) {
-					playerVelY=-3.5f;
-				}
-				
-				if(!onGround) {
-					playerVelY = playerVelY+gravity;
-					
-				}
-				
-				
-				if (!Collisions.isCollisionAbovePlayer()) {
-		            if (!Collisions.checkCollision(player, 0, (int) playerVelY)) {
-		                player.posY += playerVelY;
-		            } else {
-		                playerVelY = 0;
-		            }
-		        } else {
-		            playerVelY = 0;
-		        }			
-
-				// Kollisionserkennung für Spieler
-				Collisions.updateOnGroundStatus();
-
-				if (Collisions.checkDeathBlock(player, 0, -1)) {
-					resetLevel();
-				}
-
-				//movement mobs
-				for (int i = 0; i < mobs.size(); i++) {
-					TestMob mob = mobs.get(i);
-
-					if (player.posX > mob.posX) {
-						mob.dx = 1;
-					} else if (player.posX < mob.posX) {
-						mob.dx = -1;
-					} else {
-						mob.dx = 0;
-					}
-
-					// Bewege den Mob nur, wenn keine Kollision vorliegt
-					if (mob.dx > 0 && !Collisions.checkCollision(mob, mob.speed, 0)) {
-						mob.posX += mob.speed;
-					} else if (mob.dx < 0 && !Collisions.checkCollision(mob, -mob.speed, 0)) {
-						mob.posX -= mob.speed;
-					}
-
-					if(Collisions.checkPlayer(mob, 1, 0)) {
-						if(player.HitCooldown==0) {
-							player.Hp -= mob.damage;
-							player.setHitCooldown();
-							System.out.println("Player HP: "+ player.Hp);
-						}
-					}
-				}
-				
-				if(player.HitCooldown>0) {
-				player.HitCooldown--;
-				}
+				if(player.HitCooldown>0) {player.HitCooldown--;}
+				if(player.AtkCooldown>0) {player.AtkCooldown--;}
 				
 				
 				
 				
 				
 				
-
 				if(player.posX<=0&&dungeon.currentRoom>=1) {
-					CreateRooms.createRoom(dungeon.getLastRoom());
 					directionRoom = 1;
 					resetLevel();
 					dungeon.currentRoom--;
 					TestScreen.updateRoomNr(dungeon.currentRoom+1);
-				}else if(player.posX>screenBreite-player.breite&&dungeon.currentRoom<dungeon.DungeonLenght-1) {
-					CreateRooms.createRoom(dungeon.getNextRoom());
+				}else if(player.posX>screenBreite-player.breite&&dungeon.currentRoom<dungeon.getDungeonLenght()-1) {
 					directionRoom=0;
 					resetLevel();
 					dungeon.currentRoom++;
@@ -211,6 +153,92 @@ public class GameLogic {
 	
 	public static void createBullet() {
 		
+	}
+	
+	public static void createDungeonChooser(int posX, int posY) {
+		interactables.add(new DungeonChooser(10, 10, posX, posY));
+	}
+	
+	public static void createShopOpen(int posX, int posY) {
+		interactables.add(new ShopOpen(10, 10, posX, posY));
+	}
+	
+	private static void playerMovement() {
+		// Spielerbewegung
+		if (moveLeft && !Collisions.checkCollision(player, -2, 0)) {
+			player.posX -= 2;
+		}
+		if (moveRight && !Collisions.checkCollision(player, 2, 0)) {
+			player.posX += 2;
+		}
+		
+		if(jump&&onGround) {
+			playerVelY=-3.5f;
+		}
+		
+		if(!onGround) {
+			playerVelY = playerVelY+gravity;
+			
+		}
+		
+		
+		if (!Collisions.isCollisionAbovePlayer()) {
+            if (!Collisions.checkCollision(player, 0, (int) playerVelY)) {
+                player.posY += playerVelY;
+            } else {
+                playerVelY = 0;
+            }
+        } else {
+            playerVelY = 0;
+        }			
+
+		// Kollisionserkennung für Spieler
+		Collisions.updateOnGroundStatus();
+
+		if (Collisions.checkDeathBlock(player, 0, -1)) {
+			resetLevel();
+		}
+		
+		if(Interact) {
+			for(int i = 0; i<interactables.size();i++) {
+				if(interactables.get(i).actionEnabled) {
+					interactables.get(i).performAction();
+				}
+			}
+			Interact = false;
+		}
+
+	}
+	
+	private static void mobMovement(){
+
+		//movement mobs
+		for (int i = 0; i < mobs.size(); i++) {
+			TestMob mob = mobs.get(i);
+
+			if (player.posX > mob.posX) {
+				mob.dx = 1;
+			} else if (player.posX < mob.posX) {
+				mob.dx = -1;
+			} else {
+				mob.dx = 0;
+			}
+
+			// Bewege den Mob nur, wenn keine Kollision vorliegt
+			if (mob.dx > 0 && !Collisions.checkCollision(mob, mob.speed, 0)) {
+				mob.posX += mob.speed;
+			} else if (mob.dx < 0 && !Collisions.checkCollision(mob, -mob.speed, 0)) {
+				mob.posX -= mob.speed;
+			}
+
+			if(Collisions.checkPlayer(mob, 1, 0)) {
+				if(player.HitCooldown==0) {
+					player.Hp -= mob.damage;
+					player.setHitCooldown();
+					System.out.println("Player HP: "+ player.Hp);
+				}
+			}
+		}
 	}
 
 	

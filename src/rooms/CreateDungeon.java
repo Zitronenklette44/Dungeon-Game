@@ -1,14 +1,16 @@
 package rooms;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 
+import gui.Draw;
 import rooms.Home.*;
 
 public class CreateDungeon {
 	public int[] DungeonRooms;
 	public int DungeonLenght;
 	public int currentRoom=0;
-	private static RoomTemplate[][] rooms = {{new Dungeon(), new Entrace(), new Center(), new Exit(), new Field()}};
+	private static RoomTemplate[][] rooms = {{new Dungeon("Dungeon"), new Entrace("Eingang"), new Center("Mitte"), new Exit("Ausgang"), new Field("Field")}};
 	private static int[] homeVillage = {0,1,2,3,4};
 	public boolean homeVillageBuild = true;
 	public static int dungeonType = 0;
@@ -46,13 +48,23 @@ public class CreateDungeon {
 		return DungeonRooms[currentRoom+1];
 	}
 	
+	public int getDungeonLenght() {
+		if(homeVillageBuild) {
+			return homeVillage.length;
+		}
+		return DungeonLenght;
+	}
+	
 	public void createHomeVillage(){
 		
 	}
 	
 	public void drawRoom(Graphics2D g2d) {
-			g2d.drawString(rooms[dungeonType][currentRoom].name, 20f, 30f);
-		
-
+		Draw.clearObjects();
+		rooms[dungeonType][currentRoom].changeColors();
+	    g2d.setFont(new Font("Arial", Font.BOLD, 20));
+		g2d.drawString(rooms[dungeonType][currentRoom].name, 200, 300);
+		rooms[dungeonType][currentRoom].createObjects();
+		rooms[dungeonType][currentRoom].DrawImage(g2d);
 	}
 }

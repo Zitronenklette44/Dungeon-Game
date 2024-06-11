@@ -34,7 +34,7 @@ public class CreateRooms {
 		Draw.playerColor = Color.blue;
 		spielLogic.resetPos = new int[] {50,701};
 		//zusätzliche Objekte erstellen/löschen
-		clearObjects();
+		Draw.clearObjects();
 		for(int i = 0;i<10;i++) {
 			GameLogic.createColumn(50, 750, Color.gray,Color.lightGray ,(1150/10)*i+50, 0);
 		}
@@ -51,7 +51,7 @@ public class CreateRooms {
 		spielLogic.resetPos = new int[] {50,701};
 		spielLogic.resetPos1 = new int[] {1150,651};
 		//zusätzliche Objekte erstellen/löschen
-		clearObjects();
+		Draw.clearObjects();
 		GameLogic.createCollisionRechteck(50, 50, 100, 700);	//höhe brereite posX posY
 		GameLogic.createCollisionRechteck(100, 50, 150, 650);
 		GameLogic.createCollisionRechteck(50, 50, 200, 650);
@@ -75,7 +75,7 @@ public class CreateRooms {
 		Draw.deathRechteckColor = Color.pink;
 		spielLogic.resetPos = new int[] {50,701};
 		//zusätzliche Objekte erstellen/löschen
-		clearObjects();
+		Draw.clearObjects();
 		GameLogic.createTestMob(30, 30, 1000, 720, 0, 1, 1000, 720, 2, 5); 	//höhe breite posX posY Dx Speed SpawnX SpawnY damage hp
 		GameLogic.createCollisionRechteck(50, 10, 200, 700);
 		GameLogic.createCollisionRechteck(50, 10, 1100, 700);
@@ -84,13 +84,6 @@ public class CreateRooms {
 		
 
 
-	}
-	
-	public static void clearObjects() {
-		Draw.collisionRectangles.clear();
-		Draw.deathRechtecks.clear();
-		Draw.columns.clear();
-		Draw.mobs.clear();
 	}
 
 	public static void setSpielLogic(GameLogic spielLogic) {
