@@ -60,11 +60,7 @@ public class Draw extends JLabel {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		//versteckte Interactionen
-		g.setColor(Color.green);
-		for (int i = 0; i < interactables.size(); i++) {
-			InteractableTemplate aktuellesObjekt = interactables.get(i);
-			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
-		}
+		
 		
 		//zeiche Hintergrund
 		g.setColor(backgroundColor);
@@ -116,6 +112,11 @@ public class Draw extends JLabel {
 		g.fillRect(player.posX, player.posY, player.breite, player.hoehe);
 		
 		Collisions.checkInteractable(g2d, Color.white);
+		g.setColor(Color.green);
+		for (int i = 0; i < interactables.size(); i++) {
+			InteractableTemplate aktuellesObjekt = interactables.get(i);
+			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+		}
 		
 		repaint();
 	}

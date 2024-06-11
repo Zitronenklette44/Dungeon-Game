@@ -9,7 +9,8 @@ import entitys.Bullet;
 import entitys.DungeonChooser;
 import entitys.InteractableTemplate;
 import entitys.Player;
-import entitys.ShopOpen;
+import entitys.ShopOpenPotions;
+import entitys.ShopOpenTools;
 import entitys.TestMob;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
@@ -159,8 +160,11 @@ public class GameLogic {
 		interactables.add(new DungeonChooser(10, 10, posX, posY));
 	}
 	
-	public static void createShopOpen(int posX, int posY) {
-		interactables.add(new ShopOpen(10, 10, posX, posY));
+	public static void createShopToolsOpen(int posX, int posY) {
+		interactables.add(new ShopOpenTools(10, 10, posX, posY));
+	}
+	public static void createShopPotionsOpen(int posX, int posY) {
+		interactables.add(new ShopOpenPotions(10, 10, posX, posY));
 	}
 	
 	private static void playerMovement() {

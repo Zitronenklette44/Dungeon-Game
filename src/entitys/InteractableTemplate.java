@@ -14,5 +14,5 @@ public class InteractableTemplate extends Rechteck{
 	}
 	
 	public void performAction() {}
-
+	
 }
