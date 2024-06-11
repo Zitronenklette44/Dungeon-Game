@@ -72,7 +72,7 @@ public class Draw extends JLabel {
 		
 		//zeiche Raum
 		g.setColor(Color.white);
-		spieLogic.dungeon.drawRoom(g2d);
+		//spieLogic.dungeon.drawRoom(g2d);
 		
 		//Zeichne Objekte
 		g.setColor(gameObjectsColor);
