@@ -16,7 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 
-public class ShopPotions extends JFrame {
+public class ShopPotions_outdated extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private  JPanel contentPane;
@@ -55,7 +55,7 @@ public class ShopPotions extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShopPotions() {
+	public ShopPotions_outdated() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 679, 484);
 		contentPane = new JPanel();
