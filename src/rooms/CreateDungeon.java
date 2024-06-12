@@ -30,10 +30,11 @@ public class CreateDungeon {
 	private int[][] Features= {{1,6}};
 	private static int[] homeVillage = {0,1,2,3,4};
 	public boolean homeVillageBuild = true;
-	public static int dungeonType = 1;
+	public static int dungeonType = 0;
 	private static int[] maxRooms = {10,20,50,100};
 
 	public void createDungeon() {
+		if(!homeVillageBuild) {
 		DungeonLength = (int)(Math.random()*(maxRooms[dungeonType]/2))+(maxRooms[dungeonType]/2);
 		DungeonRooms= new int[DungeonLength];
 		System.out.println("Dungeon erstelle mit:"+DungeonLength+" mit folgenden Räumen: ");
@@ -45,6 +46,7 @@ public class CreateDungeon {
 
 		for(int i= 0; i<DungeonLength;i++) {
 			System.out.print(DungeonRooms[i]+", ");
+		}
 		}
 	}
 
@@ -138,11 +140,18 @@ public class CreateDungeon {
 
 	public void drawRoom(Graphics2D g2d) {
 		Draw.clearObjects();
-		//System.out.println("dungeon Type: "+ dungeonType+" current Room: "+ currentRoom+" dungeonLength: "+ DungeonLength);
+		if(!homeVillageBuild) {
 		rooms[dungeonType][DungeonRooms[currentRoom]].changeColors();
 		g2d.setFont(new Font("Arial", Font.BOLD, 20));
 		g2d.drawString(rooms[dungeonType][DungeonRooms[currentRoom]].name, 200, 300);
 		rooms[dungeonType][DungeonRooms[currentRoom]].createObjects();
 		rooms[dungeonType][DungeonRooms[currentRoom]].DrawImage(g2d);
+		}else {
+			rooms[dungeonType][currentRoom].changeColors();
+			g2d.setFont(new Font("Arial", Font.BOLD, 20));
+			g2d.drawString(rooms[dungeonType][currentRoom].name, 200, 300);
+			rooms[dungeonType][currentRoom].createObjects();
+			rooms[dungeonType][currentRoom].DrawImage(g2d);
+		}
 	}
 }

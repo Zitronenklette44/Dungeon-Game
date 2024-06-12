@@ -54,6 +54,8 @@ public class ShopTools extends JFrame {
 	 * Create the frame.
 	 */
 	public ShopTools() {
+		setResizable(false);
+		setAlwaysOnTop(true);
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

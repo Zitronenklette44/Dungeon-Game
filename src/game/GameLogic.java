@@ -16,7 +16,7 @@ import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.DeathRechteck;
 import gameObject.Rechteck;
-import gui.TestScreen;
+import gui.GameScreen;
 import rooms.CreateDungeon;
 import rooms.CreateRooms;
 
@@ -62,8 +62,8 @@ public class GameLogic {
 		interactables = new ArrayList<InteractableTemplate>();
 		
 		collisionRectangles = new ArrayList<>();
-		screenBreite =TestScreen.getScreenBreite();
-		screenHoehe = TestScreen.getScreenHoehe();
+		screenBreite =GameScreen.getScreenBreite();
+		screenHoehe = GameScreen.getScreenHoehe();
 
 		createObjekts();
 		dungeon.createDungeon();
@@ -94,12 +94,12 @@ public class GameLogic {
 					directionRoom = 1;
 					resetLevel();
 					dungeon.currentRoom--;
-					TestScreen.updateRoomNr(dungeon.currentRoom+1);
+					GameScreen.updateRoomNr(dungeon.currentRoom+1);
 				}else if(player.posX>screenBreite-player.breite&&dungeon.currentRoom<dungeon.getDungeonLenght()-1) {
 					directionRoom=0;
 					resetLevel();
 					dungeon.currentRoom++;
-					TestScreen.updateRoomNr(dungeon.currentRoom+1);
+					GameScreen.updateRoomNr(dungeon.currentRoom+1);
 				}
 				
 				if(player.posX<0) {

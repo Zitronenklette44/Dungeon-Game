@@ -3,11 +3,11 @@ package action;
 
 
 
-import gui.TestScreen;
+import gui.GameScreen;
 import gui.Shops.ShopTools;
 
 public class Main {
     public static void main(String[] args) {
-        TestScreen.erstellen();
+        GameScreen.erstellen();
     }
 }

@@ -10,7 +10,7 @@ import entitys.InteractableTemplate;
 import gameObject.CollisionRechteck;
 import gameObject.DeathRechteck;
 import gameObject.Rechteck;
-import gui.TestScreen;
+import gui.GameScreen;
 
 public class Collisions {
 	GameLogic spieLogic;

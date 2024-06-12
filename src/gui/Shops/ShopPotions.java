@@ -55,6 +55,8 @@ public class ShopPotions extends JFrame {
 	 * Create the frame.
 	 */
 	public ShopPotions() {
+		setResizable(false);
+		setAlwaysOnTop(true);
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

@@ -14,7 +14,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
-public class TestScreen extends JFrame {
+public class GameScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static JPanel contentPane;
@@ -31,7 +31,7 @@ public class TestScreen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestScreen frame = new TestScreen();
+					GameScreen frame = new GameScreen();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,8 @@ public class TestScreen extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings("static-access")
-	public TestScreen() {
+	public GameScreen() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, screenBreite, screenHoehe);
 		contentPane = new JPanel();
