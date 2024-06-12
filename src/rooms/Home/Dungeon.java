@@ -31,7 +31,6 @@ public class Dungeon extends RoomTemplate{
 	public void DrawImage(Graphics2D g) {
 		super.DrawImage(g);
 		try {
-			//g.drawImage(ImageIO.read(getClass().getResourceAsStream("/resources/DungeonBackground.jpeg")), 0, 0, null, null);
 			g.drawImage(ImageIO.read(getClass().getResourceAsStream("/resources/cave.png")), 0, 550, null, null);
 		} catch (IOException e) {
 			e.printStackTrace();

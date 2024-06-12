@@ -65,7 +65,7 @@ public class TestScreen extends JFrame {
 		contentPane.add(draw);
 
 		setContentPane(contentPane);
-		CreateRooms.createRoom(spiellogik.dungeon.getRoom());
+		//CreateRooms.createRoom(spiellogik.dungeon.getRoom());
 	}
 
 	public static int getScreenHoehe() {
