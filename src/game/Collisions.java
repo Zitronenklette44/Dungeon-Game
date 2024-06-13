@@ -118,7 +118,7 @@ public class Collisions {
             int dy = playerCenterY - interactableCenterY;
             int distanceSquared = dx * dx + dy * dy;
             int rangeSquared = interactable.range * interactable.range;
-
+            
             if (distanceSquared <= rangeSquared) {
             	interactable.actionEnabled = true;
                 g.setColor(color);

@@ -1,5 +1,9 @@
 package entitys;
 
+import game.GameLogic;
+import gui.DungeonChooserGUI;
+import gui.GameScreen;
+
 public class DungeonChooser extends InteractableTemplate{
 
 	public DungeonChooser(int hoehe, int breite, int posX, int posY) {
@@ -10,6 +14,7 @@ public class DungeonChooser extends InteractableTemplate{
 	@Override
 	public void performAction() {
 		super.performAction();
-		System.out.println("dungeon switch");
+		DungeonChooserGUI.erstellen(GameLogic.dungeonKey);
+		GameScreen.hideFrame();
 	}
 }

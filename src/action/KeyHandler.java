@@ -62,8 +62,7 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			GameLogic.isSpacePressed=false;
 			GameLogic.jump=false;
-		}
-		
+		}	
 	}
 
 }

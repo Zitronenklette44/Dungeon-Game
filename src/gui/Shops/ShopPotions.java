@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import gui.GameScreen;
+
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -19,6 +22,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
@@ -28,18 +33,22 @@ public class ShopPotions extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	static ShopPotions frame;
+	private static boolean existing = false;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void erstellen() {
-		System.out.println("Will ne BANANE");
+		if(existing) {
+			return;
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					frame = new ShopPotions();
 					frame.setVisible(true);
 					frame.requestFocusInWindow();
+					existing = true;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,20 +58,28 @@ public class ShopPotions extends JFrame {
 	
 	public static void close() {
 		frame.dispose();
+		existing= false;
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public ShopPotions() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				close();
+				GameScreen.showFrame();
+			}
+		});
 		setResizable(false);
 		setAlwaysOnTop(true);
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) {
-					System.out.println("pressed ");
 					close();
+					GameScreen.showFrame();
 				}
 			}
 		});
@@ -645,12 +662,12 @@ public class ShopPotions extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/TableSmall.jpeg")));
+		lblNewLabel.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/backgrounds/TableSmall.jpeg")));
 		lblNewLabel.setBackground(new Color(125, 67, 2));
 		lblNewLabel.setBounds(714, 211, 200, 400);
 		panel.add(lblNewLabel);
 		JLabel lbBackground = new JLabel("");
-		lbBackground.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/TestBackground.jpeg")));
+		lbBackground.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/backgrounds/TestBackground.jpeg")));
 		lbBackground.setBounds(0, 0, 1200, 800);
 		contentPane.add(lbBackground);
 	}

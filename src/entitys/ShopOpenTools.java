@@ -1,5 +1,7 @@
 package entitys;
 
+import gui.GameScreen;
+
 public class ShopOpenTools extends InteractableTemplate{
 
 	public ShopOpenTools(int hoehe, int breite, int posX, int posY) {
@@ -10,6 +12,7 @@ public class ShopOpenTools extends InteractableTemplate{
 	public void performAction() {
 		super.performAction();
 		gui.Shops.ShopTools.erstellen();
+		GameScreen.hideFrame();
 		
 	}
 	

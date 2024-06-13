@@ -22,6 +22,7 @@ public class GameScreen extends JFrame {
 	static int screenBreite = 1200;
 	static GameLogic spiellogik = new GameLogic();
 	private static JLabel lbRoomNR;
+	static GameScreen frame;
 
 
 	/**
@@ -31,7 +32,7 @@ public class GameScreen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GameScreen frame = new GameScreen();
+					frame = new GameScreen();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,11 +40,18 @@ public class GameScreen extends JFrame {
 			}
 		});
 	}
+	
+	public static void hideFrame() {
+		frame.setVisible(false);
+	}
+	
+	public static void showFrame() {
+		frame.setVisible(true);
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("static-access")
 	public GameScreen() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +74,6 @@ public class GameScreen extends JFrame {
 		contentPane.add(draw);
 
 		setContentPane(contentPane);
-		//CreateRooms.createRoom(spiellogik.dungeon.getRoom());
 	}
 
 	public static int getScreenHoehe() {

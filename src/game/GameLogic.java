@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import entitys.Bullet;
 import entitys.DungeonChooser;
+import entitys.DungeonExit;
 import entitys.InteractableTemplate;
 import entitys.Player;
 import entitys.ShopOpenPotions;
@@ -46,11 +47,13 @@ public class GameLogic {
 	public static int directionRoom = 0;
 	public static float playerVelY = 0;
 	public static float gravity = 0.1f;
+	public static int dungeonKey=2;
+	public static int counterInteraction = 0;
 	private static int jumpStart;
 	public static boolean onGround=false;
 	static boolean jumpInitialized = false;
 	public static boolean isSpacePressed = false;
-	public CreateDungeon dungeon = new CreateDungeon();
+	public static CreateDungeon dungeon = new CreateDungeon();
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
@@ -108,8 +111,10 @@ public class GameLogic {
 					player.posX =1150;
 					
 				}
-
-
+				if(Interact) {
+					counterInteraction++;
+				}
+				
 			}
 		}, 0, 5);
 	}
@@ -167,6 +172,10 @@ public class GameLogic {
 		interactables.add(new ShopOpenPotions(10, 10, posX, posY));
 	}
 	
+	public static void createDungeonExit(int posX, int posY) {
+		interactables.add(new DungeonExit(10, 10, posX, posY));
+	}
+	
 	private static void playerMovement() {
 		// Spielerbewegung
 		if (moveLeft && !Collisions.checkCollision(player, -2, 0)) {
@@ -205,11 +214,16 @@ public class GameLogic {
 		
 		if(Interact) {
 			for(int i = 0; i<interactables.size();i++) {
-				if(interactables.get(i).actionEnabled) {
-					interactables.get(i).performAction();
-				}
+				try {
+					if(interactables.get(i).actionEnabled) {
+						interactables.get(i).performAction();
+					}
+				} catch (IndexOutOfBoundsException e) {}
 			}
+		}
+		if(counterInteraction >=50) {
 			Interact = false;
+			counterInteraction = 0;
 		}
 
 	}

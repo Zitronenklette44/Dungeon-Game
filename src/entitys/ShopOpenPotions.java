@@ -1,5 +1,7 @@
 package entitys;
 
+import gui.GameScreen;
+
 public class ShopOpenPotions extends InteractableTemplate{
 
 	public ShopOpenPotions(int hoehe, int breite, int posX, int posY) {
@@ -10,6 +12,7 @@ public class ShopOpenPotions extends InteractableTemplate{
 	public void performAction() {
 		super.performAction();
 		gui.Shops.ShopPotions.erstellen();
+		GameScreen.hideFrame();
 		
 	}
 	

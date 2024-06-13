@@ -1,5 +1,6 @@
 package entitys;
 
+import game.GameLogic;
 import gameObject.Rechteck;
 
 public class InteractableTemplate extends Rechteck{
@@ -13,6 +14,6 @@ public class InteractableTemplate extends Rechteck{
 		this.range = range;
 	}
 	
-	public void performAction() {}
+	public void performAction() {GameLogic.Interact = false;GameLogic.counterInteraction =0;}
 	
 }

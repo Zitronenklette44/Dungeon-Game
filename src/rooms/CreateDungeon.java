@@ -35,8 +35,8 @@ public class CreateDungeon {
     };
     private int[][] Features = {{1, 6}};
     private static int[] homeVillage = {0, 1, 2, 3, 4};
-    public boolean homeVillageBuild = false;
-    public static int dungeonType = 1;
+    public static boolean homeVillageBuild = true;
+    public static int dungeonType = 0;
     private static int[] maxRooms = {10, 20, 50, 100};
 
     public void createDungeon() {
@@ -152,17 +152,18 @@ public class CreateDungeon {
     }
 
     public void drawRoom(Graphics2D g2d) {
-        Draw.clearObjects();
         if (!homeVillageBuild) {
             rooms[dungeonType][DungeonRooms.get(currentRoom)].changeColors();
             g2d.setFont(new Font("Arial", Font.BOLD, 20));
             g2d.drawString(rooms[dungeonType][DungeonRooms.get(currentRoom)].name, 200, 300);
+            Draw.clearObjects();
             rooms[dungeonType][DungeonRooms.get(currentRoom)].createObjects();
             rooms[dungeonType][DungeonRooms.get(currentRoom)].DrawImage(g2d);
         } else {
             rooms[dungeonType][currentRoom].changeColors();
             g2d.setFont(new Font("Arial", Font.BOLD, 20));
             g2d.drawString(rooms[dungeonType][currentRoom].name, 200, 300);
+            Draw.clearObjects();
             rooms[dungeonType][currentRoom].createObjects();
             rooms[dungeonType][currentRoom].DrawImage(g2d);
         }
