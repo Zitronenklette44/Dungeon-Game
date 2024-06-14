@@ -25,6 +25,8 @@ public class GameLogic {
 
 	public static boolean moveLeft = false;
 	public static boolean moveRight = false;
+	public static boolean moveUp = false;
+	public static boolean moveDown= false;
 	public static boolean jump = false;
 	public static boolean Interact = false;
 	public static ArrayList<Rechteck> spielObjekte;
@@ -47,12 +49,13 @@ public class GameLogic {
 	public static int directionRoom = 0;
 	public static float playerVelY = 0;
 	public static float gravity = 0.1f;
-	public static int dungeonKey=2;
+	public static int dungeonKey=4;
 	public static int counterInteraction = 0;
-	private static int jumpStart;
 	public static boolean onGround=false;
 	static boolean jumpInitialized = false;
 	public static boolean isSpacePressed = false;
+	public static boolean vertikalAxis = false;
+	
 	public static CreateDungeon dungeon = new CreateDungeon();
 
 	public GameLogic() {
@@ -184,18 +187,24 @@ public class GameLogic {
 		if (moveRight && !Collisions.checkCollision(player, 2, 0)) {
 			player.posX += 2;
 		}
+		if (moveUp && !Collisions.checkCollision(player, 0, -2)&&vertikalAxis&&player.posY>0) {
+			player.posY -= 2;
+		}
+		if (moveDown && !Collisions.checkCollision(player, 0, 2)&&vertikalAxis&&player.posY<floor) {
+			player.posY += 2;
+		}
 		
-		if(jump&&onGround) {
+		if(jump&&onGround&&!vertikalAxis) {
 			playerVelY=-3.5f;
 		}
 		
-		if(!onGround) {
+		if(!onGround&&!vertikalAxis) {
 			playerVelY = playerVelY+gravity;
 			
 		}
 		
 		
-		if (!Collisions.isCollisionAbovePlayer()) {
+		if (!Collisions.isCollisionAbovePlayer()&&!vertikalAxis) {
             if (!Collisions.checkCollision(player, 0, (int) playerVelY)) {
                 player.posY += playerVelY;
             } else {
@@ -206,8 +215,10 @@ public class GameLogic {
         }			
 
 		// Kollisionserkennung für Spieler
+		if(!vertikalAxis) {
 		Collisions.updateOnGroundStatus();
-
+		}
+		
 		if (Collisions.checkDeathBlock(player, 0, -1)) {
 			resetLevel();
 		}

@@ -249,6 +249,7 @@ public class DungeonChooserGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CreateDungeon.dungeonType = selectedDungeonType;
 				CreateDungeon.homeVillageBuild = false;
+				GameLogic.vertikalAxis = true;
 				GameLogic.dungeon.createDungeon();
 				close();
 				Draw.resetColor();

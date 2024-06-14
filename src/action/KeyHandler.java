@@ -26,7 +26,13 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'd' || e.getKeyChar() == 'D' || e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			GameLogic.moveRight=true;
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE && GameLogic.onGround) {
+		if(e.getKeyChar() == 's' || e.getKeyChar() == 'S'|| e.getKeyCode() == KeyEvent.VK_DOWN&&!GameLogic.vertikalAxis) {
+			GameLogic.moveDown= true;
+		}
+		if(e.getKeyChar() == 'w' || e.getKeyChar() == 'W' || e.getKeyCode() == KeyEvent.VK_UP&&!GameLogic.vertikalAxis) {
+			GameLogic.moveUp=true;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_SPACE && GameLogic.onGround&&!GameLogic.vertikalAxis) {
 			if(GameLogic.isSpacePressed == false) {
 				GameLogic.jump=true;
 			}else {
@@ -38,17 +44,6 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
 			GameLogic.Interact=true;
 		}
-		
-		//temp
-		if(e.getKeyCode() == KeyEvent.VK_1 ) {
-			CreateRooms.createRoom(0);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_2 ) {
-			CreateRooms.createRoom(1);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_3 ) {
-			CreateRooms.createRoom(2);
-		}
 	}
 
 	@Override
@@ -59,7 +54,14 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'd' || e.getKeyChar() == 'D'|| e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			GameLogic.moveRight=false;
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+		if(e.getKeyChar() == 's' || e.getKeyChar() == 'S'|| e.getKeyCode() == KeyEvent.VK_LEFT) {
+			GameLogic.moveDown= false;
+		}
+		if(e.getKeyChar() == 'w' || e.getKeyChar() == 'W' || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			GameLogic.moveUp=false;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_SPACE&&!GameLogic.vertikalAxis) {
 			GameLogic.isSpacePressed=false;
 			GameLogic.jump=false;
 		}	

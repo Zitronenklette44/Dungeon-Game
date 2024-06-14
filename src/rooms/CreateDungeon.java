@@ -3,24 +3,13 @@ package rooms;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import gui.Draw;
+import rooms.Castle.*;
+import rooms.Dungeon.*;
+import rooms.Forest.*;
 import rooms.Home.*;
-import rooms.Village.Goal;
-import rooms.Village.HouseEntrance;
-import rooms.Village.HouseExit;
-import rooms.Village.HouseMiddel;
-import rooms.Village.HouseMiddel1;
-import rooms.Village.HouseMiddel2;
-import rooms.Village.MarketEntrance;
-import rooms.Village.MarketExit;
-import rooms.Village.MarketMiddel;
-import rooms.Village.MarketMiddel1;
-import rooms.Village.MarketMiddel2;
-import rooms.Village.Normal;
-import rooms.Village.Spawn;
+import rooms.Village.*;
 
 public class CreateDungeon {
     public ArrayList<Integer> DungeonRooms;
@@ -31,9 +20,27 @@ public class CreateDungeon {
             {new Normal("Path"), new HouseEntrance("Haus eingang"), new HouseMiddel("Haus Mitte 1"), new HouseMiddel1("Haus Mitte 2"), new HouseMiddel2("Haus Mitte 3"), new HouseExit("Haus Exit"),
                     new MarketEntrance("Markt Eingang"), new MarketMiddel("Markt Mitte 1"), new MarketMiddel1("Markt Mitte 2"), new MarketMiddel2("Markt Mitte 3"), new MarketExit("Markt Exit"),
                     new Spawn("Spawn"), new Goal("Goal")},
-            {}
+            {new ForestNormal("Path") ,new ForestCaveEntrance("Cave Eingang"),new ForestCaveMiddel("Cave Mitte 1"), new ForestCaveMiddel2("Cave Mittel 2"), new ForestCaveMiddel3("Cave Mitte 3"), new ForestCaveExit("Cave Exit"),
+                    new ForestLichtungEntrance("Lichtung Eingang"),new ForestLichtungMiddel("Lichtung Mitte 1"),new ForestLichtungMiddel2("Lichtung Mitte 2"),new ForestLichtungMiddel3("Lichtung Mitte 3"),new ForestLichtungExit("Lichtung Ausgang"),
+                    new ForestSeeEntrance("See eingang"), new ForestSeeMiddel("See Mitte 1"), new ForestSeeMiddel2("See Mitte 2"), new ForestSeeMiddel3("See Mitte 3"), new ForestSeeExit("See Exit"),
+                    new ForestEntrance("Spawn"), new ForestGoal("Goal")},
+            {new CastleNormal("Path"),new CastleEsszimmerEntrance("Esszimmer Eingang"),new CastleEsszimmerMiddel("Esszimmer Mitte 1"),new CastleEsszimmerMiddel2("Esszimmer Mitte 2"),new CastleEsszimmerMiddel3("Esszimmer Mitte 3"),new CastleEsszimmerExit("Esszimmer Ausgang"),
+                    new CastleKuecheEntrance("Küche Eingang"),new CastleKuecheMiddel("Küche Mitte 1"),new CastleKuecheMiddel2("Küche Mitte 2"),new CastleKuecheMiddel3("Küche Mitte 3"),new CastleKuecheExit("Küche Ausgang"),
+                    new CastlePrivatRoomsEntrance("Privat Gemäche Eingang"),new CastlePrivatRoomsMiddel("Privat Gemäche Mitte 1"),new CastlePrivatRoomsMiddel2("Privat Gemäche Mitte 2"),new CastlePrivatRoomsMiddel3("Privat Gemäche Mitte 3"),new CastlePrivatRoomsExit("Privat Gemäche Ausgang"),
+                    new CastleKerkerEntrance("Kerker Eingang"),new CastleKerkerMiddel("Kerker Mitte 1"),new CastleKerkerMiddel2("Kerker Mitte 2"),new CastleKerkerMiddel3("Kerker Mitte 3"),new CastleKerkerExit("Kerker Ausgang"),
+                    new CastleEntrance("Spawn"),new CastleExit("Goal")},
+            {new DungeonNormal("Path"), new DungeonSpawnerEntrance("Spawner Eingang"), new DungeonSpawnerMiddel("Spawner Mitte 1"), new DungeonSpawnerMiddel2("Spawner Mitte 2"), new DungeonSpawnerMiddel3("Spawner Mitte 3"), new DungeonSpawnerExit("Spawner Ausgang"),
+                    new DungeonWaffenkammerEntrance("Waffenkammer Eingang"), new DungeonWaffenkammerMiddel("Waffenkammer Mitte 1"),new DungeonWaffenkammerMiddel2("Waffenkammer Mitte 2"),new DungeonWaffenkammerMiddel3("Waffenkammer Mitte 3"),new DungeonWaffenkammerExit("Waffenkammer Ausgang"),
+                    new DungeonCrystalCaveEntrance("Crystal Cave Eingang"),new DungeonCrystalCaveMiddel("Crystal Cave Mitte 1"),new DungeonCrystalCaveMiddel2("Crystal Cave Mitte 2"),new DungeonCrystalCaveMiddel3("Crystal Cave Mitte 3"),new DungeonCrystalCaveExit("Crystal Cave Ausgang"),
+            		new DungeonLibraryEntrance("Library Eingang"),new DungeonLibraryMiddel("Library Mitte 1"),new DungeonLibraryMiddel2("Library Mitte 2"),new DungeonLibraryMiddel3("Library Mitte 3"),new DungeonLibraryExit("Library Ausgang"),
+            		new DungeonMineEntrance("Mine Eingang"),new DungeonMineMiddel("Mine Mitte 1"),new DungeonMineMiddel2("Mine Mitte 2"),new DungeonMineMiddel3("Mine mitte 3"),new DungeonMineExit("Mine Ausgang"),
+            		new DungeonLavaCaveEntrance("Lava Cave Eingang"),new DungeonLavaCaveMiddel("Lava Cave Mitte 1"),new DungeonLavaCaveMiddel2("Lava Cave Mitte 2"),new DungeonLavaCaveMiddel3("Lava Cave Mitte 3"),new DungeonLavaCaveExit("Lava Cave Ausgang"),
+            		new DungeonEntrance("Spawn"), new DungeonExit("Goal")}
     };
-    private int[][] Features = {{1, 6}};
+    private int[][] Features = {{1, 6},	//Haus Markt
+    							{1,6,11},//Cave Lichtung See
+    							{1,6,11,16},//Esszimmer küche PrivatRäume Kerker 
+    							{1,6,11,16,21,26}}; //Spawner Waffenkammer KristalCave Bibiliothek Mine LavaCave
     private static int[] homeVillage = {0, 1, 2, 3, 4};
     public static boolean homeVillageBuild = true;
     public static int dungeonType = 0;
@@ -43,6 +50,7 @@ public class CreateDungeon {
         if (!homeVillageBuild) {
             DungeonLength = (int) (Math.random() * (maxRooms[dungeonType-1] / 2)) + (maxRooms[dungeonType-1] / 2);
             DungeonRooms = new ArrayList<Integer>();
+            System.out.println("");
             System.out.println("Dungeon erstelle mit:" + DungeonLength + " mit folgenden Räumen: ");
             for (int i = 0; i < DungeonLength; i++) {
                 DungeonRooms.add(-1);
@@ -50,8 +58,8 @@ public class CreateDungeon {
             spreadFeatures();
             finishFeatures();
             
-            DungeonRooms.addFirst(11);
-            DungeonRooms.addLast(12);
+            DungeonRooms.addFirst(rooms[dungeonType].length-2);
+            DungeonRooms.addLast(rooms[dungeonType].length-1);
             
             DungeonLength+=2;
             
