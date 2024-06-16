@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 public class GameScreen extends JFrame {
 
@@ -23,6 +24,7 @@ public class GameScreen extends JFrame {
 	static GameLogic spiellogik = new GameLogic();
 	private static JLabel lbRoomNR;
 	static GameScreen frame;
+	private static JLabel lbBackground;
 
 
 	/**
@@ -43,10 +45,18 @@ public class GameScreen extends JFrame {
 	
 	public static void hideFrame() {
 		frame.setVisible(false);
+		GameLogic.moveDown =false;
+		GameLogic.moveLeft = false;
+		GameLogic.moveRight = false;
+		GameLogic.moveUp = false;
 	}
 	
 	public static void showFrame() {
 		frame.setVisible(true);
+		GameLogic.moveDown =false;
+		GameLogic.moveLeft = false;
+		GameLogic.moveRight = false;
+		GameLogic.moveUp = false;
 	}
 
 	/**
@@ -74,6 +84,10 @@ public class GameScreen extends JFrame {
 		contentPane.add(draw);
 
 		setContentPane(contentPane);
+		
+		lbBackground = new JLabel("");
+		lbBackground.setBounds(0, 0, 1184, 761);
+		contentPane.add(lbBackground);
 	}
 
 	public static int getScreenHoehe() {
@@ -87,4 +101,16 @@ public class GameScreen extends JFrame {
 	public static void updateRoomNr(int RoomNr) {
 		lbRoomNR.setText("Room "+RoomNr);
 	}	
+	
+	public static void changeBackground(String ImagePath) {	//example "/resources/rooms/backgrounds/test.png"
+		System.out.println(ImagePath);
+		try {
+			lbBackground.setIcon(new ImageIcon(GameScreen.class.getResource(ImagePath)));
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 }

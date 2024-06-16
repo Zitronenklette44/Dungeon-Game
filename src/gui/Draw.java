@@ -36,6 +36,8 @@ public class Draw extends JLabel {
 	public static Color deathRechteckColor = Color.red;
 	public static Color mobsColor = Color.blue;
 	public static Color bulletColor = Color.magenta;
+	private int oldRoom = -1;
+	private int oldDungeonType=-1;
 	
 	
 	@SuppressWarnings("static-access")
@@ -59,6 +61,7 @@ public class Draw extends JLabel {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
+		
 		//versteckte Interactionen
 		g.setColor(Color.green);
 		for (int i = 0; i < interactables.size(); i++) {
@@ -66,13 +69,17 @@ public class Draw extends JLabel {
 			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
 		
-		//zeiche Hintergrund
-		g.setColor(backgroundColor);
-		g.fillRect(0, 0, screenwidth, screenheight);
 		
-		//zeiche Raum
-		g.setColor(Color.white);
-		spieLogic.dungeon.drawRoom(g2d);
+			//zeiche Hintergrund
+			g.setColor(backgroundColor);
+			//g.fillRect(0, 0, screenwidth, screenheight);
+		
+			//zeiche Raum
+			g.setColor(Color.white);
+			spieLogic.dungeon.drawRoom(g2d);
+			oldDungeonType = GameLogic.dungeon.dungeonType;
+			oldRoom = GameLogic.dungeon.currentRoom;
+		
 		
 		//Zeichne Objekte
 		g.setColor(gameObjectsColor);
@@ -112,8 +119,10 @@ public class Draw extends JLabel {
 			aktuellesObjekt.draw(g2d);
 		}
 		
+		
 		g.setColor(playerColor);
 		g.fillRect(player.posX, player.posY, player.breite, player.hoehe);
+		
 		
 		Collisions.checkInteractable(g2d, Color.white);
 		repaint();

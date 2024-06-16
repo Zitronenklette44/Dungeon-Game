@@ -19,7 +19,6 @@ import gameObject.DeathRechteck;
 import gameObject.Rechteck;
 import gui.GameScreen;
 import rooms.CreateDungeon;
-import rooms.CreateRooms;
 
 public class GameLogic {
 
@@ -49,14 +48,14 @@ public class GameLogic {
 	public static int directionRoom = 0;
 	public static float playerVelY = 0;
 	public static float gravity = 0.1f;
-	public static int dungeonKey=4;
+	public static int dungeonKey=1;
 	public static int counterInteraction = 0;
 	public static boolean onGround=false;
 	static boolean jumpInitialized = false;
 	public static boolean isSpacePressed = false;
 	public static boolean vertikalAxis = false;
 	
-	public static CreateDungeon dungeon = new CreateDungeon();
+	public static CreateDungeon dungeon;
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
@@ -66,6 +65,7 @@ public class GameLogic {
 		mobs =new ArrayList<TestMob>();
 		bullets = new ArrayList<Bullet>();
 		interactables = new ArrayList<InteractableTemplate>();
+		dungeon = new CreateDungeon();
 		
 		collisionRectangles = new ArrayList<>();
 		screenBreite =GameScreen.getScreenBreite();
@@ -96,16 +96,18 @@ public class GameLogic {
 				
 				
 				
-				if(player.posX<=0&&dungeon.currentRoom>=1) {
+				if(player.posX<=0&&CreateDungeon.currentRoom>=1) {
 					directionRoom = 1;
 					resetLevel();
-					dungeon.currentRoom--;
-					GameScreen.updateRoomNr(dungeon.currentRoom+1);
-				}else if(player.posX>screenBreite-player.breite&&dungeon.currentRoom<dungeon.getDungeonLenght()-1) {
+					CreateDungeon.currentRoom--;
+					GameScreen.updateRoomNr(CreateDungeon.currentRoom+1);
+					GameScreen.changeBackground(CreateDungeon.getImage(0));
+				}else if(player.posX>screenBreite-player.breite&&CreateDungeon.currentRoom<dungeon.getDungeonLenght()-1) {
 					directionRoom=0;
 					resetLevel();
-					dungeon.currentRoom++;
-					GameScreen.updateRoomNr(dungeon.currentRoom+1);
+					CreateDungeon.currentRoom++;
+					GameScreen.updateRoomNr(CreateDungeon.currentRoom+1);
+					GameScreen.changeBackground(CreateDungeon.getImage(0));
 				}
 				
 				if(player.posX<0) {
@@ -130,6 +132,7 @@ public class GameLogic {
 	}
 
 	public static void resetLevel() {
+		dungeon.setSpawns();
 		if(directionRoom == 0) {
 			player.posX = resetPos[0];
 			player.posY = resetPos[1];
