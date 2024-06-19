@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import game.GameLogic;
 import gui.Draw;
 import rooms.Castle.*;
 import rooms.Dungeon.*;
@@ -162,27 +163,46 @@ public class CreateDungeon {
 	}
 
 	public static String getImage(int addToRoom) {
+		if(dungeonType != 0) {
 		try {
+			if(rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath == null) {
+				System.out.println("Image missing / Image error");
+			}
 			return rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath;
 		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Image missing / Image error");
+		}
+		}else {
+			try {
+				if(rooms[dungeonType][currentRoom+addToRoom].ImagePath == null) {
+					System.out.println("Image missing / Image error");
+				}
+				return rooms[dungeonType][currentRoom+addToRoom].ImagePath;
+			} catch (NullPointerException e) {
+				System.out.println("Image missing / Image error");
+			}
 		}
 		return null;
 	}
 
 	public void drawRoom(Graphics2D g2d) {
 		if (!homeVillageBuild) {
+			GameLogic.floor = 725;
 			rooms[dungeonType][DungeonRooms.get(currentRoom)].changeColors();
 			g2d.setFont(new Font("Arial", Font.BOLD, 20));
-			g2d.drawString(rooms[dungeonType][DungeonRooms.get(currentRoom)].name, 200, 300);
+			if(GameLogic.debug) {
+				g2d.drawString(rooms[dungeonType][DungeonRooms.get(currentRoom)].name, 200, 300);
+			}
 			Draw.clearObjects();
 			rooms[dungeonType][DungeonRooms.get(currentRoom)].createObjects();
 			rooms[dungeonType][DungeonRooms.get(currentRoom)].DrawImage(g2d);
 		} else {
+			GameLogic.floor = 700;
 			rooms[dungeonType][currentRoom].changeColors();
 			g2d.setFont(new Font("Arial", Font.BOLD, 20));
-			g2d.drawString(rooms[dungeonType][currentRoom].name, 200, 300);
+			if(GameLogic.debug) {
+				g2d.drawString(rooms[dungeonType][currentRoom].name, 200, 300);
+			}
 			Draw.clearObjects();
 			rooms[dungeonType][currentRoom].createObjects();
 			rooms[dungeonType][currentRoom].DrawImage(g2d);
@@ -193,8 +213,11 @@ public class CreateDungeon {
 		rooms[1][11].ImagePath="/resources/rooms/backgrounds/test.png";
 
 	}
-	
+
 	public void setSpawns() {
+		if(dungeonType == 0) {
+			return;
+		}
 		rooms[dungeonType][DungeonRooms.get(currentRoom)].setSpawns();
 	}
 }

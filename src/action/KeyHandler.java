@@ -13,7 +13,7 @@ public class KeyHandler implements KeyListener {
 		spieLogik = spielLogic;
 		CreateRooms.setSpielLogic(spielLogic);
 	}
-	
+
 	public void keyTyped(KeyEvent e) {
 
 	}
@@ -44,6 +44,10 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
 			GameLogic.Interact=true;
 		}
+
+		if(e.getKeyCode() == KeyEvent.VK_F1) {
+			GameLogic.debug=!GameLogic.debug;
+		}
 	}
 
 	@Override
@@ -60,7 +64,7 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'w' || e.getKeyChar() == 'W' || e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			GameLogic.moveUp=false;
 		}
-		
+
 		if(e.getKeyCode() == KeyEvent.VK_SPACE&&!GameLogic.vertikalAxis) {
 			GameLogic.isSpacePressed=false;
 			GameLogic.jump=false;

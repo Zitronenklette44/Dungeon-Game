@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,14 +29,14 @@ public class GameLogic {
 	public static boolean moveDown= false;
 	public static boolean jump = false;
 	public static boolean Interact = false;
-	public static ArrayList<Rechteck> spielObjekte;
+	public static ArrayList<Rechteck> floorObject;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<DeathRechteck> deathRechteck;
 	public static ArrayList<TestMob> mobs;
 	public static ArrayList<Bullet> bullets;
 	public static ArrayList<InteractableTemplate> interactables;
-	
+
 	public static Player player;
 	public static Rechteck FloorObject;
 	public static int screenHoehe;
@@ -54,26 +55,27 @@ public class GameLogic {
 	static boolean jumpInitialized = false;
 	public static boolean isSpacePressed = false;
 	public static boolean vertikalAxis = false;
-	
+	public static boolean debug = false;
+
 	public static CreateDungeon dungeon;
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
-		spielObjekte = new ArrayList<Rechteck>();
+		floorObject = new ArrayList<Rechteck>();
 		columns = new ArrayList<Column>();
 		deathRechteck = new ArrayList<DeathRechteck>();
 		mobs =new ArrayList<TestMob>();
 		bullets = new ArrayList<Bullet>();
 		interactables = new ArrayList<InteractableTemplate>();
 		dungeon = new CreateDungeon();
-		
+
 		collisionRectangles = new ArrayList<>();
 		screenBreite =GameScreen.getScreenBreite();
 		screenHoehe = GameScreen.getScreenHoehe();
 
 		createObjekts();
 		dungeon.createDungeon();
-		
+
 
 
 
@@ -87,15 +89,15 @@ public class GameLogic {
 
 				playerMovement();
 				mobMovement();
-				
+
 				if(player.HitCooldown>0) {player.HitCooldown--;}
 				if(player.AtkCooldown>0) {player.AtkCooldown--;}
-				
-				
-				
-				
-				
-				
+
+
+
+
+
+
 				if(player.posX<=0&&CreateDungeon.currentRoom>=1) {
 					directionRoom = 1;
 					resetLevel();
@@ -109,17 +111,17 @@ public class GameLogic {
 					GameScreen.updateRoomNr(CreateDungeon.currentRoom+1);
 					GameScreen.changeBackground(CreateDungeon.getImage(0));
 				}
-				
+
 				if(player.posX<0) {
 					player.posX = 0;
 				}else if(player.posX>screenBreite-player.breite) {
 					player.posX =1150;
-					
+
 				}
 				if(Interact) {
 					counterInteraction++;
 				}
-				
+
 			}
 		}, 0, 5);
 	}
@@ -128,7 +130,7 @@ public class GameLogic {
 		player = new Player(50, 50, screenBreite/2, floor-2, 0, 0, playerSpeed, 0, 0, 3, 20);
 
 		FloorObject = new Rechteck(50, screenBreite, 0, screenHoehe-50);
-		spielObjekte.add(FloorObject);
+		floorObject.add(FloorObject);
 	}
 
 	public static void resetLevel() {
@@ -152,7 +154,11 @@ public class GameLogic {
 	}
 
 	public static void createCollisionRechteck(int hoehe,int breite,int posX, int posY) {
-		collisionRectangles.add(new CollisionRechteck(hoehe, breite, posX, posY));
+		collisionRectangles.add(new CollisionRechteck(hoehe, breite, posX, posY, true));
+	}
+	
+	public static void createHitbox(int hoehe,int breite,int posX, int posY) {
+		collisionRectangles.add(new CollisionRechteck(hoehe, breite, posX, posY, false));
 	}
 
 	public static void createDeathReckteck(int hoehe,int breite,int posX, int posY) {
@@ -162,70 +168,72 @@ public class GameLogic {
 	public static void createTestMob(int hoehe,int breite,int posX, int posY, int Dx, int Speed, int SpawnX, int SpawnY, int damage, int Hp) {
 		mobs.add(new TestMob(hoehe, breite, posX, posY, Dx, 0, Speed, SpawnX, SpawnY, damage, Hp));
 	}
-	
+
 	public static void createBullet() {
-		
+
 	}
-	
+
 	public static void createDungeonChooser(int posX, int posY) {
 		interactables.add(new DungeonChooser(10, 10, posX, posY));
 	}
-	
+
 	public static void createShopToolsOpen(int posX, int posY) {
 		interactables.add(new ShopOpenTools(10, 10, posX, posY));
 	}
 	public static void createShopPotionsOpen(int posX, int posY) {
 		interactables.add(new ShopOpenPotions(10, 10, posX, posY));
 	}
-	
+
 	public static void createDungeonExit(int posX, int posY) {
 		interactables.add(new DungeonExit(10, 10, posX, posY));
 	}
-	
+
 	private static void playerMovement() {
 		// Spielerbewegung
-		if (moveLeft && !Collisions.checkCollision(player, -2, 0)) {
+
+		if (moveLeft && !Collisions.checkCollision(player, -3, 0) &&!moveRight) {
 			player.posX -= 2;
 		}
-		if (moveRight && !Collisions.checkCollision(player, 2, 0)) {
+		if (moveRight && !Collisions.checkCollision(player, 3, 0)&&!moveLeft) {
 			player.posX += 2;
 		}
-		if (moveUp && !Collisions.checkCollision(player, 0, -2)&&vertikalAxis&&player.posY>0) {
+		if (moveUp && !Collisions.checkCollision(player, 0, -3)&&vertikalAxis&&player.posY>0&&!moveDown) {
 			player.posY -= 2;
 		}
-		if (moveDown && !Collisions.checkCollision(player, 0, 2)&&vertikalAxis&&player.posY<floor) {
+		if (moveDown && !Collisions.checkCollision(player, 0, 3)&&vertikalAxis&&player.posY<floor&&!moveUp) {
 			player.posY += 2;
 		}
-		
+
+
 		if(jump&&onGround&&!vertikalAxis) {
 			playerVelY=-3.5f;
 		}
-		
+
 		if(!onGround&&!vertikalAxis) {
 			playerVelY = playerVelY+gravity;
-			
+
 		}
-		
-		
+
+
 		if (!Collisions.isCollisionAbovePlayer()&&!vertikalAxis) {
-            if (!Collisions.checkCollision(player, 0, (int) playerVelY)) {
-                player.posY += playerVelY;
-            } else {
-                playerVelY = 0;
-            }
-        } else {
-            playerVelY = 0;
-        }			
+			if (!Collisions.checkCollision(player, 0, (int) playerVelY)) {
+				player.posY += playerVelY;
+			} else {
+				playerVelY = 0;
+			}
+		} else {
+			playerVelY = 0;
+		}			
 
 		// Kollisionserkennung für Spieler
 		if(!vertikalAxis) {
-		Collisions.updateOnGroundStatus();
+			Collisions.updateOnGroundStatus();
 		}
-		
+
 		if (Collisions.checkDeathBlock(player, 0, -1)) {
 			resetLevel();
 		}
-		
+
 		if(Interact) {
 			for(int i = 0; i<interactables.size();i++) {
 				try {
@@ -241,7 +249,7 @@ public class GameLogic {
 		}
 
 	}
-	
+
 	private static void mobMovement(){
 
 		//movement mobs
@@ -273,5 +281,5 @@ public class GameLogic {
 		}
 	}
 
-	
+
 }

@@ -103,7 +103,9 @@ public class GameScreen extends JFrame {
 	}	
 	
 	public static void changeBackground(String ImagePath) {	//example "/resources/rooms/backgrounds/test.png"
-		System.out.println(ImagePath);
+		if(ImagePath == null) {
+			return;
+		}
 		try {
 			lbBackground.setIcon(new ImageIcon(GameScreen.class.getResource(ImagePath)));
 		} catch (NullPointerException e) {

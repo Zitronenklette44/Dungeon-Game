@@ -20,16 +20,16 @@ public class Draw extends JLabel {
 	private int screenheight;
 	public static Rechteck player;
 	static GameLogic spieLogic;
-	public static ArrayList<Rechteck> spielObjekte;
+	public static ArrayList<Rechteck> floor;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<DeathRechteck> deathRechtecks;
 	public static ArrayList<TestMob> mobs;
 	public static ArrayList<Bullet> bullets;
 	public static ArrayList<InteractableTemplate> interactables;
-	
+
 	public static Color backgroundColor = Color.DARK_GRAY;
-	public static Color gameObjectsColor = Color.white;
+	public static Color floorColor = Color.white;
 	public static Color columsColor = Color.gray;
 	public static Color playerColor = Color.white;
 	public static Color collisionRectanglesColor = Color.white;
@@ -38,13 +38,13 @@ public class Draw extends JLabel {
 	public static Color bulletColor = Color.magenta;
 	private int oldRoom = -1;
 	private int oldDungeonType=-1;
-	
-	
+
+
 	@SuppressWarnings("static-access")
 	public Draw(int screenBreite, int screenHoehe, GameLogic spiellogik) {
 		this.screenwidth =screenBreite;
 		this.screenheight = screenHoehe;
-		spielObjekte = spiellogik.spielObjekte;
+		floor = spiellogik.floorObject;
 		columns = spiellogik.columns;
 		player= spiellogik.player;
 		collisionRectangles = spiellogik.collisionRectangles;
@@ -54,81 +54,92 @@ public class Draw extends JLabel {
 		this.spieLogic = spiellogik;
 		interactables = spiellogik.interactables;
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		
-		
+
+
 		//versteckte Interactionen
 		g.setColor(Color.green);
 		for (int i = 0; i < interactables.size(); i++) {
 			InteractableTemplate aktuellesObjekt = interactables.get(i);
 			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
-		
-		
-			//zeiche Hintergrund
-			g.setColor(backgroundColor);
-			//g.fillRect(0, 0, screenwidth, screenheight);
-		
-			//zeiche Raum
-			g.setColor(Color.white);
-			spieLogic.dungeon.drawRoom(g2d);
-			oldDungeonType = GameLogic.dungeon.dungeonType;
-			oldRoom = GameLogic.dungeon.currentRoom;
-		
-		
+
+
+		//zeiche Hintergrund
+		g.setColor(backgroundColor);
+		//g.fillRect(0, 0, screenwidth, screenheight);
+
+		//zeiche Raum
+		g.setColor(Color.white);
+		spieLogic.dungeon.drawRoom(g2d);
+		oldDungeonType = GameLogic.dungeon.dungeonType;
+		oldRoom = GameLogic.dungeon.currentRoom;
+
+
 		//Zeichne Objekte
-		g.setColor(gameObjectsColor);
-		for (int i = 0; i < spielObjekte.size(); i++) {
-			Rechteck aktuellesObjekt = spielObjekte.get(i);
-			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+		g.setColor(floorColor);
+		for (int i = 0; i < floor.size(); i++) {
+			if(GameLogic.dungeon.dungeonType == 0) {
+				Rechteck aktuellesObjekt = floor.get(i);
+				g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+			}
 		}
-		
+
 		g.setColor(columsColor);
 		for (int i = 0; i < columns.size(); i++) {
 			Column aktuellesObjekt = columns.get(i);
 			aktuellesObjekt.draw(g);
 		}
-		
+
 		g.setColor(collisionRectanglesColor);
 		for (int i = 0; i < collisionRectangles.size(); i++) {
 			CollisionRechteck aktuellesObjekt = collisionRectangles.get(i);
-			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+			if(aktuellesObjekt.isVisible) {
+				g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+			}else if(GameLogic.debug){
+				g.setColor(Color.red);
+				g.drawRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+			}
 		}
-		
+
 		g.setColor(deathRechteckColor);
 		for (int i = 0; i < deathRechtecks.size(); i++) {
 			DeathRechteck aktuellesObjekt = deathRechtecks.get(i);
 			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
-		
+
 		g.setColor(mobsColor);
 		for (int i = 0; i < mobs.size(); i++) {
 			TestMob aktuellesObjekt = mobs.get(i);
 			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
-		
+
 		g.setColor(bulletColor);
 		for (int i = 0; i < bullets.size(); i++) {
 			Bullet aktuellesObjekt = bullets.get(i);
 			aktuellesObjekt.rotateToPlayerAndUpdate(player);
 			aktuellesObjekt.draw(g2d);
 		}
-		
-		
+
+
 		g.setColor(playerColor);
 		g.fillRect(player.posX, player.posY, player.breite, player.hoehe);
-		
-		
+		if(GameLogic.debug) {
+			g2d.drawString(player.posX+"", player.posX, player.posY-5);
+			g2d.drawString(player.posY+"", player.posX-40, player.posY+(player.hoehe/2));
+		}
+
+
 		Collisions.checkInteractable(g2d, Color.white);
 		repaint();
 	}
-	
-	
+
+
 	public static void clearObjects() {
 		Draw.collisionRectangles.clear();
 		Draw.deathRechtecks.clear();
@@ -136,10 +147,10 @@ public class Draw extends JLabel {
 		Draw.mobs.clear();
 		Draw.interactables.clear();
 	}
-	
+
 	public static void resetColor() {
 		backgroundColor = Color.DARK_GRAY;
-		gameObjectsColor = Color.white;
+		floorColor = Color.white;
 		columsColor = Color.gray;
 		playerColor = Color.white;
 		collisionRectanglesColor = Color.white;

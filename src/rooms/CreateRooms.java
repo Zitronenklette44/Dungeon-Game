@@ -30,7 +30,7 @@ public class CreateRooms {
 		//Farben festsetzen
 		Draw.backgroundColor = Color.black;
 		Draw.columsColor = Color.gray;
-		Draw.gameObjectsColor = Color.white;
+		Draw.floorColor = Color.white;
 		Draw.playerColor = Color.blue;
 		spielLogic.resetPos = new int[] {50,701};
 		//zusätzliche Objekte erstellen/löschen
@@ -44,7 +44,7 @@ public class CreateRooms {
 	private static void Nr1() {
 		//Farben festsetzen
 		Draw.backgroundColor = Color.black;
-		Draw.gameObjectsColor = Color.red;
+		Draw.floorColor = Color.red;
 		Draw.playerColor = Color.cyan;
 		Draw.collisionRectanglesColor = Color.white;
 		Draw.deathRechteckColor = Color.red;
@@ -69,7 +69,7 @@ public class CreateRooms {
 	private static void Nr2() {
 		//Farben festsetzen
 		Draw.backgroundColor = Color.cyan;
-		Draw.gameObjectsColor = Color.green;
+		Draw.floorColor = Color.green;
 		Draw.playerColor = Color.black;
 		Draw.collisionRectanglesColor = Color.orange;
 		Draw.deathRechteckColor = Color.pink;
