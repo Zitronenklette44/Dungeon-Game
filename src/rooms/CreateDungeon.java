@@ -187,6 +187,7 @@ public class CreateDungeon {
 
 	public void drawRoom(Graphics2D g2d) {
 		if (!homeVillageBuild) {
+			rooms[dungeonType][DungeonRooms.get(currentRoom)].VariantExists(currentRoom);
 			GameLogic.floor = 725;
 			rooms[dungeonType][DungeonRooms.get(currentRoom)].changeColors();
 			g2d.setFont(new Font("Arial", Font.BOLD, 20));
@@ -194,7 +195,7 @@ public class CreateDungeon {
 				g2d.drawString(rooms[dungeonType][DungeonRooms.get(currentRoom)].name, 200, 300);
 			}
 			Draw.clearObjects();
-			rooms[dungeonType][DungeonRooms.get(currentRoom)].createObjects();
+			rooms[dungeonType][DungeonRooms.get(currentRoom)].createObjects(currentRoom);
 			rooms[dungeonType][DungeonRooms.get(currentRoom)].DrawImage(g2d);
 		} else {
 			GameLogic.floor = 700;
@@ -204,14 +205,9 @@ public class CreateDungeon {
 				g2d.drawString(rooms[dungeonType][currentRoom].name, 200, 300);
 			}
 			Draw.clearObjects();
-			rooms[dungeonType][currentRoom].createObjects();
+			rooms[dungeonType][currentRoom].createObjects(currentRoom);
 			rooms[dungeonType][currentRoom].DrawImage(g2d);
 		}
-	}
-
-	private void loadBackgrounds() {
-		rooms[1][11].ImagePath="/resources/rooms/backgrounds/test.png";
-
 	}
 
 	public void setSpawns() {

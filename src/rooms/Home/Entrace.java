@@ -19,9 +19,9 @@ public class Entrace extends RoomTemplate{
 		Draw.backgroundColor= Color.black;
 	}
 	@Override
-	public void createObjects() {
+	public void createObjects(int currentRoom) {
 		// TODO Auto-generated method stub
-		super.createObjects();
+		super.createObjects(currentRoom);
 		GameLogic.createShopPotionsOpen(300, 700);
 	}
 

@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 public class RoomTemplate {
 	public String name;
 	public String ImagePath;
+	protected int RoomVariant;
 	
 	public RoomTemplate(String name) {
 		this.name = name;
@@ -15,7 +16,7 @@ public class RoomTemplate {
 		this.ImagePath = Image;
 	}
 	
-	public void createObjects() {}
+	public void createObjects(int currentRoom) {}
 	
 	public void DrawImage(Graphics2D g) {}
 	
@@ -24,4 +25,6 @@ public class RoomTemplate {
 	public String getImage() {return ImagePath;}
 	
 	public void setSpawns() {}
+	
+	public void VariantExists(int currentRoom) {}
 }

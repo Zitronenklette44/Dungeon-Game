@@ -10,8 +10,8 @@ public class Center extends RoomTemplate{
 	}
 	
 	@Override
-	public void createObjects() {
-		super.createObjects();
+	public void createObjects(int currentRoom) {
+		super.createObjects(currentRoom);
 		GameLogic.createShopToolsOpen(300, 700);   
 	}
 	

@@ -10,8 +10,8 @@ public class Goal extends RoomTemplate{
 	}
 	
 	@Override
-	public void createObjects() {
-		super.createObjects();
+	public void createObjects(int currentRoom) {
+		super.createObjects(currentRoom);
 		GameLogic.createDungeonExit(1000, 700);
 		
 		

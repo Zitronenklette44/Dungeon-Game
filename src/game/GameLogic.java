@@ -2,7 +2,6 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -100,14 +99,14 @@ public class GameLogic {
 
 				if(player.posX<=0&&CreateDungeon.currentRoom>=1) {
 					directionRoom = 1;
-					resetLevel();
 					CreateDungeon.currentRoom--;
+					resetLevel();
 					GameScreen.updateRoomNr(CreateDungeon.currentRoom+1);
 					GameScreen.changeBackground(CreateDungeon.getImage(0));
 				}else if(player.posX>screenBreite-player.breite&&CreateDungeon.currentRoom<dungeon.getDungeonLenght()-1) {
 					directionRoom=0;
-					resetLevel();
 					CreateDungeon.currentRoom++;
+					resetLevel();
 					GameScreen.updateRoomNr(CreateDungeon.currentRoom+1);
 					GameScreen.changeBackground(CreateDungeon.getImage(0));
 				}

@@ -1,7 +1,5 @@
 package rooms.Village;
 
-import java.awt.Graphics2D;
-
 import game.GameLogic;
 import rooms.RoomTemplate;
 
@@ -11,15 +9,9 @@ public class Spawn extends RoomTemplate{
 		super(name, "/resources/rooms/backgrounds/VillageSpawn.png");
 	}
 	
-	
 	@Override
-	public void DrawImage(Graphics2D g) {
-		super.DrawImage(g);
-	}
-	
-	@Override
-	public void createObjects() {
-		super.createObjects();
+	public void createObjects(int currentRoom) {
+		super.createObjects(currentRoom);
 		//Walls
 		GameLogic.createHitbox(761,100, 0, 0);
 		GameLogic.createHitbox(250,100, 100, 520);	//hohe breite posX posY
@@ -41,6 +33,7 @@ public class Spawn extends RoomTemplate{
 	public void setSpawns() {
 		GameLogic.player.breite = 25;
 		GameLogic.player.hoehe = 25;
+		GameLogic.floor = 725;
 		GameLogic.resetPos[0] =250;
 		GameLogic.resetPos[1] = 100;
 		GameLogic.resetPos1[0]= 1150;

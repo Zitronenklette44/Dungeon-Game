@@ -16,7 +16,10 @@ public class Dungeon extends RoomTemplate{
 		super(name);
 	}
 	
-	public void createObjects() {
+
+	@Override
+	public void createObjects(int CurrentRoom) {
+		super.createObjects(CurrentRoom);
 		GameLogic.createDungeonChooser(200, 700);
 	}
 	
