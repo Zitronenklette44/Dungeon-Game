@@ -1,9 +1,9 @@
 // Wenn Musik aktiviert ist
-musicEnabled = false
-musicVolume = -30.0
+musicEnabled = true
+musicVolume = -50.0
 
 // Anzahl der in Besitz befindenen dungeon Keys
-dungeonKey = 1
+dungeonKey = 4
 
 // Debug Modus
 debug = false

@@ -45,7 +45,7 @@ public class GameLogic {
 	public static int directionRoom = 0;
 	public static float playerVelY = 0;
 	public static float gravity = 0.1f;
-	public static int dungeonKey=1;
+	public static int dungeonKey=4;
 	public static int counterInteraction = 0;
 	public static boolean onGround=false;
 	static boolean jumpInitialized = false;

@@ -166,7 +166,7 @@ public class DungeonCore {
 	    if(dungeonType != 0) {
 	        try {
 	            rooms[dungeonType][DungeonRooms.get(currentRoom)].VariantExists(currentRoom);
-	            rooms[dungeonType][currentRoom+addToRoom].getImage(currentRoom);
+	            rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].getImage(currentRoom);
 	            if(rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath == null) {
 	                System.out.println("Image missing / Image error");
 	            }

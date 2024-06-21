@@ -75,7 +75,7 @@ public class Draw extends JLabel {
 
 		//zeiche Hintergrund
 		g.setColor(backgroundColor);
-		//g.fillRect(0, 0, screenwidth, screenheight);
+		g.fillRect(0, 0, screenwidth, screenheight);
 
 		//zeiche Raum
 		g.setColor(Color.white);
