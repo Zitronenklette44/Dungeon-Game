@@ -1,6 +1,6 @@
 package rooms.Home;
 
-import game.GameLogic;
+import gameObject.CreateObjects;
 import rooms.RoomTemplate;
 
 public class Center extends RoomTemplate{
@@ -12,7 +12,7 @@ public class Center extends RoomTemplate{
 	@Override
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
-		GameLogic.createShopToolsOpen(300, 700);   
+		CreateObjects.createShopToolsOpen(300, 700);   
 	}
 	
 

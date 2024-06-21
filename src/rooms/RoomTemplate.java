@@ -22,7 +22,7 @@ public class RoomTemplate {
 	
 	public void changeColors() {}
 	
-	public String getImage() {return ImagePath;}
+	public String getImage(int currentRoom) {return ImagePath;}
 	
 	public void setSpawns() {}
 	

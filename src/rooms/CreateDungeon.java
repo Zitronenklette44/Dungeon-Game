@@ -17,7 +17,7 @@ public class CreateDungeon {
 	public static ArrayList<Integer> DungeonRooms;
 	public int DungeonLength;
 	public static int currentRoom = 0;
-	private static RoomTemplate[][] rooms = {
+	public static RoomTemplate[][] rooms = {
 			{new Dungeon("Dungeon"), new Entrace("Eingang"), new Center("Mitte"), new Exit("Ausgang"), new Field("Field")},
 			{new Normal("Path"), new HouseEntrance("Haus eingang"), new HouseMiddel("Haus Mitte 1"), new HouseMiddel1("Haus Mitte 2"), new HouseMiddel2("Haus Mitte 3"), new HouseExit("Haus Exit"),
 				new MarketEntrance("Markt Eingang"), new MarketMiddel("Markt Mitte 1"), new MarketMiddel1("Markt Mitte 2"), new MarketMiddel2("Markt Mitte 3"), new MarketExit("Markt Exit"),
@@ -163,26 +163,28 @@ public class CreateDungeon {
 	}
 
 	public static String getImage(int addToRoom) {
-		if(dungeonType != 0) {
-		try {
-			if(rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath == null) {
-				System.out.println("Image missing / Image error");
-			}
-			return rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath;
-		} catch (NullPointerException e) {
-			System.out.println("Image missing / Image error");
-		}
-		}else {
-			try {
-				if(rooms[dungeonType][currentRoom+addToRoom].ImagePath == null) {
-					System.out.println("Image missing / Image error");
-				}
-				return rooms[dungeonType][currentRoom+addToRoom].ImagePath;
-			} catch (NullPointerException e) {
-				System.out.println("Image missing / Image error");
-			}
-		}
-		return null;
+	    if(dungeonType != 0) {
+	        try {
+	            rooms[dungeonType][DungeonRooms.get(currentRoom)].VariantExists(currentRoom);
+	            rooms[dungeonType][currentRoom+addToRoom].getImage(currentRoom);
+	            if(rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath == null) {
+	                System.out.println("Image missing / Image error");
+	            }
+	            return rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath;
+	        } catch (NullPointerException e) {
+	            System.out.println("Image missing / Image error");
+	        }
+	    } else {
+	        try {
+	            if(rooms[dungeonType][currentRoom+addToRoom].ImagePath == null) {
+	                System.out.println("Image missing / Image error");
+	            }
+	            return rooms[dungeonType][currentRoom+addToRoom].ImagePath;
+	        } catch (NullPointerException e) {
+	            System.out.println("Image missing / Image error");
+	        }
+	    }
+	    return null;
 	}
 
 	public void drawRoom(Graphics2D g2d) {

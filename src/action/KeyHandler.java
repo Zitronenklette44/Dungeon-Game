@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import game.GameLogic;
+import rooms.CreateDungeon;
 import rooms.CreateRooms;
 
 public class KeyHandler implements KeyListener {

@@ -102,17 +102,15 @@ public class GameScreen extends JFrame {
 		lbRoomNR.setText("Room "+RoomNr);
 	}	
 	
-	public static void changeBackground(String ImagePath) {	//example "/resources/rooms/backgrounds/test.png"
-		if(ImagePath == null) {
-			return;
-		}
-		try {
-			lbBackground.setIcon(new ImageIcon(GameScreen.class.getResource(ImagePath)));
-		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	public static void changeBackground(String ImagePath) {
+	    if(ImagePath == null) {
+	        return;
+	    }
+	    try {
+	        lbBackground.setIcon(new ImageIcon(GameScreen.class.getResource(ImagePath)));
+	    } catch (NullPointerException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 }

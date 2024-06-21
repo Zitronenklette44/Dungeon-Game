@@ -1,6 +1,6 @@
 package rooms.Village;
 
-import game.GameLogic;
+import gameObject.CreateObjects;
 import rooms.RoomTemplate;
 
 public class Goal extends RoomTemplate{
@@ -12,7 +12,7 @@ public class Goal extends RoomTemplate{
 	@Override
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
-		GameLogic.createDungeonExit(1000, 700);
+		CreateObjects.createDungeonExit(1000, 700);
 		
 		
 		

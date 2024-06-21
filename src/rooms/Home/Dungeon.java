@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import game.GameLogic;
+import gameObject.CreateObjects;
 import gui.Draw;
 import rooms.RoomTemplate;
 
@@ -20,7 +20,7 @@ public class Dungeon extends RoomTemplate{
 	@Override
 	public void createObjects(int CurrentRoom) {
 		super.createObjects(CurrentRoom);
-		GameLogic.createDungeonChooser(200, 700);
+		CreateObjects.createDungeonChooser(200, 700);
 	}
 	
 	@Override

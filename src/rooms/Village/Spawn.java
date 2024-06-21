@@ -1,6 +1,7 @@
 package rooms.Village;
 
 import game.GameLogic;
+import gameObject.CreateObjects;
 import rooms.RoomTemplate;
 
 public class Spawn extends RoomTemplate{
@@ -13,20 +14,20 @@ public class Spawn extends RoomTemplate{
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
 		//Walls
-		GameLogic.createHitbox(761,100, 0, 0);
-		GameLogic.createHitbox(250,100, 100, 520);	//hohe breite posX posY
-		GameLogic.createHitbox(250,600, 200, 560);
-		GameLogic.createHitbox(400,40, 815, 350);
-		GameLogic.createHitbox(150,100, 855, 350);
-		GameLogic.createHitbox(150,100, 855, 125);
-		GameLogic.createHitbox(275,40, 820, 0);
-		GameLogic.createHitbox(10,250, 950, 130);
-		GameLogic.createHitbox(10,350, 850, 600);
-		GameLogic.createHitbox(50,230, 470, 10);
-		GameLogic.createHitbox(10,485, 340, 30);
-		GameLogic.createHitbox(180,80,100,0);
-		GameLogic.createHitbox(50,180,180,0);
-		GameLogic.createHitbox(65,63,300,50);
+		CreateObjects.createHitbox(761,100, 0, 0);
+		CreateObjects.createHitbox(250,100, 100, 520);	//hohe breite posX posY
+		CreateObjects.createHitbox(250,600, 200, 560);
+		CreateObjects.createHitbox(400,40, 815, 350);
+		CreateObjects.createHitbox(150,100, 855, 350);
+		CreateObjects.createHitbox(150,100, 855, 125);
+		CreateObjects.createHitbox(275,40, 820, 0);
+		CreateObjects.createHitbox(10,250, 950, 130);
+		CreateObjects.createHitbox(10,350, 850, 600);
+		CreateObjects.createHitbox(50,230, 470, 10);
+		CreateObjects.createHitbox(10,485, 340, 30);
+		CreateObjects.createHitbox(180,80,100,0);
+		CreateObjects.createHitbox(50,180,180,0);
+		CreateObjects.createHitbox(65,63,300,50);
 	}
 	
 	@Override

@@ -2,7 +2,7 @@ package rooms.Home;
 
 import java.awt.Color;
 
-import game.GameLogic;
+import gameObject.CreateObjects;
 import gui.Draw;
 import rooms.RoomTemplate;
 
@@ -22,7 +22,7 @@ public class Entrace extends RoomTemplate{
 	public void createObjects(int currentRoom) {
 		// TODO Auto-generated method stub
 		super.createObjects(currentRoom);
-		GameLogic.createShopPotionsOpen(300, 700);
+		CreateObjects.createShopPotionsOpen(300, 700);
 	}
 
 }

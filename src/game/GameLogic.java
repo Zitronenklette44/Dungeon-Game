@@ -1,20 +1,16 @@
 package game;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import entitys.Bullet;
-import entitys.DungeonChooser;
-import entitys.DungeonExit;
 import entitys.InteractableTemplate;
 import entitys.Player;
-import entitys.ShopOpenPotions;
-import entitys.ShopOpenTools;
 import entitys.TestMob;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
+import gameObject.CreateObjects;
 import gameObject.DeathRechteck;
 import gameObject.Rechteck;
 import gui.GameScreen;
@@ -60,6 +56,7 @@ public class GameLogic {
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
+		Timer OnesTimer = new Timer();
 		floorObject = new ArrayList<Rechteck>();
 		columns = new ArrayList<Column>();
 		deathRechteck = new ArrayList<DeathRechteck>();
@@ -72,7 +69,7 @@ public class GameLogic {
 		screenBreite =GameScreen.getScreenBreite();
 		screenHoehe = GameScreen.getScreenHoehe();
 
-		createObjekts();
+		CreateObjects.createObjekts();
 		dungeon.createDungeon();
 
 
@@ -120,16 +117,22 @@ public class GameLogic {
 				if(Interact) {
 					counterInteraction++;
 				}
-
+				
 			}
 		}, 0, 5);
-	}
-
-	private static void createObjekts() {
-		player = new Player(50, 50, screenBreite/2, floor-2, 0, 0, playerSpeed, 0, 0, 3, 20);
-
-		FloorObject = new Rechteck(50, screenBreite, 0, screenHoehe-50);
-		floorObject.add(FloorObject);
+		
+		
+		
+		OnesTimer.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				try {
+					GameScreen.changeBackground(CreateDungeon.getImage(0));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}, 0, 1000);
 	}
 
 	public static void resetLevel() {
@@ -146,45 +149,6 @@ public class GameLogic {
 			mobs.get(i).posX = mobs.get(i).SpawnX;
 			mobs.get(i).posY = mobs.get(i).SpawnY;
 		}
-	}
-
-	public static void createColumn(int breite, int hoehe , Color farbe,Color farbe2, int posX, int posY) {
-		columns.add(new Column(breite, hoehe, posX, posY, farbe, farbe2));
-	}
-
-	public static void createCollisionRechteck(int hoehe,int breite,int posX, int posY) {
-		collisionRectangles.add(new CollisionRechteck(hoehe, breite, posX, posY, true));
-	}
-	
-	public static void createHitbox(int hoehe,int breite,int posX, int posY) {
-		collisionRectangles.add(new CollisionRechteck(hoehe, breite, posX, posY, false));
-	}
-
-	public static void createDeathReckteck(int hoehe,int breite,int posX, int posY) {
-		deathRechteck.add(new DeathRechteck(hoehe, breite, posX, posY));
-	}
-
-	public static void createTestMob(int hoehe,int breite,int posX, int posY, int Dx, int Speed, int SpawnX, int SpawnY, int damage, int Hp) {
-		mobs.add(new TestMob(hoehe, breite, posX, posY, Dx, 0, Speed, SpawnX, SpawnY, damage, Hp));
-	}
-
-	public static void createBullet() {
-
-	}
-
-	public static void createDungeonChooser(int posX, int posY) {
-		interactables.add(new DungeonChooser(10, 10, posX, posY));
-	}
-
-	public static void createShopToolsOpen(int posX, int posY) {
-		interactables.add(new ShopOpenTools(10, 10, posX, posY));
-	}
-	public static void createShopPotionsOpen(int posX, int posY) {
-		interactables.add(new ShopOpenPotions(10, 10, posX, posY));
-	}
-
-	public static void createDungeonExit(int posX, int posY) {
-		interactables.add(new DungeonExit(10, 10, posX, posY));
 	}
 
 	private static void playerMovement() {
