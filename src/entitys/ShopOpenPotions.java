@@ -1,5 +1,6 @@
 package entitys;
 
+import gameMusik.MusicPlayer;
 import gui.GameScreen;
 
 public class ShopOpenPotions extends InteractableTemplate{
@@ -13,6 +14,8 @@ public class ShopOpenPotions extends InteractableTemplate{
 		super.performAction();
 		gui.Shops.ShopPotions.erstellen();
 		GameScreen.hideFrame();
+		MusicPlayer.pauseAllSound();
+		MusicPlayer.playSound(2, true);
 		
 	}
 	

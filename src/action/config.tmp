@@ -1,0 +1,20 @@
+//Wenn Musik aktiviert ist
+musicEnabled = true
+musicVolume = -30
+
+//anzahl der in Besitz befindenen dungeon Keys
+dungeonKey = 1
+
+//debug Modus
+debug = false
+
+
+
+
+//********Player*********
+
+//Spieler Geschwindigkeit
+playerSpeed = 2
+
+//Spieler Sprung Höhe
+jumpHight = 70

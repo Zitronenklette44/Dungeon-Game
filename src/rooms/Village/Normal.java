@@ -106,18 +106,15 @@ public class Normal extends RoomTemplate {
     public String getImage(int currentRoom) {
         int variantIndex = getVariantIndex(currentRoom);
         if (variantIndex == -1) {
-            System.out.println("No image for currentRoom: " + currentRoom);
             return "";
         }
         setImagePath(dungeonPaths.get(variantIndex + 1));
-        System.out.println("ImagePath set to: " + ImagePath);
         return ImagePath;
     }
 
     private void setImagePath(int variant) {
         if (variant >= 0 && variant < image.length) {
             ImagePath = image[variant];
-            System.out.println("ImagePath set to: " + ImagePath);
         } else {
             throw new IllegalArgumentException("Invalid variant: " + variant);
         }

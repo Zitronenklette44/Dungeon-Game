@@ -4,7 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import game.GameLogic;
-import rooms.CreateDungeon;
+import gameMusik.MusicPlayer;
+import rooms.DungeonCore;
 import rooms.CreateRooms;
 
 public class KeyHandler implements KeyListener {
@@ -33,7 +34,7 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'w' || e.getKeyChar() == 'W' || e.getKeyCode() == KeyEvent.VK_UP&&!GameLogic.vertikalAxis) {
 			GameLogic.moveUp=true;
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE && GameLogic.onGround&&!GameLogic.vertikalAxis) {
+		if(e.getKeyCode() == KeyEvent.VK_SPACE && GameLogic.onGround&&!GameLogic.vertikalAxis&&!GameLogic.paused) {
 			if(GameLogic.isSpacePressed == false) {
 				GameLogic.jump=true;
 			}else {
@@ -48,6 +49,26 @@ public class KeyHandler implements KeyListener {
 
 		if(e.getKeyCode() == KeyEvent.VK_F1) {
 			GameLogic.debug=!GameLogic.debug;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_F3) {
+			MusicPlayer.playSound(0, true);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_F4) {
+			MusicPlayer.playSound(1, true);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_F2) {
+			MusicPlayer.stopAllSound();
+		}
+		
+		
+		if(e.getKeyCode() == KeyEvent.VK_MULTIPLY) {
+			MusicPlayer.setVolumeAll(MusicPlayer.totalVolume-1F);
+			System.out.println(MusicPlayer.getVolume(0));
+		}
+		if(e.getKeyCode() == KeyEvent.VK_ADD) {
+			MusicPlayer.setVolumeAll(MusicPlayer.totalVolume+1F);
+			System.out.println(MusicPlayer.getVolume(0));
 		}
 	}
 

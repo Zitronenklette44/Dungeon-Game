@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import gameMusik.MusicPlayer;
 import gui.GameScreen;
 
 import java.awt.FlowLayout;
@@ -33,7 +34,7 @@ public class ShopPotions extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	static ShopPotions frame;
-	private static boolean existing = false;
+	public static boolean existing = false;
 
 	/**
 	 * Launch the application.
@@ -70,6 +71,8 @@ public class ShopPotions extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				close();
 				GameScreen.showFrame();
+				MusicPlayer.stopSound(2);
+				MusicPlayer.continueAllSound();
 			}
 		});
 		setResizable(false);
@@ -80,6 +83,8 @@ public class ShopPotions extends JFrame {
 				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 					close();
 					GameScreen.showFrame();
+					MusicPlayer.stopSound(2);
+					MusicPlayer.continueAllSound();
 				}
 			}
 		});

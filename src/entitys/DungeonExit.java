@@ -2,7 +2,7 @@ package entitys;
 
 import game.GameLogic;
 import gui.GameScreen;
-import rooms.CreateDungeon;
+import rooms.DungeonCore;
 
 public class DungeonExit extends InteractableTemplate{
 
@@ -17,9 +17,10 @@ public class DungeonExit extends InteractableTemplate{
 		GameScreen.updateRoomNr(0);
 		GameLogic.vertikalAxis=false;
 		GameScreen.updateRoomNr(1);
-		CreateDungeon.dungeonType = 0;
-		CreateDungeon.homeVillageBuild = true;
-		
+		DungeonCore.dungeonType = 0;
+		DungeonCore.homeVillageBuild = true;
+		GameLogic.player.breite = 50;
+		GameLogic.player.hoehe = 50;
 		
 		
 	}

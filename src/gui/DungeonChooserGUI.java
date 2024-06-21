@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import game.GameLogic;
-import rooms.CreateDungeon;
+import rooms.DungeonCore;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -247,11 +247,11 @@ public class DungeonChooserGUI extends JFrame {
 		btnConfirm.setContentAreaFilled(false);
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CreateDungeon.dungeonType = selectedDungeonType;
-				CreateDungeon.homeVillageBuild = false;
+				DungeonCore.dungeonType = selectedDungeonType;
+				DungeonCore.homeVillageBuild = false;
 				GameLogic.vertikalAxis = true;
 				GameLogic.dungeon.createDungeon();
-				GameScreen.changeBackground(CreateDungeon.getImage(0));
+				GameScreen.changeBackground(DungeonCore.getImage(0));
 				GameLogic.directionRoom = 0;
 				GameLogic.resetLevel();
 				close();

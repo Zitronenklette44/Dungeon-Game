@@ -8,13 +8,14 @@ import entitys.Bullet;
 import entitys.InteractableTemplate;
 import entitys.Player;
 import entitys.TestMob;
+import gameMusik.MusicPlayer;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.CreateObjects;
 import gameObject.DeathRechteck;
 import gameObject.Rechteck;
 import gui.GameScreen;
-import rooms.CreateDungeon;
+import rooms.DungeonCore;
 
 public class GameLogic {
 
@@ -51,8 +52,10 @@ public class GameLogic {
 	public static boolean isSpacePressed = false;
 	public static boolean vertikalAxis = false;
 	public static boolean debug = false;
+	public static boolean paused = false;
+	public static boolean musicEnabled = true;
 
-	public static CreateDungeon dungeon;
+	public static DungeonCore dungeon;
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
@@ -63,7 +66,7 @@ public class GameLogic {
 		mobs =new ArrayList<TestMob>();
 		bullets = new ArrayList<Bullet>();
 		interactables = new ArrayList<InteractableTemplate>();
-		dungeon = new CreateDungeon();
+		dungeon = new DungeonCore();
 
 		collisionRectangles = new ArrayList<>();
 		screenBreite =GameScreen.getScreenBreite();
@@ -72,50 +75,28 @@ public class GameLogic {
 		CreateObjects.createObjekts();
 		dungeon.createDungeon();
 
-
-
-
-
-
-
-
-		gameTimer.scheduleAtFixedRate(new TimerTask() {
+		gameTimer.scheduleAtFixedRate(new TimerTask() {		//5ms Timer
 
 			public void run() {
+				if(!paused) {
+					Movement.playerMovement();		//bewegung Spieler + Mobs
+					Movement.mobMovement();
 
-				playerMovement();
-				mobMovement();
-
-				if(player.HitCooldown>0) {player.HitCooldown--;}
-				if(player.AtkCooldown>0) {player.AtkCooldown--;}
-
-
-
-
-
-
-				if(player.posX<=0&&CreateDungeon.currentRoom>=1) {
-					directionRoom = 1;
-					CreateDungeon.currentRoom--;
-					resetLevel();
-					GameScreen.updateRoomNr(CreateDungeon.currentRoom+1);
-					GameScreen.changeBackground(CreateDungeon.getImage(0));
-				}else if(player.posX>screenBreite-player.breite&&CreateDungeon.currentRoom<dungeon.getDungeonLenght()-1) {
-					directionRoom=0;
-					CreateDungeon.currentRoom++;
-					resetLevel();
-					GameScreen.updateRoomNr(CreateDungeon.currentRoom+1);
-					GameScreen.changeBackground(CreateDungeon.getImage(0));
+					if(player.HitCooldown>0) {player.HitCooldown--;}		//Cooldown Reset
+					if(player.AtkCooldown>0) {player.AtkCooldown--;}
 				}
+				
+				changeRoom();		//Raum wechsel
 
-				if(player.posX<0) {
-					player.posX = 0;
-				}else if(player.posX>screenBreite-player.breite) {
-					player.posX =1150;
-
-				}
+				
 				if(Interact) {
 					counterInteraction++;
+				}
+				if(GameLogic.player.posX<0) {
+					GameLogic.player.posX = 0;
+				}else if(GameLogic.player.posX>GameLogic.screenBreite-GameLogic.player.breite) {
+					GameLogic.player.posX =1150;
+
 				}
 				
 			}
@@ -123,124 +104,45 @@ public class GameLogic {
 		
 		
 		
-		OnesTimer.scheduleAtFixedRate(new TimerTask() {
+		OnesTimer.scheduleAtFixedRate(new TimerTask() {		//1s Timer
 			public void run() {
 				try {
-					GameScreen.changeBackground(CreateDungeon.getImage(0));
+					GameScreen.changeBackground(DungeonCore.getImage(0));		//Hintergrund erneuern
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
-				
+				}		
 			}
 		}, 0, 1000);
 	}
 
+	public void changeRoom() {
+		if(player.posX<=0&&DungeonCore.currentRoom>=1) {		//Wenn am linken ende des Raumes und weiterer Raum vorhanden
+			directionRoom = 1;		//setze richtung auf rechts nach links
+			DungeonCore.currentRoom--;	//aktuellen Raum um 1 nach hinten verscheieben
+			resetLevel();		//Level reseten
+			GameScreen.updateRoomNr(DungeonCore.currentRoom+1);		//Raum Nummer updaten	
+		}else if(player.posX>screenBreite-player.breite&&DungeonCore.currentRoom<dungeon.getDungeonLenght()-1) {		//Wenn am rechten Rand des Raumes und weiterer Raum vorhanden
+			directionRoom=0;	//richtung auf links nach rechts setzen
+			DungeonCore.currentRoom++;	//aktuellen raum um 1 nach vorne verscheiben
+			resetLevel();	//Level reseten
+			GameScreen.updateRoomNr(DungeonCore.currentRoom+1);	//Raum Nummer updaten
+		}
+		
+	}
+
 	public static void resetLevel() {
-		dungeon.setSpawns();
-		if(directionRoom == 0) {
-			player.posX = resetPos[0];
+		dungeon.setSpawns();		//reset Punkte aus dem aktuellen Raum abrufen
+		if(directionRoom == 0) {	//wenn von links nach rechts
+			player.posX = resetPos[0];	
 			player.posY = resetPos[1];
-		}else if(directionRoom == 1) {
+		}else if(directionRoom == 1) {	//wenn von rechts nach links
 			player.posX = resetPos1[0];
 			player.posY = resetPos1[1];
 
 		}
-		for (int i = 0; i < mobs.size(); i++) {
+		for (int i = 0; i < mobs.size(); i++) {	//für alle mobs position auf Spawn zurücksetzen
 			mobs.get(i).posX = mobs.get(i).SpawnX;
 			mobs.get(i).posY = mobs.get(i).SpawnY;
-		}
-	}
-
-	private static void playerMovement() {
-		// Spielerbewegung
-
-		if (moveLeft && !Collisions.checkCollision(player, -3, 0) &&!moveRight) {
-			player.posX -= 2;
-		}
-		if (moveRight && !Collisions.checkCollision(player, 3, 0)&&!moveLeft) {
-			player.posX += 2;
-		}
-		if (moveUp && !Collisions.checkCollision(player, 0, -3)&&vertikalAxis&&player.posY>0&&!moveDown) {
-			player.posY -= 2;
-		}
-		if (moveDown && !Collisions.checkCollision(player, 0, 3)&&vertikalAxis&&player.posY<floor&&!moveUp) {
-			player.posY += 2;
-		}
-
-
-		if(jump&&onGround&&!vertikalAxis) {
-			playerVelY=-3.5f;
-		}
-
-		if(!onGround&&!vertikalAxis) {
-			playerVelY = playerVelY+gravity;
-
-		}
-
-
-		if (!Collisions.isCollisionAbovePlayer()&&!vertikalAxis) {
-			if (!Collisions.checkCollision(player, 0, (int) playerVelY)) {
-				player.posY += playerVelY;
-			} else {
-				playerVelY = 0;
-			}
-		} else {
-			playerVelY = 0;
-		}			
-
-		// Kollisionserkennung für Spieler
-		if(!vertikalAxis) {
-			Collisions.updateOnGroundStatus();
-		}
-
-		if (Collisions.checkDeathBlock(player, 0, -1)) {
-			resetLevel();
-		}
-
-		if(Interact) {
-			for(int i = 0; i<interactables.size();i++) {
-				try {
-					if(interactables.get(i).actionEnabled) {
-						interactables.get(i).performAction();
-					}
-				} catch (IndexOutOfBoundsException e) {}
-			}
-		}
-		if(counterInteraction >=50) {
-			Interact = false;
-			counterInteraction = 0;
-		}
-
-	}
-
-	private static void mobMovement(){
-
-		//movement mobs
-		for (int i = 0; i < mobs.size(); i++) {
-			TestMob mob = mobs.get(i);
-
-			if (player.posX > mob.posX) {
-				mob.dx = 1;
-			} else if (player.posX < mob.posX) {
-				mob.dx = -1;
-			} else {
-				mob.dx = 0;
-			}
-
-			// Bewege den Mob nur, wenn keine Kollision vorliegt
-			if (mob.dx > 0 && !Collisions.checkCollision(mob, mob.speed, 0)) {
-				mob.posX += mob.speed;
-			} else if (mob.dx < 0 && !Collisions.checkCollision(mob, -mob.speed, 0)) {
-				mob.posX -= mob.speed;
-			}
-
-			if(Collisions.checkPlayer(mob, 1, 0)) {
-				if(player.HitCooldown==0) {
-					player.Hp -= mob.damage;
-					player.setHitCooldown();
-					System.out.println("Player HP: "+ player.Hp);
-				}
-			}
 		}
 	}
 

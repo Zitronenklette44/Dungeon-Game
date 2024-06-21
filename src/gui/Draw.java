@@ -60,7 +60,10 @@ public class Draw extends JLabel {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+		
+		if(GameLogic.paused) {
+			return;
+		}
 
 		//versteckte Interactionen
 		g.setColor(Color.green);
