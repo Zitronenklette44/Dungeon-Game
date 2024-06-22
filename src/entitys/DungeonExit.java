@@ -13,7 +13,7 @@ public class DungeonExit extends InteractableTemplate{
 	@Override
 	public void performAction() {
 		super.performAction();
-		GameLogic.dungeon.currentRoom = 0;
+		DungeonCore.currentRoom = 0;
 		GameScreen.updateRoomNr(0);
 		GameLogic.vertikalAxis=false;
 		GameScreen.updateRoomNr(1);

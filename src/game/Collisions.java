@@ -18,24 +18,22 @@ public class Collisions {
 
 	public static boolean checkCollision(Rechteck rect, int deltaX, int deltaY) {
 		ArrayList<CollisionRechteck> collisionRechtecks = new ArrayList<>(GameLogic.collisionRectangles);
-		// Berechne die zukünftige Position des Rechtecks
-		int futurePosX = rect.posX + deltaX;
-		int futurePosY = rect.posY + deltaY;
+	    int futurePosX = rect.posX + deltaX;
+	    int futurePosY = rect.posY + deltaY;
 
-		// Überprüfe, ob eine Kollision auftreten würde
-		for (CollisionRechteck collisionRect : collisionRechtecks) {
-			if(collisionRect != null) {
-				if (futurePosX < collisionRect.posX + collisionRect.breite && futurePosX + rect.breite > collisionRect.posX
-						&& futurePosY < collisionRect.posY + collisionRect.hoehe
-						&& futurePosY + rect.hoehe > collisionRect.posY) {
-					// Kollision gefunden
-					return true;
-				}
-			}
-		}
-		// Keine Kollision
-		return false;
+	    for (CollisionRechteck collisionRect : collisionRechtecks) {
+	        if (collisionRect != null) {
+	            if (futurePosX < collisionRect.posX + collisionRect.breite 
+	                    && futurePosX + rect.breite > collisionRect.posX
+	                    && futurePosY < collisionRect.posY + collisionRect.hoehe
+	                    && futurePosY + rect.hoehe > collisionRect.posY) {
+	                return true;
+	            }
+	        }
+	    }
+	    return false;
 	}
+
 
 	public static boolean isCollisionAbovePlayer() {
 		ArrayList<CollisionRechteck> collisionRechtecks = new ArrayList<>(GameLogic.collisionRectangles);

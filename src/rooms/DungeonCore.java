@@ -40,9 +40,9 @@ public class DungeonCore {
 							new DungeonEntrance("Spawn"), new DungeonExit("Goal")}
 	};
 	private int[][] Features = {{1, 6},	//Haus Markt
-			{1,6,11},//Cave Lichtung See
-			{1,6,11,16},//Esszimmer küche PrivatRäume Kerker 
-			{1,6,11,16,21,26}}; //Spawner Waffenkammer KristalCave Bibiliothek Mine LavaCave
+								{1,6,11},//Cave Lichtung See
+								{1,6,11,16},//Esszimmer küche PrivatRäume Kerker 
+								{1,6,11,16,21,26}}; //Spawner Waffenkammer KristalCave Bibiliothek Mine LavaCave
 	private static int[] homeVillage = {0, 1, 2, 3, 4};
 	public static boolean homeVillageBuild = true;
 	public static int dungeonType = 0;
@@ -68,9 +68,7 @@ public class DungeonCore {
 			for (int i = 0; i < DungeonLength; i++) {
 				System.out.print(DungeonRooms.get(i) + ", ");
 			}
-
 		}
-		//loadBackgrounds();
 	}
 
 	private void spreadFeatures() {

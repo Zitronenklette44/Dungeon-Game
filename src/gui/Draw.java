@@ -14,9 +14,13 @@ import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.DeathRechteck;
 import gameObject.Rechteck;
+import rooms.DungeonCore;
 
 public class Draw extends JLabel {
+	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private int screenwidth;
+	@SuppressWarnings("unused")
 	private int screenheight;
 	public static Rechteck player;
 	static GameLogic spieLogic;
@@ -36,8 +40,6 @@ public class Draw extends JLabel {
 	public static Color deathRechteckColor = Color.red;
 	public static Color mobsColor = Color.blue;
 	public static Color bulletColor = Color.magenta;
-	private int oldRoom = -1;
-	private int oldDungeonType=-1;
 
 
 	@SuppressWarnings("static-access")
@@ -79,15 +81,13 @@ public class Draw extends JLabel {
 
 		//zeiche Raum
 		g.setColor(Color.white);
-		spieLogic.dungeon.drawRoom(g2d);
-		oldDungeonType = GameLogic.dungeon.dungeonType;
-		oldRoom = GameLogic.dungeon.currentRoom;
+		GameLogic.dungeon.drawRoom(g2d);
 
 
 		//Zeichne Objekte
 		g.setColor(floorColor);
 		for (int i = 0; i < floor.size(); i++) {
-			if(GameLogic.dungeon.dungeonType == 0) {
+			if(DungeonCore.dungeonType == 0) {
 				Rechteck aktuellesObjekt = floor.get(i);
 				g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 			}
