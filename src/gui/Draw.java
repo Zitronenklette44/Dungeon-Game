@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import entitys.Bullet;
 import entitys.InteractableTemplate;
+import entitys.MobTemplate;
 import entitys.TestMob;
 import game.Collisions;
 import game.GameLogic;
@@ -28,7 +29,7 @@ public class Draw extends JLabel {
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<DeathRechteck> deathRechtecks;
-	public static ArrayList<TestMob> mobs;
+	public static ArrayList<MobTemplate> mobs;
 	public static ArrayList<Bullet> bullets;
 	public static ArrayList<InteractableTemplate> interactables;
 
@@ -77,7 +78,7 @@ public class Draw extends JLabel {
 
 		//zeiche Hintergrund
 		g.setColor(backgroundColor);
-		g.fillRect(0, 0, screenwidth, screenheight);
+		//g.fillRect(0, 0, screenwidth, screenheight);
 
 		//zeiche Raum
 		g.setColor(Color.white);
@@ -120,10 +121,10 @@ public class Draw extends JLabel {
 
 		g.setColor(mobsColor);
 		for (int i = 0; i < mobs.size(); i++) {
-			TestMob aktuellesObjekt = mobs.get(i);
+			MobTemplate aktuellesObjekt = mobs.get(i);
 			g.fillRect(aktuellesObjekt.posX, aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
-
+		
 		g.setColor(bulletColor);
 		for (int i = 0; i < bullets.size(); i++) {
 			Bullet aktuellesObjekt = bullets.get(i);
@@ -149,7 +150,6 @@ public class Draw extends JLabel {
 		Draw.collisionRectangles.clear();
 		Draw.deathRechtecks.clear();
 		Draw.columns.clear();
-		Draw.mobs.clear();
 		Draw.interactables.clear();
 	}
 

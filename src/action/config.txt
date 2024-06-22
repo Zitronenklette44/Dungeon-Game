@@ -1,16 +1,21 @@
 // Wenn Musik aktiviert ist
+// Standart true, -30
 musicEnabled = true
-musicVolume = -50.0
+musicVolume = -30.0
 
 // Anzahl der in Besitz befindenen dungeon Keys
-dungeonKey = 4
+// Standart ohne Spielfortschritt 1
+dungeonKey = 1
 
 // Debug Modus
-debug = false
+// Standart false
+debug = true
 
 // Spieler Geschwindigkeit
+// Standart 2
 playerSpeed = 2
 
 // Spieler Sprung Höhe
+// Standart 70
 jumpHight = 70
 

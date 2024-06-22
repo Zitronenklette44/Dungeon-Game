@@ -63,15 +63,20 @@ public class SaveLoad {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
             // Schreibe die aktualisierten Konfigurationswerte
             writer.write("// Wenn Musik aktiviert ist\n");
+            writer.write("// Standart true, -30\n");
             writer.write("musicEnabled = " + GameLogic.musicEnabled + "\n");
             writer.write("musicVolume = "+MusicPlayer.totalVolume+"\n\n");
             writer.write("// Anzahl der in Besitz befindenen dungeon Keys\n");
+            writer.write("// Standart ohne Spielfortschritt 1\n");
             writer.write("dungeonKey = " + GameLogic.dungeonKey + "\n\n");
             writer.write("// Debug Modus\n");
+            writer.write("// Standart false\n");
             writer.write("debug = " + GameLogic.debug + "\n\n");
             writer.write("// Spieler Geschwindigkeit\n");
+            writer.write("// Standart 2\n");
             writer.write("playerSpeed = " + GameLogic.playerSpeed + "\n\n");
             writer.write("// Spieler Sprung Höhe\n");
+            writer.write("// Standart 70\n");
             writer.write("jumpHight = " + GameLogic.jumpHight + "\n\n");
 
             System.out.println("Konfigurationsdatei erfolgreich aktualisiert.");

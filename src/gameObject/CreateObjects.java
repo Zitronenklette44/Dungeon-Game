@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import entitys.DungeonChooser;
 import entitys.DungeonExit;
+import entitys.MobTemplate;
 import entitys.Player;
 import entitys.ShopOpenPotions;
 import entitys.ShopOpenTools;
@@ -35,8 +36,10 @@ public class CreateObjects {
 		GameLogic.deathRechteck.add(new DeathRechteck(hoehe, breite, posX, posY));
 	}
 
-	public static void createTestMob(int hoehe,int breite,int posX, int posY, int Dx, int Speed, int SpawnX, int SpawnY, int damage, int Hp) {
-		GameLogic.mobs.add(new TestMob(hoehe, breite, posX, posY, Dx, 0, Speed, SpawnX, SpawnY, damage, Hp));
+	public static MobTemplate createTestMob(int hoehe,int breite, int Speed, int SpawnX, int SpawnY, int damage, int Hp) {
+		MobTemplate template =new TestMob(hoehe, breite, SpawnX, SpawnY, 0, 0, Speed, SpawnX, SpawnY, damage, Hp);
+		GameLogic.mobs.add(template);
+		return template;
 	}
 
 	public static void createBullet() {

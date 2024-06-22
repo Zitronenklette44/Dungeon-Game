@@ -1,23 +1,66 @@
 package game;
 
+import entitys.MobTemplate;
 import entitys.TestMob;
 
 public class Movement {
 
 	static void playerMovement() {
+		boolean mLeft = GameLogic.moveLeft;
+		boolean mRight = GameLogic.moveRight;
+		boolean mUp = GameLogic.moveUp;
+		boolean mDown = GameLogic.moveDown;
+		
 		// Spielerbewegung
-	
-		if (GameLogic.moveLeft && !Collisions.checkCollision(GameLogic.player, -3, 0) &&!GameLogic.moveRight) {
-			GameLogic.player.posX -= 2;
+		if(GameLogic.vertikalAxis) {
+		if(mLeft && mUp) {
+			if(!Collisions.checkCollision(GameLogic.player, -(GameLogic.playerSpeed+1), 0)) {
+			GameLogic.player.posX -= GameLogic.playerSpeed/2;
+			}
+			if(!Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.playerSpeed+1))) {
+			GameLogic.player.posY -= GameLogic.playerSpeed/2;
+			}
 		}
-		if (GameLogic.moveRight && !Collisions.checkCollision(GameLogic.player, 3, 0)&&!GameLogic.moveLeft) {
-			GameLogic.player.posX += 2;
+		if(mLeft && mDown) {
+			if (!Collisions.checkCollision(GameLogic.player, -(GameLogic.playerSpeed+1), 0)) {
+				GameLogic.player.posX -= GameLogic.playerSpeed / 2;
+			}
+			if (!Collisions.checkCollision(GameLogic.player, 0, (GameLogic.playerSpeed+1))) {
+				GameLogic.player.posY += GameLogic.playerSpeed / 2;
+			}
 		}
-		if (GameLogic.moveUp && !Collisions.checkCollision(GameLogic.player, 0, -3)&&GameLogic.vertikalAxis&&GameLogic.player.posY>0&&!GameLogic.moveDown) {
-			GameLogic.player.posY -= 2;
+		if(mRight && mUp) {
+			if (!Collisions.checkCollision(GameLogic.player, (GameLogic.playerSpeed+1), 0)) {
+				GameLogic.player.posX += GameLogic.playerSpeed / 2;
+			}
+			if (!Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.playerSpeed+1))) {
+				GameLogic.player.posY -= GameLogic.playerSpeed / 2;
+			}
 		}
-		if (GameLogic.moveDown && !Collisions.checkCollision(GameLogic.player, 0, 3)&&GameLogic.vertikalAxis&&GameLogic.player.posY<GameLogic.floor&&!GameLogic.moveUp) {
-			GameLogic.player.posY += 2;
+		if(mRight && mDown) {
+			if (!Collisions.checkCollision(GameLogic.player, (GameLogic.playerSpeed+1), 0)) {
+				GameLogic.player.posX += GameLogic.playerSpeed / 2;
+			}
+			if (!Collisions.checkCollision(GameLogic.player, 0, (GameLogic.playerSpeed+1))) {
+				GameLogic.player.posY += GameLogic.playerSpeed / 2;
+			}
+		}
+		}else {
+			mDown = false;
+			mUp = false;
+		}
+		
+		if (mLeft && !Collisions.checkCollision(GameLogic.player, -(GameLogic.playerSpeed+1), 0) &&!mRight&&!mUp&&!mDown) {
+			GameLogic.player.posX -= GameLogic.playerSpeed;
+		}
+		if (mRight && !Collisions.checkCollision(GameLogic.player, (GameLogic.playerSpeed+1), 0)&&!mLeft&&!mUp&&!mDown) {
+			GameLogic.player.posX += GameLogic.playerSpeed;
+		}
+		if (mUp && !Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.playerSpeed+1))&&GameLogic.vertikalAxis&&GameLogic.player.posY>0&&!mDown&&!mLeft&&!mRight) {
+			GameLogic.player.posY -= GameLogic.playerSpeed;
+		}
+		if (mDown && !Collisions.checkCollision(GameLogic.player, 0, (GameLogic.playerSpeed+1))&&GameLogic.vertikalAxis&&GameLogic.player.posY<GameLogic.floor&&!mUp&&!mLeft&&!mRight) {
+			GameLogic.player.posY += GameLogic.playerSpeed;
 		}
 	
 	
@@ -65,35 +108,67 @@ public class Movement {
 		}
 	}
 
-	static void mobMovement(){
-	
-		//movement mobs
-		for (int i = 0; i < GameLogic.mobs.size(); i++) {
-			TestMob mob = GameLogic.mobs.get(i);
-	
-			if (GameLogic.player.posX > mob.posX) {
-				mob.dx = 1;
-			} else if (GameLogic.player.posX < mob.posX) {
-				mob.dx = -1;
-			} else {
-				mob.dx = 0;
-			}
-	
-			// Bewege den Mob nur, wenn keine Kollision vorliegt
-			if (mob.dx > 0 && !Collisions.checkCollision(mob, mob.speed, 0)) {
-				mob.posX += mob.speed;
-			} else if (mob.dx < 0 && !Collisions.checkCollision(mob, -mob.speed, 0)) {
-				mob.posX -= mob.speed;
-			}
-	
-			if(Collisions.checkPlayer(mob, 1, 0)) {
-				if(GameLogic.player.HitCooldown==0) {
-					GameLogic.player.Hp -= mob.damage;
-					GameLogic.player.setHitCooldown();
-					System.out.println("Player HP: "+ GameLogic.player.Hp);
-				}
-			}
-		}
+	static void mobMovement() {
+	    // Movement for mobs
+	    for (int i = 0; i < GameLogic.mobs.size(); i++) {
+	        MobTemplate mob = GameLogic.mobs.get(i);
+
+	        boolean moveHorizontally = true;
+	        boolean moveVertically = true;
+
+	        // Determine direction based on player position
+	        if (GameLogic.player.posX > mob.posX) {
+	            mob.dx = mob.speed;
+	        } else if (GameLogic.player.posX < mob.posX) {
+	            mob.dx = -mob.speed;
+	        } else {
+	            mob.dx = 0;
+	        }
+
+	        if (GameLogic.player.posY > mob.posY) {
+	            mob.dy = mob.speed;
+	        } else if (GameLogic.player.posY < mob.posY) {
+	            mob.dy = -mob.speed;
+	        } else {
+	            mob.dy = 0;
+	        }
+
+	        float diagonalSpeed = 0.5F;
+
+	        // Diagonal movement
+	        if (mob.dx != 0 && mob.dy != 0) {
+	            if (!Collisions.checkCollision(mob, (int) (mob.dx * diagonalSpeed)+1, 0)) {
+	                mob.posX += mob.dx * diagonalSpeed;
+	            } else {
+	                moveHorizontally = false;
+	            }
+	            if (!Collisions.checkCollision(mob, 0, (int) (mob.dy * diagonalSpeed)+1)) {
+	                mob.posY += mob.dy * diagonalSpeed;
+	            } else {
+	                moveVertically = false;
+	            }
+	        }
+
+	        // Horizontal movement
+	        if (moveHorizontally && mob.dx != 0 && !Collisions.checkCollision(mob, mob.dx * mob.speed+1, 0)) {
+	            mob.posX += mob.dx * mob.speed;
+	        }
+
+	        // Vertical movement
+	        if (moveVertically && mob.dy != 0 && !Collisions.checkCollision(mob, 0, mob.dy * mob.speed+1)) {
+	            mob.posY += mob.dy * mob.speed;
+	        }
+
+	        // Check collision with player
+	        if (Collisions.checkPlayer(mob, 1, 0)) {
+	            if (GameLogic.player.HitCooldown == 0) {
+	                GameLogic.player.Hp -= mob.damage;
+	                GameLogic.player.setHitCooldown();
+	                System.out.println("Player HP: " + GameLogic.player.Hp);
+	            }
+	        }
+	    }
 	}
+
 
 }

@@ -6,6 +6,7 @@ import java.util.TimerTask;
 
 import entitys.Bullet;
 import entitys.InteractableTemplate;
+import entitys.MobTemplate;
 import entitys.Player;
 import entitys.TestMob;
 import gameObject.CollisionRechteck;
@@ -28,7 +29,7 @@ public class GameLogic {
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<DeathRechteck> deathRechteck;
-	public static ArrayList<TestMob> mobs;
+	public static ArrayList<MobTemplate> mobs;
 	public static ArrayList<Bullet> bullets;
 	public static ArrayList<InteractableTemplate> interactables;
 
@@ -44,7 +45,7 @@ public class GameLogic {
 	public static int directionRoom = 0;
 	public static float playerVelY = 0;
 	public static float gravity = 0.1f;
-	public static int dungeonKey=4;
+	public static int dungeonKey=1;
 	public static int counterInteraction = 0;
 	public static boolean onGround=false;
 	static boolean jumpInitialized = false;
@@ -62,7 +63,7 @@ public class GameLogic {
 		floorObject = new ArrayList<Rechteck>();
 		columns = new ArrayList<Column>();
 		deathRechteck = new ArrayList<DeathRechteck>();
-		mobs =new ArrayList<TestMob>();
+		mobs =new ArrayList<MobTemplate>();
 		bullets = new ArrayList<Bullet>();
 		interactables = new ArrayList<InteractableTemplate>();
 		dungeon = new DungeonCore();
@@ -123,10 +124,10 @@ public class GameLogic {
 		}else if(player.posX>screenBreite-player.breite&&DungeonCore.currentRoom<dungeon.getDungeonLenght()-1) {		//Wenn am rechten Rand des Raumes und weiterer Raum vorhanden
 			directionRoom=0;	//richtung auf links nach rechts setzen
 			DungeonCore.currentRoom++;	//aktuellen raum um 1 nach vorne verscheiben
-			resetLevel();	//Level reseten
 			GameScreen.updateRoomNr(DungeonCore.currentRoom+1);	//Raum Nummer updaten
+			resetLevel();	//Level reseten
 		}
-		
+		GameScreen.changeBackground(DungeonCore.getImage(0));
 	}
 
 	public static void resetLevel() {

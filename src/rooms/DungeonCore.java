@@ -69,6 +69,7 @@ public class DungeonCore {
 				System.out.print(DungeonRooms.get(i) + ", ");
 			}
 		}
+		
 	}
 
 	private void spreadFeatures() {
@@ -175,7 +176,7 @@ public class DungeonCore {
 	    } else {
 	        try {
 	            if(rooms[dungeonType][currentRoom+addToRoom].ImagePath == null) {
-	                System.out.println("Image missing / Image error");
+	                //System.out.println("Image missing / Image error");
 	            }
 	            return rooms[dungeonType][currentRoom+addToRoom].ImagePath;
 	        } catch (NullPointerException e) {
@@ -212,8 +213,11 @@ public class DungeonCore {
 
 	public void setSpawns() {
 		if(dungeonType == 0) {
+			rooms[dungeonType][currentRoom].spawnEntitys();
+			rooms[dungeonType][currentRoom].setSpawns(currentRoom);
 			return;
 		}
-		rooms[dungeonType][DungeonRooms.get(currentRoom)].setSpawns();
+		rooms[dungeonType][DungeonRooms.get(currentRoom)].setSpawns(currentRoom);
+		rooms[dungeonType][DungeonRooms.get(currentRoom)].spawnEntitys();
 	}
 }

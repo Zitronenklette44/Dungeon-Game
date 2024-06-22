@@ -1,5 +1,6 @@
 package rooms.Village;
 
+import entitys.MobTemplate;
 import game.GameLogic;
 import gameObject.CreateObjects;
 import rooms.RoomTemplate;
@@ -8,12 +9,13 @@ public class Spawn extends RoomTemplate{
 	
 	public Spawn(String name) {
 		super(name, "/resources/rooms/backgrounds/VillageSpawn.png");
+		createEntitys();
 	}
 	
 	@Override
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
-		//Walls
+		//Hitboxen
 		CreateObjects.createHitbox(761,100, 0, 0);
 		CreateObjects.createHitbox(250,100, 100, 520);	//hohe breite posX posY
 		CreateObjects.createHitbox(250,600, 200, 560);
@@ -31,7 +33,7 @@ public class Spawn extends RoomTemplate{
 	}
 	
 	@Override
-	public void setSpawns() {
+	public void setSpawns(int currentRoom) {
 		GameLogic.player.breite = 25;
 		GameLogic.player.hoehe = 25;
 		GameLogic.floor = 725;
@@ -39,7 +41,27 @@ public class Spawn extends RoomTemplate{
 		GameLogic.resetPos[1] = 100;
 		GameLogic.resetPos1[0]= 1150;
 		GameLogic.resetPos1[1] = 350;
-		super.setSpawns();
+		super.setSpawns(currentRoom);
+	}
+	
+	@Override
+	protected void createEntitys() {
+		Entitys = new MobTemplate[1];	//maximale anzahl an gegnern die gespawnt werden
+		Entitys[0] = CreateObjects.createTestMob(25, 25, 1, 1035, 311, 1, 20);
+		super.createEntitys();
+	}
+	
+	@Override
+	public void spawnEntitys() {;
+		super.spawnEntitys();	//Liste wird geleert
+		for(int i=0; i<Entitys.length;i++) {
+			if(!Entitys[i].defeated) {
+				GameLogic.mobs.add(Entitys[i]);		//der Liste für bewegungen hinzufügen
+				Entitys[i].posX = Entitys[i].SpawnX;	//Position zurücksetzen
+				Entitys[i].posY = Entitys[i].SpawnY;
+			}
+		}
+		
 	}
 
 }
