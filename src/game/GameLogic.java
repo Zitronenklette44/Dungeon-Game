@@ -127,7 +127,12 @@ public class GameLogic {
 			GameScreen.updateRoomNr(DungeonCore.currentRoom+1);	//Raum Nummer updaten
 			resetLevel();	//Level reseten
 		}
-		GameScreen.changeBackground(DungeonCore.getImage(0));
+		try {
+			GameScreen.changeBackground(DungeonCore.getImage(0));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void resetLevel() {

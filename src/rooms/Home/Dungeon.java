@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import game.GameLogic;
 import gameObject.CreateObjects;
 import gui.Draw;
 import rooms.RoomTemplate;
@@ -38,6 +39,18 @@ public class Dungeon extends RoomTemplate{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void setSpawns(int currentRoom) {
+		super.setSpawns(currentRoom);
+		GameLogic.resetPos[0] = 50;
+		GameLogic.resetPos[1] = 700;
+		GameLogic.resetPos1[0] = 1100;
+		GameLogic.resetPos1[1] = 700;
+		
+		
+		
 	}
 
 }

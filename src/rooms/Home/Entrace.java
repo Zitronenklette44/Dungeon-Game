@@ -2,6 +2,7 @@ package rooms.Home;
 
 import java.awt.Color;
 
+import game.GameLogic;
 import gameObject.CreateObjects;
 import gui.Draw;
 import rooms.RoomTemplate;
@@ -25,4 +26,16 @@ public class Entrace extends RoomTemplate{
 		CreateObjects.createShopPotionsOpen(300, 700);
 	}
 
+	
+	@Override
+	public void setSpawns(int currentRoom) {
+		super.setSpawns(currentRoom);
+		GameLogic.resetPos[0] = 50;
+		GameLogic.resetPos[1] = 700;
+		GameLogic.resetPos1[0] = 1100;
+		GameLogic.resetPos1[1] = 700;
+		
+		
+		
+	}
 }
