@@ -46,8 +46,9 @@ public class Spawn extends RoomTemplate{
 	
 	@Override
 	protected void createEntitys() {
-		Entitys = new MobTemplate[1];	//maximale anzahl an gegnern die gespawnt werden
-		Entitys[0] = CreateObjects.createTestMob(25, 25, 1, 1035, 311, 1, 20);
+		Entitys = new MobTemplate[2];	//maximale anzahl an gegnern die gespawnt werden
+		Entitys[0] = CreateObjects.createTestMob(25, 25, 1, 1035, 300, 1, 20);
+		Entitys[1] = CreateObjects.createTestMob(25, 25, 1, 1035, 400, 1, 20);
 		super.createEntitys();
 	}
 	

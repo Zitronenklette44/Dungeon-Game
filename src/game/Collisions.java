@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import entitys.InteractableTemplate;
+import entitys.MobTemplate;
 import gameObject.CollisionRechteck;
 import gameObject.DeathRechteck;
 import gameObject.Rechteck;
@@ -105,6 +106,26 @@ public class Collisions {
 			// Kollision gefunden
 			return true;
 
+		}
+		// Keine Kollision
+		return false;
+	}
+	
+	public static boolean checkMob(Rechteck rect, int deltaX, int deltaY) {
+		ArrayList<MobTemplate> mobsArrayList = GameLogic.mobs;
+		// Berechne die zukünftige Position des Rechtecks
+		int futurePosX = rect.posX + deltaX;
+		int futurePosY = rect.posY + deltaY;
+
+		for(int i = 0 ; i<mobsArrayList.size();i++) {
+			if (futurePosX < mobsArrayList.get(i).posX + mobsArrayList.get(i).breite
+					&& futurePosX + rect.breite > mobsArrayList.get(i).posX
+					&& futurePosY < mobsArrayList.get(i).posY + mobsArrayList.get(i).hoehe
+					&& futurePosY + rect.hoehe > mobsArrayList.get(i).posY) {
+				// Kollision gefunden
+				return true;
+			
+			}
 		}
 		// Keine Kollision
 		return false;

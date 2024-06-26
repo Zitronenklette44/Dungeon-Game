@@ -133,30 +133,53 @@ public class Movement {
 	            mob.dy = 0;
 	        }
 
-	        float diagonalSpeed = 0.5F;
+	        int lastDx = mob.dx;
+	        int lastDy = mob.dy;
 
-	        // Diagonal movement
-	        if (mob.dx != 0 && mob.dy != 0) {
-	            if (!Collisions.checkCollision(mob, (int) (mob.dx * diagonalSpeed)+1, 0)) {
-	                mob.posX += mob.dx * diagonalSpeed;
-	            } else {
-	                moveHorizontally = false;
+	        // Check for obstacles and adjust direction
+	        if (mob.dx != 0) {
+	            if (Collisions.checkCollision(mob, mob.dx, 0)) {
+	                // Horizontal collision, try vertical movement instead
+	                if (!Collisions.checkCollision(mob, 0, mob.dy)) {
+	                    mob.dx = 0;
+	                } else {
+	                    mob.dx = -mob.dx; // Reverse horizontal direction
+	                }
 	            }
-	            if (!Collisions.checkCollision(mob, 0, (int) (mob.dy * diagonalSpeed)+1)) {
-	                mob.posY += mob.dy * diagonalSpeed;
-	            } else {
-	                moveVertically = false;
+	        }
+
+	        if (mob.dy != 0) {
+	            if (Collisions.checkCollision(mob, 0, mob.dy)) {
+	                // Vertical collision, try horizontal movement instead
+	                if (!Collisions.checkCollision(mob, mob.dx, 0)) {
+	                    mob.dy = 0;
+	                } else {
+	                    mob.dy = -mob.dy; // Reverse vertical direction
+	                }
 	            }
+	        }
+	        
+	        // Check collision with other mobs
+	        if (Collisions.checkMob(mob, mob.dx, mob.dy)) {
+	            // Handle collision with other mobs
+	            // For example, stop movement or change direction
+	            mob.dx = 0;
+	            mob.dy = 0;
+	            System.out.println("colliding");
 	        }
 
 	        // Horizontal movement
-	        if (moveHorizontally && mob.dx != 0 && !Collisions.checkCollision(mob, mob.dx * mob.speed+1, 0)) {
-	            mob.posX += mob.dx * mob.speed;
+	        if (moveHorizontally && mob.dx != 0 && !Collisions.checkCollision(mob, mob.dx, 0)) {
+	            mob.posX += mob.dx;
 	        }
 
 	        // Vertical movement
-	        if (moveVertically && mob.dy != 0 && !Collisions.checkCollision(mob, 0, mob.dy * mob.speed+1)) {
-	            mob.posY += mob.dy * mob.speed;
+	        if (moveVertically && mob.dy != 0 && !Collisions.checkCollision(mob, 0, mob.dy)) {
+	            mob.posY += mob.dy;
+	        }
+
+	        if (isInWall(mob)) {
+	            moveBack(mob, lastDx, lastDy);
 	        }
 
 	        // Check collision with player
@@ -167,6 +190,22 @@ public class Movement {
 	                System.out.println("Player HP: " + GameLogic.player.Hp);
 	            }
 	        }
+	    }
+	}
+
+	private static boolean isInWall(MobTemplate mob) {
+	    // Check collision at the current position
+	    return Collisions.checkCollision(mob, 0, 0);
+	}
+
+	// Method to move the mob back if it's inside a wall
+	private static void moveBack(MobTemplate mob, int lastDx, int lastDy) {
+	    // Move the mob back in the opposite direction of the last movement
+	    if (!Collisions.checkCollision(mob, -lastDx, 0)) {
+	        mob.posX -= lastDx;
+	    }
+	    if (!Collisions.checkCollision(mob, 0, -lastDy)) {
+	        mob.posY -= lastDy;
 	    }
 	}
 
