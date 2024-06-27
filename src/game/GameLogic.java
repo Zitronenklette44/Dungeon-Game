@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import entitys.Bullet;
+import entitys.Arrow;
 import entitys.InteractableTemplate;
 import entitys.MobTemplate;
 import entitys.Player;
-import entitys.TestMob;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.CreateObjects;
@@ -30,7 +29,7 @@ public class GameLogic {
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<DeathRechteck> deathRechteck;
 	public static ArrayList<MobTemplate> mobs;
-	public static ArrayList<Bullet> bullets;
+	public static ArrayList<Arrow> arrows;
 	public static ArrayList<InteractableTemplate> interactables;
 
 	public static Player player;
@@ -39,7 +38,6 @@ public class GameLogic {
 	public static int screenBreite;
 	public static int floor = 700;
 	public static int jumpHight = 70;
-	public static int playerSpeed = 2;
 	public static int[] resetPos = {50,700};
 	public static int[] resetPos1 = {1100,700};
 	public static int directionRoom = 0;
@@ -56,6 +54,7 @@ public class GameLogic {
 	public static boolean musicEnabled = true;
 
 	public static DungeonCore dungeon;
+	public static float playerSpeed = 2F;
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
@@ -64,7 +63,7 @@ public class GameLogic {
 		columns = new ArrayList<Column>();
 		deathRechteck = new ArrayList<DeathRechteck>();
 		mobs =new ArrayList<MobTemplate>();
-		bullets = new ArrayList<Bullet>();
+		arrows = new ArrayList<Arrow>();
 		interactables = new ArrayList<InteractableTemplate>();
 		dungeon = new DungeonCore();
 
@@ -78,6 +77,7 @@ public class GameLogic {
 		gameTimer.scheduleAtFixedRate(new TimerTask() {		//5ms Timer
 
 			public void run() {
+				player.speed = playerSpeed;
 				if(!paused) {
 					Movement.playerMovement();		//bewegung Spieler + Mobs
 					Movement.mobMovement();
@@ -85,7 +85,6 @@ public class GameLogic {
 					if(player.HitCooldown>0) {player.HitCooldown--;}		//Cooldown Reset
 					if(player.AtkCooldown>0) {player.AtkCooldown--;}
 				}
-				
 				changeRoom();		//Raum wechsel
 
 				

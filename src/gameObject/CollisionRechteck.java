@@ -5,6 +5,7 @@ public class CollisionRechteck extends Rechteck {
     public CollisionRechteck(int hoehe, int breite, int posX, int posY) {
         super(hoehe, breite, posX, posY);
         isVisible = true;
+        
     }
     
     public CollisionRechteck(int hoehe, int breite, int posX, int posY, boolean Visible) {

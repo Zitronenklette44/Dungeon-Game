@@ -2,6 +2,7 @@ package gameObject;
 
 import java.awt.Color;
 
+import entitys.Arrow;
 import entitys.DungeonChooser;
 import entitys.DungeonExit;
 import entitys.MobTemplate;
@@ -36,15 +37,17 @@ public class CreateObjects {
 		GameLogic.deathRechteck.add(new DeathRechteck(hoehe, breite, posX, posY));
 	}
 
-	public static MobTemplate createTestMob(int hoehe,int breite, int Speed, int SpawnX, int SpawnY, int damage, int Hp) {
-		MobTemplate template =new TestMob(hoehe, breite, SpawnX, SpawnY, 0, 0, Speed, SpawnX, SpawnY, damage, Hp);
+	public static MobTemplate createTestMob(int hoehe,int breite, float speed, int SpawnX, int SpawnY, int damage, int Hp) {
+		MobTemplate template =new TestMob(hoehe, breite, SpawnX, SpawnY, 0, 0, speed, SpawnX, SpawnY, damage, Hp);
 		GameLogic.mobs.add(template);
 		return template;
 	}
 
-	public static void createBullet() {
-	
-	}
+	public static void createBullet(int hoehe, int breite, float posX, float posY, float speed, int SpawnX, int SpawnY, int damage, float range) {
+        Arrow bullet = new Arrow(hoehe, breite, posX, posY, 0, 0, speed, SpawnX, SpawnY, damage, range);
+        bullet.rotateToPlayerDirection();
+        GameLogic.arrows.add(bullet);
+    }
 
 	public static void createDungeonChooser(int posX, int posY) {
 		GameLogic.interactables.add(new DungeonChooser(10, 10, posX, posY));

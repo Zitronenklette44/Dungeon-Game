@@ -9,11 +9,11 @@ dungeonKey = 1
 
 // Debug Modus
 // Standart false
-debug = true
+debug = false
 
 // Spieler Geschwindigkeit
 // Standart 2
-playerSpeed = 2
+playerSpeed = 2.0
 
 // Spieler Sprung Höhe
 // Standart 70

@@ -71,21 +71,21 @@ public class Column {
     public void draw(Graphics g) {
         g.setColor(color);
         Rechteck akRech = parts.get(0);
-        g.fillRect(akRech.posX, akRech.posY, akRech.breite, akRech.hoehe);
+        g.fillRect((int)akRech.posX, (int)akRech.posY, akRech.breite, akRech.hoehe);
         akRech = parts.get(1);
-        g.fillRect(akRech.posX, akRech.posY, akRech.breite, akRech.hoehe);
+        g.fillRect((int)akRech.posX, (int)akRech.posY, akRech.breite, akRech.hoehe);
         akRech = parts.get(2);
-        g.fillRect(akRech.posX, akRech.posY, akRech.breite, akRech.hoehe);
+        g.fillRect((int)akRech.posX, (int)akRech.posY, akRech.breite, akRech.hoehe);
         akRech = parts.get(4);
-        g.fillRect(akRech.posX, akRech.posY, akRech.breite, akRech.hoehe);
+        g.fillRect((int)akRech.posX, (int)akRech.posY, akRech.breite, akRech.hoehe);
         akRech = parts.get(6);
-        g.fillRect(akRech.posX, akRech.posY, akRech.breite, akRech.hoehe);
+        g.fillRect((int)akRech.posX, (int)akRech.posY, akRech.breite, akRech.hoehe);
         
         g.setColor(color1);
         akRech = parts.get(3);
-        g.fillRect(akRech.posX, akRech.posY, akRech.breite, akRech.hoehe);
+        g.fillRect((int)akRech.posX,(int) akRech.posY, akRech.breite, akRech.hoehe);
         akRech = parts.get(5);
-        g.fillRect(akRech.posX, akRech.posY, akRech.breite, akRech.hoehe);;
+        g.fillRect((int)akRech.posX,(int) akRech.posY, akRech.breite, akRech.hoehe);;
     }
 }
 

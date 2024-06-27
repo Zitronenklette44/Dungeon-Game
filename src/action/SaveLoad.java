@@ -41,7 +41,7 @@ public class SaveLoad {
                         GameLogic.debug = Boolean.parseBoolean(value);
                         break;
                     case "playerSpeed":
-                        GameLogic.playerSpeed = Integer.parseInt(value);
+                        GameLogic.playerSpeed = Float.parseFloat(value);
                         break;
                     case "jumpHight":
                         GameLogic.jumpHight = Integer.parseInt(value);
@@ -74,7 +74,7 @@ public class SaveLoad {
             writer.write("debug = " + GameLogic.debug + "\n\n");
             writer.write("// Spieler Geschwindigkeit\n");
             writer.write("// Standart 2\n");
-            writer.write("playerSpeed = " + GameLogic.playerSpeed + "\n\n");
+            writer.write("playerSpeed = " + GameLogic.player.speed + "\n\n");
             writer.write("// Spieler Sprung Höhe\n");
             writer.write("// Standart 70\n");
             writer.write("jumpHight = " + GameLogic.jumpHight + "\n\n");
@@ -116,7 +116,7 @@ public class SaveLoad {
         GameLogic.dungeonKey = 1;
         GameLogic.debug = false;
         GameLogic.jumpHight = 70;
-        GameLogic.playerSpeed = 2;
+        GameLogic.player.speed = 2;
         MusicPlayer.totalVolume = -30F;
 
         // Speichere die neuen Standardwerte in der Konfigurationsdatei

@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import action.KeyHandler;
+import action.MouseHandler;
 import action.SaveLoad;
 import game.GameLogic;
 import javax.swing.JLabel;
@@ -97,6 +98,7 @@ public class GameScreen extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		addKeyListener(new KeyHandler(spiellogik));
+		addMouseListener(new MouseHandler(spiellogik));
 		
 		pauseMenue = new JPanel();
 		pauseMenue.setBounds(0, 0, 1184, 761);

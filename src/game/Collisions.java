@@ -17,10 +17,10 @@ public class Collisions {
 		this.spieLogic = spieLogic;
 	}
 
-	public static boolean checkCollision(Rechteck rect, int deltaX, int deltaY) {
+	public static boolean checkCollision(Rechteck rect, float deltaX, float deltaY) {
 		ArrayList<CollisionRechteck> collisionRechtecks = new ArrayList<>(GameLogic.collisionRectangles);
-	    int futurePosX = rect.posX + deltaX;
-	    int futurePosY = rect.posY + deltaY;
+	    float futurePosX = rect.posX + deltaX;
+	    float futurePosY = rect.posY + deltaY;
 
 	    for (CollisionRechteck collisionRect : collisionRechtecks) {
 	        if (collisionRect != null) {
@@ -78,8 +78,8 @@ public class Collisions {
 
 	public static boolean checkDeathBlock(Rechteck rect, int deltaX, int deltaY) {
 		// Berechne die zukünftige Position des Rechtecks
-		int futurePosX = rect.posX + deltaX;
-		int futurePosY = rect.posY + deltaY;
+		float futurePosX = rect.posX + deltaX;
+		float futurePosY = rect.posY + deltaY;
 
 		// Überprüfe, ob eine Kollision mit einem DeathRechteck auftreten würde
 		for (DeathRechteck deathRect : GameLogic.deathRechteck) {
@@ -93,10 +93,10 @@ public class Collisions {
 		return false;
 	}
 
-	public static boolean checkPlayer(Rechteck rect, int deltaX, int deltaY) {
+	public static boolean checkPlayer(Rechteck rect, float deltaX, float deltaY) {
 		// Berechne die zukünftige Position des Rechtecks
-		int futurePosX = rect.posX + deltaX;
-		int futurePosY = rect.posY + deltaY;
+		float futurePosX = rect.posX + deltaX;
+		float futurePosY = rect.posY + deltaY;
 
 		// Überprüfe, ob eine Kollision mit einem DeathRechteck auftreten würde
 		if (futurePosX < GameLogic.player.posX + GameLogic.player.breite
@@ -111,37 +111,94 @@ public class Collisions {
 		return false;
 	}
 	
-	public static boolean checkMob(Rechteck rect, int deltaX, int deltaY) {
-		ArrayList<MobTemplate> mobsArrayList = GameLogic.mobs;
+	public static boolean checkPlayer(MobTemplate mob, float deltaX, float deltaY, boolean DealDamage) {
 		// Berechne die zukünftige Position des Rechtecks
-		int futurePosX = rect.posX + deltaX;
-		int futurePosY = rect.posY + deltaY;
+		float futurePosX = mob.posX + deltaX;
+		float futurePosY = mob.posY + deltaY;
 
-		for(int i = 0 ; i<mobsArrayList.size();i++) {
-			if (futurePosX < mobsArrayList.get(i).posX + mobsArrayList.get(i).breite
-					&& futurePosX + rect.breite > mobsArrayList.get(i).posX
-					&& futurePosY < mobsArrayList.get(i).posY + mobsArrayList.get(i).hoehe
-					&& futurePosY + rect.hoehe > mobsArrayList.get(i).posY) {
-				// Kollision gefunden
-				return true;
-			
+		// Überprüfe, ob eine Kollision mit einem DeathRechteck auftreten würde
+		if (futurePosX < GameLogic.player.posX + GameLogic.player.breite
+				&& futurePosX + mob.breite > GameLogic.player.posX
+				&& futurePosY < GameLogic.player.posY + GameLogic.player.hoehe
+				&& futurePosY + mob.hoehe > GameLogic.player.posY) {
+			// Kollision gefunden
+			if(DealDamage) {
+				GameLogic.player.Hp -= mob.damage;
 			}
+			
+			return true;
+
 		}
 		// Keine Kollision
 		return false;
 	}
+	
+	public static boolean checkMob(MobTemplate akuellemob, float deltaX, float deltaY) {
+	    ArrayList<MobTemplate> mobsArrayList = GameLogic.mobs;
+	    // Berechne die zukünftige Position des Rechtecks
+	    float futurePosX = akuellemob.posX + deltaX;
+	    float futurePosY = akuellemob.posY + deltaY;
+
+	    for (int i = 0; i < mobsArrayList.size(); i++) {
+	        MobTemplate mob = mobsArrayList.get(i);
+	        
+	        // Vermeide Selbst-Kollision
+	        if (mob == akuellemob) {
+	            continue;
+	        }
+	       
+	        if (futurePosX < mob.posX + mob.breite
+	                && futurePosX + akuellemob.breite > mob.posX
+	                && futurePosY < mob.posY + mob.hoehe
+	                && futurePosY + akuellemob.hoehe > mob.posY) {
+	            // Kollision gefunden
+	            return true;
+	        }
+	    }
+	    // Keine Kollision
+	    return false;
+	}
+	
+	public static boolean checkMob(MobTemplate akuellemob, float deltaX, float deltaY, boolean DealDamage) {
+	    ArrayList<MobTemplate> mobsArrayList = GameLogic.mobs;
+	    // Berechne die zukünftige Position des Rechtecks
+	    float futurePosX = akuellemob.posX + deltaX;
+	    float futurePosY = akuellemob.posY + deltaY;
+
+	    for (int i = 0; i < mobsArrayList.size(); i++) {
+	        MobTemplate mob = mobsArrayList.get(i);
+	        
+	        // Vermeide Selbst-Kollision
+	        if (mob == akuellemob) {
+	            continue;
+	        }
+	       
+	        if (futurePosX < mob.posX + mob.breite
+	                && futurePosX + akuellemob.breite > mob.posX
+	                && futurePosY < mob.posY + mob.hoehe
+	                && futurePosY + akuellemob.hoehe > mob.posY) {
+	            // Kollision gefunden
+	        	if(DealDamage) {
+					mob.Hp -= mob.damage;
+				}
+	            return true;
+	        }
+	    }
+	    // Keine Kollision
+	    return false;
+	}
 
 	public static void checkInteractable(Graphics2D g, Color color) {
 		for (InteractableTemplate interactable : GameLogic.interactables) {
-			int playerCenterX = GameLogic.player.posX + GameLogic.player.breite / 2;
-			int playerCenterY = GameLogic.player.posY + GameLogic.player.hoehe / 2;
+			float playerCenterX = GameLogic.player.posX + GameLogic.player.breite / 2;
+			float playerCenterY = GameLogic.player.posY + GameLogic.player.hoehe / 2;
 
-			int interactableCenterX = interactable.posX + interactable.breite / 2;
-			int interactableCenterY = interactable.posY + interactable.hoehe / 2;
+			float interactableCenterX = interactable.posX + interactable.breite / 2;
+			float interactableCenterY = interactable.posY + interactable.hoehe / 2;
 
-			int dx = playerCenterX - interactableCenterX;
-			int dy = playerCenterY - interactableCenterY;
-			int distanceSquared = dx * dx + dy * dy;
+			float dx = playerCenterX - interactableCenterX;
+			float dy = playerCenterY - interactableCenterY;
+			float distanceSquared = dx * dx + dy * dy;
 			int rangeSquared = interactable.range * interactable.range;
 
 			if (distanceSquared <= rangeSquared) {

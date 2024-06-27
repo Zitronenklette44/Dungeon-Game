@@ -50,6 +50,9 @@ public class KeyHandler implements KeyListener {
 			GameLogic.debug=!GameLogic.debug;
 		}
 		
+		
+		
+		
 		if(e.getKeyCode() == KeyEvent.VK_F3) {
 			MusicPlayer.playSound(0, true);
 		}

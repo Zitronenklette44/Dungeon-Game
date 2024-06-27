@@ -1,5 +1,7 @@
 package rooms.Village;
 
+import java.awt.Color;
+
 import entitys.MobTemplate;
 import game.GameLogic;
 import gameObject.CreateObjects;
@@ -47,8 +49,10 @@ public class Spawn extends RoomTemplate{
 	@Override
 	protected void createEntitys() {
 		Entitys = new MobTemplate[2];	//maximale anzahl an gegnern die gespawnt werden
-		Entitys[0] = CreateObjects.createTestMob(25, 25, 1, 1035, 300, 1, 20);
-		Entitys[1] = CreateObjects.createTestMob(25, 25, 1, 1035, 400, 1, 20);
+		Entitys[0] = CreateObjects.createTestMob(25, 25, 1, 1035, 300, 1, 1);
+		Entitys[0].typeColor = Color.blue;
+		Entitys[1] = CreateObjects.createTestMob(25, 25, 1.05F, 1035, 400, 1, 3);
+		Entitys[1].typeColor = Color.white;
 		super.createEntitys();
 	}
 	
@@ -56,6 +60,9 @@ public class Spawn extends RoomTemplate{
 	public void spawnEntitys() {;
 		super.spawnEntitys();	//Liste wird geleert
 		for(int i=0; i<Entitys.length;i++) {
+			if(Entitys[i] == null) {
+				break;
+			}
 			if(!Entitys[i].defeated) {
 				GameLogic.mobs.add(Entitys[i]);		//der Liste für bewegungen hinzufügen
 				Entitys[i].posX = Entitys[i].SpawnX;	//Position zurücksetzen
