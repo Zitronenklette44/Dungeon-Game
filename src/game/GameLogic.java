@@ -128,10 +128,7 @@ public class GameLogic {
 		}
 		try {
 			GameScreen.changeBackground(DungeonCore.getImage(0));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (Exception e) {}
 	}
 
 	public static void resetLevel() {

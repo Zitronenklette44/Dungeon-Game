@@ -14,6 +14,7 @@ public class MobTemplate extends Rechteck{
     public float speed;
 	public int damage;
 	public int Hp;
+	public int maxHp;
 	public boolean defeated= false;
 	public boolean hasCollision  = false;
 	public Color typeColor;
@@ -26,6 +27,7 @@ public class MobTemplate extends Rechteck{
         this.speed = speed;
         this.damage = damage;
         this.Hp = Hp;
+        this.maxHp = Hp;
     
     }
     

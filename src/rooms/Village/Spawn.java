@@ -49,9 +49,9 @@ public class Spawn extends RoomTemplate{
 	@Override
 	protected void createEntitys() {
 		Entitys = new MobTemplate[2];	//maximale anzahl an gegnern die gespawnt werden
-		Entitys[0] = CreateObjects.createTestMob(25, 25, 1, 1035, 300, 1, 1);
+		Entitys[0] = CreateObjects.createTestMob(25, 25, 1F, 1035, 300, 1, 1);
 		Entitys[0].typeColor = Color.blue;
-		Entitys[1] = CreateObjects.createTestMob(25, 25, 1.05F, 1035, 400, 1, 3);
+		Entitys[1] = CreateObjects.createTestMob(25, 25, 1.1F, 1035, 400, 1, 3);
 		Entitys[1].typeColor = Color.white;
 		super.createEntitys();
 	}
@@ -69,6 +69,14 @@ public class Spawn extends RoomTemplate{
 				Entitys[i].posY = Entitys[i].SpawnY;
 			}
 		}
+		
+	}
+	
+	@Override
+	public void resetRoom() {
+		super.resetRoom();
+		Entitys = null;
+		createEntitys();
 		
 	}
 

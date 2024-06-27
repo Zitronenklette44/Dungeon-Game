@@ -122,7 +122,7 @@ public class Collisions {
 				&& futurePosY < GameLogic.player.posY + GameLogic.player.hoehe
 				&& futurePosY + mob.hoehe > GameLogic.player.posY) {
 			// Kollision gefunden
-			if(DealDamage) {
+			if(DealDamage && !mob.defeated) {
 				GameLogic.player.Hp -= mob.damage;
 			}
 			
@@ -179,7 +179,7 @@ public class Collisions {
 	                && futurePosY + akuellemob.hoehe > mob.posY) {
 	            // Kollision gefunden
 	        	if(DealDamage) {
-					mob.Hp -= mob.damage;
+					mob.Hp -= akuellemob.damage;
 				}
 	            return true;
 	        }

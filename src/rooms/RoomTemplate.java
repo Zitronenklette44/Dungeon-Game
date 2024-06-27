@@ -36,4 +36,6 @@ public class RoomTemplate {
 	public void spawnEntitys() {GameLogic.mobs.clear();}
 	
 	public void VariantExists(int currentRoom) {}
+	
+	public void resetRoom() {}
 }

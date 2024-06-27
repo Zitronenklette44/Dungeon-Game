@@ -67,6 +67,7 @@ public class DungeonCore {
 
 			for (int i = 0; i < DungeonLength; i++) {
 				System.out.print(DungeonRooms.get(i) + ", ");
+				rooms[dungeonType][DungeonRooms.get(i)].resetRoom();
 			}
 		}
 		

@@ -76,7 +76,10 @@ public class Movement {
 			GameLogic.player.posY += GameLogic.player.speed;
 			GameLogic.player.dy = GameLogic.player.speed;
 			GameLogic.player.dx = 0;
-		}
+		}	
+		
+		float lastDx = GameLogic.player.dx;
+		float lastDy = GameLogic.player.dy;
 
 
 		if(GameLogic.jump&&GameLogic.onGround&&!GameLogic.vertikalAxis) {
@@ -121,6 +124,9 @@ public class Movement {
 			GameLogic.Interact = false;
 			GameLogic.counterInteraction = 0;
 		}
+		if (isInWall(GameLogic.player)) {
+			moveBack(GameLogic.player, lastDx, lastDy);
+		}
 	}
 
 	static void mobMovement() {
@@ -128,78 +134,81 @@ public class Movement {
 		for (int i = 0; i < GameLogic.mobs.size(); i++) {
 			MobTemplate mob = GameLogic.mobs.get(i);
 
-			boolean moveHorizontally = true;
-			boolean moveVertically = true;
+			if(!mob.defeated) {
+				boolean moveHorizontally = true;
+				boolean moveVertically = true;
 
-			// Determine direction based on player position
-			if (GameLogic.player.posX > mob.posX) {
-				mob.dx = mob.speed;
-			} else if (GameLogic.player.posX < mob.posX) {
-				mob.dx = -mob.speed;
-			} else {
-				mob.dx = 0;
-			}
+				// Determine direction based on player position
+				if (GameLogic.player.posX > mob.posX) {
+					mob.dx = mob.speed;
+				} else if (GameLogic.player.posX < mob.posX) {
+					mob.dx = -mob.speed;
+				} else {
+					mob.dx = 0;
+				}
 
-			if (GameLogic.player.posY > mob.posY) {
-				mob.dy = mob.speed;
-			} else if (GameLogic.player.posY < mob.posY) {
-				mob.dy = -mob.speed;
-			} else {
-				mob.dy = 0;
-			}
+				if (GameLogic.player.posY > mob.posY) {
+					mob.dy = mob.speed;
+				} else if (GameLogic.player.posY < mob.posY) {
+					mob.dy = -mob.speed;
+				} else {
+					mob.dy = 0;
+				}
 
-			float lastDx = mob.dx;
-			float lastDy = mob.dy;
+				float lastDx = mob.dx;
+				float lastDy = mob.dy;
 
-			// Check for obstacles and adjust direction
-			if (mob.dx != 0) {
-				if (Collisions.checkCollision(mob, mob.dx, 0)) {
-					// Horizontal collision, try vertical movement instead
-					if (!Collisions.checkCollision(mob, 0, mob.dy)) {
-						mob.dx = 0;
-					} else {
-						mob.dx = -mob.dx; // Reverse horizontal direction
+				// Check for obstacles and adjust direction
+				if (mob.dx != 0) {
+					if (Collisions.checkCollision(mob, mob.dx, 0)) {
+						// Horizontal collision, try vertical movement instead
+						if (!Collisions.checkCollision(mob, 0, mob.dy)) {
+							mob.dx = 0;
+						} else {
+							mob.dx = -mob.dx; // Reverse horizontal direction
+						}
 					}
 				}
-			}
 
-			if (mob.dy != 0) {
-				if (Collisions.checkCollision(mob, 0, mob.dy)) {
-					// Vertical collision, try horizontal movement instead
-					if (!Collisions.checkCollision(mob, mob.dx, 0)) {
-						mob.dy = 0;
-					} else {
-						mob.dy = -mob.dy; // Reverse vertical direction
+				if (mob.dy != 0) {
+					if (Collisions.checkCollision(mob, 0, mob.dy)) {
+						// Vertical collision, try horizontal movement instead
+						if (!Collisions.checkCollision(mob, mob.dx, 0)) {
+							mob.dy = 0;
+						} else {
+							mob.dy = -mob.dy; // Reverse vertical direction
+						}
 					}
 				}
-			}
 
-			if(!Collisions.checkMob(mob, mob.dx, mob.dy)) {
+				if(!Collisions.checkMob(mob, mob.dx, mob.dy)) {
 
-				// Horizontal movement
-				if (moveHorizontally && mob.dx != 0 && !Collisions.checkCollision(mob, mob.dx, 0)) {
-					mob.posX += mob.dx;
+					// Horizontal movement
+					if (moveHorizontally && mob.dx != 0 && !Collisions.checkCollision(mob, mob.dx, 0)) {
+						mob.posX += mob.dx;
+					}
+
+					// Vertical movement
+					if (moveVertically && mob.dy != 0 && !Collisions.checkCollision(mob, 0, mob.dy)) {
+						mob.posY += mob.dy;
+					}
+
+					if (isInWall(mob)) {
+						moveBack(mob, lastDx, lastDy);
+					}
+
+					
+				}else {
+					//moveBack(mob, lastDx, lastDy);
 				}
-
-				// Vertical movement
-				if (moveVertically && mob.dy != 0 && !Collisions.checkCollision(mob, 0, mob.dy)) {
-					mob.posY += mob.dy;
-				}
-
-				if (isInWall(mob)) {
-					moveBack(mob, lastDx, lastDy);
-				}
-
 				// Check collision with player
-				if (Collisions.checkPlayer(mob, 1, 0)) {
+				if (Collisions.checkPlayer(mob, 1, 0) || Collisions.checkPlayer(mob, 0, 1)||Collisions.checkPlayer(mob, 0, 0)) {
 					if (GameLogic.player.HitCooldown == 0) {
 						GameLogic.player.Hp -= mob.damage;
 						GameLogic.player.setHitCooldown();
 						System.out.println("Player HP: " + GameLogic.player.Hp);
 					}
 				}
-			}else {
-				//moveBack(mob, lastDx, lastDy);
 			}
 		}
 	}

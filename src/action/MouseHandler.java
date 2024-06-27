@@ -16,8 +16,15 @@ public class MouseHandler implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == 1) {
 			if(GameLogic.vertikalAxis && GameLogic.player.AtkCooldown == 0) {
+				//TODO Sword Attack
+				GameLogic.player.setAtkCooldown();;
+			}
+		}
+		
+		if(e.getButton() == 3) {
+			if(GameLogic.vertikalAxis && GameLogic.player.AtkCooldown == 0) {
 				CreateObjects.createBullet(10, 25, GameLogic.player.posX, GameLogic.player.posY, 0.5F, 0, 0, 1, 300);
-				GameLogic.player.AtkCooldown = 200;
+				GameLogic.player.setAtkCooldown();;
 			}
 		}
 		

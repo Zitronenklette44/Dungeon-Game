@@ -63,7 +63,7 @@ public class Draw extends JLabel {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		
+
 		if(GameLogic.paused) {
 			//return;
 		}
@@ -122,18 +122,19 @@ public class Draw extends JLabel {
 		g.setColor(mobsColor);
 		for (int i = 0; i < mobs.size(); i++) {
 			if(checkValidmob(i)) {
-			MobTemplate aktuellesObjekt = mobs.get(i);
-			aktuellesObjekt.drawMob(g2d);
+				MobTemplate aktuellesObjekt = mobs.get(i);
+				aktuellesObjekt.drawMob(g2d);
+				drawHealthBar(g2d, aktuellesObjekt);
 			}
 		}
-		
+
 		g.setColor(bulletColor);
 		for (int i = 0; i < bullets.size(); i++) {
 			Arrow aktuellesObjekt = bullets.get(i);
 			aktuellesObjekt.draw(g2d);
 		}
 
-
+		//player
 		g.setColor(playerColor);
 		g.fillRect((int)player.posX,(int) player.posY, player.breite, player.hoehe);
 		if(GameLogic.debug) {
@@ -141,6 +142,22 @@ public class Draw extends JLabel {
 			g2d.drawString(player.posY+"", player.posX-40, player.posY+(player.hoehe/2));
 		}
 
+		//Healthbar
+		g.setColor(new Color(0,0,0,200));
+		g.fillRect(100, 10, 210, 25);
+		g.setColor(Color.red);
+		g.fillRect(105, 15, 200, 15);
+		g.setColor(Color.green);
+		int width = (int) ((float) GameLogic.player.Hp / GameLogic.player.maxHp * 200);
+		g.fillRect(105, 15, width, 15);
+		
+		//ATKCooldown
+		g.setColor(new Color(0,0,0,150));
+		int size = (int) (((float) GameLogic.player.AtkCooldown / GameLogic.player.maxAtkCooldown) * 40);
+		int centerX = 327 + 20; // 322 ist die linke Grenze 	 25 ist die Hälfte der Größe (50)
+		int centerY = 5 + 20;
+		g.fillOval(centerX - size/2, centerY - size/2, size, size);
+		
 
 		Collisions.checkInteractable(g2d, Color.white);
 		repaint();
@@ -164,39 +181,52 @@ public class Draw extends JLabel {
 		mobsColor = Color.blue;
 		bulletColor = Color.magenta;
 	}
-	
+
 	private boolean checkValidmob(int index) {
 		boolean valid =true;
 		MobTemplate mob = GameLogic.mobs.get(index);
-		
 		if(mob.posX>1200 || mob.posX <0) {
 			valid = false;
 		}
-		
 		if(mob.posY> 750 || mob.posY <0) {
 			valid = false;
 		}
-		
 		if(mob.Hp<=0) {
 			valid = false;
 		}
-		
 		if(mob.defeated) {
 			valid = false;
 		}
-		
-		
 		if(!valid) {
 			mob.defeated = true;
+			mob.posX = -20;
+			mob.posY = -20;
 		}
-		
-		
-		
-		
 		return valid;
 	}
 	
-	
-	
-	
+	public void drawHealthBar(Graphics2D g2d, MobTemplate mob){
+		int maxHp = mob.maxHp;
+		int currentHp = mob.Hp;
+		float posX = mob.posX;
+		float posY = mob.posY;
+		
+		g2d.setColor(new Color(0,0,0,200));
+		g2d.fillRect((int) posX, (int) posY-6, mob.breite+1, (int)((mob.hoehe)/5));
+		
+		g2d.setColor(Color.red);
+		int healthBarWidth = (int) (mob.breite) - mob.breite/10;
+		int healthBarHeight = (mob.hoehe / 5)-(mob.hoehe / 10);
+		int healthBarX = (int) posX + (mob.breite/10);
+		int healthBarY = (int) posY - healthBarHeight - ((int)((mob.hoehe)/5)-healthBarHeight);
+		g2d.fillRect(healthBarX, healthBarY, healthBarWidth, healthBarHeight);
+		
+		g2d.setColor(Color.green);
+		healthBarWidth = (int) (((float) currentHp / maxHp) * mob.breite) - mob.breite/10;
+		g2d.fillRect(healthBarX, healthBarY, healthBarWidth, healthBarHeight);
+		
+	}
+
+
+
 }

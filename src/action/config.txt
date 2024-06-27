@@ -1,6 +1,6 @@
 // Wenn Musik aktiviert ist
 // Standart true, -30
-musicEnabled = false
+musicEnabled = true
 musicVolume = -30.0
 
 // Anzahl der in Besitz befindenen dungeon Keys

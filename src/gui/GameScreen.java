@@ -154,6 +154,11 @@ public class GameScreen extends JFrame {
 		draw.setBounds(0,0,screenBreite,screenHoehe);
 		draw.setVisible(true);
 		contentPane.add(draw);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/spear.png")));
+		lblNewLabel_1.setBounds(322, 0, 50, 50);
+		contentPane.add(lblNewLabel_1);
 
 		setContentPane(contentPane);
 		
