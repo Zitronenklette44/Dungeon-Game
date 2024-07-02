@@ -7,6 +7,7 @@ import gameObject.CreateObjects;
 import gui.Draw;
 
 public class CreateRooms {
+	/*
 	public static GameLogic spielLogic;
 
 	public static void createRoom(int number) {
@@ -89,5 +90,5 @@ public class CreateRooms {
 
 	public static void setSpielLogic(GameLogic spielLogic) {
 		CreateRooms.spielLogic = spielLogic;
-	}
+	}*/
 }

@@ -78,8 +78,8 @@ public class Movement {
 			GameLogic.player.dx = 0;
 		}	
 		
-		float lastDx = GameLogic.player.dx;
-		float lastDy = GameLogic.player.dy;
+		GameLogic.player.lastdx = GameLogic.player.dx;
+		GameLogic.player.lastdy= GameLogic.player.dy;
 
 
 		if(GameLogic.jump&&GameLogic.onGround&&!GameLogic.vertikalAxis) {
@@ -107,8 +107,8 @@ public class Movement {
 			Collisions.updateOnGroundStatus();
 		}
 
-		if (Collisions.checkDeathBlock(GameLogic.player, 0, -1)) {
-			GameLogic.resetLevel();
+		if (Collisions.checkSwordAttack(GameLogic.player, 0, -1)) {
+			
 		}
 
 		if(GameLogic.Interact) {
@@ -125,7 +125,7 @@ public class Movement {
 			GameLogic.counterInteraction = 0;
 		}
 		if (isInWall(GameLogic.player)) {
-			moveBack(GameLogic.player, lastDx, lastDy);
+			moveBack(GameLogic.player, GameLogic.player.lastdx, GameLogic.player.lastdy);
 		}
 	}
 
@@ -133,6 +133,8 @@ public class Movement {
 		// Movement for mobs
 		for (int i = 0; i < GameLogic.mobs.size(); i++) {
 			MobTemplate mob = GameLogic.mobs.get(i);
+			
+			if(mob.HitCooldown > 0) {mob.HitCooldown--;}
 
 			if(!mob.defeated) {
 				boolean moveHorizontally = true;

@@ -9,7 +9,7 @@ dungeonKey = 1
 
 // Debug Modus
 // Standart false
-debug = false
+debug = true
 
 // Spieler Geschwindigkeit
 // Standart 2

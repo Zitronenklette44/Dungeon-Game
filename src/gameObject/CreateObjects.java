@@ -16,7 +16,7 @@ public class CreateObjects {
 
 	public static void createObjekts() {
 		GameLogic.player = new Player(50, 50, GameLogic.screenBreite/2, GameLogic.floor-2, 0, 0, GameLogic.playerSpeed, 0, 0, 3, 20);
-	
+
 		GameLogic.FloorObject = new Rechteck(50, GameLogic.screenBreite, 0, GameLogic.screenHoehe-50);
 		GameLogic.floorObject.add(GameLogic.FloorObject);
 	}
@@ -33,8 +33,10 @@ public class CreateObjects {
 		GameLogic.collisionRectangles.add(new CollisionRechteck(hoehe, breite, posX, posY, false));
 	}
 
-	public static void createDeathReckteck(int hoehe,int breite,int posX, int posY) {
-		GameLogic.deathRechteck.add(new DeathRechteck(hoehe, breite, posX, posY));
+	public static void createSwordAttack(int reach, float posX, float posY, int height , int damage, int duration, boolean damagePlayer, boolean damageMobs) {
+		SwordAttack swordAttack = new SwordAttack(reach, posX, posY, height, damage, duration, damagePlayer, damageMobs);
+		swordAttack.isVisible=false;
+		GameLogic.swordAttacks.add(swordAttack);
 	}
 
 	public static MobTemplate createTestMob(int hoehe,int breite, float speed, int SpawnX, int SpawnY, int damage, int Hp) {
@@ -44,10 +46,10 @@ public class CreateObjects {
 	}
 
 	public static void createBullet(int hoehe, int breite, float posX, float posY, float speed, int SpawnX, int SpawnY, int damage, float range) {
-        Arrow bullet = new Arrow(hoehe, breite, posX, posY, 0, 0, speed, SpawnX, SpawnY, damage, range);
-        bullet.rotateToPlayerDirection();
-        GameLogic.arrows.add(bullet);
-    }
+		Arrow bullet = new Arrow(hoehe, breite, posX, posY, 0, 0, speed, SpawnX, SpawnY, damage, range);
+		bullet.rotateToPlayerDirection();
+		GameLogic.arrows.add(bullet);
+	}
 
 	public static void createDungeonChooser(int posX, int posY) {
 		GameLogic.interactables.add(new DungeonChooser(10, 10, posX, posY));

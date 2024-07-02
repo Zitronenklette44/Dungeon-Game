@@ -5,14 +5,12 @@ import java.awt.event.KeyListener;
 
 import game.GameLogic;
 import gameMusik.MusicPlayer;
-import rooms.CreateRooms;
 
 public class KeyHandler implements KeyListener {
 
 	GameLogic spieLogik;
 	public KeyHandler(GameLogic spielLogic) {
 		spieLogik = spielLogic;
-		CreateRooms.setSpielLogic(spielLogic);
 	}
 
 	public void keyTyped(KeyEvent e) {

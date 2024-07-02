@@ -11,7 +11,7 @@ import entitys.Player;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.CreateObjects;
-import gameObject.DeathRechteck;
+import gameObject.SwordAttack;
 import gameObject.Rechteck;
 import gui.GameScreen;
 import rooms.DungeonCore;
@@ -27,7 +27,7 @@ public class GameLogic {
 	public static ArrayList<Rechteck> floorObject;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
-	public static ArrayList<DeathRechteck> deathRechteck;
+	public static ArrayList<SwordAttack> swordAttacks;
 	public static ArrayList<MobTemplate> mobs;
 	public static ArrayList<Arrow> arrows;
 	public static ArrayList<InteractableTemplate> interactables;
@@ -61,7 +61,7 @@ public class GameLogic {
 		Timer OnesTimer = new Timer();
 		floorObject = new ArrayList<Rechteck>();
 		columns = new ArrayList<Column>();
-		deathRechteck = new ArrayList<DeathRechteck>();
+		swordAttacks = new ArrayList<SwordAttack>();
 		mobs =new ArrayList<MobTemplate>();
 		arrows = new ArrayList<Arrow>();
 		interactables = new ArrayList<InteractableTemplate>();
@@ -86,7 +86,14 @@ public class GameLogic {
 					if(player.AtkCooldown>0) {player.AtkCooldown--;}
 				}
 				changeRoom();		//Raum wechsel
-
+				
+				for(int i = 0; i<swordAttacks.size();i++) {
+					swordAttacks.get(i).dealDamage();
+					if(swordAttacks.get(i).remove()) {
+						swordAttacks.remove(i);
+						i--;
+					}
+				}
 				
 				if(Interact) {
 					counterInteraction++;

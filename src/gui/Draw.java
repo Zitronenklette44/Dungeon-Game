@@ -8,12 +8,11 @@ import javax.swing.JLabel;
 import entitys.Arrow;
 import entitys.InteractableTemplate;
 import entitys.MobTemplate;
-import entitys.TestMob;
 import game.Collisions;
 import game.GameLogic;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
-import gameObject.DeathRechteck;
+import gameObject.SwordAttack;
 import gameObject.Rechteck;
 import rooms.DungeonCore;
 
@@ -28,7 +27,7 @@ public class Draw extends JLabel {
 	public static ArrayList<Rechteck> floor;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
-	public static ArrayList<DeathRechteck> deathRechtecks;
+	public static ArrayList<SwordAttack> deathRechtecks;
 	public static ArrayList<MobTemplate> mobs;
 	public static ArrayList<Arrow> bullets;
 	public static ArrayList<InteractableTemplate> interactables;
@@ -51,7 +50,7 @@ public class Draw extends JLabel {
 		columns = spiellogik.columns;
 		player= spiellogik.player;
 		collisionRectangles = spiellogik.collisionRectangles;
-		deathRechtecks = spiellogik.deathRechteck;
+		deathRechtecks = spiellogik.swordAttacks;
 		mobs = spiellogik.mobs;
 		bullets = spiellogik.arrows;
 		this.spieLogic = spiellogik;
@@ -115,8 +114,17 @@ public class Draw extends JLabel {
 
 		g.setColor(deathRechteckColor);
 		for (int i = 0; i < deathRechtecks.size(); i++) {
-			DeathRechteck aktuellesObjekt = deathRechtecks.get(i);
-			g.fillRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+			SwordAttack aktuellesObjekt = deathRechtecks.get(i);
+			if(aktuellesObjekt.isVisible) {
+				g.fillRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+			}else if(GameLogic.debug){
+				g.setColor(Color.green);
+				g2d.drawString(aktuellesObjekt.breite+"", aktuellesObjekt.posX+(aktuellesObjekt.breite/2), aktuellesObjekt.posY-5);
+				g2d.drawString(aktuellesObjekt.hoehe+"", aktuellesObjekt.posX-40, aktuellesObjekt.posY+(aktuellesObjekt.hoehe/2));
+				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+				g.setColor(Color.ORANGE);
+				g2d.drawString(aktuellesObjekt.existingTime+"", aktuellesObjekt.posX+aktuellesObjekt.breite/4, aktuellesObjekt.posY+(aktuellesObjekt.hoehe/2));
+			}
 		}
 
 		g.setColor(mobsColor);
@@ -166,7 +174,6 @@ public class Draw extends JLabel {
 
 	public static void clearObjects() {
 		Draw.collisionRectangles.clear();
-		Draw.deathRechtecks.clear();
 		Draw.columns.clear();
 		Draw.interactables.clear();
 	}

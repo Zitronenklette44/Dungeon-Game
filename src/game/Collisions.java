@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import entitys.InteractableTemplate;
 import entitys.MobTemplate;
 import gameObject.CollisionRechteck;
-import gameObject.DeathRechteck;
+import gameObject.SwordAttack;
 import gameObject.Rechteck;
 
 public class Collisions {
@@ -76,13 +76,13 @@ public class Collisions {
 		}
 	}
 
-	public static boolean checkDeathBlock(Rechteck rect, int deltaX, int deltaY) {
+	public static boolean checkSwordAttack(Rechteck rect, int deltaX, int deltaY) {
 		// Berechne die zukünftige Position des Rechtecks
 		float futurePosX = rect.posX + deltaX;
 		float futurePosY = rect.posY + deltaY;
 
 		// Überprüfe, ob eine Kollision mit einem DeathRechteck auftreten würde
-		for (DeathRechteck deathRect : GameLogic.deathRechteck) {
+		for (SwordAttack deathRect : GameLogic.swordAttacks) {
 			if (futurePosX < deathRect.posX + deathRect.breite && futurePosX + rect.breite > deathRect.posX
 					&& futurePosY < deathRect.posY + deathRect.hoehe && futurePosY + rect.hoehe > deathRect.posY) {
 				// Kollision gefunden

@@ -9,6 +9,8 @@ import gameObject.Rechteck;
 public class MobTemplate extends Rechteck{
 	public float dx;
 	public float dy;
+	public float lastdx;
+	public float lastdy;
     public int SpawnX;
     public int SpawnY;
     public float speed;
@@ -18,6 +20,8 @@ public class MobTemplate extends Rechteck{
 	public boolean defeated= false;
 	public boolean hasCollision  = false;
 	public Color typeColor;
+	public int maxHitCooldown;
+	public int HitCooldown;
     
     public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp) {
         super(hoehe, breite, posX, posY);
@@ -32,4 +36,8 @@ public class MobTemplate extends Rechteck{
     }
     
     public void drawMob(Graphics2D g) {}
+    
+    public void setHitCooldown() {
+		this.HitCooldown = maxHitCooldown;
+	}
 }
