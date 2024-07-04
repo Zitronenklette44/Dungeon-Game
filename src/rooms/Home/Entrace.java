@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import game.GameLogic;
 import gameObject.CreateObjects;
-import gui.Draw;
+import rendering.Draw;
 import rooms.RoomTemplate;
 
 public class Entrace extends RoomTemplate{

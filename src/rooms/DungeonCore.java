@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import game.GameLogic;
-import gui.Draw;
+import rendering.Draw;
 import rooms.Castle.*;
 import rooms.Dungeon.*;
 import rooms.Forest.*;

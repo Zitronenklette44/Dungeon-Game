@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import game.GameLogic;
+import rendering.Draw;
 import rooms.DungeonCore;
 
 import java.awt.event.ActionListener;

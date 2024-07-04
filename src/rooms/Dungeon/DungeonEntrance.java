@@ -2,7 +2,7 @@ package rooms.Dungeon;
 
 import java.awt.Color;
 
-import gui.Draw;
+import rendering.Draw;
 import rooms.RoomTemplate;
 
 public class DungeonEntrance extends RoomTemplate{

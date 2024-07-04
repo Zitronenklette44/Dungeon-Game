@@ -8,6 +8,7 @@ import entitys.InteractableTemplate;
 import entitys.MobTemplate;
 import gameObject.CollisionRechteck;
 import gameObject.SwordAttack;
+import spells.SpellTemplate;
 import gameObject.Rechteck;
 
 public class Collisions {
@@ -18,6 +19,23 @@ public class Collisions {
 	}
 
 	public static boolean checkCollision(Rechteck rect, float deltaX, float deltaY) {
+		ArrayList<CollisionRechteck> collisionRechtecks = new ArrayList<>(GameLogic.collisionRectangles);
+	    float futurePosX = rect.posX + deltaX;
+	    float futurePosY = rect.posY + deltaY;
+
+	    for (CollisionRechteck collisionRect : collisionRechtecks) {
+	        if (collisionRect != null) {
+	            if (futurePosX < collisionRect.posX + collisionRect.breite 
+	                    && futurePosX + rect.breite > collisionRect.posX
+	                    && futurePosY < collisionRect.posY + collisionRect.hoehe
+	                    && futurePosY + rect.hoehe > collisionRect.posY) {
+	                return true;
+	            }
+	        }
+	    }
+	    return false;
+	}
+	public static boolean checkCollision(SpellTemplate rect, float deltaX, float deltaY) {
 		ArrayList<CollisionRechteck> collisionRechtecks = new ArrayList<>(GameLogic.collisionRectangles);
 	    float futurePosX = rect.posX + deltaX;
 	    float futurePosY = rect.posY + deltaY;
@@ -180,6 +198,30 @@ public class Collisions {
 	            // Kollision gefunden
 	        	if(DealDamage) {
 					mob.Hp -= akuellemob.damage;
+				}
+	            return true;
+	        }
+	    }
+	    // Keine Kollision
+	    return false;
+	}
+	
+	public static boolean checkMob(SpellTemplate akuellerSpell, float deltaX, float deltaY, boolean DealDamage) {
+	    ArrayList<MobTemplate> mobsArrayList = GameLogic.mobs;
+	    // Berechne die zukünftige Position des Rechtecks
+	    float futurePosX = akuellerSpell.posX + deltaX;
+	    float futurePosY = akuellerSpell.posY + deltaY;
+
+	    for (int i = 0; i < mobsArrayList.size(); i++) {
+	        MobTemplate mob = mobsArrayList.get(i);
+	       
+	        if (futurePosX < mob.posX + mob.breite
+	                && futurePosX + akuellerSpell.breite > mob.posX
+	                && futurePosY < mob.posY + mob.hoehe
+	                && futurePosY + akuellerSpell.hoehe > mob.posY) {
+	            // Kollision gefunden
+	        	if(DealDamage) {
+					mob.Hp -= akuellerSpell.damage;
 				}
 	            return true;
 	        }

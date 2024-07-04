@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import game.GameLogic;
 import gameMusik.MusicPlayer;
@@ -46,6 +48,9 @@ public class SaveLoad {
                     case "jumpHight":
                         GameLogic.jumpHight = Integer.parseInt(value);
                         break;
+                    case "spells":
+                        GameLogic.unlockedSpells = parseIntArray(value);
+                        break;
                     default:
                         // Handle unknown keys if necessary
                         break;
@@ -78,6 +83,9 @@ public class SaveLoad {
             writer.write("// Spieler Sprung Höhe\n");
             writer.write("// Standart 70\n");
             writer.write("jumpHight = " + GameLogic.jumpHight + "\n\n");
+            writer.write("// Freigeschaltene Zaauber\n");
+            writer.write("// Standart alles 0\n");
+            writer.write("spells = " + Arrays.toString(GameLogic.unlockedSpells) + "\n\n");
 
             System.out.println("Konfigurationsdatei erfolgreich aktualisiert.");
 
@@ -121,6 +129,15 @@ public class SaveLoad {
 
         // Speichere die neuen Standardwerte in der Konfigurationsdatei
         saveConfig();
+    }
+	
+	private static int[] parseIntArray(String value) {
+        String[] stringArray = value.replaceAll("[\\[\\]\\s]", "").split(",");
+        int[] intArray = new int[stringArray.length];
+        for (int i = 0; i < stringArray.length; i++) {
+            intArray[i] = Integer.parseInt(stringArray[i]);
+        }
+        return intArray;
     }
 
 }

@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import game.GameLogic;
 import gameMusik.MusicPlayer;
+import gui.GameScreen;
 
 public class KeyHandler implements KeyListener {
 
@@ -42,6 +43,20 @@ public class KeyHandler implements KeyListener {
 		}
 		if(e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
 			GameLogic.Interact=true;
+		}
+		if(e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
+			GameLogic.fireSpell = true;
+		}
+		
+		
+		if(e.getKeyCode() == KeyEvent.VK_1) {
+			GameScreen.changeSpell(0);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_2) {
+			GameScreen.changeSpell(1);	
+		}
+		if(e.getKeyCode() == KeyEvent.VK_3) {
+			GameScreen.changeSpell(2);	
 		}
 
 		if(e.getKeyCode() == KeyEvent.VK_F1) {

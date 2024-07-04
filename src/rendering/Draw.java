@@ -1,4 +1,4 @@
-package gui;
+package rendering;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,6 +15,8 @@ import gameObject.Column;
 import gameObject.SwordAttack;
 import gameObject.Rechteck;
 import rooms.DungeonCore;
+import spells.SpellManager;
+import spells.SpellTemplate;
 
 public class Draw extends JLabel {
 	private static final long serialVersionUID = 1L;
@@ -24,6 +26,7 @@ public class Draw extends JLabel {
 	private int screenheight;
 	public static Rechteck player;
 	static GameLogic spieLogic;
+	public static int manabarBlink = -1;
 	public static ArrayList<Rechteck> floor;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
@@ -31,6 +34,7 @@ public class Draw extends JLabel {
 	public static ArrayList<MobTemplate> mobs;
 	public static ArrayList<Arrow> bullets;
 	public static ArrayList<InteractableTemplate> interactables;
+	public static ArrayList<SpellTemplate> spells;
 
 	public static Color backgroundColor = Color.DARK_GRAY;
 	public static Color floorColor = Color.white;
@@ -55,6 +59,7 @@ public class Draw extends JLabel {
 		bullets = spiellogik.arrows;
 		this.spieLogic = spiellogik;
 		interactables = spiellogik.interactables;
+		this.spells = SpellManager.currentSpells;
 	}
 
 	@Override
@@ -142,6 +147,12 @@ public class Draw extends JLabel {
 			aktuellesObjekt.draw(g2d);
 		}
 
+		for (int i = 0; i < spells.size(); i++) {
+			SpellTemplate aktuellesObjekt = spells.get(i);
+			aktuellesObjekt.drawSpell(g2d);
+		}
+		
+
 		//player
 		g.setColor(playerColor);
 		g.fillRect((int)player.posX,(int) player.posY, player.breite, player.hoehe);
@@ -155,9 +166,18 @@ public class Draw extends JLabel {
 		g.fillRect(100, 10, 210, 25);
 		g.setColor(Color.red);
 		g.fillRect(105, 15, 200, 15);
-		g.setColor(Color.green);
+		g.setColor(getHealtbarColor(GameLogic.player));
 		int width = (int) ((float) GameLogic.player.Hp / GameLogic.player.maxHp * 200);
 		g.fillRect(105, 15, width, 15);
+		
+		//ManaBar
+		g.setColor(new Color(0,0,0,200));
+		g.fillRect(750, 10, 210, 25);
+		g.setColor(Color.gray);
+		g.fillRect(755, 15, 200, 15);
+		g.setColor(getManabarColor());
+		width = (int) ((float) GameLogic.player.mana / GameLogic.player.maxMana * 200);
+		g.fillRect(755, 15, width, 15);
 		
 		//ATKCooldown
 		g.setColor(new Color(0,0,0,150));
@@ -228,10 +248,34 @@ public class Draw extends JLabel {
 		int healthBarY = (int) posY - healthBarHeight - ((int)((mob.hoehe)/5)-healthBarHeight);
 		g2d.fillRect(healthBarX, healthBarY, healthBarWidth, healthBarHeight);
 		
-		g2d.setColor(Color.green);
+		g2d.setColor(getHealtbarColor(mob));
 		healthBarWidth = (int) (((float) currentHp / maxHp) * mob.breite) - mob.breite/10;
 		g2d.fillRect(healthBarX, healthBarY, healthBarWidth, healthBarHeight);
 		
+	}
+	
+	public static Color getHealtbarColor(MobTemplate mob) {
+		if(mob.Hp<mob.maxHp/2) {
+			return Color.orange;
+		}
+		return Color.green;
+	}
+	
+	public static Color getManabarColor() {
+		if(manabarBlink==60)
+			manabarBlink=-1;
+		
+		if(manabarBlink == -1)
+			return Color.cyan;
+		manabarBlink++;
+		if(manabarBlink>=0&&manabarBlink<20) 
+			return Color.red;
+		else if(manabarBlink>=20&&manabarBlink<40) 
+			return Color.cyan;
+		else if(manabarBlink>=40&&manabarBlink<60) 
+			return Color.red;
+		else
+			return Color.cyan;
 	}
 
 

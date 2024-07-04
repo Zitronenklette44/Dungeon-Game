@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import game.GameLogic;
 import gameObject.CreateObjects;
-import gui.Draw;
+import rendering.Draw;
 import rooms.RoomTemplate;
 
 public class Dungeon extends RoomTemplate{

@@ -10,6 +10,8 @@ import action.KeyHandler;
 import action.MouseHandler;
 import action.SaveLoad;
 import game.GameLogic;
+import rendering.Draw;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
@@ -24,6 +26,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.LineBorder;
 
 public class GameScreen extends JFrame {
 
@@ -38,6 +41,11 @@ public class GameScreen extends JFrame {
 	private JPanel pauseMenue;
 	public static boolean settingExists = false;
 	private JLabel lblNewLabel;
+	private static JLabel lbSpell3;
+	private static JLabel lbSpell2;
+	private static JLabel lbSpell1;
+	public static int selectedSpell = 0;
+	private static JLabel[] spells = new JLabel[3];
 
 
 	/**
@@ -131,6 +139,22 @@ public class GameScreen extends JFrame {
 		btnNewButton.setBounds(459, 198, 278, 42);
 		pauseMenue.add(btnNewButton);
 		
+		lbSpell1 = new JLabel("");
+		lbSpell1.setBorder(new LineBorder(Color.ORANGE, 3));
+		lbSpell1.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/Fireball.png")));
+		lbSpell1.setBounds(974, 11, 50, 50);
+		contentPane.add(lbSpell1);
+		
+		lbSpell2 = new JLabel("");
+		lbSpell2.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/WaterDrop.png")));
+		lbSpell2.setBounds(1035, 11, 50, 50);
+		contentPane.add(lbSpell2);
+		
+		lbSpell3 = new JLabel("");
+		lbSpell3.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/rock.png")));
+		lbSpell3.setBounds(1098, 11, 50, 50);
+		contentPane.add(lbSpell3);
+		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -166,6 +190,10 @@ public class GameScreen extends JFrame {
 		lbBackground.setBounds(0, 0, 1184, 761);
 		contentPane.add(lbBackground);
 		
+		spells[0] = lbSpell1;
+		spells[1] = lbSpell2;
+		spells[2] = lbSpell3;
+		
 	}
 
 	public static int getScreenHoehe() {
@@ -197,5 +225,13 @@ public class GameScreen extends JFrame {
 		boolean paused = GameLogic.paused;
 		pauseMenue.setVisible(paused);
 		}
+	}
+	
+	public static void changeSpell(int spell) {
+		for(int i = 0; i<spells.length;i++) {
+			spells[i].setBorder(null);
+		}
+		spells[spell].setBorder(new LineBorder(Color.ORANGE, 3));
+		selectedSpell = spell;
 	}
 }

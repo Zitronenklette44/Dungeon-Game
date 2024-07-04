@@ -15,6 +15,7 @@ import gameObject.SwordAttack;
 import gameObject.Rechteck;
 import gui.GameScreen;
 import rooms.DungeonCore;
+import spells.SpellManager;
 
 public class GameLogic {
 
@@ -24,6 +25,7 @@ public class GameLogic {
 	public static boolean moveDown= false;
 	public static boolean jump = false;
 	public static boolean Interact = false;
+	public static boolean fireSpell = false;
 	public static ArrayList<Rechteck> floorObject;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;
@@ -52,6 +54,7 @@ public class GameLogic {
 	public static boolean debug = false;
 	public static boolean paused = false;
 	public static boolean musicEnabled = true;
+	public static int[] unlockedSpells = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 	public static DungeonCore dungeon;
 	public static float playerSpeed = 2F;
@@ -81,6 +84,7 @@ public class GameLogic {
 				if(!paused) {
 					Movement.playerMovement();		//bewegung Spieler + Mobs
 					Movement.mobMovement();
+					if(fireSpell) {SpellManager.fireSpell(player, GameScreen.selectedSpell);fireSpell=false;}
 
 					if(player.HitCooldown>0) {player.HitCooldown--;}		//Cooldown Reset
 					if(player.AtkCooldown>0) {player.AtkCooldown--;}
