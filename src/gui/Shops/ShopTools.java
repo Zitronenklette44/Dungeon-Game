@@ -45,6 +45,7 @@ public class ShopTools extends JFrame {
 					frame = new ShopTools();
 					frame.setVisible(true);
 					frame.requestFocusInWindow();
+					frame.setLocation(GameScreen.location);
 					existing = true;
 				} catch (Exception e) {
 					e.printStackTrace();

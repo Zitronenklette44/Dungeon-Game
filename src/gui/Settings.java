@@ -38,6 +38,7 @@ public class Settings extends JDialog {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setLocationRelativeTo(null);
 			dialog.setVisible(true);
+			dialog.setLocation(GameScreen.location.x+dialog.getWidth()/2, GameScreen.location.y+dialog.getHeight()/2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

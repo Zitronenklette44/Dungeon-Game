@@ -45,6 +45,7 @@ public class ShopPotions extends JFrame {
 					frame = new ShopPotions();
 					frame.setVisible(true);
 					frame.requestFocusInWindow();
+					frame.setLocation(GameScreen.location);
 					existing = true;
 				} catch (Exception e) {
 					e.printStackTrace();

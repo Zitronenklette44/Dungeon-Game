@@ -2,51 +2,103 @@ package spells.Fire;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import entitys.MobTemplate;
 import game.Collisions;
 import game.GameLogic;
 import spells.SpellManager;
 import spells.SpellTemplate;
 
 public class Fireball extends SpellTemplate{
+	
 
 	public Fireball(float posX, float posY, float dx, float dy, boolean damagePlayer) {
-		super(posX, posY, dx, dy, "fire", 1,(int) ((double)(GameLogic.player.damage/100)*20), 60, damagePlayer);
+		super(posX, posY, dx, dy, "fire", 1,(int) ((double)(GameLogic.player.damage/100)*20), 10, damagePlayer, loadImages());
 		breite = 25;
 		hoehe = 25;
-		speed =  0.5F;
+		speed =  0.8F;
+		Cooldown = 10;
 
+	}
+	
+	private static BufferedImage[] loadImages() {
+		try {
+			ClassLoader classLoader = Fireball.class.getClassLoader();
+			 BufferedImage[] images = {
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball1.png")),
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball2.png")),
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball3.png")),
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball4.png")),
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball5.png"))
+		            };
+		            return images;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	
-	public void rotateToPlayerDirection() {
-		// Verwendet die Blickrichtung des Spielers
-		float playerDirectionX = GameLogic.player.dx;
-		float playerDirectionY = GameLogic.player.dy;
+	public void rotateToNearestMob() {
+		MobTemplate nearestMob = SpellManager.getNearestMobFromEntity(originMob);
+	    if (nearestMob != null) {
+	        // Berechne die Richtung zum nächstgelegenen Mob
+	        float directionX = nearestMob.posX - this.posX;
+	        float directionY = nearestMob.posY - this.posY;
+	        
+	        // Berechne die Länge des Richtungsvektors
+	        double length = Math.sqrt(directionX * directionX + directionY * directionY);
 
-		// Berechne die Länge des Richtungsvektors
-		double length = Math.sqrt(playerDirectionX * playerDirectionX + playerDirectionY * playerDirectionY);
+	        if (length != 0) { // Verhindere Division durch Null
+	            // Normalisiere den Vektor (um die Richtung zu bekommen)
+	            double normalizedX = directionX / length;
+	            double normalizedY = directionY / length;
 
-		if (length != 0) { // Verhindere Division durch Null
-			// Normalisiere den Vektor (um die Richtung zu bekommen)
-			double normalizedX = playerDirectionX / length;
-			double normalizedY = playerDirectionY / length;
+	            // Setze die Bewegungsrichtung basierend auf der normierten Richtung und der Geschwindigkeit
+	            this.dx = (float) (normalizedX * this.speed);
+	            this.dy = (float) (normalizedY * this.speed);
 
-			// Setze die Bewegungsrichtung basierend auf der normierten Richtung und der Geschwindigkeit
-			this.dx = (float) (normalizedX * this.speed);
-			this.dy = (float) (normalizedY * this.speed);
+	            // Berechne den Rotationswinkel
+	            angle = Math.atan2(directionY, directionX);
+	        } else {
+	            this.dx = this.lastdx;
+	            this.dy = this.lastdy;
+	        }
+	    } else {
+	    	 // Berechne die Richtung zum nächstgelegenen Mob
+	        float directionX = this.lastdx;
+	        float directionY = this.lastdy;
+	        
+	        // Berechne die Länge des Richtungsvektors
+	        double length = Math.sqrt(directionX * directionX + directionY * directionY);
 
-			// Berechne den Rotationswinkel
-			angle = Math.atan2(playerDirectionY, playerDirectionX);
-		} else {
-			this.dx = 0;
-			this.dy = 0;
-		}
+	        if (length != 0) { // Verhindere Division durch Null
+	            // Normalisiere den Vektor (um die Richtung zu bekommen)
+	            double normalizedX = directionX / length;
+	            double normalizedY = directionY / length;
+
+	            // Setze die Bewegungsrichtung basierend auf der normierten Richtung und der Geschwindigkeit
+	            this.dx = (float) (normalizedX * this.speed);
+	            this.dy = (float) (normalizedY * this.speed);
+
+	            // Berechne den Rotationswinkel
+	            angle = Math.atan2(directionY, directionX);
+	        } else {
+	            this.dx = this.lastdx;
+	            this.dy = this.lastdy;
+	        }
+	    }
 	}
 
 	@Override
 	public void drawSpell(Graphics2D g2d) {
 		checkDelet();
+		rotateToNearestMob();
 		// Setze die alte Transformation zurück
 		AffineTransform oldTransform = g2d.getTransform();
 
@@ -58,14 +110,15 @@ public class Fireball extends SpellTemplate{
 		g2d.rotate(this.angle, centerX, centerY);
 
 		// Zeichne die Kugel als Rechteck
-		g2d.fillRect((int)this.posX, (int)this.posY, this.breite, this.hoehe);
+		//g2d.fillRect((int)this.posX, (int)this.posY, 20, 40);
+		g2d.drawImage(this.getCurrentImage(), (int)this.posX, (int)this.posY, null, null);
 
 		// Setze die alte Transformation zurück
 		g2d.setTransform(oldTransform);
 
 		// Aktualisiere die Position der Kugel
-		this.posX += this.dx;
-		this.posY += this.dy;
+		this.posX += this.dx*speed;
+		this.posY += this.dy*speed;
 		//this.range -= Math.sqrt(this.dx * this.dx + this.dy * this.dy);
 	}
 

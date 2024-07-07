@@ -13,7 +13,7 @@ debug = false
 
 // Spieler Geschwindigkeit
 // Standart 2
-playerSpeed = 2.0
+playerSpeed = 1.0
 
 // Spieler Sprung Höhe
 // Standart 70
@@ -22,4 +22,8 @@ jumpHight = 70
 // Freigeschaltene Zaauber
 // Standart alles 0
 spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+// Frame Position
+// Standart (0,0)
+frameLocation = 78,86
 

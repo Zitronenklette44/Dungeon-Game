@@ -11,9 +11,12 @@ import action.MouseHandler;
 import action.SaveLoad;
 import game.GameLogic;
 import rendering.Draw;
+import rendering.DrawSpells;
+import rendering.DrawSpellsOverlay;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -46,6 +49,7 @@ public class GameScreen extends JFrame {
 	private static JLabel lbSpell1;
 	public static int selectedSpell = 0;
 	private static JLabel[] spells = new JLabel[3];
+	public static Point location;
 
 
 	/**
@@ -57,6 +61,11 @@ public class GameScreen extends JFrame {
 				try {
 					frame = new GameScreen();
 					frame.setVisible(true);
+					if(location != null) {
+						frame.setLocation(location);
+					}else {
+						frame.setLocationRelativeTo(null);
+					} 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -65,6 +74,7 @@ public class GameScreen extends JFrame {
 	}
 	
 	public static void hideFrame() {
+		location = frame.getLocationOnScreen(); 
 		frame.setVisible(false);
 		GameLogic.moveDown =false;
 		GameLogic.moveLeft = false;
@@ -87,6 +97,7 @@ public class GameScreen extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				location = frame.getLocationOnScreen(); 
 				SaveLoad.saveConfig();
 			}
 		});
@@ -139,6 +150,11 @@ public class GameScreen extends JFrame {
 		btnNewButton.setBounds(459, 198, 278, 42);
 		pauseMenue.add(btnNewButton);
 		
+		DrawSpellsOverlay drawSpellsOverlay = new DrawSpellsOverlay(screenBreite,screenHoehe, spiellogik);
+		drawSpellsOverlay.setBounds(0,0,screenBreite,screenHoehe);
+		drawSpellsOverlay.setVisible(true);
+		contentPane.add(drawSpellsOverlay);
+		
 		lbSpell1 = new JLabel("");
 		lbSpell1.setBorder(new LineBorder(Color.ORANGE, 3));
 		lbSpell1.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/Fireball.png")));
@@ -178,6 +194,11 @@ public class GameScreen extends JFrame {
 		draw.setBounds(0,0,screenBreite,screenHoehe);
 		draw.setVisible(true);
 		contentPane.add(draw);
+		
+		DrawSpells drawSpells = new DrawSpells(screenBreite,screenHoehe, spiellogik);
+		drawSpells.setBounds(0,0,screenBreite,screenHoehe);
+		drawSpells.setVisible(true);
+		contentPane.add(drawSpells);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/spear.png")));

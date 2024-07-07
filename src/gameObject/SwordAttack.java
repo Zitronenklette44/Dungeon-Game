@@ -37,7 +37,6 @@ public class SwordAttack extends CollisionRechteck{
 	                && posY + hoehe > mob.posY) {
 	            // Kollision gefunden
 	        	if(mob.HitCooldown == 0) {
-	        		System.out.println("hit: h."+mob.Hp +" hd."+ (mob.Hp-damage)+ " hC."+ mob.HitCooldown+" hmC."+ mob.maxHitCooldown + " d."+damage);
 	        		mob.Hp-= damage;
 	        		mob.HitCooldown = mob.maxHitCooldown;
 	        		

@@ -54,6 +54,7 @@ public class DungeonChooserGUI extends JFrame {
 					DungeonChooserGUI.dungeonKey = dungeonKey;
 					frame = new DungeonChooserGUI();
 					frame.setVisible(true);
+					frame.setLocation(GameScreen.location);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

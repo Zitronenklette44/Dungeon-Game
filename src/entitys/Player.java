@@ -9,6 +9,7 @@ public class Player extends MobTemplate {
 		maxHitCooldown = 100;
 		reach = 50;
 		maxMana = 100;
+		restoreMana = 1;
 		mana = maxMana;
 	}
 	

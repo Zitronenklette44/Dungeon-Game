@@ -208,7 +208,6 @@ public class Movement {
 					if (GameLogic.player.HitCooldown == 0) {
 						GameLogic.player.Hp -= mob.damage;
 						GameLogic.player.setHitCooldown();
-						System.out.println("Player HP: " + GameLogic.player.Hp);
 					}
 				}
 			}

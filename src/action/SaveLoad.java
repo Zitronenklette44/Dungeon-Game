@@ -1,16 +1,17 @@
 package action;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import game.GameLogic;
 import gameMusik.MusicPlayer;
+import gui.GameScreen;
 
 public class SaveLoad {
 	private static final String CONFIG_FILE = "src/action/config.txt";
@@ -51,6 +52,10 @@ public class SaveLoad {
                     case "spells":
                         GameLogic.unlockedSpells = parseIntArray(value);
                         break;
+                    case "frameLocation":
+                        GameScreen.location = parsePoint(value);
+                        break;
+                        
                     default:
                         // Handle unknown keys if necessary
                         break;
@@ -86,6 +91,10 @@ public class SaveLoad {
             writer.write("// Freigeschaltene Zaauber\n");
             writer.write("// Standart alles 0\n");
             writer.write("spells = " + Arrays.toString(GameLogic.unlockedSpells) + "\n\n");
+            writer.write("// Frame Position\n");
+            writer.write("// Standart (0,0)\n");
+            Point location = GameScreen.location;
+            writer.write("frameLocation = " + location.x + "," + location.y + "\n\n");
 
             System.out.println("Konfigurationsdatei erfolgreich aktualisiert.");
 
@@ -139,5 +148,12 @@ public class SaveLoad {
         }
         return intArray;
     }
+	
+	private static Point parsePoint(String value) {
+	    String[] coords = value.split(",");
+	    int x = Integer.parseInt(coords[0].trim());
+	    int y = Integer.parseInt(coords[1].trim());
+	    return new Point(x, y);
+	}
 
 }

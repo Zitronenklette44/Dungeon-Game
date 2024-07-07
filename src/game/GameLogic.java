@@ -57,7 +57,7 @@ public class GameLogic {
 	public static int[] unlockedSpells = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 	public static DungeonCore dungeon;
-	public static float playerSpeed = 2F;
+	public static float playerSpeed = 1F;
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
@@ -80,6 +80,7 @@ public class GameLogic {
 		gameTimer.scheduleAtFixedRate(new TimerTask() {		//5ms Timer
 
 			public void run() {
+				if(vertikalAxis) {playerSpeed = 1F;}else {playerSpeed = 2F;}
 				player.speed = playerSpeed;
 				if(!paused) {
 					Movement.playerMovement();		//bewegung Spieler + Mobs
@@ -109,6 +110,10 @@ public class GameLogic {
 
 				}
 				
+				for(int i = 0; i<SpellManager.Cooldowns.length;i++) {
+					if(SpellManager.Cooldowns[i]>0) {SpellManager.Cooldowns[i] -=0.005;}
+				}
+				
 			}
 		}, 0, 5);
 		
@@ -118,6 +123,7 @@ public class GameLogic {
 			public void run() {
 				try {
 					GameScreen.changeBackground(DungeonCore.getImage(0));		//Hintergrund erneuern
+					if(player.mana+player.restoreMana < player.maxMana) {player.mana += player.restoreMana;}else {player.mana = player.maxMana;}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}		
@@ -130,7 +136,7 @@ public class GameLogic {
 			directionRoom = 1;		//setze richtung auf rechts nach links
 			DungeonCore.currentRoom--;	//aktuellen Raum um 1 nach hinten verscheieben
 			resetLevel();		//Level reseten
-			GameScreen.updateRoomNr(DungeonCore.currentRoom+1);		//Raum Nummer updaten	
+			GameScreen.updateRoomNr(DungeonCore.currentRoom+1);		//Raum Nummer updaten
 		}else if(player.posX>screenBreite-player.breite&&DungeonCore.currentRoom<dungeon.getDungeonLenght()-1) {		//Wenn am rechten Rand des Raumes und weiterer Raum vorhanden
 			directionRoom=0;	//richtung auf links nach rechts setzen
 			DungeonCore.currentRoom++;	//aktuellen raum um 1 nach vorne verscheiben
@@ -143,6 +149,7 @@ public class GameLogic {
 	}
 
 	public static void resetLevel() {
+		SpellManager.currentSpells.clear();
 		dungeon.setSpawns();		//reset Punkte aus dem aktuellen Raum abrufen
 		if(directionRoom == 0) {	//wenn von links nach rechts
 			player.posX = resetPos[0];	

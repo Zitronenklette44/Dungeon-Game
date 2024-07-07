@@ -146,11 +146,6 @@ public class Draw extends JLabel {
 			Arrow aktuellesObjekt = bullets.get(i);
 			aktuellesObjekt.draw(g2d);
 		}
-
-		for (int i = 0; i < spells.size(); i++) {
-			SpellTemplate aktuellesObjekt = spells.get(i);
-			aktuellesObjekt.drawSpell(g2d);
-		}
 		
 
 		//player
@@ -226,8 +221,7 @@ public class Draw extends JLabel {
 		}
 		if(!valid) {
 			mob.defeated = true;
-			mob.posX = -20;
-			mob.posY = -20;
+			GameLogic.mobs.remove(index);
 		}
 		return valid;
 	}

@@ -12,8 +12,8 @@ public class ShopOpenPotions extends InteractableTemplate{
 	@Override
 	public void performAction() {
 		super.performAction();
-		gui.Shops.ShopPotions.erstellen();
 		GameScreen.hideFrame();
+		gui.Shops.ShopPotions.erstellen();
 		MusicPlayer.pauseAllSound();
 		MusicPlayer.playSound(2, true);
 		

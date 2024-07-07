@@ -12,8 +12,8 @@ public class ShopOpenTools extends InteractableTemplate{
 	@Override
 	public void performAction() {
 		super.performAction();
-		gui.Shops.ShopTools.erstellen();
 		GameScreen.hideFrame();
+		gui.Shops.ShopTools.erstellen();
 		MusicPlayer.pauseAllSound();
 		MusicPlayer.playSound(2, true);
 		

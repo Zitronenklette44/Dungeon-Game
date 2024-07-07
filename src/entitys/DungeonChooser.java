@@ -14,7 +14,7 @@ public class DungeonChooser extends InteractableTemplate{
 	@Override
 	public void performAction() {
 		super.performAction();
-		DungeonChooserGUI.erstellen(GameLogic.dungeonKey);
 		GameScreen.hideFrame();
+		DungeonChooserGUI.erstellen(GameLogic.dungeonKey);
 	}
 }
