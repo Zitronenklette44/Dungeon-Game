@@ -3,11 +3,12 @@ package entitys;
 import game.GameLogic;
 import gui.GameScreen;
 import rooms.DungeonCore;
+import translation.Translation;
 
 public class DungeonExit extends InteractableTemplate{
 
 	public DungeonExit(int hoehe, int breite, int posX, int posY) {
-		super(hoehe, breite, posX, posY, 100, "Dungeon verlassen");
+		super(hoehe, breite, posX, posY, 100, Translation.get("interaction.dungeonExit"));
 	}
 	
 	@Override

@@ -62,17 +62,17 @@ public class SpellChooser extends JFrame {
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		panel_1_1.setBounds(258, 11, 290, 732);
+		panel_1_1.setBounds(283, 45, 240, 650);
 		panel.add(panel_1_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("");
 		lblNewLabel_1_1.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/backgrounds/ScrollPaperBackground.jpg")));
-		lblNewLabel_1_1.setBounds(0, 0, 290, 732);
+		lblNewLabel_1_1.setBounds(0, 0, 240, 732);
 		panel_1_1.add(lblNewLabel_1_1);
 		
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setLayout(null);
-		panel_1_1_1.setBounds(558, 11, 290, 732);
+		panel_1_1_1.setBounds(579, 45, 240, 650);
 		panel.add(panel_1_1_1);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("");
@@ -82,7 +82,7 @@ public class SpellChooser extends JFrame {
 		
 		JPanel panel_1_1_2 = new JPanel();
 		panel_1_1_2.setLayout(null);
-		panel_1_1_2.setBounds(858, 11, 290, 732);
+		panel_1_1_2.setBounds(873, 45, 240, 650);
 		panel.add(panel_1_1_2);
 		
 		JLabel lblNewLabel_1_1_2 = new JLabel("");

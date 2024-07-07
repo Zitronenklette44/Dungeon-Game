@@ -12,6 +12,8 @@ import java.util.Arrays;
 import game.GameLogic;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
+import translation.Language;
+import translation.Translation;
 
 public class SaveLoad {
 	private static final String CONFIG_FILE = "src/action/config.txt";
@@ -55,6 +57,9 @@ public class SaveLoad {
                     case "frameLocation":
                         GameScreen.location = parsePoint(value);
                         break;
+                    case "activLanguage":
+                        Translation.activLanguage = Language.valueOf(value);
+                        break;
                         
                     default:
                         // Handle unknown keys if necessary
@@ -69,32 +74,34 @@ public class SaveLoad {
 	
 	public static void saveConfig() {
         String tempFile = CONFIG_FILE + ".tmp"; // Temporäre Datei
-
+        Point location = GameScreen.location;
+        
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
             // Schreibe die aktualisierten Konfigurationswerte
-            writer.write("// Wenn Musik aktiviert ist\n");
-            writer.write("// Standart true, -30\n");
+            writer.write("// "+Translation.get("save.Comment1")+"\n");
+            writer.write("// Default true, -30\n");
             writer.write("musicEnabled = " + GameLogic.musicEnabled + "\n");
             writer.write("musicVolume = "+MusicPlayer.totalVolume+"\n\n");
-            writer.write("// Anzahl der in Besitz befindenen dungeon Keys\n");
-            writer.write("// Standart ohne Spielfortschritt 1\n");
+            writer.write("// "+Translation.get("save.Comment2")+"\n");
+            writer.write("// Default 1\n");
             writer.write("dungeonKey = " + GameLogic.dungeonKey + "\n\n");
             writer.write("// Debug Modus\n");
-            writer.write("// Standart false\n");
+            writer.write("// Default false\n");
             writer.write("debug = " + GameLogic.debug + "\n\n");
-            writer.write("// Spieler Geschwindigkeit\n");
-            writer.write("// Standart 2\n");
+            writer.write("// " +Translation.get("save.Comment3")+"\n");
+            writer.write("// Default 2\n");
             writer.write("playerSpeed = " + GameLogic.player.speed + "\n\n");
-            writer.write("// Spieler Sprung Höhe\n");
-            writer.write("// Standart 70\n");
-            writer.write("jumpHight = " + GameLogic.jumpHight + "\n\n");
-            writer.write("// Freigeschaltene Zaauber\n");
-            writer.write("// Standart alles 0\n");
+            writer.write("// " +Translation.get("save.Comment4")+"\n");
+            writer.write("// Default = " + GameLogic.jumpHight + "\n\n");
+            writer.write("// " +Translation.get("save.Comment5")+"\n");
+            writer.write("// Default all 0\n");
             writer.write("spells = " + Arrays.toString(GameLogic.unlockedSpells) + "\n\n");
-            writer.write("// Frame Position\n");
-            writer.write("// Standart (0,0)\n");
-            Point location = GameScreen.location;
+            writer.write("// " +Translation.get("save.Comment6")+"\n");
+            writer.write("// Default (0,0)\n");
             writer.write("frameLocation = " + location.x + "," + location.y + "\n\n");
+            writer.write("// " +Translation.get("save.Comment6")+"\n");
+            writer.write("// Default Deutsch\n");
+            writer.write("activLanguage = " + Translation.activLanguage + "\n\n");
 
             System.out.println("Konfigurationsdatei erfolgreich aktualisiert.");
 

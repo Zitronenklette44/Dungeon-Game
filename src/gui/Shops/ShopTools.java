@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
+import translation.Translation;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -127,7 +128,7 @@ public class ShopTools extends JFrame {
         panel_6.setLayout(null);
         panel_1.setViewportView(panel_6);
         
-        JLabel lblNewLabel_2 = new JLabel("Sword 1:                                                                                                    XCoins");
+        JLabel lblNewLabel_2 = new JLabel(Translation.get("shopTool.sword1")+":                                                                                                    XCoins");
         lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_2.setForeground(Color.WHITE);
         lblNewLabel_2.setBackground(new Color(0, 0, 0,150));
@@ -139,7 +140,7 @@ public class ShopTools extends JFrame {
         lblNewLabel_3.setBounds(0, 0, 50, 50);
         panel_6.add(lblNewLabel_3);
         
-        JLabel lblNewLabel_2_1 = new JLabel("Armor 1:                                                                                                    XCoins");
+        JLabel lblNewLabel_2_1 = new JLabel(Translation.get("shopTool.armor1")+":                                                                                                    XCoins");
         lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_2_1.setOpaque(true);
         lblNewLabel_2_1.setForeground(Color.WHITE);
@@ -151,7 +152,7 @@ public class ShopTools extends JFrame {
         lblNewLabel_3_1.setBounds(0, 50, 50, 50);
         panel_6.add(lblNewLabel_3_1);
         
-        JLabel lblNewLabel_2_2 = new JLabel("Boots 1:                                                                                                    XCoins");
+        JLabel lblNewLabel_2_2 = new JLabel(Translation.get("shopTool.boots1")+":                                                                                                    XCoins");
         lblNewLabel_2_2.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_2_2.setOpaque(true);
         lblNewLabel_2_2.setForeground(Color.WHITE);

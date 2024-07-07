@@ -13,6 +13,7 @@ import game.GameLogic;
 import rendering.Draw;
 import rendering.DrawSpells;
 import rendering.DrawSpellsOverlay;
+import translation.Translation;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -126,14 +127,14 @@ public class GameScreen extends JFrame {
 		contentPane.add(pauseMenue);
 		pauseMenue.setLayout(null);
 		
-		JLabel lbTitle = new JLabel("Pausiert");
+		JLabel lbTitle = new JLabel(Translation.get("game.pause"));
 		lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lbTitle.setForeground(new Color(255, 255, 255));
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 40));
 		lbTitle.setBounds(459, 0, 278, 86);
 		pauseMenue.add(lbTitle);
 		
-		JButton btnNewButton = new JButton("Einstellungen");
+		JButton btnNewButton = new JButton(Translation.get("game.settings"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Settings.erstellen();
@@ -183,7 +184,7 @@ public class GameScreen extends JFrame {
 		lblNewLabel.setBounds(0, 0, 50, 50);
 		contentPane.add(lblNewLabel);
 		
-		lbRoomNR = new JLabel("Room 1");
+		lbRoomNR = new JLabel(Translation.get("game.room")+" 1");
 		lbRoomNR.setHorizontalAlignment(SwingConstants.CENTER);
 		lbRoomNR.setForeground(Color.MAGENTA);
 		lbRoomNR.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -226,7 +227,7 @@ public class GameScreen extends JFrame {
 	}
 	
 	public static void updateRoomNr(int RoomNr) {
-		lbRoomNR.setText("Room "+RoomNr);
+		lbRoomNR.setText(Translation.get("game.room")+" "+RoomNr);
 	}	
 	
 	

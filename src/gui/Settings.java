@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import action.SaveLoad;
 import game.GameLogic;
 import gameMusik.MusicPlayer;
+import translation.Translation;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -69,7 +70,7 @@ public class Settings extends JDialog {
 		panel.setBackground(new Color(0,0,0,175));
 		panel.setLayout(null);
 
-		JButton okButton = new JButton("Bestätigen");
+		JButton okButton = new JButton(Translation.get("settings.confirm"));
 		okButton.setBackground(Color.LIGHT_GRAY);
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,13 +102,13 @@ public class Settings extends JDialog {
 		sliderVolume.setBounds(311, 30, 160, 26);
 		panel.add(sliderVolume);
 		
-		JLabel lblNewLabel_1 = new JLabel("Lautstärke:");
+		JLabel lblNewLabel_1 = new JLabel(Translation.get("settings.volume")+":");
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(73, 30, 201, 26);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Musik Ein/Aus:");
+		JLabel lblNewLabel_1_1 = new JLabel(Translation.get("settings.musicEnabled")+":");
 		lblNewLabel_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_1_1.setBounds(73, 67, 201, 26);
@@ -132,17 +133,16 @@ public class Settings extends JDialog {
 		chMusicEnabled.setSelected(GameLogic.musicEnabled);
 		panel.add(chMusicEnabled);
 		
-		JButton btnAufStandartZurcksetzen = new JButton("Auf Standart zurücksetzen");
+		JButton btnAufStandartZurcksetzen = new JButton(Translation.get("settings.reset"));
 		btnAufStandartZurcksetzen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int option = JOptionPane.showConfirmDialog(null, "Willst du weitermachen? Die Einstellungen lassen sich nicht mehr Wiederherstellen!","Achtung",JOptionPane.YES_NO_OPTION);
+				int option = JOptionPane.showConfirmDialog(null, Translation.get("settings.reset.message"), Translation.get("settings.reset.title"),JOptionPane.YES_NO_OPTION);
 				if(option == JOptionPane.YES_OPTION) {
 					SaveLoad.resetConfig();
 				}
 			}
 		});
 		btnAufStandartZurcksetzen.setBackground(Color.LIGHT_GRAY);
-		btnAufStandartZurcksetzen.setActionCommand("OK");
 		btnAufStandartZurcksetzen.setBounds(10, 405, 186, 23);
 		panel.add(btnAufStandartZurcksetzen);
 
