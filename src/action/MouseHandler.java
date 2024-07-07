@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import game.GameLogic;
+import gameMusik.MusicPlayer;
 import gameObject.CreateObjects;
 
 public class MouseHandler implements MouseListener{
@@ -40,7 +41,8 @@ public class MouseHandler implements MouseListener{
                 attackPosX -= reach / 2 - playerWidth / 2; // Angriff horizontal zentrieren
                 CreateObjects.createSwordAttack((int) (reach/1.5), attackPosX, attackPosY, reach, GameLogic.player.damage, 40, false ,true);
             }
-
+            MusicPlayer.playSound(3, false);
+            MusicPlayer.setVolume(3, MusicPlayer.sfxVolume);
             GameLogic.player.setAtkCooldown(); // Start cooldown after attack
         }
 		}
@@ -48,7 +50,9 @@ public class MouseHandler implements MouseListener{
 		if(e.getButton() == 3) {
 			if(GameLogic.vertikalAxis && GameLogic.player.AtkCooldown == 0) {
 				CreateObjects.createBullet(10, 25, GameLogic.player.posX, GameLogic.player.posY, 0.5F, 0, 0, 1, 300);
-				GameLogic.player.setAtkCooldown();;
+				GameLogic.player.setAtkCooldown();
+				 MusicPlayer.playSound(4, false);
+				 MusicPlayer.setVolume(4, MusicPlayer.sfxVolume);
 			}
 		}
 		

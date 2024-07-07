@@ -8,6 +8,7 @@ import entitys.Arrow;
 import entitys.InteractableTemplate;
 import entitys.MobTemplate;
 import entitys.Player;
+import gameMusik.MusicPlayer;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.CreateObjects;
@@ -113,7 +114,6 @@ public class GameLogic {
 				for(int i = 0; i<SpellManager.Cooldowns.length;i++) {
 					if(SpellManager.Cooldowns[i]>0) {SpellManager.Cooldowns[i] -=0.005;}
 				}
-				
 			}
 		}, 0, 5);
 		

@@ -23,6 +23,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Font;
 import javax.swing.JCheckBox;
+import javax.swing.border.BevelBorder;
 
 public class Settings extends JDialog {
 
@@ -145,6 +146,21 @@ public class Settings extends JDialog {
 		btnAufStandartZurcksetzen.setBackground(Color.LIGHT_GRAY);
 		btnAufStandartZurcksetzen.setBounds(10, 405, 186, 23);
 		panel.add(btnAufStandartZurcksetzen);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("<dynamic>:");
+		lblNewLabel_1_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_1_1_1.setBounds(73, 104, 201, 26);
+		panel.add(lblNewLabel_1_1_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 0), new Color(0, 0, 0), null, null));
+		btnNewButton.setRequestFocusEnabled(false);
+		btnNewButton.setFocusable(false);
+		btnNewButton.setFocusTraversalKeysEnabled(false);
+		btnNewButton.setFocusPainted(false);
+		btnNewButton.setBounds(336, 103, 108, 23);
+		panel.add(btnNewButton);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(Color.LIGHT_GRAY);
