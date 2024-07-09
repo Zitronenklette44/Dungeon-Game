@@ -8,7 +8,6 @@ import entitys.Arrow;
 import entitys.InteractableTemplate;
 import entitys.MobTemplate;
 import entitys.Player;
-import gameMusik.MusicPlayer;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.CreateObjects;

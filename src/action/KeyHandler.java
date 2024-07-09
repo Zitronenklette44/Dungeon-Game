@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import game.GameLogic;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
+import gui.SpellChooser;
 
 public class KeyHandler implements KeyListener {
 
@@ -46,6 +47,9 @@ public class KeyHandler implements KeyListener {
 		}
 		if(e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
 			GameLogic.fireSpell = true;
+		}
+		if(e.getKeyChar() == 'i' || e.getKeyChar() == 'I') {
+			SpellChooser.erstellen();
 		}
 		
 		

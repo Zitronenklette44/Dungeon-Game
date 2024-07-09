@@ -13,6 +13,7 @@ import game.GameLogic;
 import rendering.Draw;
 import rendering.DrawSpells;
 import rendering.DrawSpellsOverlay;
+import spells.SpellIcons;
 import translation.Translation;
 
 import javax.swing.JLabel;
@@ -158,7 +159,7 @@ public class GameScreen extends JFrame {
 		
 		lbSpell1 = new JLabel("");
 		lbSpell1.setBorder(new LineBorder(Color.ORANGE, 3));
-		lbSpell1.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/Fireball.png")));
+		lbSpell1.setIcon(new ImageIcon(SpellIcons.fireball));
 		lbSpell1.setBounds(974, 11, 50, 50);
 		contentPane.add(lbSpell1);
 		

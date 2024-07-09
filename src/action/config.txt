@@ -13,7 +13,7 @@ debug = false
 
 // player speed
 // Default 2
-playerSpeed = 1.0
+playerSpeed = 2.0
 
 // player jump hight
 // Default = 70
@@ -24,7 +24,7 @@ spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 // Frame position
 // Default (0,0)
-frameLocation = 78,86
+frameLocation = 185,101
 
 // Frame position
 // Default Deutsch
