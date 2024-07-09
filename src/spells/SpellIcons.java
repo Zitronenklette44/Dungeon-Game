@@ -22,7 +22,7 @@ public class SpellIcons {
 			
 			
 			//water
-			waterSplash = ImageIO.read(SpellIcons.class.getResource("/resources/spells/Fire/fireball/fireball.png"));
+			waterSplash = ImageIO.read(SpellIcons.class.getResource("/resources/spells/Water/waterSplash/waterSplash.png"));
 			
 			
 			//earth

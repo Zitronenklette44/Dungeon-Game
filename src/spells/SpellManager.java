@@ -9,13 +9,14 @@ import spells.Fire.Fireball;
 
 public class SpellManager {
 	public static ArrayList<SpellTemplate> currentSpells = new ArrayList<SpellTemplate>();
-	public static String[] availibleSpell = {"fireball"};
+	public static String[] availibleSpell = {"fireball","waterSplash"};
 	public static float[] Cooldowns = {0,0,0};
 	public static float[] maxCooldowns = {0,0,0};
 
 	//manage Spells
 	public static void init(){
 		GameLogic.player.equipedSpells[0] = SpellManager.availibleSpell[0];
+		GameLogic.player.equipedSpells[1] = SpellManager.availibleSpell[1];
 	}
 
 	public static void fireSpell(MobTemplate mob, int spellNum){
@@ -25,6 +26,10 @@ public class SpellManager {
 		switch (mob.equipedSpells[spellNum]){
 		case "fireball":{
 			createFireball(mob, !fromPlayer);
+			break;
+		}
+		case "waterSplash":{
+			createWaterSplash(mob, !fromPlayer);
 			break;
 		}
 
@@ -96,6 +101,22 @@ public class SpellManager {
 		object.mana-=tempSpell.manaConsume;
 		Cooldowns[getEquipIndex(availibleSpell[0])] = tempSpell.Cooldown;
 		maxCooldowns[getEquipIndex(availibleSpell[0])] = tempSpell.Cooldown;
+		currentSpells.add(tempSpell);
+		tempSpell = null;
+	}
+	
+	public static void createWaterSplash(MobTemplate object, boolean damagePlayer) {
+		SpellTemplate tempSpell = new Fireball(object.posX, object.posY, object.lastdx, object.lastdy, damagePlayer);
+		tempSpell.originMob = object;
+		if(tempSpell.manaConsume>object.mana) {
+			Draw.manabarBlink = 0;
+			return;
+		}
+		tempSpell.lastdx = object.lastdx;
+		tempSpell.lastdy = object.lastdy;
+		object.mana-=tempSpell.manaConsume;
+		Cooldowns[getEquipIndex(availibleSpell[1])] = tempSpell.Cooldown;
+		maxCooldowns[getEquipIndex(availibleSpell[1])] = tempSpell.Cooldown;
 		currentSpells.add(tempSpell);
 		tempSpell = null;
 	}

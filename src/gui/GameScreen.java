@@ -13,6 +13,7 @@ import game.GameLogic;
 import rendering.Draw;
 import rendering.DrawSpells;
 import rendering.DrawSpellsOverlay;
+import rooms.DungeonCore;
 import spells.SpellIcons;
 import translation.Translation;
 
@@ -52,6 +53,8 @@ public class GameScreen extends JFrame {
 	public static int selectedSpell = 0;
 	private static JLabel[] spells = new JLabel[3];
 	public static Point location;
+	private static JLabel lbTitle;
+	private static JButton btnNewButton;
 
 
 	/**
@@ -73,6 +76,12 @@ public class GameScreen extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public static void refresh() {
+		lbTitle.setText(Translation.get("game.pause"));
+		btnNewButton.setText(Translation.get("game.settings"));
+		lbRoomNR.setText(Translation.get("game.room")+" "+DungeonCore.currentRoom);
 	}
 	
 	public static void hideFrame() {
@@ -128,14 +137,14 @@ public class GameScreen extends JFrame {
 		contentPane.add(pauseMenue);
 		pauseMenue.setLayout(null);
 		
-		JLabel lbTitle = new JLabel(Translation.get("game.pause"));
+		lbTitle = new JLabel(Translation.get("game.pause"));
 		lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lbTitle.setForeground(new Color(255, 255, 255));
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 40));
 		lbTitle.setBounds(459, 0, 278, 86);
 		pauseMenue.add(lbTitle);
 		
-		JButton btnNewButton = new JButton(Translation.get("game.settings"));
+		btnNewButton = new JButton(Translation.get("game.settings"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Settings.erstellen();

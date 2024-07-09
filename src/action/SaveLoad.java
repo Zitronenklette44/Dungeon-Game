@@ -99,7 +99,7 @@ public class SaveLoad {
             writer.write("// " +Translation.get("save.Comment6")+"\n");
             writer.write("// Default (0,0)\n");
             writer.write("frameLocation = " + location.x + "," + location.y + "\n\n");
-            writer.write("// " +Translation.get("save.Comment6")+"\n");
+            writer.write("// " +Translation.get("save.Comment7")+"\n");
             writer.write("// Default Deutsch\n");
             writer.write("activLanguage = " + Translation.activLanguage + "\n\n");
 

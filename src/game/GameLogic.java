@@ -80,7 +80,7 @@ public class GameLogic {
 		gameTimer.scheduleAtFixedRate(new TimerTask() {		//5ms Timer
 
 			public void run() {
-				if(vertikalAxis) {playerSpeed = 1F;}else {playerSpeed = 2F;}
+				if(vertikalAxis) {playerSpeed = 1F;}else {playerSpeed = 2F;}//TODO geschwindigkeiten nicht fest setzen sondern variabel machen
 				player.speed = playerSpeed;
 				if(!paused) {
 					Movement.playerMovement();		//bewegung Spieler + Mobs

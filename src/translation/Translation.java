@@ -89,11 +89,16 @@ public class Translation {
 		
 		germanTranslationMap.put("settings.reset.title", "Warnung");
 		englishTranslationMap.put("settings.reset.title", "Warning");
+		
+		germanTranslationMap.put("settings.language", "Sprache");
+		englishTranslationMap.put("settings.language", "Language");
+		
+		germanTranslationMap.put("settings.activLanguage", "Deutsch");
+		englishTranslationMap.put("settings.activLanguage", "English");
 	}
 	
 	
-	public static String get(String textID) {
-		
+	public static String get(String textID) {		
 		switch (activLanguage){
 		case Deutsch: return germanTranslationMap.get(textID);
 		case English: return englishTranslationMap.get(textID);
@@ -101,6 +106,21 @@ public class Translation {
 		default:
 			return "";
 		}
+	}
+	
+	public static void switchActivLanguage() {
+		for (int i = 0; i < Language.values().length; i++) {
+			Language language = Language.values()[i];
+			if(language == activLanguage) {
+				if(i+1 < Language.values().length) {
+					activLanguage =Language.values()[i+1];
+				}else {
+					activLanguage =Language.values()[0];
+				}
+				return;
+			}
+		}
+
 	}
 	
 

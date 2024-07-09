@@ -39,11 +39,16 @@ public class Settings extends JDialog {
 			dialog = new Settings();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setLocationRelativeTo(null);
-			dialog.setVisible(true);
 			dialog.setLocation(GameScreen.location.x+dialog.getWidth()/2, GameScreen.location.y+dialog.getHeight()/2);
+			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void reOpen() {
+		dialog.dispose();
+		erstellen();
 	}
 
 	/**
@@ -147,16 +152,26 @@ public class Settings extends JDialog {
 		btnAufStandartZurcksetzen.setBounds(10, 405, 186, 23);
 		panel.add(btnAufStandartZurcksetzen);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("<dynamic>:");
+		JLabel lblNewLabel_1_1_1 = new JLabel(Translation.get("settings.language")+":");
 		lblNewLabel_1_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_1_1_1.setBounds(73, 104, 201, 26);
 		panel.add(lblNewLabel_1_1_1);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton(Translation.get("settings.activLanguage"));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dialog.setVisible(false);
+				btnNewButton.setText(Translation.get("settings.activLanguage"));
+				Translation.switchActivLanguage();
+				reOpen();
+				GameScreen.refresh();
+			}
+		});
 		btnNewButton.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 0), new Color(0, 0, 0), null, null));
 		btnNewButton.setRequestFocusEnabled(false);
 		btnNewButton.setFocusable(false);
+		btnNewButton.setBackground(Color.gray);
 		btnNewButton.setFocusTraversalKeysEnabled(false);
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setBounds(336, 103, 108, 23);
