@@ -72,14 +72,14 @@ public class DrawSpellsOverlay extends JLabel {
 
 		//draw Cooldown
 		g2d.setColor(new Color(0,0,0,200));
-		if(SpellManager.Cooldowns[0]> 0) {
-			g2d.fillRect(974, 11, 50, (int) ((float) SpellManager.Cooldowns[0] / SpellManager.maxCooldowns[0]* 50));
+		if(SpellManager.cooldowns[0]> 0) {
+			g2d.fillRect(974, 11, 50, (int) ((float) SpellManager.cooldowns[0] / SpellManager.maxCooldowns[0]* 50));
 		}
-		if(SpellManager.Cooldowns[1]> 0) {
-			g2d.fillRect(1035, 11, 50, (int) ((float) SpellManager.Cooldowns[1] / SpellManager.maxCooldowns[1]* 50));
+		if(SpellManager.cooldowns[1]> 0) {
+			g2d.fillRect(1035, 11, 50, (int) ((float) SpellManager.cooldowns[1] / SpellManager.maxCooldowns[1]* 50));
 		}
-		if(SpellManager.Cooldowns[2]> 0) {
-			g2d.fillRect(1098, 11, 50, (int) ((float) SpellManager.Cooldowns[2] / SpellManager.maxCooldowns[2]* 50));
+		if(SpellManager.cooldowns[2]> 0) {
+			g2d.fillRect(1098, 11, 50, (int) ((float) SpellManager.cooldowns[2] / SpellManager.maxCooldowns[2]* 50));
 		}
 		
 		

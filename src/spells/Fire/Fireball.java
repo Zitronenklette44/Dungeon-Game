@@ -16,13 +16,13 @@ import spells.SpellTemplate;
 public class Fireball extends SpellTemplate{
 	
 
-	public Fireball(float posX, float posY, float dx, float dy, boolean damagePlayer) {
-		super(posX, posY, dx, dy, "fire", 1,(int) ((double)(GameLogic.player.damage/100)*20), 10, damagePlayer, loadImages());
+	public Fireball(float posX, float posY, float dx, float dy, boolean damagePlayer, String spellName) {
+		super(posX, posY, dx, dy, "fire", 1,(int) ((double)(GameLogic.player.damage/100)*20), 10, damagePlayer, loadImages(), spellName);
 		breite = 25;
 		hoehe = 25;
 		speed =  0.8F;
 		Cooldown = 10;
-
+		System.out.println("fire created");
 	}
 	
 	private static BufferedImage[] loadImages() {
@@ -97,7 +97,7 @@ public class Fireball extends SpellTemplate{
 
 	@Override
 	public void drawSpell(Graphics2D g2d) {
-		checkDelet();
+		//checkDelete();
 		rotateToNearestMob();
 		// Setze die alte Transformation zurück
 		AffineTransform oldTransform = g2d.getTransform();
@@ -122,7 +122,8 @@ public class Fireball extends SpellTemplate{
 		//this.range -= Math.sqrt(this.dx * this.dx + this.dy * this.dy);
 	}
 
-	public void checkDelet() {
+	@Override
+	public boolean checkDelete() {
 		boolean delete = false;
 		if(posX >= 1200 || posX < 0) {
 			delete = true;
@@ -138,18 +139,7 @@ public class Fireball extends SpellTemplate{
 			delete = true;
 		}
 
-
-
-		if(delete) {
-			for(int i = 0 ;i<SpellManager.currentSpells.size();i++) {
-				if(SpellManager.currentSpells.get(i)== this) {
-					SpellManager.currentSpells.remove(i);
-					break;
-				}
-			}
-
-
-		}
+		return delete;
 	}
 	
 }

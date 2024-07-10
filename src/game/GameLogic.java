@@ -110,9 +110,11 @@ public class GameLogic {
 
 				}
 				
-				for(int i = 0; i<SpellManager.Cooldowns.length;i++) {
-					if(SpellManager.Cooldowns[i]>0) {SpellManager.Cooldowns[i] -=0.005;}
+				for(int i = 0; i<SpellManager.cooldowns.length;i++) {
+					if(SpellManager.cooldowns[i]>0) {SpellManager.cooldowns[i] -=0.005;}
 				}
+				
+				SpellManager.updateSpells();
 			}
 		}, 0, 5);
 		

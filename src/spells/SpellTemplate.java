@@ -28,17 +28,19 @@ public class SpellTemplate {
 	public MobTemplate originMob;
 	private static int animationPos = 0;
 	public int Cooldown;
+	public String spellName;
 
 	// Vorabberechnete rotierte Bilder für die Animationen
 	private Map<Double, BufferedImage>[] rotatedImages;
 	private BufferedImage[] originalImages;
 
 	@SuppressWarnings("unchecked")
-	public SpellTemplate(float posX, float posY, float dx, float dy, String Type, int Stage, int damage, int manaConsume, boolean damagePlayer, BufferedImage[] images) {
+	public SpellTemplate(float posX, float posY, float dx, float dy, String Type, int Stage, int damage, int manaConsume, boolean damagePlayer, BufferedImage[] images, String spellName) {
 		this.posX = posX;
 		this.posY = posY;
 		this.dx = dx;
 		this.dy = dy;
+		this.spellName = spellName;
 		if(Type.equals("fire") || Type.equals("water") || Type.equals("earth")) {
 			this.Type = Type;
 		} else {
@@ -106,7 +108,12 @@ public class SpellTemplate {
 		}
 		
 		double closestAngle = Math.round(angle / 5) * 5;
-		return rotatedImages[animationFrame].get(closestAngle);
+		BufferedImage image =rotatedImages[animationFrame].get(closestAngle);
+		if (image == null) {
+	        // Fallback-Bild oder Fehlermeldung ausgeben
+	        System.err.println("Fehler: Bild nicht gefunden für Frame " + animationFrame + " und Winkel " + closestAngle);
+	    }
+		return image;
 	}
 
 	public void drawSpell(Graphics2D g, int animationFrame) {
@@ -117,4 +124,6 @@ public class SpellTemplate {
 	}
 
 	public void drawSpell(Graphics2D g2d) {}
+
+	public boolean checkDelete() {return false;}
 }

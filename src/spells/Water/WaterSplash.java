@@ -1,6 +1,10 @@
 package spells.Water;
 
+
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -16,13 +20,14 @@ import spells.SpellTemplate;
 public class WaterSplash extends SpellTemplate{
 	
 
-	public WaterSplash(float posX, float posY, float dx, float dy, boolean damagePlayer) {
-		super(posX, posY, dx, dy, "water", 1,(int) ((double)(GameLogic.player.damage/100)*20), 15, damagePlayer, loadImages());
+	public WaterSplash(float posX, float posY, float dx, float dy, boolean damagePlayer, String spellName) {
+		super(posX, posY, dx, dy, "water", 1,(int) ((double)(GameLogic.player.damage/100)*20), 1, damagePlayer, loadImages(), spellName);	//15
 		breite = 25;
 		hoehe = 25;
-		speed =  0.8F;
-		Cooldown = 10;
-		System.out.println("water");
+		speed =  0.1F;
+		Cooldown = 1;	//10
+		System.out.println("water created");
+		
 
 	}
 	
@@ -30,11 +35,11 @@ public class WaterSplash extends SpellTemplate{
 		try {
 			ClassLoader classLoader = WaterSplash.class.getClassLoader();
 			 BufferedImage[] images = {
-		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball1.png")),
-		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball2.png")),
-		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball3.png")),
-		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball4.png")),
-		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Fire/fireball/fireball5.png"))
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Water/waterSplash/watersplash1.png")),
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Water/waterSplash/watersplash1.png")),
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Water/waterSplash/watersplash1.png")),
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Water/waterSplash/watersplash1.png")),
+		                ImageIO.read(classLoader.getResourceAsStream("resources/spells/Water/waterSplash/watersplash1.png")),
 		            };
 		            return images;
 		} catch (IOException e) {
@@ -65,10 +70,10 @@ public class WaterSplash extends SpellTemplate{
 	            this.dy = (float) (normalizedY * this.speed);
 
 	            // Berechne den Rotationswinkel
-	            angle = Math.atan2(directionY, directionX);
+	            this.angle = Math.atan2(directionY, directionX);
 	        } else {
-	            this.dx = this.lastdx;
-	            this.dy = this.lastdy;
+	        	this.dx = (float) (Math.cos(this.angle) * this.speed);
+	            this.dy = (float) (Math.sin(this.angle) * this.speed);
 	        }
 	    } else {
 	    	 // Berechne die Richtung zum nächstgelegenen Mob
@@ -88,42 +93,48 @@ public class WaterSplash extends SpellTemplate{
 	            this.dy = (float) (normalizedY * this.speed);
 
 	            // Berechne den Rotationswinkel
-	            angle = Math.atan2(directionY, directionX);
+	            this.angle = Math.atan2(directionY, directionX);
 	        } else {
-	            this.dx = this.lastdx;
-	            this.dy = this.lastdy;
+	        	this.dx = (float) (Math.cos(this.angle) * this.speed);
+	            this.dy = (float) (Math.sin(this.angle) * this.speed);
 	        }
 	    }
 	}
 
 	@Override
 	public void drawSpell(Graphics2D g2d) {
-		checkDelet();
-		rotateToNearestMob();
-		// Setze die alte Transformation zurück
-		AffineTransform oldTransform = g2d.getTransform();
+	    //checkDelete();
 
-		// Berechne das Zentrum der Kugel
-		float centerX = this.posX + this.breite / 2;
-		float centerY = this.posY + this.hoehe / 2;
+	    // Setze die alte Transformation zurück
+	    AffineTransform oldTransform = g2d.getTransform();
 
-		// Setze die Rotation um das Zentrum der Kugel
-		g2d.rotate(this.angle, centerX, centerY);
+	    // Berechne das Zentrum der Kugel
+	    float centerX = this.posX + this.breite / 2;
+	    float centerY = this.posY + this.hoehe / 2;
 
-		// Zeichne die Kugel als Rechteck
-		//g2d.fillRect((int)this.posX, (int)this.posY, 20, 40);
-		g2d.drawImage(this.getCurrentImage(), (int)this.posX, (int)this.posY, null, null);
+	    // Berechne den Endpunkt der Linie basierend auf der maximalen Länge
+	    int maxLength = 100; // Maximale Länge des Wasserstrahls in Pixel
+	    int endX = (int) (posX + dx * maxLength);
+	    int endY = (int) (posY + dy * maxLength);
 
-		// Setze die alte Transformation zurück
-		g2d.setTransform(oldTransform);
+	    // Zeichne den Strahl als Linie
+	    g2d.setStroke(new BasicStroke(10f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+	    TexturePaint paint = new TexturePaint(getCurrentImage(), new Rectangle(75, 75));
+		g2d.setPaint(paint);
+	    g2d.drawLine((int) posX, (int) posY, endX, endY);
 
-		// Aktualisiere die Position der Kugel
-		this.posX += this.dx*speed;
-		this.posY += this.dy*speed;
-		//this.range -= Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+	    // Setze die alte Transformation zurück
+	    g2d.setTransform(oldTransform);
+
+	    // Aktualisiere die Position der Kugel
+	    this.posX += this.dx * speed;
+	    this.posY += this.dy * speed;
 	}
 
-	public void checkDelet() {
+
+
+	@Override
+	public boolean checkDelete() {
 		boolean delete = false;
 		if(posX >= 1200 || posX < 0) {
 			delete = true;
@@ -139,18 +150,7 @@ public class WaterSplash extends SpellTemplate{
 			delete = true;
 		}
 
-
-
-		if(delete) {
-			for(int i = 0 ;i<SpellManager.currentSpells.size();i++) {
-				if(SpellManager.currentSpells.get(i)== this) {
-					SpellManager.currentSpells.remove(i);
-					break;
-				}
-			}
-
-
-		}
+		return delete;
 	}
 	
 }

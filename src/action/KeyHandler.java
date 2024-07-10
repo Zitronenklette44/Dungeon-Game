@@ -69,7 +69,7 @@ public class KeyHandler implements KeyListener {
 		
 		
 		
-		
+		/*
 		if(e.getKeyCode() == KeyEvent.VK_F3) {
 			MusicPlayer.playSound(0, true);
 		}
@@ -78,7 +78,7 @@ public class KeyHandler implements KeyListener {
 		}
 		if(e.getKeyCode() == KeyEvent.VK_F2) {
 			MusicPlayer.stopAllSound();
-		}
+		}*/
 		
 		
 		if(e.getKeyCode() == KeyEvent.VK_MULTIPLY) {
