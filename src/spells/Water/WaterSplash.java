@@ -26,10 +26,7 @@ public class WaterSplash extends SpellTemplate{
 		hoehe = 25;
 		speed =  0.1F;
 		Cooldown = 1;	//10
-		System.out.println("water created");
-		
-
-	}
+		}
 	
 	private static BufferedImage[] loadImages() {
 		try {

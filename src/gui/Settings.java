@@ -59,6 +59,7 @@ public class Settings extends JDialog {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				GameScreen.settingExists = false;
+				SaveLoad.saveConfig();
 			}
 		});
 		setResizable(false);

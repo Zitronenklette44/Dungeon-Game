@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import action.Logger;
 import game.GameLogic;
 import rendering.Draw;
 import rooms.Castle.*;
@@ -39,6 +40,7 @@ public class DungeonCore {
 							new DungeonLavaCaveEntrance("Lava Cave Eingang"),new DungeonLavaCaveMiddel("Lava Cave Mitte 1"),new DungeonLavaCaveMiddel2("Lava Cave Mitte 2"),new DungeonLavaCaveMiddel3("Lava Cave Mitte 3"),new DungeonLavaCaveExit("Lava Cave Ausgang"),
 							new DungeonEntrance("Spawn"), new DungeonExit("Goal")}
 	};
+	public static ArrayList<RoomTemplate> thisRooms = new ArrayList<RoomTemplate>();
 	private int[][] Features = {{1, 6},	//Haus Markt
 								{1,6,11},//Cave Lichtung See
 								{1,6,11,16},//Esszimmer küche PrivatRäume Kerker 
@@ -47,13 +49,22 @@ public class DungeonCore {
 	public static boolean homeVillageBuild = true;
 	public static int dungeonType = 0;
 	private static int[] maxRooms = {10, 20, 50, 100};
+	
+	public static void init() {
+		Logger.logInfo("creating Home Village");
+		thisRooms.add(rooms[0][0]);
+		thisRooms.add(rooms[0][1]);
+		thisRooms.add(rooms[0][2]);
+		thisRooms.add(rooms[0][3]);
+		thisRooms.add(rooms[0][4]);
+		Logger.logInfo("created Home Village");
+	}
 
 	public void createDungeon() {
 		if (!homeVillageBuild) {
+			Logger.logInfo("creating new Dungeon");
 			DungeonLength = (int) (Math.random() * (maxRooms[dungeonType-1] / 2)) + (maxRooms[dungeonType-1] / 2);
 			DungeonRooms = new ArrayList<Integer>();
-			System.out.println("");
-			System.out.println("Dungeon erstelle mit:" + DungeonLength + " mit folgenden Räumen: ");
 			for (int i = 0; i < DungeonLength; i++) {
 				DungeonRooms.add(-1);
 			}
@@ -64,11 +75,15 @@ public class DungeonCore {
 			DungeonRooms.addLast(rooms[dungeonType].length-1);
 
 			DungeonLength+=2;
-
+			thisRooms.clear();
+			String dungeonString = "";
 			for (int i = 0; i < DungeonLength; i++) {
-				System.out.print(DungeonRooms.get(i) + ", ");
+			    dungeonString += DungeonRooms.get(i) + ", ";
 				rooms[dungeonType][DungeonRooms.get(i)].resetRoom();
+				thisRooms.add(rooms[dungeonType][DungeonRooms.get(i)]); 
 			}
+			Logger.logWarning("Dungeon Lenght: "+DungeonLength+" with following Rooms: "+dungeonString);
+			Logger.logInfo("new Dungeon created");
 		}
 		
 	}
@@ -165,60 +180,63 @@ public class DungeonCore {
 	public static String getImage(int addToRoom) {
 	    if(dungeonType != 0) {
 	        try {
-	            rooms[dungeonType][DungeonRooms.get(currentRoom)].VariantExists(currentRoom);
-	            rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].getImage(currentRoom);
-	            if(rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath == null) {
-	                System.out.println("Image missing / Image error");
+	        	thisRooms.get(currentRoom).VariantExists(currentRoom);
+	        	thisRooms.get(currentRoom+addToRoom).getImage(currentRoom);
+	            if(thisRooms.get(currentRoom+addToRoom).ImagePath == null) {
+	            	Logger.logWarning("Image missing");
 	            }
-	            return rooms[dungeonType][DungeonRooms.get(currentRoom)+addToRoom].ImagePath;
+	            return thisRooms.get(currentRoom+addToRoom).ImagePath;
 	        } catch (NullPointerException e) {
-	            System.out.println("Image missing / Image error");
+	        	Logger.logWarning("Image missing");
 	        }
 	    } else {
 	        try {
-	            if(rooms[dungeonType][currentRoom+addToRoom].ImagePath == null) {
-	                //System.out.println("Image missing / Image error");
+	            if(thisRooms.get(currentRoom+addToRoom).ImagePath == null) {
+	            	//Logger.logWarning("Image missing");
 	            }
-	            return rooms[dungeonType][currentRoom+addToRoom].ImagePath;
-	        } catch (NullPointerException e) {
-	            System.out.println("Image missing / Image error");
+	            return thisRooms.get(currentRoom+addToRoom).ImagePath;
+	        } catch (NullPointerException  e ) {
+	            Logger.logWarning("Image missing");
 	        }
+	        catch (IndexOutOfBoundsException e) {
+	        	Logger.logWarning("Rooms not fully initialized: Index error");
+			}
 	    }
 	    return null;
 	}
 
 	public void drawRoom(Graphics2D g2d) {
 		if (!homeVillageBuild) {
-			rooms[dungeonType][DungeonRooms.get(currentRoom)].VariantExists(currentRoom);
+			thisRooms.get(currentRoom).VariantExists(currentRoom);
 			GameLogic.floor = 725;
-			rooms[dungeonType][DungeonRooms.get(currentRoom)].changeColors();
+			thisRooms.get(currentRoom).changeColors();
 			g2d.setFont(new Font("Arial", Font.BOLD, 20));
 			if(GameLogic.debug) {
-				g2d.drawString(rooms[dungeonType][DungeonRooms.get(currentRoom)].name, 200, 300);
+				g2d.drawString(thisRooms.get(currentRoom).name, 200, 300);
 			}
 			Draw.clearObjects();
-			rooms[dungeonType][DungeonRooms.get(currentRoom)].createObjects(currentRoom);
-			rooms[dungeonType][DungeonRooms.get(currentRoom)].DrawImage(g2d);
+			thisRooms.get(currentRoom).createObjects(currentRoom);
+			thisRooms.get(currentRoom).DrawImage(g2d);
 		} else {
 			GameLogic.floor = 700;
-			rooms[dungeonType][currentRoom].changeColors();
+			thisRooms.get(currentRoom).changeColors();
 			g2d.setFont(new Font("Arial", Font.BOLD, 20));
 			if(GameLogic.debug) {
-				g2d.drawString(rooms[dungeonType][currentRoom].name, 200, 300);
+				g2d.drawString(thisRooms.get(currentRoom).name, 200, 300);
 			}
 			Draw.clearObjects();
-			rooms[dungeonType][currentRoom].createObjects(currentRoom);
-			rooms[dungeonType][currentRoom].DrawImage(g2d);
+			thisRooms.get(currentRoom).createObjects(currentRoom);
+			thisRooms.get(currentRoom).DrawImage(g2d);
 		}
 	}
 
 	public void setSpawns() {
 		if(dungeonType == 0) {
-			rooms[dungeonType][currentRoom].spawnEntitys();
-			rooms[dungeonType][currentRoom].setSpawns(currentRoom);
+			thisRooms.get(currentRoom).spawnEntitys();
+			thisRooms.get(currentRoom).setSpawns(currentRoom);
 			return;
 		}
-		rooms[dungeonType][DungeonRooms.get(currentRoom)].setSpawns(currentRoom);
-		rooms[dungeonType][DungeonRooms.get(currentRoom)].spawnEntitys();
+		thisRooms.get(currentRoom).setSpawns(currentRoom);
+		thisRooms.get(currentRoom).spawnEntitys();
 	}
 }

@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import action.Logger;
+
 public class SpellIcons {
 	//fire
 	public static BufferedImage fireball;
@@ -16,6 +18,7 @@ public class SpellIcons {
 	public static BufferedImage stoneShot;
 	
 	public static void init(){
+		Logger.logInfo("loading Spell Icons");
 		try {
 			//fire
 			fireball = ImageIO.read(SpellIcons.class.getResource("/resources/spells/Fire/fireball/fireball.png"));	
@@ -28,8 +31,9 @@ public class SpellIcons {
 			//earth
 			stoneShot = ImageIO.read(SpellIcons.class.getResource("/resources/spells/Fire/fireball/fireball.png"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.logError("Loading Spell Images failed", e);
 		}
+		Logger.logInfo("finished loading Spell Icons");
 	}
 	
 	public static BufferedImage getIconBySpell(String spell) {

@@ -20,6 +20,7 @@ public class SaveLoad {
 
 	
 	public static void loadConfig() {
+		Logger.logInfo("Loading Configurations");
         try (BufferedReader reader = new BufferedReader(new FileReader(CONFIG_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -67,12 +68,12 @@ public class SaveLoad {
                 }
             }
         } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-            // Handle exceptions as needed
+            Logger.logError("Configurations couldn't be loaded", e);
         }
     }
 	
 	public static void saveConfig() {
+		Logger.logInfo("saving Configurations");
         String tempFile = CONFIG_FILE + ".tmp"; // Temporäre Datei
         Point location = GameScreen.location;
         
@@ -103,11 +104,9 @@ public class SaveLoad {
             writer.write("// Default Deutsch\n");
             writer.write("activLanguage = " + Translation.activLanguage + "\n\n");
 
-            System.out.println("Konfigurationsdatei erfolgreich aktualisiert.");
-
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Fehler beim Schreiben der Konfigurationsdatei.");
+            Logger.logError("Couldn't save Configurations: Error while writing file", null);
         }
 
         // Kopiere Inhalte von tempFile nach CONFIG_FILE überschreiben
@@ -122,21 +121,22 @@ public class SaveLoad {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Fehler beim Überschreiben der Konfigurationsdatei.");
+            Logger.logError("Couldn't save Configurations: Error while overwriting file", null);
         } finally {
             // Lösche die temporäre Datei
             File tempFileToDelete = new File(tempFile);
             if (!tempFileToDelete.delete()) {
-                System.out.println("Fehler beim Löschen der temporären Datei.");
+            	Logger.logError("Couldn't save Configurations: Error while deleting temp file", null);
             }
         }
+        Logger.logInfo("Configurations saved");
     }
 
 
 	
 	public static void resetConfig() {
         // Setze alle Konfigurationswerte auf Standardwerte
-        GameLogic.musicEnabled = false;
+        GameLogic.musicEnabled = true;
         GameLogic.dungeonKey = 1;
         GameLogic.debug = false;
         GameLogic.jumpHight = 70;
@@ -145,6 +145,7 @@ public class SaveLoad {
 
         // Speichere die neuen Standardwerte in der Konfigurationsdatei
         saveConfig();
+        Logger.logInfo("Configurations reset");
     }
 	
 	private static int[] parseIntArray(String value) {

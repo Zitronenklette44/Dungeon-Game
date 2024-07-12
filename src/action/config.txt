@@ -13,7 +13,7 @@ debug = false
 
 // Spieler Geschwindigkeit
 // Default 2
-playerSpeed = 1.0
+playerSpeed = 2.0
 
 // Spieler Sprung Höhe
 // Default = 70
@@ -24,7 +24,7 @@ spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 // Fenster Position
 // Default (0,0)
-frameLocation = 100,111
+frameLocation = 59,115
 
 // Sprache
 // Default Deutsch

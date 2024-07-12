@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import action.Logger;
 import entitys.MobTemplate;
 import game.GameLogic;
+import gameObject.CreateObjects;
 import rendering.Draw;
 import spells.Fire.Fireball;
 import spells.Water.WaterSplash;
@@ -17,19 +19,22 @@ public class SpellManager {
     public static float[] maxCooldowns = {0, 0, 0};
 
     // Objektpool für Fireball und WaterSplash
-    private static final int INITIAL_POOL_SIZE = 4;
+    private static final int INITIAL_POOL_SIZE = 8;
     private static Map<String, ArrayList<SpellTemplate>> spellPool = new HashMap<>();
 
     // Initiale Erstellung der Spells
     public static void init() {
+    	Logger.logInfo("initializing Spells");
         GameLogic.player.equipedSpells[0] = availableSpells[0];
         GameLogic.player.equipedSpells[1] = availableSpells[1];
 
         // Objektpool initialisieren
         initializeSpellPool();
+        Logger.logInfo("initialized Spells");
     }
 
     private static void initializeSpellPool() {
+    	Logger.logInfo("creating Spell Pool");
         // Fireball Spells initialisieren
         ArrayList<SpellTemplate> fireballPool = new ArrayList<>();
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
@@ -45,6 +50,7 @@ public class SpellManager {
             waterSplashPool.add(waterSplash);
         }
         spellPool.put(availableSpells[1], waterSplashPool);
+        Logger.logInfo("Finished creating Spell Pool");
     }
 
     // Methode zum Abrufen eines Spells aus dem Objektpool
@@ -52,36 +58,65 @@ public class SpellManager {
         ArrayList<SpellTemplate> pool = spellPool.get(spellName);
         if (pool == null || pool.isEmpty()) {
             // Wenn der Pool leer ist oder nicht existiert, erstelle einen neuen Spell
-            System.out.println("Pool leer oder nicht vorhanden. Erstelle neuen Zauber: " + spellName);
+        	Logger.logWarning("Spell Pool couldn't supplie enought Spells a new one was created");
             return createSpellInstance(spellName);
         } else {
             // Nehme den Spell aus dem Pool und entferne ihn aus der Liste
             SpellTemplate spell = pool.remove(pool.size() - 1);
-            System.out.println("Zauber aus dem Pool entnommen: " + spellName+ " spellID:"+spell);
             return spell;
         }
     }
 
     // Methode zum Freigeben eines Spells in den Objektpool
-    private static void releaseSpell(SpellTemplate spell) {
+    private static void releaseSpell(SpellTemplate spell) {        
         ArrayList<SpellTemplate> pool = spellPool.get(spell.spellName);
         if (pool != null) {
             pool.add(spell);
-            System.out.println("Zauber zurück in den Pool gegeben: " + spell.spellName);
         } else {
-            System.out.println("Fehler: Pool für den Zauber nicht gefunden: " + spell.spellName);
+            Logger.logError("Spell Pool is null for spell: " + spell.spellName, null);
         }
+    }
+    
+    public static void removeAllSpells() {
+    	for(int i = currentSpells.size()-1; i > 0; i--) {
+    		releaseSpell(currentSpells.get(i));
+    	}
+    	currentSpells.clear();
+    }
+    
+    // Methode zum Entfernen von Spells aus dem Spiel und Rückgabe in den Pool
+	public static void removeSpell(SpellTemplate spell) {
+		try {
+			currentSpells.remove(spell);
+		} catch (Exception e) {
+			Logger.logError("Couldn't return Spell to Pool:" + spell, e);
+		}
+
+	}
+    
+    // Beispiel für die Aktualisierung der Zauber
+    public static void updateSpells() {
+    	for (int i = 0; i < currentSpells.size(); i++) {
+    		SpellTemplate spell = currentSpells.get(i);
+    		// Hier ist die Logik, um zu bestimmen, wann ein Spell entfernt werden soll
+    		if (spell.checkDelete()) {
+    			releaseSpell(spell);
+    			removeSpell(spell);
+    			i--; // Die Liste wurde verkürzt, also den Index anpassen
+    		}
+    	}
     }
 
     // Methode zur Erstellung eines neuen Spell-Objekts
     private static SpellTemplate createSpellInstance(String spellType) {
         switch (spellType) {
             case "fireball":
-                return new Fireball(0, 0, 0, 0, false, "fireball");
+                return new Fireball(-100, -100, 0, 0, false, "fireball");
             case "waterSplash":
-                return new WaterSplash(0, 0, 0, 0, false, "waterSplash");
+                return new WaterSplash(-100, -100, 0, 0, false, "waterSplash");
             default:
-                throw new IllegalArgumentException("Unknown spell type: " + spellType);
+                Logger.logError("invalid SpellType", new IllegalArgumentException());
+                return null;
         }
     }
 
@@ -106,7 +141,7 @@ public class SpellManager {
                 break;
             }
             default:
-                throw new IllegalArgumentException("Invalid Spell or number: " + mob.equipedSpells[spellNum] + " Num:" + spellNum);
+            	Logger.logError("Error while fireing a Spell: Invalid Spell or number: " + mob.equipedSpells[spellNum] + " Num:" + spellNum, new IllegalArgumentException());
         }
     }
 
@@ -114,7 +149,7 @@ public class SpellManager {
         ArrayList<MobTemplate> mobsArrayList = GameLogic.mobs;
 
         if (mobsArrayList.isEmpty()) {
-            return null;
+        	CreateObjects.createTestMob(1, 1, 0,(int) (entity.posX+500*entity.dx), (int) (entity.posY+500*entity.dy), 0, 1);            
         }
 
         // Verwendet die Position des aktuellen Objekts
@@ -157,7 +192,8 @@ public class SpellManager {
             }
         } catch (NullPointerException e) {
         }
-
+        
+        Logger.logWarning("Spell not equiped");
         return -1;
     }
 
@@ -200,25 +236,4 @@ public class SpellManager {
         currentSpells.add(waterSplash);
     }
 
-    // Methode zum Entfernen von Spells aus dem Spiel und Rückgabe in den Pool
-    public static void removeSpell(SpellTemplate spell) {
-        if (currentSpells.remove(spell)) {
-            releaseSpell(spell);
-            System.out.println("Zauber entfernt und in den Pool zurückgegeben: " + spell.Type);
-        } else {
-            System.out.println("Fehler beim Entfernen des Zaubers aus der Liste: " + spell.Type);
-        }
-    }
-
-    // Beispiel für die Aktualisierung der Zauber
-    public static void updateSpells() {
-        for (int i = 0; i < currentSpells.size(); i++) {
-            SpellTemplate spell = currentSpells.get(i);
-            // Hier ist die Logik, um zu bestimmen, wann ein Spell entfernt werden soll
-            if (spell.checkDelete()) {
-                removeSpell(spell);
-                i--; // Die Liste wurde verkürzt, also den Index anpassen
-            }
-        }
-    }
 }

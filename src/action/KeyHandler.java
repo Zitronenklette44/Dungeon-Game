@@ -7,6 +7,7 @@ import game.GameLogic;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
 import gui.SpellChooser;
+import rooms.DungeonCore;
 
 public class KeyHandler implements KeyListener {
 
@@ -50,6 +51,20 @@ public class KeyHandler implements KeyListener {
 		}
 		if(e.getKeyChar() == 'i' || e.getKeyChar() == 'I') {
 			SpellChooser.erstellen();
+		}
+		if(e.getKeyChar() == 'l' || e.getKeyChar() == 'L') {
+			DungeonCore.thisRooms.clear();
+			DungeonCore.init();
+			DungeonCore.currentRoom = 0;
+			GameScreen.updateRoomNr(0);
+			GameLogic.vertikalAxis=false;
+			GameScreen.updateRoomNr(1);
+			DungeonCore.dungeonType = 0;
+			DungeonCore.homeVillageBuild = true;
+			GameLogic.player.breite = 50;
+			GameLogic.player.hoehe = 50;
+			GameLogic.resetLevel();
+			GameLogic.player.Hp = GameLogic.player.maxHp;
 		}
 		
 		

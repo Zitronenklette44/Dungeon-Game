@@ -3,6 +3,8 @@ package translation;
 import java.util.HashMap;
 import java.util.Map;
 
+import action.Logger;
+
 public class Translation {
 	
 	public static Language activLanguage = Language.Deutsch;
@@ -11,6 +13,8 @@ public class Translation {
 	static Map<String, String> englishTranslationMap;
 	
 	public static void init(){
+		
+		Logger.logInfo("Loading Translations");
 		
 		germanTranslationMap = new HashMap<String, String>();
 		englishTranslationMap = new HashMap<String, String>();
@@ -95,6 +99,8 @@ public class Translation {
 		
 		germanTranslationMap.put("settings.activLanguage", "Deutsch");
 		englishTranslationMap.put("settings.activLanguage", "English");
+		
+		Logger.logInfo("Loaded Translations");
 	}
 	
 	

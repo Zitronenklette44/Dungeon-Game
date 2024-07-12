@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import action.KeyHandler;
+import action.Logger;
 import action.MouseHandler;
 import action.SaveLoad;
 import game.GameLogic;
@@ -61,6 +62,7 @@ public class GameScreen extends JFrame {
 	 * Launch the application.
 	 */
 	public static void erstellen() {
+		Logger.logInfo("creating main Frame");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -71,20 +73,27 @@ public class GameScreen extends JFrame {
 					}else {
 						frame.setLocationRelativeTo(null);
 					} 
+					Logger.logInfo("Frame successful created");
 				} catch (Exception e) {
-					e.printStackTrace();
+					Logger.logError("Error while creating Frame", e);
 				}
 			}
 		});
 	}
 	
 	public static void refresh() {
+		Logger.logInfo("reloading Translations in main Frame");
 		lbTitle.setText(Translation.get("game.pause"));
 		btnNewButton.setText(Translation.get("game.settings"));
 		lbRoomNR.setText(Translation.get("game.room")+" "+DungeonCore.currentRoom);
+		if(DungeonCore.currentRoom == 0) {
+			lbRoomNR.setText(Translation.get("game.room")+ " 1");
+		}
+		Logger.logInfo("finished reloading Translations in main Frame");
 	}
 	
 	public static void hideFrame() {
+		Logger.logInfo("hiding main Frame");
 		location = frame.getLocationOnScreen(); 
 		frame.setVisible(false);
 		GameLogic.moveDown =false;
@@ -94,6 +103,7 @@ public class GameScreen extends JFrame {
 	}
 	
 	public static void showFrame() {
+		Logger.logInfo("show main Frame");
 		frame.setVisible(true);
 		GameLogic.moveDown =false;
 		GameLogic.moveLeft = false;

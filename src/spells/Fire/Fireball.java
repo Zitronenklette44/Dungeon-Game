@@ -22,7 +22,6 @@ public class Fireball extends SpellTemplate{
 		hoehe = 25;
 		speed =  0.8F;
 		Cooldown = 10;
-		System.out.println("fire created");
 	}
 	
 	private static BufferedImage[] loadImages() {

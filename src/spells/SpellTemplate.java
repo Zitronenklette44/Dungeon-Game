@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
+import action.Logger;
 import entitys.MobTemplate;
 
 public class SpellTemplate {
@@ -108,10 +109,11 @@ public class SpellTemplate {
 		}
 		
 		double closestAngle = Math.round(angle / 5) * 5;
+		if(closestAngle>0) {closestAngle = closestAngle*(-1);}
 		BufferedImage image =rotatedImages[animationFrame].get(closestAngle);
 		if (image == null) {
 	        // Fallback-Bild oder Fehlermeldung ausgeben
-	        System.err.println("Fehler: Bild nicht gefunden für Frame " + animationFrame + " und Winkel " + closestAngle);
+			Logger.logError("Invalid Image for Spell animations Frame: "+animationFrame+" choosen Angel:"+closestAngle, null);
 	    }
 		return image;
 	}

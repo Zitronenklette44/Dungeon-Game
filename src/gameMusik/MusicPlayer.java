@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.sound.sampled.*;
 
+import action.Logger;
 import game.GameLogic;
 import gui.Shops.ShopPotions;
 import gui.Shops.ShopTools;
@@ -34,6 +35,7 @@ public class MusicPlayer {
 	static ArrayList<ArrayList<FloatControl>> volumeControlsLists = new ArrayList<ArrayList<FloatControl>>();
 
 	public static void init() {
+		Logger.logInfo("Loading Music");
 		Lists.clear();
 		//fileTypen
 		Lists.add(clipsType1);
@@ -48,6 +50,8 @@ public class MusicPlayer {
 		volumeControlsLists.add(volumeType3);
 		volumeControlsLists.add(volumeType4);
 		volumeControlsLists.add(volumeType5);
+		
+		Logger.logInfo("finished loading Music");
 	}
 
 
@@ -62,7 +66,7 @@ public class MusicPlayer {
 			clip.open(audioStream);
 			
 			clip.addLineListener(event -> {
-	            if (event.getType() == LineEvent.Type.STOP) {
+	            if (event.getType() == LineEvent.Type.CLOSE) {
 	                removeClipFromLists(fileNR, clip);
 	                clip.close();
 	            }
@@ -145,7 +149,7 @@ public class MusicPlayer {
 				if(Lists.get(fileNR).getFirst() != null && Lists.get(fileNR).getFirst().isRunning()) {
 					Lists.get(fileNR).get(i).stop();
 					Lists.get(fileNR).get(i).close();
-					Lists.get(fileNR).remove(i);
+					//Lists.get(fileNR).remove(i);
 				}
 			}
 		}

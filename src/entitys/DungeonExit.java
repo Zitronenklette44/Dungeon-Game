@@ -14,6 +14,8 @@ public class DungeonExit extends InteractableTemplate{
 	@Override
 	public void performAction() {
 		super.performAction();
+		DungeonCore.thisRooms.clear();
+		DungeonCore.init();
 		DungeonCore.currentRoom = 0;
 		GameScreen.updateRoomNr(0);
 		GameLogic.vertikalAxis=false;
@@ -22,6 +24,8 @@ public class DungeonExit extends InteractableTemplate{
 		DungeonCore.homeVillageBuild = true;
 		GameLogic.player.breite = 50;
 		GameLogic.player.hoehe = 50;
+		GameLogic.resetLevel();
+		GameLogic.player.Hp = GameLogic.player.maxHp;
 		
 		
 	}

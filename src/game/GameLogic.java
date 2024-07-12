@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import action.Logger;
 import entitys.Arrow;
 import entitys.InteractableTemplate;
 import entitys.MobTemplate;
@@ -150,7 +151,7 @@ public class GameLogic {
 	}
 
 	public static void resetLevel() {
-		SpellManager.currentSpells.clear();
+		SpellManager.removeAllSpells();
 		dungeon.setSpawns();		//reset Punkte aus dem aktuellen Raum abrufen
 		if(directionRoom == 0) {	//wenn von links nach rechts
 			player.posX = resetPos[0];	
