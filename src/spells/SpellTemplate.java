@@ -109,11 +109,11 @@ public class SpellTemplate {
 		}
 		
 		double closestAngle = Math.round(angle / 5) * 5;
-		if(closestAngle>0) {closestAngle = closestAngle*(-1);}
+		if(closestAngle==-5) {closestAngle = 5;}
 		BufferedImage image =rotatedImages[animationFrame].get(closestAngle);
 		if (image == null) {
 	        // Fallback-Bild oder Fehlermeldung ausgeben
-			Logger.logError("Invalid Image for Spell animations Frame: "+animationFrame+" choosen Angel:"+closestAngle, null);
+			Logger.logError("Invalid Image for Spell animations Frame: "+animationFrame+" choosen Angel:"+closestAngle, this);
 	    }
 		return image;
 	}

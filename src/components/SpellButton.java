@@ -10,8 +10,8 @@ import java.awt.Color;
 
 public class SpellButton extends JButton {
     private static final long serialVersionUID = 1L;
-    private BufferedImage spellIcon;
-    private boolean isEquipSlot;
+    private BufferedImage spellIcon;	//image für Button
+    private boolean isEquipSlot;	//Wenn Spezieller Button ist
 
     public SpellButton(BufferedImage spellIcon, boolean isEquipSlot) {
         this.spellIcon = spellIcon;
@@ -24,8 +24,8 @@ public class SpellButton extends JButton {
     }
 
     private void initButton() {
-        setBorderPainted(true); // Button-Rahmen
-        setFocusPainted(false); // Kein Fokus-Rahmen
+        setBorderPainted(true); 
+        setFocusPainted(false); 
 
         addActionListener(new ActionListener() {
             @Override
@@ -36,10 +36,8 @@ public class SpellButton extends JButton {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        // Zeichne nur das Icon
-    	//g.setColor(new Color(0,0,0,0));
-    	g.setColor(Color.lightGray.darker());
+    protected void paintComponent(Graphics g) {	//Malen des Images in den Button
+    	g.setColor(Color.lightGray.darker());	//Hintergrund
     	g.fillRect(0, 0, getWidth(), getHeight());
         if (spellIcon != null) {        	
             g.drawImage(spellIcon, 0, 0, getWidth(), getHeight(), this);
@@ -47,7 +45,7 @@ public class SpellButton extends JButton {
     }
 
     @Override
-    protected void paintBorder(Graphics g) {
+    protected void paintBorder(Graphics g) {	//Borders um Button wenn kein Image vorhanden
         if (isEquipSlot|| isEquipSlot && spellIcon == null) {
             super.paintBorder(g); // Zeichne den Rahmen nur, wenn isEquipSlot true ist
             if(spellIcon == null)
@@ -57,11 +55,10 @@ public class SpellButton extends JButton {
 
     public void onPress() {
         if (!isEquipSlot) {
-            return;
+            return;		//wenn kein besonderer Button
         }
-        System.out.println("run");
-        spellIcon = null;
-        setBorder(new LineBorder(Color.orange, 3));
+        spellIcon = null;	//image löschen
+        setBorder(new LineBorder(Color.orange, 3));	//Border hinzufügen
         repaint(); // Button neu zeichnen
     }
 }

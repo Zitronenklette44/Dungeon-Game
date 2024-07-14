@@ -14,13 +14,13 @@ public class SwordAttack extends CollisionRechteck{
 	
 	public SwordAttack(int reach, float posX, float posY, int height, int damage, int duration) {
         super(reach, height, (int) posX, (int) posY);
-        this.existingTime = duration; // Beispielwert für die Lebensdauer des Angriffs
+        this.existingTime = duration; // Zeit in der der Angriff schaden macht
         this.damage = damage;
     }
 	
 	public SwordAttack(int reach, float posX, float posY, int height,int damage, int duration, boolean damagePlayer, boolean damageMobs) {
         super(reach, height, (int) posX, (int) posY);
-        this.existingTime = duration; // Beispielwert für die Lebensdauer des Angriffs
+        this.existingTime = duration; // Zeit in der der Angriff schaden macht
         this.damageMob = damageMobs;
         this.damagePlayer = damagePlayer;
         this.damage = damage;
@@ -46,7 +46,7 @@ public class SwordAttack extends CollisionRechteck{
 	    // Keine Kollision
 		}
 		if(damagePlayer) {
-			// Überprüfe, ob eine Kollision mit einem DeathRechteck auftreten würde
+			// Überprüfe, ob eine Kollision mit dem Spieler auftreten würde
 			if (posX < GameLogic.player.posX + GameLogic.player.breite
 					&& posX + breite > GameLogic.player.posX
 					&& posY < GameLogic.player.posY + GameLogic.player.hoehe

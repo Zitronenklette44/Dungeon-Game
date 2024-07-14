@@ -16,7 +16,7 @@ public class DrawSpellCooser extends JLabel{
 	}
 	
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {		//ungenutzt
 		super.paintComponent(g);
 		if(!SpellChooser.needsUpdate) {
 			return;

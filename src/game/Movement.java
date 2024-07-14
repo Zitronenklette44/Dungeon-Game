@@ -91,7 +91,7 @@ public class Movement {
 
 		}
 
-
+		//Kollision über Spieler und nicht im Dungeon
 		if (!Collisions.isCollisionAbovePlayer()&&!GameLogic.vertikalAxis) {
 			if (!Collisions.checkCollision(GameLogic.player, 0, (int) GameLogic.playerVelY)) {
 				GameLogic.player.posY += GameLogic.playerVelY;
@@ -106,26 +106,28 @@ public class Movement {
 		if(!GameLogic.vertikalAxis) {
 			Collisions.updateOnGroundStatus();
 		}
-
+		
+		//WEnn in SChwert angriff
 		if (Collisions.checkSwordAttack(GameLogic.player, 0, -1)) {
 			
 		}
-
+		
+		//Wenn interaktion statt findet
 		if(GameLogic.Interact) {
-			for(int i = 0; i<GameLogic.interactables.size();i++) {
+			for(int i = 0; i<GameLogic.interactables.size();i++) {	//gehe durch alle vorhandenen Interaktionen durch
 				try {
-					if(GameLogic.interactables.get(i).actionEnabled) {
-						GameLogic.interactables.get(i).performAction();
+					if(GameLogic.interactables.get(i).actionEnabled) {	//wenn Interaktion aktiviert
+						GameLogic.interactables.get(i).performAction();	//führe Interaktion durch
 					}
 				} catch (IndexOutOfBoundsException e) {}
 			}
 		}
-		if(GameLogic.counterInteraction >=50) {
+		if(GameLogic.counterInteraction >=50) {	//nach 50 Versuchen stope den Versuch der Interaktion			Muss so gemacht werden da sonst unter gewissen Umständen nicht erkannt wird!!!!
 			GameLogic.Interact = false;
 			GameLogic.counterInteraction = 0;
 		}
-		if (isInWall(GameLogic.player)) {
-			moveBack(GameLogic.player, GameLogic.player.lastdx, GameLogic.player.lastdy);
+		if (isInWall(GameLogic.player)) {	//wenn in einer Wand
+			moveBack(GameLogic.player, GameLogic.player.lastdx, GameLogic.player.lastdy);	//zurück in die Letzte Richtung bewegen um durch Wand glitchen zu verhindern
 		}
 	}
 
@@ -133,14 +135,12 @@ public class Movement {
 		// Movement for mobs
 		for (int i = 0; i < GameLogic.mobs.size(); i++) {
 			MobTemplate mob = GameLogic.mobs.get(i);
-			
-			if(mob.HitCooldown > 0) {mob.HitCooldown--;}
 
 			if(!mob.defeated) {
 				boolean moveHorizontally = true;
 				boolean moveVertically = true;
 
-				// Determine direction based on player position
+				//Bestimme Richtung abhängig von Spieler Position
 				if (GameLogic.player.posX > mob.posX) {
 					mob.dx = mob.speed;
 				} else if (GameLogic.player.posX < mob.posX) {
@@ -160,7 +160,7 @@ public class Movement {
 				float lastDx = mob.dx;
 				float lastDy = mob.dy;
 
-				// Check for obstacles and adjust direction
+				// Überprüfe nach Hindernissen und versuche Richtung etwas anzupassen
 				if (mob.dx != 0) {
 					if (Collisions.checkCollision(mob, mob.dx, 0)) {
 						// Horizontal collision, try vertical movement instead
@@ -183,7 +183,7 @@ public class Movement {
 					}
 				}
 
-				if(!Collisions.checkMob(mob, mob.dx, mob.dy)) {
+				if(!Collisions.checkMob(mob, mob.dx, mob.dy)) {	//Wenn nicht mit anderem mob Collidiert
 
 					// Horizontal movement
 					if (moveHorizontally && mob.dx != 0 && !Collisions.checkCollision(mob, mob.dx, 0)) {
@@ -214,14 +214,11 @@ public class Movement {
 		}
 	}
 
-	private static boolean isInWall(MobTemplate mob) {
-		// Check collision at the current position
+	private static boolean isInWall(MobTemplate mob) {	//überprüfe ob In Wand durch Überprüfung einer Kollision an der aktuellen Position
 		return Collisions.checkCollision(mob, 0, 0);
 	}
 
-	// Method to move the mob back if it's inside a wall
-	private static void moveBack(MobTemplate mob, float lastDx, float lastDy) {
-		// Move the mob back in the opposite direction of the last movement
+	private static void moveBack(MobTemplate mob, float lastDx, float lastDy) {	//bewegung in letzte bekannte Richtung um aus Wänden zu befreien
 		if (!Collisions.checkCollision(mob, -lastDx, 0)) {
 			mob.posX -= lastDx;
 		}

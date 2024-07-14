@@ -15,8 +15,8 @@ public class MouseHandler implements MouseListener{
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getButton() == 1) {
-		if (GameLogic.vertikalAxis && GameLogic.player.AtkCooldown == 0) {
+		if(e.getButton() == 1) {	//Linke Maustaste
+		if (GameLogic.vertikalAxis && GameLogic.player.AtkCooldown == 0) {	//wenn in Dungeon und kein ATK Cooldown
             float attackPosX = GameLogic.player.posX;
             float attackPosY = GameLogic.player.posY;
             int reach = GameLogic.player.reach;
@@ -41,17 +41,17 @@ public class MouseHandler implements MouseListener{
                 attackPosX -= reach / 2 - playerWidth / 2; // Angriff horizontal zentrieren
                 CreateObjects.createSwordAttack((int) (reach/1.5), attackPosX, attackPosY, reach, GameLogic.player.damage, 40, false ,true);
             }
-            MusicPlayer.playSound(3, false);
+            MusicPlayer.playSound(3, false);	//spoundeffect abspielen
             MusicPlayer.setVolume(3, MusicPlayer.sfxVolume);
             GameLogic.player.setAtkCooldown(); // Start cooldown after attack
         }
 		}
 		
-		if(e.getButton() == 3) {
-			if(GameLogic.vertikalAxis && GameLogic.player.AtkCooldown == 0) {
-				CreateObjects.createBullet(10, 25, GameLogic.player.posX, GameLogic.player.posY, 0.5F, 0, 0, 1, 300);
-				GameLogic.player.setAtkCooldown();
-				 MusicPlayer.playSound(4, false);
+		if(e.getButton() == 3) {	//rechte Maustaste
+			if(GameLogic.vertikalAxis && GameLogic.player.AtkCooldown == 0) {	//wenn in Dungeon und kein ATK Cooldown
+				CreateObjects.createArrow(10, 25, GameLogic.player.posX, GameLogic.player.posY, 0.5F, 0, 0, 1, 300);	//Pfeil erstellen
+				GameLogic.player.setAtkCooldown();	//ATK Cooldown setzen
+				 MusicPlayer.playSound(4, false);	//soundeffect abspielen
 				 MusicPlayer.setVolume(4, MusicPlayer.sfxVolume);
 			}
 		}

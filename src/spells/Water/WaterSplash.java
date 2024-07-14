@@ -21,11 +21,11 @@ public class WaterSplash extends SpellTemplate{
 	
 
 	public WaterSplash(float posX, float posY, float dx, float dy, boolean damagePlayer, String spellName) {
-		super(posX, posY, dx, dy, "water", 1,(int) ((double)(GameLogic.player.damage/100)*20), 1, damagePlayer, loadImages(), spellName);	//15
+		super(posX, posY, dx, dy, "water", 1,(int) ((double)(GameLogic.player.damage/100)*20), 15, damagePlayer, loadImages(), spellName);	
 		breite = 25;
 		hoehe = 25;
-		speed =  0.1F;
-		Cooldown = 1;	//10
+		speed =  0.8F;
+		Cooldown = 10;	
 		}
 	
 	private static BufferedImage[] loadImages() {
@@ -73,7 +73,7 @@ public class WaterSplash extends SpellTemplate{
 	            this.dy = (float) (Math.sin(this.angle) * this.speed);
 	        }
 	    } else {
-	    	 // Berechne die Richtung zum nächstgelegenen Mob
+	    	 // Berechne die Richtung zur letzen Position
 	        float directionX = this.lastdx;
 	        float directionY = this.lastdy;
 	        
@@ -106,11 +106,11 @@ public class WaterSplash extends SpellTemplate{
 	    AffineTransform oldTransform = g2d.getTransform();
 
 	    // Berechne das Zentrum der Kugel
-	    float centerX = this.posX + this.breite / 2;
-	    float centerY = this.posY + this.hoehe / 2;
+//	    float centerX = this.posX + this.breite / 2;
+//	    float centerY = this.posY + this.hoehe / 2;
 
 	    // Berechne den Endpunkt der Linie basierend auf der maximalen Länge
-	    int maxLength = 100; // Maximale Länge des Wasserstrahls in Pixel
+	    int maxLength = 50; // Maximale Länge des Wasserstrahls in Pixel
 	    int endX = (int) (posX + dx * maxLength);
 	    int endY = (int) (posY + dy * maxLength);
 
@@ -144,7 +144,7 @@ public class WaterSplash extends SpellTemplate{
 		//}
 
 		if(Collisions.checkCollision(this, this.dx+1, this.dy+1)||Collisions.checkMob(this, this.dx, this.dy, true)) {
-			delete = true;
+			//delete = true;
 		}
 
 		return delete;

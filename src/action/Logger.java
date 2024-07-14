@@ -47,4 +47,13 @@ public class Logger {
 		System.out.println(red + "[Err][" + new SimpleDateFormat("HH:mm:ss").format(new java.util.Date())
 				+ "][From: " + caller.getClass().getSimpleName() + "]\t " + message + ansicht_reset);
 	}
+	
+	public static void logError(String message){
+		System.out.println(red + "[Err][" + new SimpleDateFormat("HH:mm:ss").format(new java.util.Date())
+				+ "]\t " + message + ansicht_reset);
+	}
+
+	public static void logSeperation() {
+		Logger.logInfo("---------------------------------------------------------");
+	}
 }

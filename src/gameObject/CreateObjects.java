@@ -12,9 +12,9 @@ import entitys.ShopOpenTools;
 import entitys.TestMob;
 import game.GameLogic;
 
-public class CreateObjects {
+public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener Objekte
 
-	public static void createObjekts() {
+	public static void createObjekts() {	//anfängliche initierung der globalen Objekte wie Spieler und Boden
 		GameLogic.player = new Player(50, 50, GameLogic.screenBreite/2, GameLogic.floor-2, 0, 0, GameLogic.playerSpeed, 0, 0, 3, 20);
 
 		GameLogic.FloorObject = new Rechteck(50, GameLogic.screenBreite, 0, GameLogic.screenHoehe-50);
@@ -45,7 +45,7 @@ public class CreateObjects {
 		return template;
 	}
 
-	public static void createBullet(int hoehe, int breite, float posX, float posY, float speed, int SpawnX, int SpawnY, int damage, float range) {
+	public static void createArrow(int hoehe, int breite, float posX, float posY, float speed, int SpawnX, int SpawnY, int damage, float range) {
 		Arrow bullet = new Arrow(hoehe, breite, posX, posY, 0, 0, speed, SpawnX, SpawnY, damage, range);
 		bullet.rotateToPlayerDirection();
 		GameLogic.arrows.add(bullet);

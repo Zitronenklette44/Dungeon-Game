@@ -219,8 +219,8 @@ public class SpellManager {
 
     public static void createWaterSplash(MobTemplate object, boolean damagePlayer) {
         WaterSplash waterSplash = (WaterSplash) acquireSpell("waterSplash");
-        waterSplash.posX = object.posX;
-        waterSplash.posY = object.posY;
+        waterSplash.posX = object.posX+(object.breite/2);
+        waterSplash.posY = object.posY+(object.hoehe/2);
         waterSplash.dx = object.lastdx;
         waterSplash.dy = object.lastdy;
         waterSplash.originMob = object;
@@ -233,6 +233,7 @@ public class SpellManager {
         object.mana -= waterSplash.manaConsume;
         cooldowns[getEquipIndex(availableSpells[1])] = waterSplash.Cooldown;
         maxCooldowns[getEquipIndex(availableSpells[1])] = waterSplash.Cooldown;
+        //waterSplash.rotateToNearestMob();
         currentSpells.add(waterSplash);
     }
 

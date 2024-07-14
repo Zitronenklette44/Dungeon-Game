@@ -75,8 +75,8 @@ public class GameLogic {
 		screenBreite =GameScreen.getScreenBreite();
 		screenHoehe = GameScreen.getScreenHoehe();
 
-		CreateObjects.createObjekts();
-		dungeon.createDungeon();
+		CreateObjects.createObjekts();		//standart Objekte erstellen
+		dungeon.createDungeon();		//start Dorf erstellen
 
 		gameTimer.scheduleAtFixedRate(new TimerTask() {		//5ms Timer
 
@@ -86,14 +86,14 @@ public class GameLogic {
 				if(!paused) {
 					Movement.playerMovement();		//bewegung Spieler + Mobs
 					Movement.mobMovement();
-					if(fireSpell) {SpellManager.fireSpell(player, GameScreen.selectedSpell);fireSpell=false;}
-
-					if(player.HitCooldown>0) {player.HitCooldown--;}		//Cooldown Reset
-					if(player.AtkCooldown>0) {player.AtkCooldown--;}
+					if(fireSpell) {SpellManager.fireSpell(player, GameScreen.selectedSpell);fireSpell=false;}	//wenn Spell ausgelöst wurde entsprechenden abfeuern und trigger zurücksetzen
+					
+					decreaseCooldowns();
+					
 				}
 				changeRoom();		//Raum wechsel
 				
-				for(int i = 0; i<swordAttacks.size();i++) {
+				for(int i = 0; i<swordAttacks.size();i++) {		//Schaden hinzufügen durch Schwert angriffe und bei bedarf entfernen
 					swordAttacks.get(i).dealDamage();
 					if(swordAttacks.get(i).remove()) {
 						swordAttacks.remove(i);
@@ -101,21 +101,21 @@ public class GameLogic {
 					}
 				}
 				
-				if(Interact) {
-					counterInteraction++;
-				}
-				if(GameLogic.player.posX<0) {
+				if(Interact) {counterInteraction++;} //Interaction mit den Interaction Objecten
+				
+				
+				if(GameLogic.player.posX<0) {	//verhindern das Spieler außerhalb des Bildschirmes glitcht
 					GameLogic.player.posX = 0;
 				}else if(GameLogic.player.posX>GameLogic.screenBreite-GameLogic.player.breite) {
 					GameLogic.player.posX =1150;
 
 				}
 				
-				for(int i = 0; i<SpellManager.cooldowns.length;i++) {
+				for(int i = 0; i<SpellManager.cooldowns.length;i++) {	//Cooldown veringern
 					if(SpellManager.cooldowns[i]>0) {SpellManager.cooldowns[i] -=0.005;}
 				}
 				
-				SpellManager.updateSpells();
+				SpellManager.updateSpells();	//Spell bewegungen und ander Updates durchführen
 			}
 		}, 0, 5);
 		
@@ -125,7 +125,7 @@ public class GameLogic {
 			public void run() {
 				try {
 					GameScreen.changeBackground(DungeonCore.getImage(0));		//Hintergrund erneuern
-					if(player.mana+player.restoreMana < player.maxMana) {player.mana += player.restoreMana;}else {player.mana = player.maxMana;}
+					if(player.mana+player.restoreMana < player.maxMana) {player.mana += player.restoreMana;}else {player.mana = player.maxMana;}	//Mana erneuern über Zeit
 				} catch (Exception e) {
 					e.printStackTrace();
 				}		
@@ -151,7 +151,7 @@ public class GameLogic {
 	}
 
 	public static void resetLevel() {
-		SpellManager.removeAllSpells();
+		SpellManager.removeAllSpells();	//alle existierenden Spells löschen und in den Pool zurückgeben
 		dungeon.setSpawns();		//reset Punkte aus dem aktuellen Raum abrufen
 		if(directionRoom == 0) {	//wenn von links nach rechts
 			player.posX = resetPos[0];	
@@ -164,6 +164,19 @@ public class GameLogic {
 		for (int i = 0; i < mobs.size(); i++) {	//für alle mobs position auf Spawn zurücksetzen
 			mobs.get(i).posX = mobs.get(i).SpawnX;
 			mobs.get(i).posY = mobs.get(i).SpawnY;
+		}
+	}
+	
+	private void decreaseCooldowns() {
+		if(player.HitCooldown>0) {player.HitCooldown--;}		//Cooldown verringern
+		if(player.AtkCooldown>0) {player.AtkCooldown--;}
+		
+		for(int i  = 0; i<mobs.size();i++) {
+			if(mobs.get(i).HitCooldown>0) {
+				mobs.get(i).HitCooldown--;
+			}else {
+				mobs.get(i).HitCooldown = 0;
+			}
 		}
 	}
 

@@ -14,6 +14,6 @@ public class InteractableTemplate extends Rechteck{
 		this.range = range;
 	}
 	
-	public void performAction() {GameLogic.Interact = false;GameLogic.counterInteraction =0;}
+	public void performAction() {GameLogic.Interact = false;GameLogic.counterInteraction =0;}	//wenn interagiert
 	
 }

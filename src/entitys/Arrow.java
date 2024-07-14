@@ -66,7 +66,7 @@ public class Arrow extends MobTemplate {
 
 	public void checkDelet() {
 		boolean delete = false;
-		if(posX >= 1200 || posX < 0) {
+		if(posX >= 1200 || posX < 0) {	//wenn außerhalb von sichtbarem Bereich
 			delete = true;
 		}
 		if(posY >= 750 || posY <0) {
@@ -76,13 +76,13 @@ public class Arrow extends MobTemplate {
 			delete = true;
 		}
 
-		if(Collisions.checkCollision(this, this.dx+1, this.dy+1)||Collisions.checkMob(this, this.dx, this.dy, true)) {
+		if(Collisions.checkCollision(this, this.dx+1, this.dy+1)||Collisions.checkMob(this, this.dx, this.dy, true)) {	//Überprüfen von Collisionen mit hinzufügen des Schadens
 			delete = true;
 		}
 
 
 
-		if(delete) {
+		if(delete) {	//löschen des objektes
 			for(int i = 0 ;i<GameLogic.arrows.size();i++) {
 				if(GameLogic.arrows.get(i)== this) {
 					GameLogic.arrows.remove(i);

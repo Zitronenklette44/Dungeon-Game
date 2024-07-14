@@ -101,7 +101,7 @@ public class Settings extends JDialog {
 		sliderVolume.setMajorTickSpacing(5);
 		sliderVolume.setMinimum(-80);
 		sliderVolume.setMaximum(-10);
-		sliderVolume.setValue((int) MusicPlayer.totalVolume);
+		sliderVolume.setValue((int) MusicPlayer.musicVolume);
 		sliderVolume.addChangeListener(e -> {
 			float volume = sliderVolume.getValue();
 			MusicPlayer.setVolumeAll(volume);

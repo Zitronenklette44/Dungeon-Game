@@ -19,7 +19,7 @@ public class SaveLoad {
 	private static final String CONFIG_FILE = "src/action/config.txt";
 
 	
-	public static void loadConfig() {
+	public static void loadConfig() {	//laden der Konfigurationen aus File in Variabeln
 		Logger.logInfo("Loading Configurations");
         try (BufferedReader reader = new BufferedReader(new FileReader(CONFIG_FILE))) {
             String line;
@@ -38,7 +38,7 @@ public class SaveLoad {
                         GameLogic.musicEnabled = Boolean.parseBoolean(value);
                         break;
                     case "musicVolume":
-                        MusicPlayer.totalVolume = Float.parseFloat(value);
+                        MusicPlayer.musicVolume = Float.parseFloat(value);
                         break;
                     case "dungeonKey":
                         GameLogic.dungeonKey = Integer.parseInt(value);
@@ -63,7 +63,7 @@ public class SaveLoad {
                         break;
                         
                     default:
-                        // Handle unknown keys if necessary
+                    	Logger.logError("Invalid Configuration: "+ value);
                         break;
                 }
             }
@@ -72,7 +72,7 @@ public class SaveLoad {
         }
     }
 	
-	public static void saveConfig() {
+	public static void saveConfig() {	//speichern der Konfigurationen in File
 		Logger.logInfo("saving Configurations");
         String tempFile = CONFIG_FILE + ".tmp"; // Temporäre Datei
         Point location = GameScreen.location;
@@ -82,7 +82,7 @@ public class SaveLoad {
             writer.write("// "+Translation.get("save.Comment1")+"\n");
             writer.write("// Default true, -30\n");
             writer.write("musicEnabled = " + GameLogic.musicEnabled + "\n");
-            writer.write("musicVolume = "+MusicPlayer.totalVolume+"\n\n");
+            writer.write("musicVolume = "+MusicPlayer.musicVolume+"\n\n");
             writer.write("// "+Translation.get("save.Comment2")+"\n");
             writer.write("// Default 1\n");
             writer.write("dungeonKey = " + GameLogic.dungeonKey + "\n\n");
@@ -106,7 +106,7 @@ public class SaveLoad {
 
         } catch (IOException e) {
             e.printStackTrace();
-            Logger.logError("Couldn't save Configurations: Error while writing file", null);
+            Logger.logError("Couldn't save Configurations: Error while writing file");
         }
 
         // Kopiere Inhalte von tempFile nach CONFIG_FILE überschreiben
@@ -121,12 +121,12 @@ public class SaveLoad {
 
         } catch (IOException e) {
             e.printStackTrace();
-            Logger.logError("Couldn't save Configurations: Error while overwriting file", null);
+            Logger.logError("Couldn't save Configurations: Error while overwriting file");
         } finally {
             // Lösche die temporäre Datei
             File tempFileToDelete = new File(tempFile);
             if (!tempFileToDelete.delete()) {
-            	Logger.logError("Couldn't save Configurations: Error while deleting temp file", null);
+            	Logger.logError("Couldn't save Configurations: Error while deleting temp file");
             }
         }
         Logger.logInfo("Configurations saved");
@@ -134,21 +134,21 @@ public class SaveLoad {
 
 
 	
-	public static void resetConfig() {
+	public static void resetConfig() {	//Konfigurationen auf einen Standart Wert zurücksetzen
         // Setze alle Konfigurationswerte auf Standardwerte
         GameLogic.musicEnabled = true;
         GameLogic.dungeonKey = 1;
         GameLogic.debug = false;
         GameLogic.jumpHight = 70;
         GameLogic.player.speed = 2;
-        MusicPlayer.totalVolume = -30F;
+        MusicPlayer.musicVolume = -30F;
 
         // Speichere die neuen Standardwerte in der Konfigurationsdatei
         saveConfig();
         Logger.logInfo("Configurations reset");
     }
 	
-	private static int[] parseIntArray(String value) {
+	private static int[] parseIntArray(String value) {	//String zu Int Array umwandeln
         String[] stringArray = value.replaceAll("[\\[\\]\\s]", "").split(",");
         int[] intArray = new int[stringArray.length];
         for (int i = 0; i < stringArray.length; i++) {
@@ -157,7 +157,7 @@ public class SaveLoad {
         return intArray;
     }
 	
-	private static Point parsePoint(String value) {
+	private static Point parsePoint(String value) {		//Ints zu Point umwandeln
 	    String[] coords = value.split(",");
 	    int x = Integer.parseInt(coords[0].trim());
 	    int y = Integer.parseInt(coords[1].trim());

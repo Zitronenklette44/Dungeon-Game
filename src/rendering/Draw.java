@@ -32,7 +32,7 @@ public class Draw extends JLabel {
 	public static ArrayList<CollisionRechteck> collisionRectangles;
 	public static ArrayList<SwordAttack> deathRechtecks;
 	public static ArrayList<MobTemplate> mobs;
-	public static ArrayList<Arrow> bullets;
+	public static ArrayList<Arrow> arrows;
 	public static ArrayList<InteractableTemplate> interactables;
 	public static ArrayList<SpellTemplate> spells;
 
@@ -56,14 +56,14 @@ public class Draw extends JLabel {
 		collisionRectangles = spiellogik.collisionRectangles;
 		deathRechtecks = spiellogik.swordAttacks;
 		mobs = spiellogik.mobs;
-		bullets = spiellogik.arrows;
+		arrows = spiellogik.arrows;
 		this.spieLogic = spiellogik;
 		interactables = spiellogik.interactables;
 		this.spells = SpellManager.currentSpells;
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {		//Malen aller Objekte außer Zaubern
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -142,8 +142,8 @@ public class Draw extends JLabel {
 		}
 
 		g.setColor(bulletColor);
-		for (int i = 0; i < bullets.size(); i++) {
-			Arrow aktuellesObjekt = bullets.get(i);
+		for (int i = 0; i < arrows.size(); i++) {
+			Arrow aktuellesObjekt = arrows.get(i);
 			aktuellesObjekt.draw(g2d);
 		}
 		
@@ -187,13 +187,13 @@ public class Draw extends JLabel {
 	}
 
 
-	public static void clearObjects() {
+	public static void clearObjects() {		//leeren gewisser Listen bei Raum Wechsel
 		Draw.collisionRectangles.clear();
 		Draw.columns.clear();
 		Draw.interactables.clear();
 	}
 
-	public static void resetColor() {
+	public static void resetColor() {	//Farben zurücksetzen 		ungenutzt
 		backgroundColor = Color.DARK_GRAY;
 		floorColor = Color.white;
 		columsColor = Color.gray;
@@ -204,7 +204,7 @@ public class Draw extends JLabel {
 		bulletColor = Color.magenta;
 	}
 
-	private boolean checkValidmob(int index) {
+	private boolean checkValidmob(int index) {		//überprüfen ob Mob gemalt werden soll
 		boolean valid =true;
 		MobTemplate mob = GameLogic.mobs.get(index);
 		if(mob.posX>1200 || mob.posX <0) {
@@ -226,7 +226,7 @@ public class Draw extends JLabel {
 		return valid;
 	}
 	
-	public void drawHealthBar(Graphics2D g2d, MobTemplate mob){
+	public void drawHealthBar(Graphics2D g2d, MobTemplate mob){		//malen einer Lebensanzeige
 		int maxHp = mob.maxHp;
 		int currentHp = mob.Hp;
 		float posX = mob.posX;
@@ -248,14 +248,14 @@ public class Draw extends JLabel {
 		
 	}
 	
-	public static Color getHealtbarColor(MobTemplate mob) {
+	public static Color getHealtbarColor(MobTemplate mob) {		//Farbe der Lebensbar erhalten
 		if(mob.Hp<mob.maxHp/2) {
 			return Color.orange;
 		}
 		return Color.green;
 	}
 	
-	public static Color getManabarColor() {
+	public static Color getManabarColor() {		//Farbe für Manabar blinken wenn zu wenig Mana vorhanden
 		if(manabarBlink==60)
 			manabarBlink=-1;
 		

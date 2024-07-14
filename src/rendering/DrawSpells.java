@@ -61,7 +61,7 @@ public class DrawSpells extends JLabel {
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {		//malen aller Spells auf extra Ebene um etwas Lag zu reduzieren
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -76,17 +76,12 @@ public class DrawSpells extends JLabel {
 		}		
 		repaint();
 	}
-
-
-
-	public static void resetColor() {
-		backgroundColor = Color.DARK_GRAY;
-		floorColor = Color.white;
-		columsColor = Color.gray;
-		playerColor = Color.white;
-		collisionRectanglesColor = Color.white;
-		deathRechteckColor = Color.red;
-		mobsColor = Color.blue;
-		bulletColor = Color.magenta;
-	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
