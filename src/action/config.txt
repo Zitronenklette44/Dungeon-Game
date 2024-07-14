@@ -16,7 +16,8 @@ debug = false
 playerSpeed = 2.0
 
 // Spieler Sprung Höhe
-// Default = 70
+// Default 70
+jumpHight = 70
 
 // Freigeschaltene Zauber
 // Default all 0

@@ -63,7 +63,7 @@ public class SaveLoad {
                         break;
                         
                     default:
-                    	Logger.logError("Invalid Configuration: "+ value);
+                    	Logger.logError("Invalid Configuration: "+ line);
                         break;
                 }
             }
@@ -93,7 +93,8 @@ public class SaveLoad {
             writer.write("// Default 2\n");
             writer.write("playerSpeed = " + GameLogic.player.speed + "\n\n");
             writer.write("// " +Translation.get("save.Comment4")+"\n");
-            writer.write("// Default = " + GameLogic.jumpHight + "\n\n");
+            writer.write("// Default 70" + "\n");
+            writer.write("jumpHight = " + GameLogic.jumpHight + "\n\n");
             writer.write("// " +Translation.get("save.Comment5")+"\n");
             writer.write("// Default all 0\n");
             writer.write("spells = " + Arrays.toString(GameLogic.unlockedSpells) + "\n\n");
