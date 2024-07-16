@@ -16,11 +16,11 @@ public class Main {
     	SpellIcons.init();					//Spell Icons erstellen und fürs laden bereitstellen
         Translation.init();					//Übersetzungen laden
         MusicPlayer.init();					//Musik Listen erstellen
+        MusicPlayer.playSound(0, true);		//Background Musik abspielen
         SaveLoad.loadConfig();				//Variabeln überschreiben
         GameScreen.erstellen();				//Fenster erstellen
         DungeonCore.init();					//Dungeon erstellen und ersten Raum laden
         SpellManager.init();				//Zauber system erstellen und Zauber vorladen
-        MusicPlayer.playSound(0, true);		//Background Musik abspielen
         Logger.logSeperation();
         Logger.logInfo("Game Loaded");
     }

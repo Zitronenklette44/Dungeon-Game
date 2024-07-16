@@ -1,0 +1,34 @@
+TODO List:
+
+Rooms:
+	1.Home Village
+		-images
+		-evt Spawnpoints
+		-Gilde
+		-Field mobs
+	2.Dungeon
+		-images
+		-Mobs
+			-Bosses
+			-normale mobs
+			-Skins
+		-Coins
+		-Chests + loot
+		-interactable Objects (Hebel, doors,...)
+
+Spells:
+	1.SpellChooser
+		-auswählbare Spells
+		-markierung der Kategorien
+	2.fehlende Spells
+
+Allgemein:
+	1.Dialog möglichkeit
+	2.Drop Items
+	3.Inventar
+	4.evt Crafting möglichkeit
+	5.Ausrüstungs Slots
+	6.Items mit wirkungen(z.B. mehr HP, schnellerer ATK, mehr Mana,...)
+	7.crafting Items
+	
+	

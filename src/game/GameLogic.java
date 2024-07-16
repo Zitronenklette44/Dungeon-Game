@@ -103,11 +103,15 @@ public class GameLogic {
 				if(Interact) {counterInteraction++;} //Interaction mit den Interaction Objecten
 				
 				
-				if(GameLogic.player.posX<0) {	//verhindern das Spieler außerhalb des Bildschirmes glitcht
-					GameLogic.player.posX = 0;
-				}else if(GameLogic.player.posX>GameLogic.screenBreite-GameLogic.player.breite) {
-					GameLogic.player.posX =1150;
-
+				if(player.posX<0) {	//verhindern das Spieler außerhalb des Bildschirmes glitcht
+					player.posX = 0;
+				}else if(player.posX>screenBreite-player.breite) {
+					player.posX =1150;
+				}
+				if(player.posY<0) {	//verhindern das Spieler außerhalb des Bildschirmes glitcht
+					player.posY = 0;
+				}else if(player.posY>screenHoehe-player.hoehe) {
+					player.posY =screenHoehe-player.hoehe-50;
 				}
 				
 				for(int i = 0; i<SpellManager.cooldowns.length;i++) {	//Cooldown veringern
