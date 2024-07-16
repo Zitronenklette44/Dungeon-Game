@@ -12,42 +12,42 @@ public class Movement {
 
 		// Spielerbewegung
 		if(GameLogic.vertikalAxis) {
-			if(mLeft && mUp && !mRight && !mDown) {
+			if(mLeft && mUp) {
 				if(!Collisions.checkCollision(GameLogic.player, -(GameLogic.player.speed+1), 0)) {
 					GameLogic.player.posX -= GameLogic.player.speed;
 					GameLogic.player.dx = -GameLogic.player.speed;
 				}
-				if(!Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.player.speed+1))&& !(GameLogic.player.posY < 0)) {
+				if(!Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.player.speed+1))) {
 					GameLogic.player.posY -= GameLogic.player.speed;
 					GameLogic.player.dy = -GameLogic.player.speed;
 				}
 			}
-			if(mLeft && mDown&& !mRight && !mUp) {
+			if(mLeft && mDown) {
 				if (!Collisions.checkCollision(GameLogic.player, -(GameLogic.player.speed+1), 0)) {
 					GameLogic.player.posX -= GameLogic.player.speed ;
 					GameLogic.player.dx = -GameLogic.player.speed;
 				}
-				if (!Collisions.checkCollision(GameLogic.player, 0, (GameLogic.player.speed+1))&& !(GameLogic.player.posY > GameLogic.floor)) {
+				if (!Collisions.checkCollision(GameLogic.player, 0, (GameLogic.player.speed+1))) {
 					GameLogic.player.posY += GameLogic.player.speed ;
 					GameLogic.player.dy = GameLogic.player.speed;
 				}
 			}
-			if(mRight && mUp&& !mLeft && !mDown) {
+			if(mRight && mUp) {
 				if (!Collisions.checkCollision(GameLogic.player, (GameLogic.player.speed+1), 0)) {
 					GameLogic.player.posX += GameLogic.player.speed ;
 					GameLogic.player.dx = GameLogic.player.speed;
 				}
-				if (!Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.player.speed+1))&& !(GameLogic.player.posY < 0)) {
+				if (!Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.player.speed+1))) {
 					GameLogic.player.posY -= GameLogic.player.speed ;
 					GameLogic.player.dy = -GameLogic.player.speed;
 				}
 			}
-			if(mRight && mDown&& !mLeft && !mUp) {
+			if(mRight && mDown) {
 				if (!Collisions.checkCollision(GameLogic.player, (GameLogic.player.speed+1), 0)) {
 					GameLogic.player.posX += GameLogic.player.speed ;
 					GameLogic.player.dx = GameLogic.player.speed;
 				}
-				if (!Collisions.checkCollision(GameLogic.player, 0, (GameLogic.player.speed+1)) && !(GameLogic.player.posY > GameLogic.floor)) {
+				if (!Collisions.checkCollision(GameLogic.player, 0, (GameLogic.player.speed+1))) {
 					GameLogic.player.posY += GameLogic.player.speed ;
 					GameLogic.player.dy = GameLogic.player.speed;
 				}

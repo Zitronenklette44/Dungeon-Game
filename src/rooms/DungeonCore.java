@@ -80,7 +80,7 @@ public class DungeonCore {
 			for (int i = 0; i < DungeonLength; i++) {
 			    dungeonString += DungeonRooms.get(i) + ", ";
 				rooms[dungeonType][DungeonRooms.get(i)].resetRoom();
-				thisRooms.add((RoomTemplate) rooms[dungeonType][DungeonRooms.get(i)].clone()); 
+				thisRooms.add(rooms[dungeonType][DungeonRooms.get(i)]); 
 			}
 			Logger.logWarning("Dungeon Lenght: "+DungeonLength+" with following Rooms: "+dungeonString);
 			Logger.logInfo("new Dungeon created");
@@ -183,11 +183,11 @@ public class DungeonCore {
 	        	thisRooms.get(currentRoom).VariantExists(currentRoom);
 	        	thisRooms.get(currentRoom+addToRoom).getImage(currentRoom);
 	            if(thisRooms.get(currentRoom+addToRoom).ImagePath == null) {
-	            	return "/resources/rooms/backgrounds/Empty.png";
+	            	Logger.logWarning("Image missing");
 	            }
 	            return thisRooms.get(currentRoom+addToRoom).ImagePath;
 	        } catch (NullPointerException e) {
-	        	return "/resources/rooms/backgrounds/Empty.png";
+	        	Logger.logWarning("Image missing");
 	        }
 	    } else {
 	        try {
@@ -196,7 +196,7 @@ public class DungeonCore {
 	            }
 	            return thisRooms.get(currentRoom+addToRoom).ImagePath;
 	        } catch (NullPointerException  e ) {
-	        	return "/resources/rooms/backgrounds/Empty.png";
+	            Logger.logWarning("Image missing");
 	        }
 	        catch (IndexOutOfBoundsException e) {
 	        	Logger.logWarning("Rooms not fully initialized: Index error");

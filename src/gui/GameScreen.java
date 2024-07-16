@@ -236,8 +236,6 @@ public class GameScreen extends JFrame {
 		spells[1] = lbSpell2;
 		spells[2] = lbSpell3;
 		
-		Logger.logInfo("end of constructor");
-		
 	}
 
 	public static int getScreenHoehe() {

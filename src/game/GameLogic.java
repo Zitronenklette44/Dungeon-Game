@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import action.Logger;
 import entitys.Arrow;
 import entitys.InteractableTemplate;
 import entitys.MobTemplate;
@@ -104,15 +103,11 @@ public class GameLogic {
 				if(Interact) {counterInteraction++;} //Interaction mit den Interaction Objecten
 				
 				
-				if(player.posX<0) {	//verhindern das Spieler außerhalb des Bildschirmes glitcht
-					player.posX = 0;
-				}else if(player.posX>screenBreite-player.breite) {
-					player.posX =1150;
-				}
-				if(player.posY<0) {	//verhindern das Spieler außerhalb des Bildschirmes glitcht
-					player.posY = 0;
-				}else if(player.posY>screenHoehe-player.hoehe) {
-					player.posY =screenHoehe-player.hoehe-50;
+				if(GameLogic.player.posX<0) {	//verhindern das Spieler außerhalb des Bildschirmes glitcht
+					GameLogic.player.posX = 0;
+				}else if(GameLogic.player.posX>GameLogic.screenBreite-GameLogic.player.breite) {
+					GameLogic.player.posX =1150;
+
 				}
 				
 				for(int i = 0; i<SpellManager.cooldowns.length;i++) {	//Cooldown veringern
@@ -155,8 +150,6 @@ public class GameLogic {
 	}
 
 	public static void resetLevel() {
-		Logger.logInfo("Room has been entered: "+ dungeon.thisRooms.get(dungeon.currentRoom).entered);
-		dungeon.thisRooms.get(dungeon.currentRoom).entered = true;
 		SpellManager.removeAllSpells();	//alle existierenden Spells löschen und in den Pool zurückgeben
 		dungeon.setSpawns();		//reset Punkte aus dem aktuellen Raum abrufen
 		if(directionRoom == 0) {	//wenn von links nach rechts
