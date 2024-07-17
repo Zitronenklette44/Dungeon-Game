@@ -27,6 +27,8 @@ public class MobTemplate extends Rechteck{
 	public int mana = maxMana;
 	public int restoreMana;
 	public String[] equipedSpells = {"","",""};
+	public boolean isSlowed = false;
+	public boolean isStuned = false;
     
     public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp) {
         super(hoehe, breite, posX, posY);
@@ -37,7 +39,6 @@ public class MobTemplate extends Rechteck{
         this.damage = damage;
         this.Hp = Hp;
         this.maxHp = Hp;
-    
     }
     
     public void drawMob(Graphics2D g) {}

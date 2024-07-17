@@ -66,7 +66,7 @@ public class Spawn extends RoomTemplate{
 	}
 	
 	@Override
-	public void spawnEntitys() {;
+	public void spawnEntitys() {
 		super.spawnEntitys();	//Liste wird geleert
 		for(int i=0; i<Entitys.length;i++) {
 			if(Entitys[i] == null) {

@@ -11,9 +11,8 @@ import entitys.MobTemplate;
 import game.Collisions;
 import game.GameLogic;
 import spells.SpellManager;
-import spells.SpellTemplate;
 
-public class Fireball extends SpellTemplate{
+public class Fireball extends FireTemplate{
 	
 
 	public Fireball(float posX, float posY, float dx, float dy, boolean damagePlayer, String spellName) {

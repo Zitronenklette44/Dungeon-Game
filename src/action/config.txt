@@ -5,7 +5,7 @@ musicVolume = -30.0
 
 // Anzahl der in Besitz befindenen dungeon Keys
 // Default 1
-dungeonKey = 1
+dungeonKey = 2
 
 // Debug Modus
 // Default false
@@ -25,7 +25,7 @@ spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 // Fenster Position
 // Default (0,0)
-frameLocation = 141,91
+frameLocation = 136,121
 
 // Sprache
 // Default Deutsch

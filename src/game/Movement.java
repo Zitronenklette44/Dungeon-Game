@@ -141,18 +141,20 @@ public class Movement {
 				boolean moveVertically = true;
 
 				//Bestimme Richtung abhängig von Spieler Position
+				float speed = mob.speed;
+				if(mob.isSlowed) {speed = speed/2;}
 				if (GameLogic.player.posX > mob.posX) {
-					mob.dx = mob.speed;
+					mob.dx = speed;
 				} else if (GameLogic.player.posX < mob.posX) {
-					mob.dx = -mob.speed;
+					mob.dx = -speed;
 				} else {
 					mob.dx = 0;
 				}
 
 				if (GameLogic.player.posY > mob.posY) {
-					mob.dy = mob.speed;
+					mob.dy = speed;
 				} else if (GameLogic.player.posY < mob.posY) {
-					mob.dy = -mob.speed;
+					mob.dy = -speed;
 				} else {
 					mob.dy = 0;
 				}

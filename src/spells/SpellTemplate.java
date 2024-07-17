@@ -30,6 +30,9 @@ public class SpellTemplate {
 	private static int animationPos = 0;
 	public int Cooldown;
 	public String spellName;
+	public boolean isSlowing = false;
+	public boolean isStuning = false;
+	public int stunChance = 0;
 
 	// Vorabberechnete rotierte Bilder für die Animationen
 	private Map<Double, BufferedImage>[] rotatedImages;

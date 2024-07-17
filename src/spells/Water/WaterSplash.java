@@ -15,9 +15,8 @@ import entitys.MobTemplate;
 import game.Collisions;
 import game.GameLogic;
 import spells.SpellManager;
-import spells.SpellTemplate;
 
-public class WaterSplash extends SpellTemplate{
+public class WaterSplash extends WaterTemplate{
 	
 
 	public WaterSplash(float posX, float posY, float dx, float dy, boolean damagePlayer, String spellName) {
