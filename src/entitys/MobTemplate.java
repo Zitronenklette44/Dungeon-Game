@@ -26,7 +26,7 @@ public class MobTemplate extends Rechteck{
 	public int maxMana;
 	public int mana = maxMana;
 	public int restoreMana;
-	public String[] equipedSpells = new String[3];
+	public String[] equipedSpells = {"","",""};
     
     public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp) {
         super(hoehe, breite, posX, posY);

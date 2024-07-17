@@ -21,6 +21,7 @@ public class Main {
         GameScreen.erstellen();				//Fenster erstellen
         DungeonCore.init();					//Dungeon erstellen und ersten Raum laden
         SpellManager.init();				//Zauber system erstellen und Zauber vorladen
+        GameScreen.updateSpells();			//Spells in Slots laden
         Logger.logSeperation();
         Logger.logInfo("Game Loaded");
     }

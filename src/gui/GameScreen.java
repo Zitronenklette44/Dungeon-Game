@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
@@ -178,17 +179,14 @@ public class GameScreen extends JFrame {
 		
 		lbSpell1 = new JLabel("");
 		lbSpell1.setBorder(new LineBorder(Color.ORANGE, 3));
-		lbSpell1.setIcon(new ImageIcon(SpellIcons.fireball));
 		lbSpell1.setBounds(974, 11, 50, 50);
 		contentPane.add(lbSpell1);
 		
 		lbSpell2 = new JLabel("");
-		lbSpell2.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/WaterDrop.png")));
 		lbSpell2.setBounds(1035, 11, 50, 50);
 		contentPane.add(lbSpell2);
 		
 		lbSpell3 = new JLabel("");
-		lbSpell3.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/rock.png")));
 		lbSpell3.setBounds(1098, 11, 50, 50);
 		contentPane.add(lbSpell3);
 		
@@ -275,5 +273,16 @@ public class GameScreen extends JFrame {
 		}
 		spells[spell].setBorder(new LineBorder(Color.ORANGE, 3));
 		selectedSpell = spell;
+	}
+	
+	public static void updateSpells() {
+		BufferedImage spellImage = SpellIcons.getBufferedImageBySpell(GameLogic.player.equipedSpells[0]);
+		if (spellImage != null) {lbSpell1.setIcon(new ImageIcon(spellImage));}else {lbSpell1.setIcon(null);}
+		
+		spellImage = SpellIcons.getBufferedImageBySpell(GameLogic.player.equipedSpells[1]);
+		if (spellImage != null) {lbSpell2.setIcon(new ImageIcon(spellImage));}else {lbSpell2.setIcon(null);}
+		
+		spellImage = SpellIcons.getBufferedImageBySpell(GameLogic.player.equipedSpells[2]);
+		if (spellImage != null) {lbSpell3.setIcon(new ImageIcon(spellImage));}else {lbSpell3.setIcon(null);}
 	}
 }
