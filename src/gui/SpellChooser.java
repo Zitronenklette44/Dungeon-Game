@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import components.SpellButton;
+import components.SpellChooseable;
 import game.GameLogic;
-import rendering.DrawSpellCooser;
 import spells.SpellIcons;
 
 import javax.swing.JLabel;
@@ -20,6 +20,7 @@ public class SpellChooser extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public static boolean needsUpdate = true;
 	private JPanel contentPane;
+	private static SpellButton[] btns = new SpellButton[3];
 
 	/**
 	 * Launch the application.
@@ -55,25 +56,20 @@ public class SpellChooser extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		/*DrawSpellCooser draw = new DrawSpellCooser();
-		draw.setBounds(0,0,1190,763);
-		draw.setVisible(true);
-		panel.add(draw);*/
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(35, 106, 150, 500);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		SpellButton btnNewButton = new SpellButton(SpellIcons.getIconBySpell(GameLogic.player.equipedSpells[0]), true);
+		SpellButton btnNewButton = new SpellButton(SpellIcons.getBufferedImageBySpell(GameLogic.player.equipedSpells[0]), true);
 		btnNewButton.setBounds(35, 50, 75, 75);
 		panel_1.add(btnNewButton);
 		
-		SpellButton btnNewButton1 = new SpellButton(SpellIcons.getIconBySpell(GameLogic.player.equipedSpells[1]), true);
+		SpellButton btnNewButton1 = new SpellButton(SpellIcons.getBufferedImageBySpell(GameLogic.player.equipedSpells[1]), true);
 		btnNewButton1.setBounds(35, 200, 75, 75);
 		panel_1.add(btnNewButton1);
 		
-		SpellButton btnNewButton2 = new SpellButton(SpellIcons.getIconBySpell(GameLogic.player.equipedSpells[2]), true);
+		SpellButton btnNewButton2 = new SpellButton(SpellIcons.getBufferedImageBySpell(GameLogic.player.equipedSpells[2]), true);
 		btnNewButton2.setBounds(35, 350, 75, 75);
 		panel_1.add(btnNewButton2);
 		
@@ -87,6 +83,10 @@ public class SpellChooser extends JFrame {
 		panel_1_1.setBounds(283, 45, 240, 650);
 		panel.add(panel_1_1);
 		
+		SpellChooseable btnChooseable = new SpellChooseable(SpellIcons.fireball, "Das ist ein Beispiel\n\n unübersetzt", "fireball", true);
+		btnChooseable.setBounds(10, 11, 220, 75);
+		panel_1_1.add(btnChooseable);
+		
 		JLabel lblNewLabel_1_1 = new JLabel("");
 		lblNewLabel_1_1.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/backgrounds/ScrollPaperBackground.jpg")));
 		lblNewLabel_1_1.setBounds(0, 0, 240, 732);
@@ -97,6 +97,10 @@ public class SpellChooser extends JFrame {
 		panel_1_1_1.setBounds(579, 45, 240, 650);
 		panel.add(panel_1_1_1);
 		
+		SpellChooseable btnChooseable1 = new SpellChooseable(SpellIcons.waterSplash, "Das ist ein Beispiel\n\n unübersetzt", "waterSplash", true);
+		btnChooseable1.setBounds(10, 11, 220, 75);
+		panel_1_1_1.add(btnChooseable1);
+
 		JLabel lblNewLabel_1_1_1 = new JLabel("");
 		lblNewLabel_1_1_1.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/backgrounds/ScrollPaperBackground.jpg")));
 		lblNewLabel_1_1_1.setBounds(-202, 0, 492, 732);
@@ -121,5 +125,15 @@ public class SpellChooser extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/backgrounds/SpellChooserBackground.png")));
 		lblNewLabel.setBounds(0, 0, 1200, 800);
 		contentPane.add(lblNewLabel);
+		
+		btns[0] = btnNewButton;
+		btns[1] = btnNewButton1;
+		btns[2] = btnNewButton2;
+	}
+	
+	public static void updateIcons() {
+		for (int i = 0; i < btns.length; i++) {
+			btns[i].setSpellIcon(SpellIcons.getBufferedImageBySpell(GameLogic.player.equipedSpells[i]));
+		}
 	}
 }

@@ -237,4 +237,16 @@ public class SpellManager {
         currentSpells.add(waterSplash);
     }
 
+	public static boolean spellExists(String spellName) {
+		boolean exists = false;
+		
+		for (int i = 0; i < GameLogic.player.equipedSpells.length; i++) {
+			if(GameLogic.player.equipedSpells[i].equals(spellName)) {
+				exists = true;
+			}
+		}
+		
+		return exists;
+	}
+
 }

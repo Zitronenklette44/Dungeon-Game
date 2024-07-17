@@ -36,8 +36,8 @@ public class SpellIcons {
 		Logger.logInfo("finished loading Spell Icons");
 	}
 	
-	public static BufferedImage getIconBySpell(String spell) {
-		if(spell == null) {
+	public static BufferedImage getBufferedImageBySpell(String spell) {
+		if(spell == null || spell.isEmpty()) {
 			return null;
 		}
 		switch (spell) {
@@ -46,10 +46,27 @@ public class SpellIcons {
 		case "stoneShot": return stoneShot;
 		
 		default:
-			throw new IllegalArgumentException("Unknown Spell: " + spell);
+			Logger.logError("Unknown Spell: " + spell, new IllegalArgumentException());
 		}
+		return null;
 
 	}
+	
+	public static String getSpellNameByBufferedImage(BufferedImage image) {
+        if (image == null) {
+            return "";
+        }
+        if (image == fireball) {
+            return "fireball";
+        } else if (image == waterSplash) {
+            return "waterSplash";
+        } else if (image == stoneShot) {
+            return "stoneShot";
+        } else {
+            Logger.logError("Unknown Image: " + image, new IllegalArgumentException());
+        }
+		return "";
+    }
 	
 	
 
