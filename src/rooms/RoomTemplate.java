@@ -50,4 +50,6 @@ public class RoomTemplate implements Cloneable{
 	public void VariantExists(int currentRoom) {}
 	
 	public void resetRoom() {}
+	
+	public void update() {}
 }

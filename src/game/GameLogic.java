@@ -80,6 +80,8 @@ public class GameLogic {
 		gameTimer.scheduleAtFixedRate(new TimerTask() {		//5ms Timer
 
 			public void run() {
+				try {DungeonCore.thisRooms.get(DungeonCore.currentRoom).update();} catch (IndexOutOfBoundsException e) {}
+
 				if(vertikalAxis) {playerSpeed = 1F;}else {playerSpeed = 2F;}//TODO geschwindigkeiten nicht fest setzen sondern variabel machen
 				player.speed = playerSpeed;
 				if(!paused) {

@@ -19,6 +19,7 @@ public class Exit extends RoomTemplate{
 		GameLogic.resetPos[1] = 700;
 		GameLogic.resetPos1[0] = 1100;
 		GameLogic.resetPos1[1] = 700;
+		GameLogic.vertikalAxis = false;
 		
 		
 		

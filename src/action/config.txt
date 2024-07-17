@@ -25,7 +25,7 @@ spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 // Fenster Position
 // Default (0,0)
-frameLocation = 169,132
+frameLocation = 210,141
 
 // Sprache
 // Default Deutsch
