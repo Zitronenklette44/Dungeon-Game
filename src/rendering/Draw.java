@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import action.Logger;
 import entitys.Arrow;
 import entitys.InteractableTemplate;
 import entitys.MobTemplate;
@@ -86,7 +87,12 @@ public class Draw extends JLabel {
 
 		//zeiche Raum
 		g.setColor(Color.white);
-		GameLogic.dungeon.drawRoom(g2d);
+		try {
+			GameLogic.dungeon.drawRoom(g2d);
+		} catch (Exception e) {
+			Logger.logError("umable to draw Room", e);
+			e.printStackTrace();
+		}
 
 
 		//Zeichne Objekte

@@ -26,9 +26,6 @@ public class Field extends RoomTemplate{
 		GameLogic.resetPos1[0] = 1100;
 		GameLogic.resetPos1[1] = 700;
 		GameLogic.vertikalAxis = true;
-
-
-
 	}
 
 	@Override

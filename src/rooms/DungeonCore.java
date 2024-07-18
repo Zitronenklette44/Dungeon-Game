@@ -12,6 +12,7 @@ import rooms.Dungeon.*;
 import rooms.Forest.*;
 import rooms.Home.*;
 import rooms.Village.*;
+import rooms.specialRoom.Guilde;
 
 public class DungeonCore {
 
@@ -38,30 +39,39 @@ public class DungeonCore {
 							new DungeonLibraryEntrance("Library Eingang"),new DungeonLibraryMiddel("Library Mitte 1"),new DungeonLibraryMiddel2("Library Mitte 2"),new DungeonLibraryMiddel3("Library Mitte 3"),new DungeonLibraryExit("Library Ausgang"),
 							new DungeonMineEntrance("Mine Eingang"),new DungeonMineMiddel("Mine Mitte 1"),new DungeonMineMiddel2("Mine Mitte 2"),new DungeonMineMiddel3("Mine mitte 3"),new DungeonMineExit("Mine Ausgang"),
 							new DungeonLavaCaveEntrance("Lava Cave Eingang"),new DungeonLavaCaveMiddel("Lava Cave Mitte 1"),new DungeonLavaCaveMiddel2("Lava Cave Mitte 2"),new DungeonLavaCaveMiddel3("Lava Cave Mitte 3"),new DungeonLavaCaveExit("Lava Cave Ausgang"),
-							new DungeonEntrance("Spawn"), new DungeonExit("Goal")}
+							new DungeonEntrance("Spawn"), new DungeonExit("Goal")},
+			{new Guilde("Gilde")}
 	};
 	public static ArrayList<RoomTemplate> thisRooms = new ArrayList<RoomTemplate>();
 	private int[][] Features = {{1, 6},	//Haus Markt
 								{1,6,11},//Cave Lichtung See
 								{1,6,11,16},//Esszimmer küche PrivatRäume Kerker 
 								{1,6,11,16,21,26}}; //Spawner Waffenkammer KristalCave Bibiliothek Mine LavaCave
+	private static int[] specialRoom = {0};
 	private static int[] homeVillage = {0, 1, 2, 3, 4};
 	public static boolean homeVillageBuild = true;
+	public static boolean specialRoomBuild = false;
 	public static int dungeonType = 0;
 	private static int[] maxRooms = {10, 20, 50, 100};
 	
 	public static void init() {
 		Logger.logInfo("creating Home Village...");
-		thisRooms.add(rooms[0][0]);
-		thisRooms.add(rooms[0][1]);
-		thisRooms.add(rooms[0][2]);
-		thisRooms.add(rooms[0][3]);
-		thisRooms.add(rooms[0][4]);
+		if (homeVillageBuild) {
+			thisRooms.add(rooms[0][0]);
+			thisRooms.add(rooms[0][1]);
+			thisRooms.add(rooms[0][2]);
+			thisRooms.add(rooms[0][3]);
+			thisRooms.add(rooms[0][4]);
+			Logger.logInfo("Home Village");
+		}else {
+			thisRooms.add(rooms[5][0]);
+			Logger.logInfo("Special rooms");
+		}
 		Logger.logInfo("created Home Village");
 	}
 
 	public void createDungeon() {
-		if (!homeVillageBuild) {
+		if (!homeVillageBuild && !specialRoomBuild) {
 			Logger.logInfo("creating new Dungeon");
 			DungeonLength = (int) (Math.random() * (maxRooms[dungeonType-1] / 2)) + (maxRooms[dungeonType-1] / 2);
 			DungeonRooms = new ArrayList<Integer>();
@@ -153,12 +163,18 @@ public class DungeonCore {
 		if (homeVillageBuild) {
 			return homeVillage[currentRoom];
 		}
+		if(specialRoomBuild) {
+			return specialRoom[currentRoom];
+		}
 		return DungeonRooms.get(currentRoom);
 	}
 
 	public int getLastRoom() {
 		if (homeVillageBuild) {
 			return homeVillage[currentRoom - 1];
+		}
+		if (specialRoomBuild) {
+			return specialRoom[currentRoom-1];
 		}
 		return DungeonRooms.get(currentRoom - 1);
 	}
@@ -167,6 +183,9 @@ public class DungeonCore {
 		if (homeVillageBuild) {
 			return homeVillage[currentRoom + 1];
 		}
+		if (specialRoomBuild) {
+			return specialRoom[currentRoom+1];
+		}
 		return DungeonRooms.get(currentRoom + 1);
 	}
 
@@ -174,11 +193,14 @@ public class DungeonCore {
 		if (homeVillageBuild) {
 			return homeVillage.length;
 		}
+		if (specialRoomBuild) {
+			return specialRoom.length;
+		}
 		return DungeonLength;
 	}
 
 	public static String getImage(int addToRoom) {
-	    if(dungeonType != 0) {
+	    if(dungeonType != 0 && dungeonType != 5) {
 	        try {
 	        	thisRooms.get(currentRoom).VariantExists(currentRoom);
 	        	thisRooms.get(currentRoom+addToRoom).getImage(currentRoom);
@@ -189,7 +211,18 @@ public class DungeonCore {
 	        } catch (NullPointerException e) {
 	        	return "/resources/rooms/backgrounds/Empty.png";
 	        }
-	    } else {
+	    } else  if(dungeonType == 5) {
+	    	try {
+	            if(thisRooms.get(currentRoom+addToRoom).ImagePath == null) {
+	            }
+	            return thisRooms.get(currentRoom+addToRoom).ImagePath;
+	        } catch (NullPointerException  e ) {
+	        	return "/resources/rooms/backgrounds/Empty.png";
+	        }
+	        catch (IndexOutOfBoundsException e) {
+	        	Logger.logWarning("Rooms not fully initialized: Index error");
+			}
+	    }else{
 	        try {
 	            if(thisRooms.get(currentRoom+addToRoom).ImagePath == null) {
 	            	//Logger.logWarning("Image missing");
@@ -206,7 +239,7 @@ public class DungeonCore {
 	}
 
 	public void drawRoom(Graphics2D g2d) {
-		if (!homeVillageBuild) {
+		if (!homeVillageBuild && !specialRoomBuild) {
 			thisRooms.get(currentRoom).VariantExists(currentRoom);
 			GameLogic.floor = 725;
 			thisRooms.get(currentRoom).changeColors();
@@ -217,7 +250,21 @@ public class DungeonCore {
 			Draw.clearObjects();
 			thisRooms.get(currentRoom).createObjects(currentRoom);
 			thisRooms.get(currentRoom).DrawImage(g2d);
-		} else {
+		} else if (specialRoomBuild){
+			GameLogic.floor = 725;
+			try {
+				thisRooms.get(currentRoom).changeColors();
+			} catch (Exception e) {
+				Logger.logWarning("Rooms not fully initialized");
+			}
+			g2d.setFont(new Font("Arial", Font.BOLD, 20));
+			if(GameLogic.debug) {
+				g2d.drawString(thisRooms.get(currentRoom).name, 200, 300);
+			}
+			Draw.clearObjects();
+			thisRooms.get(currentRoom).createObjects(currentRoom);
+			thisRooms.get(currentRoom).DrawImage(g2d);
+		}else{
 			GameLogic.floor = 700;
 			thisRooms.get(currentRoom).changeColors();
 			g2d.setFont(new Font("Arial", Font.BOLD, 20));

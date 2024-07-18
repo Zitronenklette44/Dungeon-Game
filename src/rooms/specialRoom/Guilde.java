@@ -1,36 +1,35 @@
-package rooms.Home;
+package rooms.specialRoom;
 
 import entitys.GildSwitchInteraction;
 import game.GameLogic;
 import gameObject.CreateObjects;
 import rooms.RoomTemplate;
 
-public class Exit extends RoomTemplate{
+public class Guilde extends RoomTemplate{
 
-	public Exit(String name) {
+	public Guilde(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
-
-	
 	
 	@Override
 	public void setSpawns(int currentRoom) {
 		super.setSpawns(currentRoom);
-		GameLogic.resetPos[0] = 50;
+		GameLogic.resetPos[0] = 490;
 		GameLogic.resetPos[1] = 700;
-		GameLogic.resetPos1[0] = 1100;
+		GameLogic.resetPos1[0] = 490;
 		GameLogic.resetPos1[1] = 700;
-		GameLogic.player.hoehe = 50;
-		GameLogic.player.breite = 50;
-		GameLogic.vertikalAxis = false;
-		GildSwitchInteraction.isInGuild = false;
+		GameLogic.vertikalAxis = true;
+		GameLogic.player.hoehe = 25;
+		GameLogic.player.breite = 25;
+		GildSwitchInteraction.isInGuild = true;
 	}
 	
 	@Override
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
-		GameLogic.FloorObject.isVisible=true;
 		CreateObjects.createGildSwitchInteraction(500, 700);
+		
+		
 	}
+	
 }

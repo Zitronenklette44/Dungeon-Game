@@ -12,6 +12,7 @@ import java.util.Arrays;
 import game.GameLogic;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
+import gui.LoadingGUI;
 import translation.Language;
 import translation.Translation;
 
@@ -57,6 +58,7 @@ public class SaveLoad {
                         break;
                     case "frameLocation":
                         GameScreen.location = parsePoint(value);
+                        LoadingGUI.location = parsePoint(value);
                         break;
                     case "activLanguage":
                         Translation.activLanguage = Language.valueOf(value);

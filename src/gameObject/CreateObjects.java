@@ -5,6 +5,7 @@ import java.awt.Color;
 import entitys.Arrow;
 import entitys.DungeonChooser;
 import entitys.DungeonExit;
+import entitys.GildSwitchInteraction;
 import entitys.InteractableDialog;
 import entitys.MobTemplate;
 import entitys.Player;
@@ -70,6 +71,10 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 	
 	public static void createDialogInteraction(int posX, int posY, String action, int DialogNum) {
 		GameLogic.interactables.add(new InteractableDialog(posX, posY, action, DialogNum));
+	}
+	
+	public static void createGildSwitchInteraction(int posX, int posY) {
+		GameLogic.interactables.add(new GildSwitchInteraction(posX, posY));
 	}
 
 }
