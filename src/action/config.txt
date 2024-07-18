@@ -9,11 +9,11 @@ dungeonKey = 2
 
 // Debug Modus
 // Default false
-debug = true
+debug = false
 
 // player speed
 // Default 2
-playerSpeed = 2.0
+playerSpeed = 1.0
 
 // player jump hight
 // Default 70
