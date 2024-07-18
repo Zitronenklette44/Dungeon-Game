@@ -20,8 +20,11 @@ public class Exit extends RoomTemplate{
 		GameLogic.resetPos1[0] = 1100;
 		GameLogic.resetPos1[1] = 700;
 		GameLogic.vertikalAxis = false;
-		
-		
-		
+	}
+	
+	@Override
+	public void createObjects(int currentRoom) {
+		super.createObjects(currentRoom);
+		GameLogic.FloorObject.isVisible=true;
 	}
 }

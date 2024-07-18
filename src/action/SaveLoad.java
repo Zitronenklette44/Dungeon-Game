@@ -20,7 +20,7 @@ public class SaveLoad {
 
 	
 	public static void loadConfig() {	//laden der Konfigurationen aus File in Variabeln
-		Logger.logInfo("Loading Configurations");
+		Logger.logInfo("Loading Configurations...");
         try (BufferedReader reader = new BufferedReader(new FileReader(CONFIG_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {

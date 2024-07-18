@@ -35,7 +35,7 @@ public class MusicPlayer {
 	static ArrayList<ArrayList<FloatControl>> volumeControlsLists = new ArrayList<ArrayList<FloatControl>>();	//zusammenfügen der Listen
 
 	public static void init() {	//erstellen dre gesammten Listen
-		Logger.logInfo("Loading Music");
+		Logger.logInfo("Loading Music...");
 		Lists.clear();	//leeren um duplikate zu vermeiden
 		//fileTypen
 		Lists.add(clipsType1);	//hinzufügen der Listen

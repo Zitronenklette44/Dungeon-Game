@@ -10,6 +10,8 @@ import action.KeyHandler;
 import action.Logger;
 import action.MouseHandler;
 import action.SaveLoad;
+import components.DialogButton;
+import game.Dialogs;
 import game.GameLogic;
 import rendering.Draw;
 import rendering.DrawSpells;
@@ -26,6 +28,8 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -47,6 +51,7 @@ public class GameScreen extends JFrame {
 	static GameScreen frame;
 	private static JLabel lbBackground;
 	private JPanel pauseMenue;
+	private static JPanel dialogMenue;
 	public static boolean settingExists = false;
 	private JLabel lblNewLabel;
 	private static JLabel lbSpell3;
@@ -57,13 +62,15 @@ public class GameScreen extends JFrame {
 	public static Point location;
 	private static JLabel lbTitle;
 	private static JButton btnNewButton;
-
-
-	/**
-	 * Launch the application.
-	 */
+	public static String currentDialog = "";
+	public static boolean hasDialog = false;
+	private static DialogButton btnNext;
+	private static JLabel textJLabel;
+	
+	
+	
 	public static void erstellen() {
-		Logger.logInfo("creating main Frame");
+		Logger.logInfo("creating main Frame...");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -131,6 +138,7 @@ public class GameScreen extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()== KeyEvent.VK_ESCAPE) {
+					if(hasDialog) {return;}
 					GameLogic.paused = !GameLogic.paused;
 					togglePause();
 				}
@@ -145,8 +153,31 @@ public class GameScreen extends JFrame {
 		pauseMenue.setBounds(0, 0, 1184, 761);
 		pauseMenue.setVisible(false);
 		pauseMenue.setBackground(new Color(0,0,0,150));
-		contentPane.add(pauseMenue);
 		pauseMenue.setLayout(null);
+		contentPane.add(pauseMenue);
+		
+		dialogMenue = new JPanel();
+		dialogMenue.setBounds(0, (int) (getHeight()/1.5), 1184, (int) (getHeight()-(getHeight()/1.5)));
+		dialogMenue.setVisible(true);
+		dialogMenue.setBackground(new Color(0,0,0,150));
+		dialogMenue.setLayout(null);
+		contentPane.add(dialogMenue);
+		
+		textJLabel = new JLabel("asdrefdghjkl");
+		textJLabel.setBounds(0, 0, dialogMenue.getWidth(), dialogMenue.getHeight());
+		textJLabel.setVerticalAlignment(SwingConstants.TOP);
+		textJLabel.setForeground(Color.white.darker());
+		dialogMenue.add(textJLabel);
+		
+		btnNext = new DialogButton((byte) 1);
+		btnNext.setBounds(1000, dialogMenue.getHeight()-100, 150, 30);
+		btnNext.setVisible(true);
+		dialogMenue.add(btnNext);
+		
+		DialogButton btnSkip = new DialogButton((byte) 0);
+		btnSkip.setBounds(800, dialogMenue.getHeight()-100, 150, 30);
+		btnSkip.setVisible(true);
+		dialogMenue.add(btnSkip);
 		
 		lbTitle = new JLabel(Translation.get("game.pause"));
 		lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -261,7 +292,7 @@ public class GameScreen extends JFrame {
 	}
 	
 	private void togglePause() {
-		if(!settingExists ) {
+		if(!settingExists) {
 		boolean paused = GameLogic.paused;
 		pauseMenue.setVisible(paused);
 		}
@@ -284,5 +315,26 @@ public class GameScreen extends JFrame {
 		
 		spellImage = SpellIcons.getBufferedImageBySpell(GameLogic.player.equipedSpells[2]);
 		if (spellImage != null) {lbSpell3.setIcon(new ImageIcon(spellImage));}else {lbSpell3.setIcon(null);}
+	}
+	
+	public static void startDialog() {
+		hasDialog=true;
+		dialogMenue.setVisible(true);
+		GameLogic.paused = true;
+		btnNext.setDialogStrings(currentDialog);
+	}
+	
+	public static void continueDialog() {
+		btnNext.nextDialog();
+	}
+	
+	public static void printText(String text) {
+		textJLabel.setText(text);
+	}
+	
+	public static void endDialog() {
+		hasDialog=false;
+		dialogMenue.setVisible(false);
+		GameLogic.paused = false;
 	}
 }

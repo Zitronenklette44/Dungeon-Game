@@ -2,6 +2,7 @@ package main;
 
 import action.Logger;
 import action.SaveLoad;
+import game.Dialogs;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
 import rooms.DungeonCore;
@@ -11,10 +12,11 @@ import translation.Translation;
 
 public class Main {
     public static void main(String[] args) {
-    	Logger.logInfo("Start game Loading");
+    	Logger.logInfo("Start game Loading...");
     	Logger.logSeperation();
     	SpellIcons.init();					//Spell Icons erstellen und fürs laden bereitstellen
         Translation.init();					//Übersetzungen laden
+        Dialogs.init();						//Dialoge laden
         MusicPlayer.init();					//Musik Listen erstellen
         MusicPlayer.playSound(0, true);		//Background Musik abspielen
         SaveLoad.loadConfig();				//Variabeln überschreiben

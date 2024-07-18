@@ -34,14 +34,16 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'w' || e.getKeyChar() == 'W' || e.getKeyCode() == KeyEvent.VK_UP&&GameLogic.vertikalAxis) {
 			GameLogic.moveUp=true;
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE && GameLogic.onGround&&!GameLogic.vertikalAxis&&!GameLogic.paused) {
-			if(GameLogic.isSpacePressed == false) {
-				GameLogic.jump=true;
-			}else {
-				GameLogic.jump =false;
+		if(!GameScreen.hasDialog) {
+			if(e.getKeyCode() == KeyEvent.VK_SPACE && GameLogic.onGround&&!GameLogic.vertikalAxis&&!GameLogic.paused) {
+				if(GameLogic.isSpacePressed == false) {
+					GameLogic.jump=true;
+				}else {
+					GameLogic.jump =false;
+				}
+				GameLogic.isSpacePressed=true;
+				GameLogic.player.posY--;
 			}
-			GameLogic.isSpacePressed=true;
-			GameLogic.player.posY--;
 		}
 		
 		
@@ -123,11 +125,17 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'w' || e.getKeyChar() == 'W' || e.getKeyCode() == KeyEvent.VK_UP) {
 			GameLogic.moveUp=false;
 		}
-
-		if(e.getKeyCode() == KeyEvent.VK_SPACE&&!GameLogic.vertikalAxis) {
-			GameLogic.isSpacePressed=false;
-			GameLogic.jump=false;
-		}	
+		
+		if(!GameScreen.hasDialog) {
+			if(e.getKeyCode() == KeyEvent.VK_SPACE&&!GameLogic.vertikalAxis) {
+				GameLogic.isSpacePressed=false;
+				GameLogic.jump=false;
+			}	
+		}else {
+			if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+				GameScreen.continueDialog();
+			}
+		}
 	}
 
 }

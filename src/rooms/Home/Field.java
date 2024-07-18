@@ -145,7 +145,6 @@ public class Field extends RoomTemplate{
 
 	@Override
 	public void update() {
-		System.out.println(wave);
 		NextWave();
 		if(next) {
 			next = false;
@@ -154,6 +153,12 @@ public class Field extends RoomTemplate{
 			
 		}
 		super.update();
+	}
+	
+	@Override
+	public void createObjects(int currentRoom) {
+		super.createObjects(currentRoom);
+		GameLogic.FloorObject.isVisible=false;
 	}
 
 

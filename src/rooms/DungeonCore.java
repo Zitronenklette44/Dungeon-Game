@@ -51,7 +51,7 @@ public class DungeonCore {
 	private static int[] maxRooms = {10, 20, 50, 100};
 	
 	public static void init() {
-		Logger.logInfo("creating Home Village");
+		Logger.logInfo("creating Home Village...");
 		thisRooms.add(rooms[0][0]);
 		thisRooms.add(rooms[0][1]);
 		thisRooms.add(rooms[0][2]);
