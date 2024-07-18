@@ -9,11 +9,11 @@ dungeonKey = 2
 
 // Debug Modus
 // Default false
-debug = true
+debug = false
 
 // Spieler Geschwindigkeit
 // Default 2
-playerSpeed = 2.0
+playerSpeed = 1.0
 
 // Spieler Sprung Höhe
 // Default 70
@@ -25,7 +25,7 @@ spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 // Fenster Position
 // Default (0,0)
-frameLocation = 136,121
+frameLocation = -1604,210
 
 // Sprache
 // Default Deutsch

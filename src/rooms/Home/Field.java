@@ -11,11 +11,11 @@ import rooms.RoomTemplate;
 public class Field extends RoomTemplate{
 
 	public Field(String name) {
-		super(name);
+		super(name, "/resources/rooms/backgrounds/Feld.png");
 		createEntitys();
 	}
 	private int wave  = 1;
-	private boolean next = false;
+	
 
 
 	@Override
@@ -115,7 +115,7 @@ public class Field extends RoomTemplate{
 
 	}
 	private boolean NextWave() {
-		
+		 boolean next = false;
 
 		switch (wave) {
 		case 1: {
@@ -132,7 +132,6 @@ public class Field extends RoomTemplate{
 		}break;
 		case 3: {
 			if(Entitys[4].defeated && Entitys[5].defeated && Entitys[6].defeated) {
-				next = true;
 			}
 
 		}break;
@@ -145,19 +144,13 @@ public class Field extends RoomTemplate{
 
 	@Override
 	public void update() {
-		System.out.println(wave);
 		NextWave();
-		if(next) {
-			next = false;
+		if(NextWave()) {
 			wave++;
 			spawnEntitys();
 			
 		}
 		super.update();
 	}
-
-
-
-
 
 }
