@@ -14,7 +14,7 @@ public class Translation {
 	
 	public static void init(){
 		
-		Logger.logInfo("Loading Translations");
+		Logger.logInfo("Loading Translations...");
 		
 		germanTranslationMap = new HashMap<String, String>();
 		englishTranslationMap = new HashMap<String, String>();
@@ -99,6 +99,27 @@ public class Translation {
 		
 		germanTranslationMap.put("settings.activLanguage", "Deutsch");
 		englishTranslationMap.put("settings.activLanguage", "English");
+		
+		germanTranslationMap.put("components.dialogButton.skip", "[Esc] Dialog überspringen");
+		englishTranslationMap.put("components.dialogButton.skip", "[Esc] skip dialog");
+		
+		germanTranslationMap.put("components.dialogButton.next", "[space] weiter Lesen");
+		englishTranslationMap.put("components.dialogButton.next", "[space] continue reading");
+		
+		germanTranslationMap.put("dialogs.emptySender", "Weltsprache");
+		englishTranslationMap.put("dialogs.emptySender", "Voice of the world");
+		
+		
+		//Dialogs
+		germanTranslationMap.put("dialogs.log1.part1", "Das ist die erste Nachricht");
+		englishTranslationMap.put("dialogs.log1.part1", "This is the First Message");
+		
+		germanTranslationMap.put("dialogs.log1.part2", "Das ist die zweite Nachricht");
+		englishTranslationMap.put("dialogs.log1.part2", "This is the second Message");
+		
+		germanTranslationMap.put("dialogs.log1.part3", "Das ist die letzte Nachricht");
+		englishTranslationMap.put("dialogs.log1.part3", "This is the last Message");
+		
 		
 		Logger.logInfo("Loaded Translations");
 	}

@@ -152,5 +152,11 @@ public class Field extends RoomTemplate{
 		}
 		super.update();
 	}
+	
+	@Override
+	public void createObjects(int currentRoom) {
+		super.createObjects(currentRoom);
+		GameLogic.FloorObject.isVisible=false;
+	}
 
 }

@@ -18,7 +18,7 @@ public class SpellIcons {
 	public static BufferedImage stoneShot;
 	
 	public static void init(){
-		Logger.logInfo("loading Spell Icons");
+		Logger.logInfo("loading Spell Icons...");
 		try {
 			//fire
 			fireball = ImageIO.read(SpellIcons.class.getResource("/resources/spells/Fire/fireball/fireball.png"));	

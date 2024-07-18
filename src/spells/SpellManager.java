@@ -24,7 +24,7 @@ public class SpellManager {
 
     // Initiale Erstellung der Spells
     public static void init() {
-    	Logger.logInfo("initializing Spells");
+    	Logger.logInfo("initializing Spells...");
         GameLogic.player.equipedSpells[0] = availableSpells[0];
         GameLogic.player.equipedSpells[1] = availableSpells[1];
 
@@ -34,7 +34,7 @@ public class SpellManager {
     }
 
     private static void initializeSpellPool() {
-    	Logger.logInfo("creating Spell Pool");
+    	Logger.logInfo("creating Spell Pool...");
         // Fireball Spells initialisieren
         ArrayList<SpellTemplate> fireballPool = new ArrayList<>();
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {

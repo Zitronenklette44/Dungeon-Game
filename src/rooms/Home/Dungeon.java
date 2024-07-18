@@ -22,6 +22,7 @@ public class Dungeon extends RoomTemplate{
 	public void createObjects(int CurrentRoom) {
 		super.createObjects(CurrentRoom);
 		CreateObjects.createDungeonChooser(200, 700);
+		CreateObjects.createDialogInteraction(500, 700, "read", 1);
 	}
 	
 	@Override

@@ -94,7 +94,7 @@ public class Draw extends JLabel {
 		for (int i = 0; i < floor.size(); i++) {
 			if(DungeonCore.dungeonType == 0) {
 				Rechteck aktuellesObjekt = floor.get(i);
-				g.fillRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+				if(aktuellesObjekt.isVisible) {g.fillRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);}
 			}
 		}
 
