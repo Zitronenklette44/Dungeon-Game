@@ -54,6 +54,7 @@ public class GameScreen extends JFrame {
 	private static JPanel dialogMenue;
 	public static boolean settingExists = false;
 	private JLabel lblNewLabel;
+	private static JLabel textJLabelSender;
 	private static JLabel lbSpell3;
 	private static JLabel lbSpell2;
 	private static JLabel lbSpell1;
@@ -66,6 +67,8 @@ public class GameScreen extends JFrame {
 	public static boolean hasDialog = false;
 	private static DialogButton btnNext;
 	private static JLabel textJLabel;
+	private static Draw draw;
+	private static DialogButton btnSkip;
 	
 	
 	
@@ -90,13 +93,16 @@ public class GameScreen extends JFrame {
 	}
 	
 	public static void refresh() {
-		Logger.logInfo("reloading Translations in main Frame");
+		Logger.logInfo("reloading Translations in main Frame...");
+		Dialogs.init();
 		lbTitle.setText(Translation.get("game.pause"));
 		btnNewButton.setText(Translation.get("game.settings"));
 		lbRoomNR.setText(Translation.get("game.room")+" "+DungeonCore.currentRoom);
 		if(DungeonCore.currentRoom == 0) {
 			lbRoomNR.setText(Translation.get("game.room")+ " 1");
 		}
+		btnNext.text = Translation.get("components.dialogButton.next");
+		btnSkip.text = Translation.get("components.dialogButton.skip");
 		Logger.logInfo("finished reloading Translations in main Frame");
 	}
 	
@@ -138,7 +144,7 @@ public class GameScreen extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()== KeyEvent.VK_ESCAPE) {
-					if(hasDialog) {return;}
+					if(hasDialog) {btnNext.finishDialog();return;}
 					GameLogic.paused = !GameLogic.paused;
 					togglePause();
 				}
@@ -148,6 +154,7 @@ public class GameScreen extends JFrame {
 		contentPane.setLayout(null);
 		addKeyListener(new KeyHandler(spiellogik));
 		addMouseListener(new MouseHandler(spiellogik));
+		contentPane.setDoubleBuffered(true);
 		
 		pauseMenue = new JPanel();
 		pauseMenue.setBounds(0, 0, 1184, 761);
@@ -157,27 +164,41 @@ public class GameScreen extends JFrame {
 		contentPane.add(pauseMenue);
 		
 		dialogMenue = new JPanel();
-		dialogMenue.setBounds(0, (int) (getHeight()/1.5), 1184, (int) (getHeight()-(getHeight()/1.5)));
-		dialogMenue.setVisible(true);
-		dialogMenue.setBackground(new Color(0,0,0,150));
+		dialogMenue.setBounds(0, (int) (getHeight()/1.25), 1184, (int) (getHeight()-(getHeight()/1.25)));
+		dialogMenue.setVisible(false);
+		//dialogMenue.setBackground(new Color(0,0,0, 150));
+		dialogMenue.setBackground(Color.gray.darker());
 		dialogMenue.setLayout(null);
+		dialogMenue.setDoubleBuffered(true);
 		contentPane.add(dialogMenue);
 		
-		textJLabel = new JLabel("asdrefdghjkl");
-		textJLabel.setBounds(0, 0, dialogMenue.getWidth(), dialogMenue.getHeight());
+		textJLabel = new JLabel();
+		textJLabel.setBounds(0, dialogMenue.getHeight()/5, dialogMenue.getWidth(), (int) (dialogMenue.getHeight()-dialogMenue.getHeight()/5));
 		textJLabel.setVerticalAlignment(SwingConstants.TOP);
 		textJLabel.setForeground(Color.white.darker());
+		textJLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		textJLabel.setDoubleBuffered(true);
+		
+		textJLabelSender = new JLabel();
+		textJLabelSender.setBounds(0, 0, dialogMenue.getWidth(), dialogMenue.getHeight()-textJLabel.getHeight());
+		textJLabelSender.setVerticalAlignment(SwingConstants.TOP);
+		textJLabelSender.setForeground(Color.gray.darker().darker().darker());
+		textJLabelSender.setFont(new Font("Tahoma", Font.BOLD, 25));
+		textJLabelSender.setDoubleBuffered(true);
+		dialogMenue.add(textJLabelSender);
 		dialogMenue.add(textJLabel);
 		
-		btnNext = new DialogButton((byte) 1);
-		btnNext.setBounds(1000, dialogMenue.getHeight()-100, 150, 30);
-		btnNext.setVisible(true);
-		dialogMenue.add(btnNext);
-		
-		DialogButton btnSkip = new DialogButton((byte) 0);
-		btnSkip.setBounds(800, dialogMenue.getHeight()-100, 150, 30);
+		btnSkip = new DialogButton((byte) 1, textJLabel);
+		btnSkip.setBounds(1000, dialogMenue.getHeight()-80, 170, 30);
 		btnSkip.setVisible(true);
+		btnSkip.setDoubleBuffered(true);
 		dialogMenue.add(btnSkip);
+		
+		btnNext = new DialogButton((byte) 0, textJLabel);
+		btnNext.setBounds(800, dialogMenue.getHeight()-80, 170, 30);
+		btnNext.setVisible(true);
+		btnNext.setDoubleBuffered(true);
+		dialogMenue.add(btnNext);
 		
 		lbTitle = new JLabel(Translation.get("game.pause"));
 		lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -221,7 +242,7 @@ public class GameScreen extends JFrame {
 		lbSpell3.setBounds(1098, 11, 50, 50);
 		contentPane.add(lbSpell3);
 		
-		lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel();
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -240,7 +261,7 @@ public class GameScreen extends JFrame {
 		lbRoomNR.setBounds(0, 11, 1184, 56);
 		contentPane.add(lbRoomNR);
 		
-		Draw draw = new Draw(screenBreite,screenHoehe, spiellogik);
+		draw = new Draw(screenBreite,screenHoehe, spiellogik);
 		draw.setBounds(0,0,screenBreite,screenHoehe);
 		draw.setVisible(true);
 		contentPane.add(draw);
@@ -317,23 +338,29 @@ public class GameScreen extends JFrame {
 		if (spellImage != null) {lbSpell3.setIcon(new ImageIcon(spellImage));}else {lbSpell3.setIcon(null);}
 	}
 	
-	public static void startDialog() {
+	public static void startDialog(String sender) {
+		Logger.logInfo("started Dialog");
+		draw.setIgnoreRepaint(true);
 		hasDialog=true;
 		dialogMenue.setVisible(true);
 		GameLogic.paused = true;
 		btnNext.setDialogStrings(currentDialog);
+		btnNext.dialogSource = sender;
+		btnNext.startDialog();
 	}
 	
 	public static void continueDialog() {
+		btnNext.currentDialogPoint++;
 		btnNext.nextDialog();
 	}
 	
-	public static void printText(String text) {
-		textJLabel.setText(text);
+	public static void setSender(String sender) {
+		textJLabelSender.setText(sender+":");
 	}
 	
 	public static void endDialog() {
 		hasDialog=false;
+		draw.setIgnoreRepaint(false);
 		dialogMenue.setVisible(false);
 		GameLogic.paused = false;
 	}

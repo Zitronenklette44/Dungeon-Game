@@ -100,11 +100,14 @@ public class Translation {
 		germanTranslationMap.put("settings.activLanguage", "Deutsch");
 		englishTranslationMap.put("settings.activLanguage", "English");
 		
-		germanTranslationMap.put("components.dialogButton.skip", "Dialog überspringen");
-		englishTranslationMap.put("components.dialogButton.skip", "skip dialog");
+		germanTranslationMap.put("components.dialogButton.skip", "[Esc] Dialog überspringen");
+		englishTranslationMap.put("components.dialogButton.skip", "[Esc] skip dialog");
 		
-		germanTranslationMap.put("components.dialogButton.next", "weiter Lesen");
-		englishTranslationMap.put("components.dialogButton.next", "continue reading");
+		germanTranslationMap.put("components.dialogButton.next", "[space] weiter Lesen");
+		englishTranslationMap.put("components.dialogButton.next", "[space] continue reading");
+		
+		germanTranslationMap.put("dialogs.emptySender", "Weltsprache");
+		englishTranslationMap.put("dialogs.emptySender", "Voice of the world");
 		
 		
 		//Dialogs

@@ -1,5 +1,6 @@
 package entitys;
 
+import action.Logger;
 import gui.GameScreen;
 
 public class InteractableDialog extends InteractableTemplate{
@@ -12,8 +13,9 @@ public class InteractableDialog extends InteractableTemplate{
 	
 	@Override
 	public void performAction() {
+		Logger.logInfo("interacted");
 		super.performAction();
 		GameScreen.currentDialog = "log"+Dialog;
-		GameScreen.startDialog();
+		GameScreen.startDialog("Test");
 	}	
 }

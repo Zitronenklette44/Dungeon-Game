@@ -5,7 +5,7 @@ Rooms:
 		-images
 		-evt Spawnpoints
 		-Gilde
-		-Field mobs
+		-Field mobs				Done
 	2.Dungeon
 		-images
 		-Mobs
@@ -24,7 +24,7 @@ Spells:
 	3.Spell Leveling
 
 Allgemein:
-	1.Dialog möglichkeit
+	1.Dialog möglichkeit			Done
 	2.Drop Items
 	3.Inventar
 	4.evt Crafting möglichkeit
@@ -34,4 +34,8 @@ Allgemein:
 	8.Skilltree
 	9.evt bossRoom
 	
+	
+	
+Bugfixes:
+	1.evt DialogMenue durchsichtig 	--> flackern der icons von Draw methode
 	

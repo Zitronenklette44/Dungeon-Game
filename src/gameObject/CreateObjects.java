@@ -5,6 +5,7 @@ import java.awt.Color;
 import entitys.Arrow;
 import entitys.DungeonChooser;
 import entitys.DungeonExit;
+import entitys.InteractableDialog;
 import entitys.MobTemplate;
 import entitys.Player;
 import entitys.ShopOpenPotions;
@@ -65,6 +66,10 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 
 	public static void createDungeonExit(int posX, int posY) {
 		GameLogic.interactables.add(new DungeonExit(10, 10, posX, posY));
+	}
+	
+	public static void createDialogInteraction(int posX, int posY, String action, int DialogNum) {
+		GameLogic.interactables.add(new InteractableDialog(posX, posY, action, DialogNum));
 	}
 
 }
