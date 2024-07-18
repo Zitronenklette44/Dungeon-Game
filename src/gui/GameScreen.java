@@ -28,7 +28,6 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -79,6 +78,7 @@ public class GameScreen extends JFrame {
 				try {
 					frame = new GameScreen();
 					frame.setVisible(true);
+					hideFrame();
 					if(location != null) {
 						frame.setLocation(location);
 					}else {
@@ -275,7 +275,7 @@ public class GameScreen extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/spear.png")));
 		lblNewLabel_1.setBounds(322, 0, 50, 50);
 		contentPane.add(lblNewLabel_1);
-
+		
 		setContentPane(contentPane);
 		
 		lbBackground = new JLabel("");

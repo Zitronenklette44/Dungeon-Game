@@ -97,28 +97,28 @@ public class MusicPlayer {
 	}
 	
 	public static void pauseSound(int fileNR) {		//Pausieren einer Saound Datei
-	    for (Clip clip : Lists.get(fileNR)) {
-	        if (clip != null && clip.isRunning()) {
-	            clip.stop();
+		for(int i = 0; i<Lists.get(fileNR).size(); i++) {
+	        if (Lists.get(fileNR).get(i) != null && clip.isRunning()) {
+	        	Lists.get(fileNR).get(i).stop();
 	        }
 	    }
 	}
 
 	public static void continueSound(int fileNR) {	//Fortsetzen einer Sound Datei
-	    for (Clip clip : Lists.get(fileNR)) {
-	        if (clip != null && !clip.isRunning()) {
-	            clip.start();
+		for(int i = 0; i<Lists.get(fileNR).size(); i++) {
+	        if (Lists.get(fileNR).get(i) != null && !clip.isRunning()) {
+	        	Lists.get(fileNR).get(i).start();
 	        }
 	    }
 	}
 
 	public static void stopSound(int fileNR) {		//Beenden einer Sound Datei
-	    for (Clip clip : Lists.get(fileNR)) {
-	        if (clip != null && clip.isRunning()) {
-	            clip.stop();
-	            clip.close();
-	        }
-	    }
+		for(int i = 0; i<Lists.get(fileNR).size(); i++) {
+			if (Lists.get(fileNR).get(i) != null && clip.isRunning()) {
+				Lists.get(fileNR).get(i).stop();
+				Lists.get(fileNR).get(i).close();
+			}
+		}
 	}
 
 	public static void pauseAllSound() {	//Pausieren aller Sounds

@@ -109,7 +109,6 @@ public class DialogButton extends JButton {
 			String newString = "<html>" + dialogLabel.getText().replace("<html>", "").replace("</html>", "")
 					+ currentChars[currentCharIndex] + "</html>";
 			dialogLabel.setText(newString);
-			Logger.logInfo("generated String: " + newString);
 			currentCharIndex++;
 		} else {
 			timer.stop();
