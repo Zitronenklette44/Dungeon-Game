@@ -21,6 +21,8 @@ public class Field extends RoomTemplate{
 	@Override
 	public void setSpawns(int currentRoom) {
 		super.setSpawns(currentRoom);
+		GameLogic.player.hoehe = 25;
+		GameLogic.player.breite = 25;
 		GameLogic.resetPos[0] = 50;
 		GameLogic.resetPos[1] = 700;
 		GameLogic.resetPos1[0] = 1100;

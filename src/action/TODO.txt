@@ -1,41 +1,50 @@
 TODO List:
 
-Rooms:
-	1.Home Village
-		-images
-		-evt Spawnpoints
-		-Gilde
-		-Field mobs				Done
-	2.Dungeon
-		-images
-		-Mobs
-			-Bosses
-			-normale mobs
-			-Skins
-		-Coins
-		-Chests + loot
-		-interactable Objects (Hebel, doors,...)
-
-Spells:
-	1.SpellChooser
-		-auswählbare Spells
-		-markierung der Kategorien
-	2.fehlende Spells
-	3.Spell Leveling
-
-Allgemein:
-	1.Dialog möglichkeit			Done
-	2.Drop Items
-	3.Inventar
-	4.evt Crafting möglichkeit
-	5.Ausrüstungs Slots
-	6.Items mit wirkungen(z.B. mehr HP, schnellerer ATK, mehr Mana,...)
-	7.crafting Items
-	8.Skilltree
-	9.evt bossRoom
+	Rooms:
 	
+		1.Anfangs Kampf
+			-Dungeon rooms
+			-Dialog (Erklärung)
+			-Boss (Zu Schwer)
+			-Teleportation
 	
+		2.Home Village
+			-images
+			-evt Spawnpoints
+			-Gilde
+			-Field mobs				Done
+		3.Dungeon
+			-images
+			-Mobs
+				-Bosses
+				-normale mobs
+				-Skins
+			-Coins
+			-Chests + loot
+			-interactable Objects (Hebel, doors,...)
+			
+		4. Endboss
+			-Rune
+			-Schlüssel nach besiegen des 4 Dungeon Boss
+			-Teleportation ins Boss raum (siehe 1)
+			
+	Spells:
+		1.SpellChooser
+			-auswählbare Spells
+			-markierung der Kategorien
+		2.fehlende Spells
+		3.Spell Leveling
 	
-Bugfixes:
-	1.evt DialogMenue durchsichtig 	--> flackern der icons von Draw methode
-	
+	Allgemein:
+		1.Dialog möglichkeit			Done
+		2.Drop Items
+		3.Inventar
+		4.evt Crafting möglichkeit
+		5.Ausrüstungs Slots
+		6.Items mit wirkungen(z.B. mehr HP, schnellerer ATK, mehr Mana,...)
+		7.crafting Items
+		8.Skilltree
+		9.evt bossRoom
+		
+	Bugfixes:
+		1.evt DialogMenue durchsichtig 	--> flackern der icons von Draw methode
