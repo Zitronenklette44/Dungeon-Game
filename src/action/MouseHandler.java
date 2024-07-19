@@ -27,7 +27,7 @@ public class MouseHandler implements MouseListener{
             if (GameLogic.player.lastdx > 0) { // Angriff nach rechts
                 attackPosX += playerWidth;
                 attackPosY -= playerHeight / 2; // Angriff vertikal zentrieren
-                CreateObjects.createSwordAttack(reach, attackPosX, attackPosY, (int) (reach / 1.5), GameLogic.player.damage, 40, true ,true);
+                CreateObjects.createSwordAttack(reach, attackPosX, attackPosY, (int) (reach / 1.5), GameLogic.player.damage, 40, false ,true);
             } else if (GameLogic.player.lastdx < 0) { // Angriff nach links
                 attackPosX = GameLogic.player.posX-reach/2;
                 attackPosY -= playerHeight / 2; // Angriff vertikal zentrieren

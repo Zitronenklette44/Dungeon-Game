@@ -1,33 +1,33 @@
-// If Music activ
+// Wenn Musik aktiviert ist
 // Default true, -30
 musicEnabled = true
 musicVolume = -30.0
 
-// Number of owned dungeon keys
+// Anzahl der in Besitz befindenen dungeon Keys
 // Default 1
-dungeonKey = 2
+dungeonKey = 4
 
 // Debug Modus
 // Default false
 debug = true
 
-// player speed
+// Spieler Geschwindigkeit
 // Default 2
 playerSpeed = 1.0
 
-// player jump hight
+// Spieler Sprung Höhe
 // Default 70
 jumpHight = 70
 
-// unlocked spells
+// Freigeschaltene Zauber
 // Default all 0
 spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-// Frame position
+// Fenster Position
 // Default (0,0)
-frameLocation = 75,136
+frameLocation = 100,100
 
-// Language
+// Sprache
 // Default Deutsch
-activLanguage = English
+activLanguage = Deutsch
 

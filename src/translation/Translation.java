@@ -109,6 +109,8 @@ public class Translation {
 		germanTranslationMap.put("dialogs.emptySender", "Weltsprache");
 		englishTranslationMap.put("dialogs.emptySender", "Voice of the world");
 		
+		germanTranslationMap.put("interaction.testDialog", "Lesen");
+		englishTranslationMap.put("interaction.testDialog", "read");
 		
 		//Dialogs
 		germanTranslationMap.put("dialogs.log1.part1", "Das ist die erste Nachricht");
