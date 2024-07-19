@@ -18,7 +18,7 @@ public class DungeonCore {
 
 	public static ArrayList<Integer> DungeonRooms;
 	public int DungeonLength;
-	public static int currentRoom = 0;
+	public static int currentRoom = 3;
 	public static RoomTemplate[][] rooms = {
 			{new Dungeon("Dungeon"), new Entrace("Eingang"), new Center("Mitte"), new Exit("Ausgang"), new Field("Field")},
 			{new Normal("Path"), new HouseEntrance("Haus eingang"), new HouseMiddel("Haus Mitte 1"), new HouseMiddel1("Haus Mitte 2"), new HouseMiddel2("Haus Mitte 3"), new HouseExit("Haus Exit"),

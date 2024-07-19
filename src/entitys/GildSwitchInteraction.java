@@ -4,19 +4,19 @@ import action.Logger;
 import game.GameLogic;
 import gui.GameScreen;
 import rooms.DungeonCore;
+import translation.Translation;
 
 public class GildSwitchInteraction extends InteractableTemplate{
 	public static boolean isInGuild= false;
 	
 	public GildSwitchInteraction(int posX, int posY) {
-		super(10, 10, posX, posY, 100, "Gilde betreten");
+		super(10, 10, posX, posY, 100, Translation.get("interaction.guildEnter"));
 	}
 	
 	
 	@Override
 	public void performAction() {
 		super.performAction();
-		Logger.logInfo("isInGilde: "+isInGuild);
 		if(!isInGuild) {
 			DungeonCore.homeVillageBuild = false;
 			DungeonCore.specialRoomBuild = true;
@@ -28,6 +28,7 @@ public class GildSwitchInteraction extends InteractableTemplate{
 			GameLogic.vertikalAxis=true;
 			GameScreen.updateRoomNr(1);
 			GameLogic.resetLevel();
+			GameScreen.updateRoomNr(true);
 		}else {
 			DungeonCore.homeVillageBuild = true;
 			DungeonCore.specialRoomBuild = false;
@@ -40,6 +41,22 @@ public class GildSwitchInteraction extends InteractableTemplate{
 			GameScreen.updateRoomNr(4);
 			GameLogic.resetLevel();
 			GameLogic.player.posX = 490;
+			GameScreen.paintRoomNum = false;
+			GameScreen.updateRoomNr(DungeonCore.currentRoom);
+			
+		}
+		Logger.logInfo(interactionString);
+	}
+	
+	@Override
+	public void update() {
+		super.update();
+		if(!isInGuild) {
+			interactionString = Translation.get("interaction.guildEnter");
+			range = 100;
+		}else {
+			interactionString = Translation.get("interaction.guildExit");
+			range = 25;
 		}
 	}
 	

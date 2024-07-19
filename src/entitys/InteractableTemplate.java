@@ -16,4 +16,6 @@ public class InteractableTemplate extends Rechteck{
 	
 	public void performAction() {GameLogic.Interact = false;GameLogic.counterInteraction =0;}	//wenn interagiert
 	
+	public void update(){}
+	
 }

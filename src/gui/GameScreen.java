@@ -68,6 +68,7 @@ public class GameScreen extends JFrame {
 	private static JLabel textJLabel;
 	private static Draw draw;
 	private static DialogButton btnSkip;
+	public static boolean paintRoomNum;
 	
 	
 	
@@ -297,8 +298,15 @@ public class GameScreen extends JFrame {
 	}
 	
 	public static void updateRoomNr(int RoomNr) {
+		if(!paintRoomNum) {
 		lbRoomNR.setText(Translation.get("game.room")+" "+RoomNr);
-	}	
+		}
+	}
+	
+	public static void updateRoomNr(boolean gilde) {
+		paintRoomNum = gilde;
+		lbRoomNR.setText(Translation.get("gilde.title"));
+	}
 	
 	
 	public static void changeBackground(String ImagePath) {

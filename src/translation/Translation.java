@@ -112,6 +112,15 @@ public class Translation {
 		germanTranslationMap.put("interaction.testDialog", "Lesen");
 		englishTranslationMap.put("interaction.testDialog", "read");
 		
+		germanTranslationMap.put("gilde.title", "Gilde");
+		englishTranslationMap.put("gilde.title", "Guild");
+		
+		germanTranslationMap.put("interaction.guildEnter", "Gilde betreten");
+		englishTranslationMap.put("interaction.guildEnter", "enter guild");
+		
+		germanTranslationMap.put("interaction.guildExit", "Gilde verlassen");
+		englishTranslationMap.put("interaction.guildExit", "leave guild");
+		
 		//Dialogs
 		germanTranslationMap.put("dialogs.log1.part1", "Das ist die erste Nachricht");
 		englishTranslationMap.put("dialogs.log1.part1", "This is the First Message");

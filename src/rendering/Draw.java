@@ -73,13 +73,6 @@ public class Draw extends JLabel {
 			//return;
 		}
 
-		//versteckte Interactionen
-		g.setColor(Color.green);
-		for (int i = 0; i < interactables.size(); i++) {
-			InteractableTemplate aktuellesObjekt = interactables.get(i);
-			g.fillRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
-		}
-
 
 		//zeiche Hintergrund
 		g.setColor(backgroundColor);
@@ -91,7 +84,7 @@ public class Draw extends JLabel {
 			GameLogic.dungeon.drawRoom(g2d);
 		} catch (Exception e) {
 			Logger.logError("umable to draw Room", e);
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 
 
@@ -136,6 +129,14 @@ public class Draw extends JLabel {
 				g.setColor(Color.ORANGE);
 				g2d.drawString(aktuellesObjekt.existingTime+"", aktuellesObjekt.posX+aktuellesObjekt.breite/4, aktuellesObjekt.posY+(aktuellesObjekt.hoehe/2));
 			}
+		}
+		
+		//versteckte Interactionen
+		g.setColor(Color.green);
+		for (int i = 0; i < interactables.size(); i++) {
+			InteractableTemplate aktuellesObjekt = interactables.get(i);
+			if(GameLogic.debug)
+				g.fillRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
 
 		g.setColor(mobsColor);

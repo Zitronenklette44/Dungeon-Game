@@ -8,16 +8,16 @@ import rooms.RoomTemplate;
 public class Guilde extends RoomTemplate{
 
 	public Guilde(String name) {
-		super(name);
+		super(name, "/resources/rooms/backgrounds/Gilde.png");
 	}
 	
 	@Override
 	public void setSpawns(int currentRoom) {
 		super.setSpawns(currentRoom);
-		GameLogic.resetPos[0] = 490;
-		GameLogic.resetPos[1] = 700;
-		GameLogic.resetPos1[0] = 490;
-		GameLogic.resetPos1[1] = 700;
+		GameLogic.resetPos[0] = 550;
+		GameLogic.resetPos[1] = 725;
+		GameLogic.resetPos1[0] = 550;
+		GameLogic.resetPos1[1] = 725;
 		GameLogic.vertikalAxis = true;
 		GameLogic.player.hoehe = 25;
 		GameLogic.player.breite = 25;
@@ -27,7 +27,7 @@ public class Guilde extends RoomTemplate{
 	@Override
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
-		CreateObjects.createGildSwitchInteraction(500, 700);
+		CreateObjects.createGildSwitchInteraction(550, 750);
 		
 		
 	}

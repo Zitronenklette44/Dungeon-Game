@@ -234,6 +234,7 @@ public class Collisions {
 
 	public static void checkInteractable(Graphics2D g, Color color) {		//Überprüfen von möglichen Interactionen in Bereich um Spieler
 		for (InteractableTemplate interactable : GameLogic.interactables) {
+			interactable.update();
 			float playerCenterX = GameLogic.player.posX + GameLogic.player.breite / 2;
 			float playerCenterY = GameLogic.player.posY + GameLogic.player.hoehe / 2;
 
