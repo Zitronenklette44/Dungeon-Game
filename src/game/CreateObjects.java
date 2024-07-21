@@ -1,18 +1,23 @@
-package gameObject;
+package game;
 
 import java.awt.Color;
 
 import entitys.Arrow;
-import entitys.DungeonChooser;
-import entitys.DungeonExit;
-import entitys.GildSwitchInteraction;
-import entitys.InteractableDialog;
 import entitys.MobTemplate;
 import entitys.Player;
-import entitys.ShopOpenPotions;
-import entitys.ShopOpenTools;
 import entitys.TestMob;
-import game.GameLogic;
+import functionalObjects.Chest;
+import gameObject.CollisionRechteck;
+import gameObject.Column;
+import gameObject.Rechteck;
+import gameObject.SwordAttack;
+import interactions.DungeonChooser;
+import interactions.DungeonExit;
+import interactions.GildSwitchInteraction;
+import interactions.InteractableDialog;
+import interactions.ShopOpenPotions;
+import interactions.ShopOpenTools;
+import loot.LootTabels;
 
 public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener Objekte
 
@@ -76,5 +81,10 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 	public static void createGildSwitchInteraction(int posX, int posY) {
 		GameLogic.interactables.add(new GildSwitchInteraction(posX, posY));
 	}
+	
+	public static void createChest(int posX, int posY, boolean isExisting) {
+		GameLogic.functionalObjects.add(new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5)));
+	}
+	
 
 }

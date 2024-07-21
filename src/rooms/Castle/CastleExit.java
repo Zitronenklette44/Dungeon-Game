@@ -1,6 +1,6 @@
 package rooms.Castle;
 
-import gameObject.CreateObjects;
+import game.CreateObjects;
 import rooms.RoomTemplate;
 
 public class CastleExit extends RoomTemplate{

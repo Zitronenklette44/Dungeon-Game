@@ -1,8 +1,8 @@
 package rooms.Home;
 
-import entitys.GildSwitchInteraction;
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
+import interactions.GildSwitchInteraction;
 import rooms.RoomTemplate;
 
 public class Exit extends RoomTemplate{

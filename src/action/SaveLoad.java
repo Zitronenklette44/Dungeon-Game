@@ -13,11 +13,13 @@ import game.GameLogic;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
 import gui.LoadingGUI;
+import rooms.DungeonCore;
 import translation.Language;
 import translation.Translation;
 
 public class SaveLoad {
 	private static final String CONFIG_FILE = "src/action/config.txt";
+	private static boolean startedGame;
 
 	
 	public static void loadConfig() {	//laden der Konfigurationen aus File in Variabeln
@@ -64,6 +66,10 @@ public class SaveLoad {
                         Translation.activLanguage = Language.valueOf(value);
                         break;
                         
+                    case "startedGame":
+                        checkGameStarted(value);;
+                        break;
+                        
                     default:
                     	Logger.logError("Invalid Configuration: "+ line);
                         break;
@@ -106,6 +112,9 @@ public class SaveLoad {
             writer.write("// " +Translation.get("save.Comment7")+"\n");
             writer.write("// Default Deutsch\n");
             writer.write("activLanguage = " + Translation.activLanguage + "\n\n");
+            writer.write("// " +Translation.get("save.Comment8")+"\n");
+            writer.write("// Default true\n");
+            writer.write("startedGame = " + startedGame+ "\n\n");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -165,6 +174,35 @@ public class SaveLoad {
 	    int x = Integer.parseInt(coords[0].trim());
 	    int y = Integer.parseInt(coords[1].trim());
 	    return new Point(x, y);
+	}
+	
+	private static void checkGameStarted(String value) {
+		startedGame = Boolean.parseBoolean(value);
+		if(startedGame) {
+			return;
+		}else {
+			DungeonCore.homeVillageBuild = false;
+			DungeonCore.specialRoomBuild = true;
+			DungeonCore.thisRooms.clear();
+			DungeonCore.currentRoom = 1;
+			DungeonCore.dungeonType = 5;
+			DungeonCore.init();
+			GameScreen.updateRoomNr(1);
+			GameLogic.vertikalAxis=true;
+			GameScreen.updateRoomNr(1);
+			GameLogic.player.breite = 25;
+			GameLogic.player.hoehe = 25;
+			GameLogic.resetLevel();
+			
+			//Noch weitere Anweisungen für werte bei Spielstart
+			
+			startedGame = true;
+			saveConfig();
+		}
+		
+		
+		
+		
 	}
 
 }

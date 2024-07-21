@@ -1,7 +1,7 @@
 package rooms.Home;
 
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
 import rooms.RoomTemplate;
 
 public class Center extends RoomTemplate{

@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
 import rendering.Draw;
 import rooms.RoomTemplate;
 import translation.Translation;

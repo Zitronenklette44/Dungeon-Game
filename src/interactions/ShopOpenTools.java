@@ -1,4 +1,4 @@
-package entitys;
+package interactions;
 
 import gameMusik.MusicPlayer;
 import gui.GameScreen;

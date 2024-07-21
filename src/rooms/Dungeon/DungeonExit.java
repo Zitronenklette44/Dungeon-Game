@@ -1,6 +1,6 @@
 package rooms.Dungeon;
 
-import gameObject.CreateObjects;
+import game.CreateObjects;
 import rooms.RoomTemplate;
 
 public class DungeonExit extends RoomTemplate{

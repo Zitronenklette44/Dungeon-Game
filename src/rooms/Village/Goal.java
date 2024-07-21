@@ -1,6 +1,6 @@
 package rooms.Village;
 
-import gameObject.CreateObjects;
+import game.CreateObjects;
 import rooms.RoomTemplate;
 
 public class Goal extends RoomTemplate{

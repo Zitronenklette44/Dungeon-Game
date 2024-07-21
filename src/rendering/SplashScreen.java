@@ -5,8 +5,6 @@ import java.awt.Graphics;
 
 import javax.swing.JLabel;
 
-import action.Logger;
-
 public class SplashScreen extends JLabel {
     private static final long serialVersionUID = 1L;
     public static int currentLoadingState = 0;

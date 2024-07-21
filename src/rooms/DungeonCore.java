@@ -13,6 +13,8 @@ import rooms.Forest.*;
 import rooms.Home.*;
 import rooms.Village.*;
 import rooms.specialRoom.Guilde;
+import rooms.specialRoom.StartRoom1;
+import rooms.specialRoom.StartRoom2;
 
 public class DungeonCore {
 
@@ -40,14 +42,14 @@ public class DungeonCore {
 							new DungeonMineEntrance("Mine Eingang"),new DungeonMineMiddel("Mine Mitte 1"),new DungeonMineMiddel2("Mine Mitte 2"),new DungeonMineMiddel3("Mine mitte 3"),new DungeonMineExit("Mine Ausgang"),
 							new DungeonLavaCaveEntrance("Lava Cave Eingang"),new DungeonLavaCaveMiddel("Lava Cave Mitte 1"),new DungeonLavaCaveMiddel2("Lava Cave Mitte 2"),new DungeonLavaCaveMiddel3("Lava Cave Mitte 3"),new DungeonLavaCaveExit("Lava Cave Ausgang"),
 							new DungeonEntrance("Spawn"), new DungeonExit("Goal")},
-			{new Guilde("Gilde")}
+			{new Guilde("Gilde"), new StartRoom1("startRaum1"), new StartRoom2("startRaum2")}
 	};
 	public static ArrayList<RoomTemplate> thisRooms = new ArrayList<RoomTemplate>();
 	private int[][] Features = {{1, 6},	//Haus Markt
 								{1,6,11},//Cave Lichtung See
 								{1,6,11,16},//Esszimmer küche PrivatRäume Kerker 
 								{1,6,11,16,21,26}}; //Spawner Waffenkammer KristalCave Bibiliothek Mine LavaCave
-	private static int[] specialRoom = {0};
+	private static int[] specialRoom = {0, 1, 2};
 	private static int[] homeVillage = {0, 1, 2, 3, 4};
 	public static boolean homeVillageBuild = true;
 	public static boolean specialRoomBuild = false;
@@ -65,6 +67,8 @@ public class DungeonCore {
 			Logger.logInfo("Home Village");
 		}else {
 			thisRooms.add(rooms[5][0]);
+			thisRooms.add(rooms[5][1]);
+			thisRooms.add(rooms[5][2]);
 			Logger.logInfo("Special rooms");
 		}
 		Logger.logInfo("created Home Village");

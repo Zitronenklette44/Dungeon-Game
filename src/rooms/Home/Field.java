@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import action.Logger;
 import entitys.MobTemplate;
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
 import rooms.RoomTemplate;
 
 public class Field extends RoomTemplate{

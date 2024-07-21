@@ -7,13 +7,15 @@ import javax.swing.JLabel;
 
 import action.Logger;
 import entitys.Arrow;
-import entitys.InteractableTemplate;
 import entitys.MobTemplate;
+import functionalObjects.FunctionalTemplate;
 import game.Collisions;
 import game.GameLogic;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.SwordAttack;
+import interactions.InteractableTemplate;
+import loot.items.ItemTemplate;
 import gameObject.Rechteck;
 import rooms.DungeonCore;
 import spells.SpellManager;
@@ -35,7 +37,9 @@ public class Draw extends JLabel {
 	public static ArrayList<MobTemplate> mobs;
 	public static ArrayList<Arrow> arrows;
 	public static ArrayList<InteractableTemplate> interactables;
+	public static ArrayList<FunctionalTemplate> functionalObjects;
 	public static ArrayList<SpellTemplate> spells;
+	public static ArrayList<ItemTemplate> items;
 
 	public static Color backgroundColor = Color.DARK_GRAY;
 	public static Color floorColor = Color.white;
@@ -61,6 +65,8 @@ public class Draw extends JLabel {
 		this.spieLogic = spiellogik;
 		interactables = spiellogik.interactables;
 		this.spells = SpellManager.currentSpells;
+		this.functionalObjects = GameLogic.functionalObjects;
+		this.items = GameLogic.items;
 	}
 
 	@Override
@@ -72,7 +78,7 @@ public class Draw extends JLabel {
 		if(GameLogic.paused) {
 			//return;
 		}
-
+		
 
 		//zeiche Hintergrund
 		g.setColor(backgroundColor);
@@ -83,7 +89,7 @@ public class Draw extends JLabel {
 		try {
 			GameLogic.dungeon.drawRoom(g2d);
 		} catch (Exception e) {
-			Logger.logError("umable to draw Room", e);
+			Logger.logError("unable to draw Room", e);
 //			e.printStackTrace();
 		}
 
@@ -138,6 +144,20 @@ public class Draw extends JLabel {
 			if(GameLogic.debug)
 				g.fillRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
+		
+		g.setColor(Color.green);
+		for (int i = 0; i < functionalObjects.size(); i++) {
+			FunctionalTemplate aktuellesObjekt = functionalObjects.get(i);
+			if(aktuellesObjekt.isExisting && aktuellesObjekt.isVisible) {
+				g.drawImage(aktuellesObjekt.image, (int) aktuellesObjekt.posX, (int) aktuellesObjekt.posY, null);
+			}
+			if(GameLogic.debug) {
+				g.setColor(Color.green);
+				g2d.drawString(aktuellesObjekt.breite+"", aktuellesObjekt.posX+(aktuellesObjekt.breite/2), aktuellesObjekt.posY-5);
+				g2d.drawString(aktuellesObjekt.hoehe+"", aktuellesObjekt.posX-40, aktuellesObjekt.posY+(aktuellesObjekt.hoehe/2));
+				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+			}
+		}
 
 		g.setColor(mobsColor);
 		for (int i = 0; i < mobs.size(); i++) {
@@ -152,6 +172,21 @@ public class Draw extends JLabel {
 		for (int i = 0; i < arrows.size(); i++) {
 			Arrow aktuellesObjekt = arrows.get(i);
 			aktuellesObjekt.draw(g2d);
+		}
+		
+		
+		g.setColor(Color.blue);
+		for (int i = 0; i < items.size(); i++) {
+			ItemTemplate aktuellesObjekt = items.get(i);
+			if(aktuellesObjekt.isObject && aktuellesObjekt.isVisible) {
+				g.drawImage(aktuellesObjekt.itemImage, (int) aktuellesObjekt.posX, (int) aktuellesObjekt.posY, null);
+			}
+			if(GameLogic.debug) {
+				g.setColor(Color.blue);
+				g2d.drawString(aktuellesObjekt.itemImage.getHeight()+"", aktuellesObjekt.posX+(aktuellesObjekt.itemImage.getWidth()/2), aktuellesObjekt.posY-5);
+				g2d.drawString(aktuellesObjekt.itemImage.getHeight()+"", aktuellesObjekt.posX-40, aktuellesObjekt.posY+(aktuellesObjekt.itemImage.getHeight()/2));
+				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.itemImage.getWidth(), aktuellesObjekt.itemImage.getHeight());
+			}
 		}
 		
 
@@ -190,6 +225,7 @@ public class Draw extends JLabel {
 		
 
 		Collisions.checkInteractable(g2d, Color.white);
+		Collisions.checkFunctionable(g2d, Color.white);
 		repaint();
 	}
 
@@ -198,6 +234,8 @@ public class Draw extends JLabel {
 		Draw.collisionRectangles.clear();
 		Draw.columns.clear();
 		Draw.interactables.clear();
+		Draw.functionalObjects.clear();
+//		Draw.items.clear();
 	}
 
 	public static void resetColor() {	//Farben zurücksetzen 		ungenutzt

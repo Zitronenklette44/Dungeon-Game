@@ -2,8 +2,8 @@ package rooms.Village;
 
 import java.util.ArrayList;
 
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
 import rooms.RoomTemplate;
 
 public class Normal extends RoomTemplate {

@@ -121,7 +121,15 @@ public class Movement {
 					}
 				} catch (IndexOutOfBoundsException e) {}
 			}
+			for(int i = 0; i<GameLogic.functionalObjects.size();i++) {	//gehe durch alle vorhandenen Interaktionen durch
+				try {
+					if(GameLogic.functionalObjects.get(i).actionEnabled) {	//wenn Interaktion aktiviert
+						GameLogic.functionalObjects.get(i).performAction();	//führe Interaktion durch
+					}
+				} catch (IndexOutOfBoundsException e) {}
+			}
 		}
+		Collisions.checkItems();
 		if(GameLogic.counterInteraction >=50) {	//nach 50 Versuchen stope den Versuch der Interaktion			Muss so gemacht werden da sonst unter gewissen Umständen nicht erkannt wird!!!!
 			GameLogic.Interact = false;
 			GameLogic.counterInteraction = 0;

@@ -89,10 +89,10 @@ public class KeyHandler implements KeyListener {
 		
 		
 		
-		/*
 		if(e.getKeyCode() == KeyEvent.VK_F3) {
-			MusicPlayer.playSound(0, true);
+			GameLogic.items.clear();
 		}
+		/*
 		if(e.getKeyCode() == KeyEvent.VK_F4) {
 			MusicPlayer.playSound(1, true);
 		}

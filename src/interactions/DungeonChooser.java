@@ -1,4 +1,4 @@
-package entitys;
+package interactions;
 
 import game.GameLogic;
 import gui.DungeonChooserGUI;

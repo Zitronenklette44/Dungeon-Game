@@ -9,7 +9,7 @@ dungeonKey = 4
 
 // Debug Modus
 // Default false
-debug = false
+debug = true
 
 // Spieler Geschwindigkeit
 // Default 2
@@ -30,4 +30,8 @@ frameLocation = 100,100
 // Sprache
 // Default Deutsch
 activLanguage = Deutsch
+
+// Wurde das Spiel gestarted
+// Default true
+startedGame = true
 

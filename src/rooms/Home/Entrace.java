@@ -2,8 +2,8 @@ package rooms.Home;
 
 import java.awt.Color;
 
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
 import rendering.Draw;
 import rooms.RoomTemplate;
 

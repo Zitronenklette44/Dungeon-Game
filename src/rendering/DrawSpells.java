@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import entitys.Arrow;
-import entitys.InteractableTemplate;
 import entitys.MobTemplate;
 import game.GameLogic;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.SwordAttack;
+import interactions.InteractableTemplate;
 import gameObject.Rechteck;
 import spells.SpellManager;
 import spells.SpellTemplate;

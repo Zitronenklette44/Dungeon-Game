@@ -6,8 +6,8 @@ import java.util.Map;
 
 import action.Logger;
 import entitys.MobTemplate;
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
 import rendering.Draw;
 import spells.Fire.Fireball;
 import spells.Water.WaterSplash;

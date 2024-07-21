@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import action.Logger;
 import entitys.Arrow;
-import entitys.InteractableTemplate;
 import entitys.MobTemplate;
 import entitys.Player;
+import functionalObjects.FunctionalTemplate;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
-import gameObject.CreateObjects;
 import gameObject.SwordAttack;
 import gameObject.Rechteck;
 import gui.GameScreen;
+import interactions.InteractableTemplate;
+import loot.items.ItemTemplate;
 import rooms.DungeonCore;
 import spells.SpellManager;
 
@@ -33,7 +35,9 @@ public class GameLogic {
 	public static ArrayList<MobTemplate> mobs;
 	public static ArrayList<Arrow> arrows;
 	public static ArrayList<InteractableTemplate> interactables;
-
+	public static ArrayList<FunctionalTemplate> functionalObjects;
+	public static ArrayList<ItemTemplate> items;
+	
 	public static Player player;
 	public static Rechteck FloorObject;
 	public static int screenHoehe;
@@ -68,6 +72,8 @@ public class GameLogic {
 		mobs =new ArrayList<MobTemplate>();
 		arrows = new ArrayList<Arrow>();
 		interactables = new ArrayList<InteractableTemplate>();
+		functionalObjects = new ArrayList<FunctionalTemplate>();
+		items = new ArrayList<ItemTemplate>();
 		dungeon = new DungeonCore();
 
 		collisionRectangles = new ArrayList<>();
@@ -134,6 +140,16 @@ public class GameLogic {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}		
+//				System.out.println("floor: "+floorObject.size());
+//				System.out.println("cloums: "+columns.size());
+//				System.out.println("collisionRectangles: "+collisionRectangles.size());
+//				System.out.println("deathRechtecks: "+swordAttacks.size());
+//				System.out.println("mobs: "+mobs.size());
+//				System.out.println("arrows: "+arrows.size());
+//				System.out.println("interactables: "+interactables.size());
+//				System.out.println("functionable: "+functionalObjects.size());
+//				System.out.println("spells: "+SpellManager.currentSpells.size());
+//				System.out.println("items: "+items.size());
 			}
 		}, 0, 1000);
 	}

@@ -1,4 +1,4 @@
-package entitys;
+package interactions;
 
 import action.Logger;
 import gui.GameScreen;

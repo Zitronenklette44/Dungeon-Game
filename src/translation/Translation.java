@@ -40,6 +40,9 @@ public class Translation {
 		germanTranslationMap.put("save.Comment7", "Sprache");
 		englishTranslationMap.put("save.Comment7", "Language");
 		
+		germanTranslationMap.put("save.Comment8", "Wurde das Spiel gestarted");
+		englishTranslationMap.put("save.Comment8", "was the game started bevor");
+		
 		germanTranslationMap.put("interaction.dungeonEnter", "Dungeon betreten");
 		englishTranslationMap.put("interaction.dungeonEnter", "Enter dungeon");
 		
@@ -120,6 +123,18 @@ public class Translation {
 		
 		germanTranslationMap.put("interaction.guildExit", "Gilde verlassen");
 		englishTranslationMap.put("interaction.guildExit", "leave guild");
+		
+		germanTranslationMap.put("interaction.chestOpen", "Kiste öffnen");
+		englishTranslationMap.put("interaction.chestOpen", "open Chest");
+		
+		
+		
+		
+		//Items
+		germanTranslationMap.put("item.copperCoin", "Kupfermünze");
+		englishTranslationMap.put("item.copperCoin", "Copper coin");
+		
+		
 		
 		//Dialogs
 		germanTranslationMap.put("dialogs.log1.part1", "Das ist die erste Nachricht");

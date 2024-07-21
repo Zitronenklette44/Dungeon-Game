@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import entitys.InteractableTemplate;
 import entitys.MobTemplate;
+import functionalObjects.FunctionalTemplate;
 import gameObject.CollisionRechteck;
 import gameObject.SwordAttack;
+import interactions.InteractableTemplate;
+import loot.items.ItemTemplate;
 import spells.SpellTemplate;
 import gameObject.Rechteck;
 
@@ -256,6 +258,52 @@ public class Collisions {
 			}
 		}
 	}
+	
+	public static void checkFunctionable(Graphics2D g, Color color) {		//Überprüfen von möglichen Interactionen in Bereich um Spieler
+		for (FunctionalTemplate interactable : GameLogic.functionalObjects) {
+			interactable.update();
+			float playerCenterX = GameLogic.player.posX + GameLogic.player.breite / 2;
+			float playerCenterY = GameLogic.player.posY + GameLogic.player.hoehe / 2;
+
+			float interactableCenterX = interactable.posX + interactable.breite / 2;
+			float interactableCenterY = interactable.posY + interactable.hoehe / 2;
+
+			float dx = playerCenterX - interactableCenterX;
+			float dy = playerCenterY - interactableCenterY;
+			float distanceSquared = dx * dx + dy * dy;
+			int rangeSquared = interactable.range * interactable.range;
+
+			if (distanceSquared <= rangeSquared) {
+				interactable.actionEnabled = true;
+				g.setColor(color);
+				g.drawString("[E] "+interactable.interactionString, interactable.posX, interactable.posY-10);
+
+			}else {
+				interactable.actionEnabled = false;
+			}
+		}
+	}
+	
+	public static void checkItems() {        
+	    ArrayList<ItemTemplate> itemsList = new ArrayList<>(GameLogic.items); // Kopieren der Liste
+	    for (ItemTemplate items : itemsList) {
+	        float playerCenterX = GameLogic.player.posX + GameLogic.player.breite / 2;
+	        float playerCenterY = GameLogic.player.posY + GameLogic.player.hoehe / 2;
+
+	        float itemCenterX = items.posX + items.itemImage.getWidth() / 2;
+	        float itemCenterY = items.posY + items.itemImage.getHeight() / 2;
+
+	        float dx = playerCenterX - itemCenterX;
+	        float dy = playerCenterY - itemCenterY;
+	        float distanceSquared = dx * dx + dy * dy;
+	        int rangeSquared = GameLogic.player.itemPickupRange * GameLogic.player.itemPickupRange;
+
+	        if (distanceSquared <= rangeSquared) {
+	            items.pickedUp();
+	        }
+	    }
+	}
+
 
 
 }

@@ -1,6 +1,6 @@
 package rooms.Forest;
 
-import gameObject.CreateObjects;
+import game.CreateObjects;
 import rooms.RoomTemplate;
 
 public class ForestGoal extends RoomTemplate{

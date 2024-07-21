@@ -1,8 +1,8 @@
 package rooms.specialRoom;
 
-import entitys.GildSwitchInteraction;
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
+import interactions.GildSwitchInteraction;
 import rooms.RoomTemplate;
 
 public class Guilde extends RoomTemplate{
@@ -28,6 +28,7 @@ public class Guilde extends RoomTemplate{
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
 		CreateObjects.createGildSwitchInteraction(550, 750);
+		CreateObjects.createChest(600, 400, true);
 		
 		
 	}

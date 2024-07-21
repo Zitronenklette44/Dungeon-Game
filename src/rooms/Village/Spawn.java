@@ -3,8 +3,8 @@ package rooms.Village;
 import java.awt.Color;
 
 import entitys.MobTemplate;
+import game.CreateObjects;
 import game.GameLogic;
-import gameObject.CreateObjects;
 import rooms.RoomTemplate;
 
 public class Spawn extends RoomTemplate{
@@ -89,6 +89,7 @@ public class Spawn extends RoomTemplate{
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private void killAllEntitys() {
 		for(int i = 0; i<Entitys.length ; i++) {
 			Entitys[i].defeated = true;
