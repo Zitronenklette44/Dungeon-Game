@@ -51,6 +51,8 @@ public class GameLogic {
 	public static float gravity = 0.1f;
 	public static int dungeonKey=1;
 	public static int counterInteraction = 0;
+	public static float BaseSpeed = 2F;
+	public  static float VerticalSpeed = 1F;
 	public static boolean onGround=false;
 	static boolean jumpInitialized = false;
 	public static boolean isSpacePressed = false;
@@ -58,6 +60,7 @@ public class GameLogic {
 	public static boolean debug = false;
 	public static boolean paused = false;
 	public static boolean musicEnabled = true;
+	public static int Coins = 0;
 	public static int[] unlockedSpells = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 	public static DungeonCore dungeon;
@@ -88,7 +91,7 @@ public class GameLogic {
 			public void run() {
 				try {DungeonCore.thisRooms.get(DungeonCore.currentRoom).update();} catch (IndexOutOfBoundsException e) {}
 
-				if(vertikalAxis) {playerSpeed = 1F;}else {playerSpeed = 2F;}//TODO geschwindigkeiten nicht fest setzen sondern variabel machen
+				if(vertikalAxis) {playerSpeed = VerticalSpeed;}else {playerSpeed = BaseSpeed;}
 				player.speed = playerSpeed;
 				if(!paused) {
 					Movement.playerMovement();		//bewegung Spieler + Mobs
@@ -150,6 +153,7 @@ public class GameLogic {
 //				System.out.println("functionable: "+functionalObjects.size());
 //				System.out.println("spells: "+SpellManager.currentSpells.size());
 //				System.out.println("items: "+items.size());
+				Logger.logInfo("Coins: "+ Coins);
 			}
 		}, 0, 1000);
 	}
@@ -174,6 +178,7 @@ public class GameLogic {
 	public static void resetLevel() {
 		SpellManager.removeAllSpells();	//alle existierenden Spells löschen und in den Pool zurückgeben
 		dungeon.setSpawns();		//reset Punkte aus dem aktuellen Raum abrufen
+		items.clear();
 		if(directionRoom == 0) {	//wenn von links nach rechts
 			player.posX = resetPos[0];	
 			player.posY = resetPos[1];
