@@ -134,6 +134,9 @@ public class Translation {
 		germanTranslationMap.put("item.copperCoin", "Kupfermünze");
 		englishTranslationMap.put("item.copperCoin", "Copper coin");
 		
+		germanTranslationMap.put("item.silverCoin", "Silbermünze");
+		englishTranslationMap.put("item.silverCoin", "Silver coin");
+		
 		
 		
 		//Dialogs
