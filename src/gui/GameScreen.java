@@ -167,7 +167,7 @@ public class GameScreen extends JFrame {
 		dialogMenue = new JPanel();
 		dialogMenue.setBounds(0, (int) (getHeight()/1.25), 1184, (int) (getHeight()-(getHeight()/1.25)));
 		dialogMenue.setVisible(false);
-		//dialogMenue.setBackground(new Color(0,0,0, 150));
+//		dialogMenue.setBackground(new Color(0,0,0, 150));
 		dialogMenue.setBackground(Color.gray.darker());
 		dialogMenue.setLayout(null);
 		dialogMenue.setDoubleBuffered(true);

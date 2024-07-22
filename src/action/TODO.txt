@@ -12,7 +12,7 @@ TODO List:
 			-images
 			-evt Spawnpoints
 			-Gilde
-			-Field mobs				Done
+			-Field mobs									Done
 		3.Dungeon
 			-images
 			-Mobs
@@ -20,8 +20,8 @@ TODO List:
 				-normale mobs
 				-Skins
 			-Coins
-			-Chests + loot
-			-interactable Objects (Hebel, doors,...)
+			-Chests + loot								<-- solle verrecken gehen aber erledigt
+			-interactable Objects (Hebel, doors,...)	<-- können jetzt hinzugefügt werden mit entsprechendem template
 			
 		4. Endboss
 			-Rune
@@ -36,10 +36,10 @@ TODO List:
 		3.Spell Leveling
 	
 	Allgemein:
-		1.Dialog möglichkeit			Done
+		1.Dialog möglichkeit					Done
 		2.Drop Items
 		3.Inventar
-		4.evt Crafting möglichkeit
+		4.Crafting möglichkeit
 		5.Ausrüstungs Slots
 		6.Items mit wirkungen(z.B. mehr HP, schnellerer ATK, mehr Mana,...)
 		7.crafting Items

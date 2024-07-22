@@ -33,11 +33,4 @@ public class FunctionalTemplate extends InteractableTemplate{
 		}
 	}
 
-	public void draw(Graphics2D g) {
-		if(isExisting && isVisible) {
-			g.drawImage(image, (int) posX, (int) posY, null);
-		}
-		
-	}
-
 }

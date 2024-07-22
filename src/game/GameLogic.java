@@ -153,8 +153,8 @@ public class GameLogic {
 //				System.out.println("interactables: "+interactables.size());
 //				System.out.println("functionable: "+functionalObjects.size());
 //				System.out.println("spells: "+SpellManager.currentSpells.size());
-				System.out.println("items: "+items.size());
-				Logger.logInfo("Coins: "+ Coins);
+//				System.out.println("items: "+items.size());
+//				Logger.logInfo("Coins: "+ Coins);
 			}
 		}, 0, 1000);
 	}

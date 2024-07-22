@@ -55,7 +55,6 @@ public class ItemTemplate implements Cloneable{
 				GameLogic.items.remove(i);
 				isObject = false;
 				posX = 100;
-				Logger.logInfo("item picked up: "+this);
 				break;
 			}
 		}
