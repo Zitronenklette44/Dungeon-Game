@@ -86,7 +86,6 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 	public static FunctionalTemplate createPernamentChest(int posX, int posY, boolean isExisting) {	//feste Kiste immer da
 		return new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5));
 	}
-	
 	public static FunctionalTemplate createChestPoint(int posX, int posY, boolean isExisting, int spawnChance) {	//variable Kiste kann generieren muss aber nicht
 		return new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5), false, spawnChance);
 	}

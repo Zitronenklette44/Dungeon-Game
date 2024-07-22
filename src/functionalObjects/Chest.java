@@ -21,7 +21,6 @@ public class Chest extends FunctionalTemplate{
 		this.lootTableTemplate = lootTable;
 		name = "chest";
 	}
-	
 	public Chest(int posX, int posY, boolean isExisting, LootTableTemplate lootTable, boolean permanent, int spawnChance) {
 		this(posX, posY, isExisting, lootTable);
 		if(!permanent) {

@@ -184,7 +184,7 @@ public class Draw extends JLabel {
 				g.setColor(Color.blue);
 				g2d.drawString(aktuellesObjekt.itemImage.getHeight()+"", aktuellesObjekt.posX+(aktuellesObjekt.itemImage.getWidth()/2), aktuellesObjekt.posY-5);
 				g2d.drawString(aktuellesObjekt.itemImage.getHeight()+"", aktuellesObjekt.posX-40, aktuellesObjekt.posY+(aktuellesObjekt.itemImage.getHeight()/2));
-				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.itemImage.getWidth(), aktuellesObjekt.itemImage.getHeight());
+				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.itemImage.getWidth(), aktuellesObjekt.itemImage.getHeight()); 
 			}
 		}
 		

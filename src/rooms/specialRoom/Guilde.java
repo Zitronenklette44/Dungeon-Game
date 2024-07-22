@@ -1,5 +1,6 @@
 package rooms.specialRoom;
 
+import action.Logger;
 import game.CreateObjects;
 import game.GameLogic;
 import interactions.GildSwitchInteraction;
@@ -28,9 +29,11 @@ public class Guilde extends RoomTemplate{
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
 		CreateObjects.createGildSwitchInteraction(550, 750);
+//		GameLogic.functionalObjects.add(CreateObjects.createPernamentChest(600, 400, true));
 		for (int i = 0; i < functional.size(); i++) {
 			GameLogic.functionalObjects.add(functional.get(i));
 		}
+		
 	}
 	
 	@Override

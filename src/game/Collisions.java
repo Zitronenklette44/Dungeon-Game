@@ -300,6 +300,7 @@ public class Collisions {
 
 	        if (distanceSquared <= rangeSquared) {
 	            items.pickedUp();
+	            return;
 	        }
 	    }
 	}
