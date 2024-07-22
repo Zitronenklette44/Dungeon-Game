@@ -7,6 +7,7 @@ import entitys.MobTemplate;
 import entitys.Player;
 import entitys.TestMob;
 import functionalObjects.Chest;
+import functionalObjects.FunctionalTemplate;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.Rechteck;
@@ -82,8 +83,12 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 		GameLogic.interactables.add(new GildSwitchInteraction(posX, posY));
 	}
 	
-	public static void createChest(int posX, int posY, boolean isExisting) {
-		GameLogic.functionalObjects.add(new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5)));
+	public static FunctionalTemplate createPernamentChest(int posX, int posY, boolean isExisting) {	//feste Kiste immer da
+		return new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5));
+	}
+
+	public static FunctionalTemplate createChestPoint(int posX, int posY, boolean isExisting, int spawnChance) {	//variable Kiste kann generieren muss aber nicht
+		return new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5), false, spawnChance);
 	}
 	
 

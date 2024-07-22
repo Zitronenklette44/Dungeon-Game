@@ -13,7 +13,6 @@ public class SpawnLoot {
 	}
 	
 	public static void around(float posX, float posY, int range, LootTableTemplate loot){
-		Logger.logInfo("Loot spawned");
 		loot.generateLoot();
 		for (int i = 0; i < loot.rolls; i++) {
 			if (!(loot.lastGeneratedLoot.get(i) instanceof EmptyItem)) {
@@ -22,6 +21,7 @@ public class SpawnLoot {
 				loot.lastGeneratedLoot.get(i).changeToObject(posX+addX, posY+addY);
 			}
 		}
+		Logger.logInfo("Loot spawned");
 	}
 
 }

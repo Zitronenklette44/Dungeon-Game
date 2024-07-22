@@ -148,14 +148,14 @@ public class Draw extends JLabel {
 		g.setColor(Color.green);
 		for (int i = 0; i < functionalObjects.size(); i++) {
 			FunctionalTemplate aktuellesObjekt = functionalObjects.get(i);
-			if(aktuellesObjekt.isExisting && aktuellesObjekt.isVisible) {
-				g.drawImage(aktuellesObjekt.image, (int) aktuellesObjekt.posX, (int) aktuellesObjekt.posY, null);
-			}
+			aktuellesObjekt.draw(g2d);
 			if(GameLogic.debug) {
 				g.setColor(Color.green);
 				g2d.drawString(aktuellesObjekt.breite+"", aktuellesObjekt.posX+(aktuellesObjekt.breite/2), aktuellesObjekt.posY-5);
 				g2d.drawString(aktuellesObjekt.hoehe+"", aktuellesObjekt.posX-40, aktuellesObjekt.posY+(aktuellesObjekt.hoehe/2));
 				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+				g.setColor(Color.orange);
+				g2d.drawString(aktuellesObjekt.name, aktuellesObjekt.posX+3, aktuellesObjekt.posY+(aktuellesObjekt.hoehe/2));
 			}
 		}
 
@@ -185,7 +185,7 @@ public class Draw extends JLabel {
 				g.setColor(Color.blue);
 				g2d.drawString(aktuellesObjekt.itemImage.getHeight()+"", aktuellesObjekt.posX+(aktuellesObjekt.itemImage.getWidth()/2), aktuellesObjekt.posY-5);
 				g2d.drawString(aktuellesObjekt.itemImage.getHeight()+"", aktuellesObjekt.posX-40, aktuellesObjekt.posY+(aktuellesObjekt.itemImage.getHeight()/2));
-				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.itemImage.getWidth(), aktuellesObjekt.itemImage.getHeight());
+				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.itemImage.getWidth(), aktuellesObjekt.itemImage.getHeight()); 
 			}
 		}
 		

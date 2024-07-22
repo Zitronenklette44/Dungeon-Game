@@ -1,7 +1,11 @@
 package loot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
+import action.Logger;
 import loot.items.ItemTemplate;
 
 public class LootTableTemplate {
@@ -26,11 +30,26 @@ public class LootTableTemplate {
 	}
 	
 	public void generateLoot() {
-		lastGeneratedLoot.clear();
-		for(int i = 0; i< rolls ; i++) {
-			ItemTemplate item =itemPool.get((int) (Math.random()*itemPool.size()));
-			lastGeneratedLoot.add(item);
-		}
+	    Set<UUID> seenUUIDs = new HashSet<>();
+	    lastGeneratedLoot.clear();
+	    
+	    for (int i = 0; i < rolls; i++) {
+	        if (itemPool.size() == 0) {
+	            Logger.logWarning("Item pool is empty!");
+	            break;
+	        }
+	        
+	        ItemTemplate item = itemPool.get((int) (Math.random() * itemPool.size())).clone();
+	        while (seenUUIDs.contains(item.id)) {
+	            item = itemPool.get((int) (Math.random() * itemPool.size())).clone();
+	            if (itemPool.size() == 0) {
+	                break;
+	            }
+	        }
+	        
+	        seenUUIDs.add(item.id);
+	        lastGeneratedLoot.add(item);
+	    }
 	}
 	
 

@@ -1,9 +1,11 @@
 package rooms;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import action.Logger;
 import entitys.MobTemplate;
+import functionalObjects.FunctionalTemplate;
 import game.GameLogic;
 
 public class RoomTemplate implements Cloneable{
@@ -12,14 +14,17 @@ public class RoomTemplate implements Cloneable{
 	protected int RoomVariant;
 	public boolean EntitysSpawned = false;
 	protected MobTemplate[] Entitys;
+	protected ArrayList<FunctionalTemplate> functional = new ArrayList<FunctionalTemplate>();
 	
 	public RoomTemplate(String name) {
 		this.name = name;
+		createFunctionable();
 	}
 	
 	public RoomTemplate(String name, String Image) {
 		this.name = name;
 		this.ImagePath = Image;
+		createFunctionable();
 	}
 	
 	@Override
@@ -52,4 +57,6 @@ public class RoomTemplate implements Cloneable{
 	public void resetRoom() {}
 	
 	public void update() {}
+	
+	protected void createFunctionable() {}
 }
