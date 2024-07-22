@@ -145,17 +145,17 @@ public class Draw extends JLabel {
 				g.fillRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
 		}
 		
-		g.setColor(Color.green);
+		g.setColor(Color.green);	//nutzbare objekte
 		for (int i = 0; i < functionalObjects.size(); i++) {
 			FunctionalTemplate aktuellesObjekt = functionalObjects.get(i);
-			if(aktuellesObjekt.isExisting && aktuellesObjekt.isVisible) {
-				g.drawImage(aktuellesObjekt.image, (int) aktuellesObjekt.posX, (int) aktuellesObjekt.posY, null);
-			}
+			aktuellesObjekt.draw(g2d);
 			if(GameLogic.debug) {
 				g.setColor(Color.green);
 				g2d.drawString(aktuellesObjekt.breite+"", aktuellesObjekt.posX+(aktuellesObjekt.breite/2), aktuellesObjekt.posY-5);
 				g2d.drawString(aktuellesObjekt.hoehe+"", aktuellesObjekt.posX-40, aktuellesObjekt.posY+(aktuellesObjekt.hoehe/2));
 				g.drawRect((int)aktuellesObjekt.posX, (int)aktuellesObjekt.posY, aktuellesObjekt.breite, aktuellesObjekt.hoehe);
+				g.setColor(Color.orange);
+				g2d.drawString(aktuellesObjekt.name, aktuellesObjekt.posX+3, aktuellesObjekt.posY+(aktuellesObjekt.hoehe/2));
 			}
 		}
 
@@ -174,9 +174,8 @@ public class Draw extends JLabel {
 			aktuellesObjekt.draw(g2d);
 		}
 		
-		
 		g.setColor(Color.blue);
-		for (int i = 0; i < items.size(); i++) {
+		for (int i = 0; i < items.size(); i++) {		//items
 			ItemTemplate aktuellesObjekt = items.get(i);
 			if(aktuellesObjekt.isObject && aktuellesObjekt.isVisible) {
 				g.drawImage(aktuellesObjekt.itemImage, (int) aktuellesObjekt.posX, (int) aktuellesObjekt.posY, null);

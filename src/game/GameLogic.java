@@ -16,6 +16,7 @@ import gameObject.Rechteck;
 import gui.GameScreen;
 import interactions.InteractableTemplate;
 import loot.items.ItemTemplate;
+import rendering.Draw;
 import rooms.DungeonCore;
 import spells.SpellManager;
 
@@ -152,7 +153,7 @@ public class GameLogic {
 //				System.out.println("interactables: "+interactables.size());
 //				System.out.println("functionable: "+functionalObjects.size());
 //				System.out.println("spells: "+SpellManager.currentSpells.size());
-//				System.out.println("items: "+items.size());
+				System.out.println("items: "+items.size());
 				Logger.logInfo("Coins: "+ Coins);
 			}
 		}, 0, 1000);
@@ -176,6 +177,8 @@ public class GameLogic {
 	}
 
 	public static void resetLevel() {
+		Draw.clearObjects();
+		DungeonCore.thisRooms.get(DungeonCore.currentRoom).createObjects(DungeonCore.currentRoom);
 		SpellManager.removeAllSpells();	//alle existierenden Spells löschen und in den Pool zurückgeben
 		dungeon.setSpawns();		//reset Punkte aus dem aktuellen Raum abrufen
 		items.clear();

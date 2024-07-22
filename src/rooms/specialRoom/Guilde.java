@@ -28,9 +28,15 @@ public class Guilde extends RoomTemplate{
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
 		CreateObjects.createGildSwitchInteraction(550, 750);
-		CreateObjects.createChest(600, 400, true);
-		
-		
+		for (int i = 0; i < functional.size(); i++) {
+			GameLogic.functionalObjects.add(functional.get(i));
+		}
+	}
+	
+	@Override
+	protected void createFunctionable() {
+		super.createFunctionable();
+		functional.add(CreateObjects.createChestPoint(600, 400, true, 100));
 	}
 	
 }

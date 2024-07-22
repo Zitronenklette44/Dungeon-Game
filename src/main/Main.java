@@ -3,6 +3,7 @@ package main;
 import action.Logger;
 import action.SaveLoad;
 import game.Dialogs;
+import game.GameLogic;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
 import gui.LoadingGUI;
@@ -37,6 +38,7 @@ public class Main {
         LoadingGUI.nextLoadingStage("Finalizing...");
         GameScreen.updateSpells();			//Spells in Slots laden
         GameScreen.showFrame();
+        GameLogic.resetLevel();
         LoadingGUI.close();
         Logger.logSeperation();
         Logger.logInfo("Game Loaded");
