@@ -7,6 +7,7 @@ import game.GameLogic;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
 import gui.LoadingGUI;
+import inventory.InventoryManager;
 import rooms.DungeonCore;
 import spells.SpellIcons;
 import spells.SpellManager;
@@ -31,10 +32,12 @@ public class Main {
         LoadingGUI.nextLoadingStage("Creating Dungeons...");
         DungeonCore.init();					//Dungeon erstellen und ersten Raum laden
         LoadingGUI.nextLoadingStage("Loading Save File...");
-        MusicPlayer.playSound(0, true);		//Background Musik abspielen
         SaveLoad.loadConfig();				//Variabeln überschreiben
+        MusicPlayer.playSound(0, true);		//Background Musik abspielen
         LoadingGUI.nextLoadingStage("Loading Spells...");
         SpellManager.init();				//Zauber system erstellen und Zauber vorladen
+        LoadingGUI.nextLoadingStage("Loading Inventory...");
+        InventoryManager.init();
         LoadingGUI.nextLoadingStage("Finalizing...");
         GameScreen.updateSpells();			//Spells in Slots laden
         GameScreen.showFrame();

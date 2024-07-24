@@ -30,6 +30,20 @@ public class MobTemplate extends Rechteck{
 	public boolean isSlowed = false;
 	public boolean isStuned = false;
     
+    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana) {
+        super(hoehe, breite, posX, posY);
+        this.dx = dx;
+        this.SpawnX = SpawnX;
+        this.SpawnY = SpawnY;
+        this.speed = speed;
+        this.damage = damage;
+        this.Hp = Hp;
+        this.maxHp = Hp;
+        this.maxMana = MaxMana;
+        mana = maxMana;
+        this.restoreMana = restoreMana;
+    }
+    
     public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp) {
         super(hoehe, breite, posX, posY);
         this.dx = dx;
@@ -39,6 +53,9 @@ public class MobTemplate extends Rechteck{
         this.damage = damage;
         this.Hp = Hp;
         this.maxHp = Hp;
+        this.maxMana = 0;
+        mana = maxMana;
+        this.restoreMana = 0;
     }
     
     public void drawMob(Graphics2D g) {}

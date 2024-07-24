@@ -127,10 +127,10 @@ public class GameLogic {
 				}
 				
 				for(int i = 0; i<SpellManager.cooldowns.length;i++) {	//Cooldown veringern
-					if(SpellManager.cooldowns[i]>0) {SpellManager.cooldowns[i] -=0.005;}
+					if(SpellManager.cooldowns[i]>0 && !paused) {SpellManager.cooldowns[i] -=0.005;}
 				}
 				
-				SpellManager.updateSpells();	//Spell bewegungen und ander Updates durchführen
+				if(!paused) { SpellManager.updateSpells();}	//Spell bewegungen und ander Updates durchführen
 			}
 		}, 0, 5);
 		
@@ -140,7 +140,7 @@ public class GameLogic {
 			public void run() {
 				try {
 					GameScreen.changeBackground(DungeonCore.getImage(0));		//Hintergrund erneuern
-					if(player.mana+player.restoreMana < player.maxMana) {player.mana += player.restoreMana;}else {player.mana = player.maxMana;}	//Mana erneuern über Zeit
+					if(player.mana+player.restoreMana < player.maxMana && !paused) {player.mana += player.restoreMana;}else {player.mana = player.maxMana;}	//Mana erneuern über Zeit
 				} catch (Exception e) {
 					e.printStackTrace();
 				}		

@@ -40,6 +40,8 @@ TODO List:
 		2.Drop Items
 		3.Inventar
 		4.Crafting möglichkeit
+			-Item Icons
+			-GUI für craften erstellen
 		5.Ausrüstungs Slots
 		6.Items mit wirkungen(z.B. mehr HP, schnellerer ATK, mehr Mana,...)
 		7.crafting Items

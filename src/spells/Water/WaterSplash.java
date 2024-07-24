@@ -123,8 +123,10 @@ public class WaterSplash extends WaterTemplate{
 	    g2d.setTransform(oldTransform);
 
 	    // Aktualisiere die Position der Kugel
-	    this.posX += this.dx * speed;
-	    this.posY += this.dy * speed;
+	    if(!GameLogic.paused) {
+			this.posX += this.dx*speed;
+			this.posY += this.dy*speed;
+		}
 	}
 
 

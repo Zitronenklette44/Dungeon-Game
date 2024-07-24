@@ -13,6 +13,8 @@ import action.SaveLoad;
 import components.DialogButton;
 import game.Dialogs;
 import game.GameLogic;
+import inventory.Inventory;
+import inventory.InventoryManager;
 import rendering.Draw;
 import rendering.DrawSpells;
 import rendering.DrawSpellsOverlay;
@@ -69,6 +71,7 @@ public class GameScreen extends JFrame {
 	private static Draw draw;
 	private static DialogButton btnSkip;
 	public static boolean paintRoomNum;
+	public static Inventory inventory;
 	
 	
 	
@@ -147,6 +150,7 @@ public class GameScreen extends JFrame {
 				if(e.getKeyCode()== KeyEvent.VK_ESCAPE) {
 					if(hasDialog) {btnNext.finishDialog();return;}
 					GameLogic.paused = !GameLogic.paused;
+					if(inventory.isVisible()) {inventory.setVisible(false);}
 					togglePause();
 				}
 			}
@@ -170,7 +174,7 @@ public class GameScreen extends JFrame {
 //		dialogMenue.setBackground(new Color(0,0,0, 150));
 		dialogMenue.setBackground(Color.gray.darker());
 		dialogMenue.setLayout(null);
-		dialogMenue.setDoubleBuffered(true);
+		dialogMenue.setDoubleBuffered(true); 
 		contentPane.add(dialogMenue);
 		
 		textJLabel = new JLabel();
@@ -277,6 +281,11 @@ public class GameScreen extends JFrame {
 		lblNewLabel_1.setBounds(322, 0, 50, 50);
 		contentPane.add(lblNewLabel_1);
 		
+		inventory = new Inventory(InventoryManager.maxInventorySlots);
+		inventory.setBounds(0,0,1184,764);
+		inventory.setVisible(false);
+		contentPane.add(inventory);
+		
 		setContentPane(contentPane);
 		
 		lbBackground = new JLabel("");
@@ -286,7 +295,8 @@ public class GameScreen extends JFrame {
 		spells[0] = lbSpell1;
 		spells[1] = lbSpell2;
 		spells[2] = lbSpell3;
-		
+	
+		contentPane.setComponentZOrder(inventory, 0);
 	}
 
 	public static int getScreenHoehe() {
@@ -318,6 +328,7 @@ public class GameScreen extends JFrame {
 	    } catch (NullPointerException e) {
 	        e.printStackTrace();
 	    }
+	    updateInventory();
 	}
 	
 	private void togglePause() {
@@ -371,5 +382,9 @@ public class GameScreen extends JFrame {
 		draw.setIgnoreRepaint(false);
 		dialogMenue.setVisible(false);
 		GameLogic.paused = false;
+	}
+	
+	public static void updateInventory() {
+		inventory.maxInventarSlots = InventoryManager.maxInventorySlots;
 	}
 }

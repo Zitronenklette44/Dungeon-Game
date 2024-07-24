@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import game.GameLogic;
 import gui.GameScreen;
 import gui.SpellChooser;
+import inventory.InventoryManager;
 import rooms.DungeonCore;
 
 public class KeyHandler implements KeyListener {
@@ -53,8 +54,12 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {	//auslösen von Zaubern
 			GameLogic.fireSpell = true;
 		}
-		if(e.getKeyChar() == 'i' || e.getKeyChar() == 'I') {	//temporär
+		if(e.getKeyChar() == 'm' || e.getKeyChar() == 'M') {	//temporär
 			SpellChooser.erstellen();
+		}
+		if(e.getKeyChar() == 'i' || e.getKeyChar() == 'I') {	//temporär
+			GameScreen.inventory.setVisible(!GameScreen.inventory.isVisible());
+			GameLogic.paused = GameScreen.inventory.isVisible();
 		}
 		if(e.getKeyChar() == 'l' || e.getKeyChar() == 'L') {	//temporär zum leften eines Dungeon
 			DungeonCore.thisRooms.clear();
@@ -105,10 +110,10 @@ public class KeyHandler implements KeyListener {
 //			MusicPlayer.setVolumeAll(MusicPlayer.totalVolume-1F);
 //			System.out.println(MusicPlayer.getVolume(0));
 //		}
-//		if(e.getKeyCode() == KeyEvent.VK_ADD) {
-//			MusicPlayer.setVolumeAll(MusicPlayer.totalVolume+1F);
-//			System.out.println(MusicPlayer.getVolume(0));
-//		}
+		if(e.getKeyCode() == KeyEvent.VK_ADD) {
+			if(InventoryManager.maxInventorySlots<=40)
+				InventoryManager.maxInventorySlots++;
+		}
 	}
 
 	@Override

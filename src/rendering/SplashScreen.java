@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 public class SplashScreen extends JLabel {
     private static final long serialVersionUID = 1L;
     public static int currentLoadingState = 0;
-    private static int maxLoadingState = 9;
+    private static int maxLoadingState = 10;
 
     public SplashScreen() {}
 

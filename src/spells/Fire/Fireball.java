@@ -115,8 +115,10 @@ public class Fireball extends FireTemplate{
 		g2d.setTransform(oldTransform);
 
 		// Aktualisiere die Position der Kugel
-		this.posX += this.dx*speed;
-		this.posY += this.dy*speed;
+		if(!GameLogic.paused) {
+			this.posX += this.dx*speed;
+			this.posY += this.dy*speed;
+		}
 		//this.range -= Math.sqrt(this.dx * this.dx + this.dy * this.dy);
 	}
 

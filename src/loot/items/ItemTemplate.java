@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import action.Logger;
 import game.GameLogic;
+import inventory.InventoryManager;
 
 public class ItemTemplate implements Cloneable{
 	
@@ -55,6 +56,7 @@ public class ItemTemplate implements Cloneable{
 				GameLogic.items.remove(i);
 				isObject = false;
 				posX = 100;
+				InventoryManager.add(this, 1);
 				break;
 			}
 		}

@@ -59,9 +59,11 @@ public class Arrow extends MobTemplate {
 		g2d.setTransform(oldTransform);
 
 		// Aktualisiere die Position der Kugel
-		this.posX += this.dx;
-		this.posY += this.dy;
-		this.range -= Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+		if(!GameLogic.paused) {
+			this.posX += this.dx*speed;
+			this.posY += this.dy*speed;
+			this.range -= Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+		}
 	}
 
 	public void checkDelet() {
