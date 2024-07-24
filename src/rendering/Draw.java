@@ -44,7 +44,7 @@ public class Draw extends JLabel {
 	public static Color backgroundColor = Color.DARK_GRAY;
 	public static Color floorColor = Color.white;
 	public static Color columsColor = Color.gray;
-	public static Color playerColor = Color.white;
+	public static Color playerColor = Color.gray;
 	public static Color collisionRectanglesColor = Color.white;
 	public static Color deathRechteckColor = Color.red;
 	public static Color mobsColor = Color.blue;

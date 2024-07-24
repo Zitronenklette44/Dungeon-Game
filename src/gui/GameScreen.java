@@ -328,7 +328,6 @@ public class GameScreen extends JFrame {
 	    } catch (NullPointerException e) {
 	        e.printStackTrace();
 	    }
-	    updateInventory();
 	}
 	
 	private void togglePause() {

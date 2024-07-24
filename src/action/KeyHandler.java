@@ -111,7 +111,7 @@ public class KeyHandler implements KeyListener {
 //			System.out.println(MusicPlayer.getVolume(0));
 //		}
 		if(e.getKeyCode() == KeyEvent.VK_ADD) {
-			if(InventoryManager.maxInventorySlots<=40)
+			if(InventoryManager.maxInventorySlots<40)
 				InventoryManager.maxInventorySlots++;
 		}
 	}

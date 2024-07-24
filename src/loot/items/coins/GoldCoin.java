@@ -14,7 +14,7 @@ public class GoldCoin extends CoinTemplate{
 
 	public GoldCoin(int dropChance) {
 		super(3, dropChance, Translation.get("item.goldCoin"), getImage(), 10);
-		// TODO Auto-generated constructor stub
+		maxStackSize = 10;
 	}
 	
 	

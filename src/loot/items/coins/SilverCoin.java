@@ -14,7 +14,7 @@ public class SilverCoin extends CoinTemplate{
 
 	public SilverCoin(int dropChance) {
 		super(2, dropChance, Translation.get("item.silverCoin"), getImage(), 5);
-		// TODO Auto-generated constructor stub
+		maxStackSize = 50;
 	}
 	
 	private static BufferedImage getImage() {

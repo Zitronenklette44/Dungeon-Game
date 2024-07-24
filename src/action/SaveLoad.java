@@ -1,5 +1,6 @@
 package action;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,6 +14,8 @@ import game.GameLogic;
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
 import gui.LoadingGUI;
+import inventory.InventoryManager;
+import rendering.Draw;
 import rooms.DungeonCore;
 import translation.Language;
 import translation.Translation;
@@ -69,7 +72,12 @@ public class SaveLoad {
                     case "startedGame":
                         checkGameStarted(value);;
                         break;
-                        
+                    case "inventorySlots":
+                    	InventoryManager.maxInventorySlots = Integer.parseInt(value);
+                        break;
+                    case "inventory":
+                    	InventoryManager.loadSaveString(value);
+                    	break;
                     default:
                     	Logger.logError("Invalid Configuration: "+ line);
                         break;
@@ -87,34 +95,40 @@ public class SaveLoad {
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
             // Schreibe die aktualisierten Konfigurationswerte
-            writer.write("// "+Translation.get("save.Comment1")+"\n");
+            writer.write("// If Music activ\n");
             writer.write("// Default true, -30\n");
             writer.write("musicEnabled = " + GameLogic.musicEnabled + "\n");
             writer.write("musicVolume = "+MusicPlayer.musicVolume+"\n\n");
-            writer.write("// "+Translation.get("save.Comment2")+"\n");
+            writer.write("// Number of owned dungeon keys\n");
             writer.write("// Default 1\n");
             writer.write("dungeonKey = " + GameLogic.dungeonKey + "\n\n");
             writer.write("// Debug Modus\n");
             writer.write("// Default false\n");
             writer.write("debug = " + GameLogic.debug + "\n\n");
-            writer.write("// " +Translation.get("save.Comment3")+"\n");
+            writer.write("// player speed\n");
             writer.write("// Default 2\n");
             writer.write("playerSpeed = " + GameLogic.player.speed + "\n\n");
-            writer.write("// " +Translation.get("save.Comment4")+"\n");
+            writer.write("// player jump hight\n");
             writer.write("// Default 70" + "\n");
             writer.write("jumpHight = " + GameLogic.jumpHight + "\n\n");
-            writer.write("// " +Translation.get("save.Comment5")+"\n");
+            writer.write("// unlocked spells\n");
             writer.write("// Default all 0\n");
             writer.write("spells = " + Arrays.toString(GameLogic.unlockedSpells) + "\n\n");
-            writer.write("// " +Translation.get("save.Comment6")+"\n");
+            writer.write("// Frame position\n");
             writer.write("// Default (0,0)\n");
             writer.write("frameLocation = " + location.x + "," + location.y + "\n\n");
-            writer.write("// " +Translation.get("save.Comment7")+"\n");
+            writer.write("// Language\n");
             writer.write("// Default Deutsch\n");
             writer.write("activLanguage = " + Translation.activLanguage + "\n\n");
-            writer.write("// " +Translation.get("save.Comment8")+"\n");
+            writer.write("// was the game started bevor\n");
             writer.write("// Default true\n");
             writer.write("startedGame = " + startedGame+ "\n\n");
+            writer.write("// Inventory Slots\n");
+            writer.write("// Default 10\n");
+            writer.write("inventorySlots = " + InventoryManager.maxInventorySlots+ "\n\n");
+            writer.write("// Inventory\n");
+            writer.write("// Default --\n");
+            writer.write("inventory = " + InventoryManager.createSaveString()+ "\n\n");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -147,6 +161,7 @@ public class SaveLoad {
 
 	
 	public static void resetConfig() {	//Konfigurationen auf einen Standart Wert zurücksetzen
+		int[] emptySpells = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         // Setze alle Konfigurationswerte auf Standardwerte
         GameLogic.musicEnabled = true;
         GameLogic.dungeonKey = 1;
@@ -154,6 +169,12 @@ public class SaveLoad {
         GameLogic.jumpHight = 70;
         GameLogic.player.speed = 2;
         MusicPlayer.musicVolume = -30F;
+        GameLogic.unlockedSpells = emptySpells;
+        GameScreen.location = new Point(0,0);
+        Translation.activLanguage = Language.Deutsch;
+        startedGame = false;
+        InventoryManager.maxInventorySlots = 10;
+        InventoryManager.clearInventory();
 
         // Speichere die neuen Standardwerte in der Konfigurationsdatei
         saveConfig();
@@ -192,6 +213,7 @@ public class SaveLoad {
 			GameScreen.updateRoomNr(1);
 			GameLogic.player.breite = 25;
 			GameLogic.player.hoehe = 25;
+			Draw.playerColor = Color.gray;
 			GameLogic.resetLevel();
 			
 			//Noch weitere Anweisungen für werte bei Spielstart

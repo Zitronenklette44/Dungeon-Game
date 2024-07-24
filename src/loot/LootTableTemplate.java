@@ -51,6 +51,4 @@ public class LootTableTemplate {
 	        lastGeneratedLoot.add(item);
 	    }
 	}
-	
-
 }

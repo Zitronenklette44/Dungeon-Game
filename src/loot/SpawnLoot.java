@@ -18,7 +18,7 @@ public class SpawnLoot {
 			if (!(loot.lastGeneratedLoot.get(i) instanceof EmptyItem)) {
 				int addX = (int) (Math.random() * range) - range / 2;
 	            int addY = (int) (Math.random() * range) - range / 2;
-				loot.lastGeneratedLoot.get(i).changeToObject(posX+addX, posY+addY);
+				loot.lastGeneratedLoot.get(i).changeToObject(posX+addX, posY+addY); 
 			}
 		}
 		Logger.logInfo("Loot spawned");

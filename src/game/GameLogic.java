@@ -143,7 +143,12 @@ public class GameLogic {
 					if(player.mana+player.restoreMana < player.maxMana && !paused) {player.mana += player.restoreMana;}else {player.mana = player.maxMana;}	//Mana erneuern über Zeit
 				} catch (Exception e) {
 					e.printStackTrace();
-				}		
+				}
+				for (int i = 0; i < items.size(); i++) {
+					if(items.get(i).pickUpCooldown != 0 && !paused) {
+						items.get(i).pickUpCooldown--;
+					}
+				}
 //				System.out.println("floor: "+floorObject.size());
 //				System.out.println("cloums: "+columns.size());
 //				System.out.println("collisionRectangles: "+collisionRectangles.size());
@@ -173,6 +178,7 @@ public class GameLogic {
 		}
 		try {
 			GameScreen.changeBackground(DungeonCore.getImage(0));
+			GameScreen.updateInventory();
 		} catch (Exception e) {}
 	}
 

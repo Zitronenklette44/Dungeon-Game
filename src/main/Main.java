@@ -31,13 +31,13 @@ public class Main {
         GameScreen.erstellen();				//Fenster erstellen
         LoadingGUI.nextLoadingStage("Creating Dungeons...");
         DungeonCore.init();					//Dungeon erstellen und ersten Raum laden
+        LoadingGUI.nextLoadingStage("Loading Inventory...");
+        InventoryManager.init();
         LoadingGUI.nextLoadingStage("Loading Save File...");
         SaveLoad.loadConfig();				//Variabeln überschreiben
         MusicPlayer.playSound(0, true);		//Background Musik abspielen
         LoadingGUI.nextLoadingStage("Loading Spells...");
         SpellManager.init();				//Zauber system erstellen und Zauber vorladen
-        LoadingGUI.nextLoadingStage("Loading Inventory...");
-        InventoryManager.init();
         LoadingGUI.nextLoadingStage("Finalizing...");
         GameScreen.updateSpells();			//Spells in Slots laden
         GameScreen.showFrame();

@@ -19,30 +19,6 @@ public class Translation {
 		germanTranslationMap = new HashMap<String, String>();
 		englishTranslationMap = new HashMap<String, String>();
 		
-		germanTranslationMap.put("save.Comment1", "Wenn Musik aktiviert ist");
-		englishTranslationMap.put("save.Comment1", "If Music activ");
-		
-		germanTranslationMap.put("save.Comment2", "Anzahl der in Besitz befindenen dungeon Keys");
-		englishTranslationMap.put("save.Comment2", "Number of owned dungeon keys");
-		
-		germanTranslationMap.put("save.Comment3", "Spieler Geschwindigkeit");
-		englishTranslationMap.put("save.Comment3", "player speed");
-		
-		germanTranslationMap.put("save.Comment4", "Spieler Sprung Höhe");
-		englishTranslationMap.put("save.Comment4", "player jump hight");
-		
-		germanTranslationMap.put("save.Comment5", "Freigeschaltene Zauber");
-		englishTranslationMap.put("save.Comment5", "unlocked spells");
-		
-		germanTranslationMap.put("save.Comment6", "Fenster Position");
-		englishTranslationMap.put("save.Comment6", "Frame position");
-		
-		germanTranslationMap.put("save.Comment7", "Sprache");
-		englishTranslationMap.put("save.Comment7", "Language");
-		
-		germanTranslationMap.put("save.Comment8", "Wurde das Spiel gestarted");
-		englishTranslationMap.put("save.Comment8", "was the game started bevor");
-		
 		germanTranslationMap.put("interaction.dungeonEnter", "Dungeon betreten");
 		englishTranslationMap.put("interaction.dungeonEnter", "Enter dungeon");
 		
