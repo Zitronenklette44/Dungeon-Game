@@ -159,17 +159,42 @@ public class Translation {
 		englishTranslationMap.put("dialogs.log1.part3", "This is the last Message");
 		
 			//Gilde
-		germanTranslationMap.put("dialogs.log2.part1", "AHH, Ein Fremder. Zumindest hab ich dich hier noch nie gesehen. Was wollen Sie hier?");
+		germanTranslationMap.put("dialogs.log2.part1", "Ahh, Ein Fremder. Zumindest hab ich dich hier noch nie gesehen. Was wollen Sie hier?");
 		englishTranslationMap.put("dialogs.log2.part1", "AHH, a stranger. At least I've never seen you here. What do you want here?. Meth??");
 		
 		germanTranslationMap.put("dialogs.log2.part2", "AHH, Du willst dich in der Gilde anmelden. Weißt du, wir lassen hier nicht Jeden rein. Du musst schon was drauf haben, um hier rein zu kommen.");
-		englishTranslationMap.put("dialogs.log2.part2", "AHH, you want to sign up for the guild. You know, we don't let everyone in here. You have to have what it takes to get in here. Asshole");
+		englishTranslationMap.put("dialogs.log2.part2", "AHH, you want to sign up for the guild. You know, we don't let everyone in here. You have to have what it takes to get in here.");
 		
 		germanTranslationMap.put("dialogs.log2.part3", "Ich sehe. Du willst es also versuchen?");
 		englishTranslationMap.put("dialogs.log2.part3", "I see. So you want to give it a try?");
 		
 		germanTranslationMap.put("dialogs.log2.part4", "Ok, gehe zum Feld und besiege die dort existierenden Monster, wenn du es schaffst nehmen wir dich auf.");
 		englishTranslationMap.put("dialogs.log2.part4", "Ok, go to the field and defeat the monsters that exist there, if you make it we will take you in.");
+		
+				//Nach der Mission
+		
+		germanTranslationMap.put("dialogs.log3.part1", "Ohh, Du hast es tatsächlich geschafft. Willkommen in der Gilde.");
+		englishTranslationMap.put("dialogs.log3.part1", "oh, you actually did it. Welcome to the guild.");
+		
+		germanTranslationMap.put("dialogs.log3.part2", "Du kannst bei dem Händler, in der Gilde, deine Items verkaufen wenn du magst.");
+		englishTranslationMap.put("dialogs.log3.part2", "You can sell your items at the merchant, in the guild, if you like.");
+		
+		germanTranslationMap.put("dialogs.log3.part3", "Achso hier für die Erfolgreiche Mission.");
+		englishTranslationMap.put("dialogs.log3.part3", "Oh, here for the Successful Mission.");
+		
+		germanTranslationMap.put("dialogs.log3.part4", "An der Tafel kannst du dir weitere Quest's anschauen und auswählen. Nur musst du diese bei mir Verifizieren. Dann viel Spaß mit deinem neuen Leben als richtiger Abenteurer.");
+		englishTranslationMap.put("dialogs.log3.part4", "On the board you can continue to view and select missions. Only you have to verify them with me. Then have fun with your new life as a real adventurer.");
+		
+			//Quest Annahme
+		
+		germanTranslationMap.put("dialogs.log4.part1", "Du hast noch keine Quest? Schau an die Tafel links von mir. Und wähle eine Quest aus. Aber Vorsicht. Wähle weise.");
+		englishTranslationMap.put("dialogs.log4.part1", "Don't have a quest yet? Look at the board to my left. And choose a quest. But be careful. Choose wisely.");
+		
+		germanTranslationMap.put("dialogs.log5.part1", "Ah, Da hast du dir eine schöne Quest ausgesucht. Viel Spaß und sei Vorsichtig.");
+		englishTranslationMap.put("dialogs.log5.part1", "Ah, you've chosen a nice quest. Have fun and be careful.");
+		
+		germanTranslationMap.put("dialogs.log6.part1", "Du hast es Geschafft? Und du Lebst noch???? Hier ist deine Belohnung");
+		englishTranslationMap.put("dialogs.log6.part1", "You made it? And you're still alive???? Here's Your Reward");
 		
 		Logger.logInfo("Loaded Translations");
 	}
