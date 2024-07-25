@@ -21,7 +21,8 @@ public class Dialogs {
         dialogs.put("log2", new String[]{
                 Translation.get("dialogs.log2.part1"),
                 Translation.get("dialogs.log2.part2"),
-                Translation.get("dialogs.log2.part3")
+                Translation.get("dialogs.log2.part3"),
+                Translation.get("dialogs.log2.part4")
             });
         
             Logger.logInfo("Finished loading Dialogs");

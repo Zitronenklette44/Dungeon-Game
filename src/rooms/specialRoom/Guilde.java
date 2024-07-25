@@ -1,8 +1,6 @@
 package rooms.specialRoom;
 
 import java.awt.Color;
-
-import action.Logger;
 import entitys.MobTemplate;
 import game.CreateObjects;
 import game.GameLogic;
@@ -36,7 +34,7 @@ public class Guilde extends RoomTemplate{
 		CreateObjects.createGildSwitchInteraction(550, 750);
 //		GameLogic.functionalObjects.add(CreateObjects.createPernamentChest(600, 400, true));
 		CreateObjects.createDialogInteraction(581, 103, Translation.get("interaction.testDialog") , 2, Translation.get("dialogs.gildenSender"));
-		
+	
 		
 		CreateObjects.createHitbox(57,1160, 0, 0);	//hohe breite posX posY
 		CreateObjects.createHitbox(750,26, 1161, 0);
@@ -47,6 +45,7 @@ public class Guilde extends RoomTemplate{
 		CreateObjects.createHitbox(41,522, 0, 708);
 		CreateObjects.createHitbox(41,600, 612, 708);
 		CreateObjects.createHitbox(82,63, 562, 96);
+		CreateObjects.createHitbox(59,135, 326, 57);
 	}
 	
 	protected void createEntitys() {
