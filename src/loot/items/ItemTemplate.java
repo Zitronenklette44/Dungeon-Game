@@ -17,7 +17,7 @@ public class ItemTemplate implements Cloneable {
 	public int stackSize = 1;
 	public int pickUpCooldown;
 	public int maxStackSize = 99;
-	public int variant;
+	public int variant = -1;
 
 	public float posX;
 	public float posY;

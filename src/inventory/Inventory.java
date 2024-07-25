@@ -10,13 +10,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JLabel;
 
-import action.Logger;
 import game.GameLogic;
 import loot.LootTableTemplate;
 import loot.SpawnLoot;
 import loot.items.EmptyItem;
 import loot.items.ItemTemplate;
-import loot.items.villageLoot.Food;
 
 public class Inventory extends JLabel {
 	private static final long serialVersionUID = 1L;
