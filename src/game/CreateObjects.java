@@ -6,6 +6,7 @@ import entitys.Arrow;
 import entitys.MobTemplate;
 import entitys.Player;
 import entitys.TestMob;
+import entitys.village.Swordmen;
 import functionalObjects.Chest;
 import functionalObjects.FunctionalTemplate;
 import gameObject.CollisionRechteck;
@@ -19,6 +20,7 @@ import interactions.InteractableDialog;
 import interactions.ShopOpenPotions;
 import interactions.ShopOpenTools;
 import loot.LootTabels;
+import loot.LootTableTemplate;
 
 public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener Objekte
 
@@ -88,6 +90,11 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 	}
 	public static FunctionalTemplate createChestPoint(int posX, int posY, boolean isExisting, int spawnChance) {	//variable Kiste kann generieren muss aber nicht
 		return new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5), false, spawnChance);
+	}
+	public static MobTemplate createSwordmen(int hoehe,int breite, float speed, int SpawnX, int SpawnY, int damage, int Hp, LootTableTemplate loot) {
+		MobTemplate template = new Swordmen(hoehe, breite, SpawnX, SpawnY, 0, 0, speed, SpawnX, SpawnY, damage, Hp, loot);
+		GameLogic.mobs.add(template);
+		return template;
 	}
 	
 

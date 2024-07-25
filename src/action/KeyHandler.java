@@ -57,7 +57,7 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'm' || e.getKeyChar() == 'M') {	//temporär
 			SpellChooser.erstellen();
 		}
-		if(e.getKeyChar() == 'i' || e.getKeyChar() == 'I') {	//temporär
+		if((e.getKeyChar() == 'i' || e.getKeyChar() == 'I') && !GameLogic.paused) {	
 			GameScreen.inventory.setVisible(!GameScreen.inventory.isVisible());
 			GameLogic.paused = GameScreen.inventory.isVisible();
 		}

@@ -265,6 +265,7 @@ public class Draw extends JLabel {
 		}
 		if(!valid) {
 			mob.defeated = true;
+			mob.onDeath();
 			GameLogic.mobs.remove(index);
 		}
 		return valid;

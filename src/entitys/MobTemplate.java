@@ -3,7 +3,10 @@ package entitys;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import action.Logger;
 import gameObject.Rechteck;
+import loot.LootTableTemplate;
+import loot.SpawnLoot;
 
 
 public class MobTemplate extends Rechteck{
@@ -27,6 +30,8 @@ public class MobTemplate extends Rechteck{
 	public int mana = maxMana;
 	public int restoreMana;
 	public String[] equipedSpells = {"","",""};
+	public LootTableTemplate loot;
+	public boolean spawnedLootTable = false;
 	public boolean isSlowed = false;
 	public boolean isStuned = false;
     
@@ -58,9 +63,31 @@ public class MobTemplate extends Rechteck{
         this.restoreMana = 0;
     }
     
+    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana, LootTableTemplate loot) {
+        this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, MaxMana, restoreMana);
+        this.loot = loot;
+    }
+    
+    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, LootTableTemplate loot) {
+        this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp);
+        this.loot = loot;
+    }
+    
     public void drawMob(Graphics2D g) {}
     
     public void setHitCooldown() {
 		this.HitCooldown = maxHitCooldown;
 	}
+    
+    public void onDeath() {
+    	if(!defeated || spawnedLootTable || loot == null) {return;}
+    	SpawnLoot.around(posX, posY, 20, loot);
+    	spawnedLootTable = true;
+    	
+    }
+    
+    public void resetPos() {
+        this.posX = SpawnX;
+        this.posY = SpawnY;
+    }
 }

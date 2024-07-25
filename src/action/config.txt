@@ -9,11 +9,11 @@ dungeonKey = 4
 
 // Debug Modus
 // Default false
-debug = true
+debug = false
 
 // player speed
 // Default 2
-playerSpeed = 2.0
+playerSpeed = 1.0
 
 // player jump hight
 // Default 70
@@ -37,7 +37,7 @@ startedGame = true
 
 // Inventory Slots
 // Default 10
-inventorySlots = 20
+inventorySlots = 40
 
 // Inventory
 // Default --

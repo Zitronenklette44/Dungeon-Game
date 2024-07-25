@@ -72,7 +72,7 @@ public class DrawSpells extends JLabel {
 
 		for (int i = 0; i < spells.size(); i++) {
 			SpellTemplate aktuellesObjekt = spells.get(i);
-			aktuellesObjekt.drawSpell(g2d);
+			if(aktuellesObjekt!= null) {aktuellesObjekt.drawSpell(g2d);}
 		}		
 		repaint();
 	}

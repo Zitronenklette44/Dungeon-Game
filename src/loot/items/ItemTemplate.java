@@ -17,12 +17,14 @@ public class ItemTemplate implements Cloneable {
 	public int stackSize = 1;
 	public int pickUpCooldown;
 	public int maxStackSize = 99;
+	public int variant;
 
 	public float posX;
 	public float posY;
 
 	public boolean isVisible = true;
 	public BufferedImage itemImage;
+	public boolean interactable = false;
 
 	public ItemTemplate(int ItemID, int dropChance, String itemName, BufferedImage itemImage) {
 		this.id = UUID.randomUUID(); // Eindeutige UUID generieren
@@ -96,5 +98,7 @@ public class ItemTemplate implements Cloneable {
 		pickUpCooldown = 2000;
 		GameLogic.items.add(this);
 	}
+	
+	public void onInteraction() {}
 
 }

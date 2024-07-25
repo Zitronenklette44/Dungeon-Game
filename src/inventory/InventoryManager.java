@@ -7,6 +7,7 @@ import action.Logger;
 import loot.items.CreateItem;
 import loot.items.EmptyItem;
 import loot.items.ItemTemplate;
+import loot.items.villageLoot.Food;
 
 public class InventoryManager {
 
@@ -47,8 +48,15 @@ public class InventoryManager {
 		boolean hasItem = false;
 		for (int i = 0; i < maxInventorySlots; i++) {
 			if (inventory.get("Slot" + i).getItem().getClass() == item.getClass()) {
-				hasItem = true;
-				break;
+				if(item instanceof Food) {
+					if(inventory.get("Slot" + i).getItem().variant == item.variant) {
+						hasItem = true;
+						break;
+					}
+				}else {
+					hasItem = true;
+					break;
+				}
 			}
 		}
 		return hasItem;
@@ -57,8 +65,14 @@ public class InventoryManager {
 	public static int getSlot(ItemTemplate item, int count) {		//Slot in dem sich das gesuchte Item befindet 		nicht vorhanden = -1
 		for (int i = 0; i < maxInventorySlots; i++) {
 			if (inventory.get("Slot" + i).getItem().getClass() == item.getClass()) {
-				if (inventory.get("Slot" + i).getCount() <= item.maxStackSize - count) {
-					return i;
+				if (inventory.get("Slot" + i).getItem().getClass() == item.getClass()) {
+					if(item instanceof Food) {
+						if(inventory.get("Slot" + i).getItem().variant == item.variant) {
+							return i;
+						}
+					}else {
+						return i;
+					}
 				}
 			}
 		}

@@ -2,6 +2,7 @@ package loot.items;
 
 import action.Logger;
 import loot.items.coins.*;
+import loot.items.villageLoot.Food;
 
 public class CreateItem {	
 	 public static ItemTemplate createEmpty(int dropChance) {	//ID = 0
@@ -20,6 +21,9 @@ public class CreateItem {
 		 return new GoldCoin(dropChance);
 	}
 	
+	public static ItemTemplate createFood(int dropChance) {	//ID = 4
+		 return new Food(dropChance);
+	}
 	
 	
 	public static ItemTemplate getItembyID(int ID) {
@@ -28,6 +32,8 @@ public class CreateItem {
 		case 1: return new CopperCoin(0);
 		case 2: return new SilverCoin(0);
 		case 3: return new GoldCoin(0);
+		case 4: return new EmptyItem(0);	//Food will be deleted after loading the game
+//		case 4: return new Food(0);
 		default:
 			Logger.logError("Invalid Item ID in Configs:"+ID, new IllegalArgumentException());
 			return null;
