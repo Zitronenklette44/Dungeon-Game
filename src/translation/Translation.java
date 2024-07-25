@@ -116,6 +116,32 @@ public class Translation {
 		germanTranslationMap.put("item.goldCoin", "Goldmünze");
 		englishTranslationMap.put("item.goldCoin", "Gold coin");
 		
+		germanTranslationMap.put("item.bread", "Brot");	//
+		englishTranslationMap.put("item.bread", "Bread");
+		
+		germanTranslationMap.put("item.apple", "Apfel");
+		englishTranslationMap.put("item.apple", "Apple");
+		
+		germanTranslationMap.put("item.potato", "Kartoffel");
+		englishTranslationMap.put("item.potato", "Potato");
+		
+		germanTranslationMap.put("item.mondtau", "Mondtau");
+		englishTranslationMap.put("item.mondtau", "Moon Dew");
+		
+		germanTranslationMap.put("item.daemerungswurz", "Dämerungswurz");
+		englishTranslationMap.put("item.daemerungswurz", "Duskroot");
+		
+		germanTranslationMap.put("item.schattenkraut", "Schattenkraut");
+		englishTranslationMap.put("item.schattenkraut", "Shadow Herb");
+		
+		germanTranslationMap.put("item.kette", "Kette");
+		englishTranslationMap.put("item.kette", "Necklace");
+		
+		germanTranslationMap.put("item.ring", "Ring");
+		englishTranslationMap.put("item.ring", "Ring");
+		
+		germanTranslationMap.put("item.armreif", "Armreif");
+		englishTranslationMap.put("item.armreif", "Bracelet");
 		
 		
 		//Dialogs

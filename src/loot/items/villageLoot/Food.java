@@ -9,6 +9,7 @@ import action.Logger;
 import game.GameLogic;
 import loot.items.ItemTemplate;
 import spells.SpellIcons;
+import translation.Translation;
 
 public class Food extends ItemTemplate{
 	private static BufferedImage bread;
@@ -23,35 +24,68 @@ public class Food extends ItemTemplate{
 		generateRandomVariant();
 	}
 	
-	private void generateRandomVariant() {
+	public Food(int dropChance, int variant) {
+		super(4, dropChance, "", null);
+		generateVariant(variant);
+	}
+	
+	private void generateVariant(int variant) {
 		setImage();
-		int random = (int) (Math.random()*3);
-		switch (random) {
+		switch (variant) {
 		case 0: 
-			itemName = "Bread";
+			itemName = Translation.get("item.bread");
 			itemImage = bread;
 			healthRegeneration = 5;
-			variant = 0;
+			this.variant = 0;
 			break;
 		case 1:
-			itemName = "Apple";
+			itemName = Translation.get("item.apple");
+			itemImage = apple;
+			healthRegeneration = 3;
+			this.variant = 1;
+			break;
+		case 2:
+			itemName = Translation.get("item.potato");
+			itemImage = potato;
+			healthRegeneration = 2;
+			this.variant = 2;	
+			break;
+		default:
+			Logger.logError("invalid food variant: "+variant, new IllegalArgumentException());
+			Logger.logWarning("Food Variant has been set to bread");
+			itemName = Translation.get("item.bread");
+			itemImage = bread;
+			this.variant = 0;
+			break;
+		}
+		
+	}
+	
+	private void generateRandomVariant() {
+		setImage();
+		int random = (int) (Math.random()*100);
+		if (random >= 0 && random <= 50) {
+			itemName = Translation.get("item.potato");
+			itemImage = potato;
+			healthRegeneration = 2;
+			variant = 0;
+		} else if (random >= 51 && random <= 90) {
+			itemName = Translation.get("item.apple");
 			itemImage = apple;
 			healthRegeneration = 3;
 			variant = 1;
-			break;
-		case 2:
-			itemName = "Potato";
-			itemImage = potato;
-			healthRegeneration = 2;
-			variant = 2;	
-			break;
-		default:
-			Logger.logError("invalid food variant: "+random, new IllegalArgumentException());
-			Logger.logWarning("Food Variant has been set to bread");
-			itemName = "Bread";
+		} else if (random >= 91) {
+			itemName = Translation.get("item.bread");
 			itemImage = bread;
+			healthRegeneration = 5;
+			
+			variant = 2;	
+		} else {
+			Logger.logError("invalid food variant: "+random, new IllegalArgumentException());
+			Logger.logWarning("Food Variant has been set to potato");
+			itemName = Translation.get("item.potato");
+			itemImage = potato;
 			variant = 0;
-			break;
 		}
 		
 		
