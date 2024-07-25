@@ -93,7 +93,7 @@ public class ItemTemplate implements Cloneable {
 		isObject = true;
 		this.posX = posX;
 		this.posY = posY;
-		pickUpCooldown = 2;
+		pickUpCooldown = 2000;
 		GameLogic.items.add(this);
 	}
 

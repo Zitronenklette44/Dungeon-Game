@@ -47,6 +47,7 @@ TODO List:
 		7.crafting Items
 		8.Skilltree
 		9.evt bossRoom
+		10.Inventar						Done
 		
 	Bugfixes:
-		1.evt DialogMenue durchsichtig 	--> flackern der icons von Draw methode
+		1.evt DialogMenue durchsichtig 	--> flackern der icons von Draw methode			Done

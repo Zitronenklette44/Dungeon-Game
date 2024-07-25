@@ -76,13 +76,13 @@ public class InventoryManager {
 	}
 
 	public static void add(ItemTemplate item, int count) {		//hinzufügen eines Items
-        int slot = getSlot(item, count);
-        if (hasItem(item) && slot != -1) {
-            Pair<ItemTemplate, Integer> slotPair = inventory.get("Slot" + slot);
-            slotPair.setCount(slotPair.getCount() + count);
-        } else if (hasItem(empty)) {
-            slot = getSlot(empty, count);
-            Pair<ItemTemplate, Integer> slotPair = inventory.get("Slot" + slot);
+        int slot = getSlot(item, count);	//Slot erhalten in den Item gespeichert ist
+        if (hasItem(item) && slot != -1) {	
+            Pair<ItemTemplate, Integer> slotPair = inventory.get("Slot" + slot);	//aktuelle item erhalten
+            slotPair.setCount(slotPair.getCount() + count);		//um entsprechende Anzahl erhöhen
+        } else if (hasItem(empty)) {	//wenn leeren Slot vorhanden
+            slot = getSlot(empty, count);	//ersten leeren Slot erhalten
+            Pair<ItemTemplate, Integer> slotPair = inventory.get("Slot" + slot);	//slot erhalten
             slotPair.setItem(item);
             slotPair.setCount(count);
         } else {
@@ -108,26 +108,24 @@ public class InventoryManager {
 	}
 
 	public static void loadSaveString(String value) {		//überschreiben des Inventares mit Item Strings
-	    String[] items = value.split("#");
+	    String[] items = value.split("#");	//in einzelnen Items Splitten
 	    for (int i = 0; i < items.length; i++) {
 	        try {
-	            String[] itemInfos = items[i].split(":");
-	            if (itemInfos.length != 3) {
+	            String[] itemInfos = items[i].split(":");	//in einzelnen Werte Splitten
+	            if (itemInfos.length != 3) {	//wenn nicht alle benötigten Werte vorhanden
 	                Logger.logWarning("Invalid item data: " + items[i]);
 	                continue;
 	            }
 
-	            String slot = "Slot" + itemInfos[0].trim();
+	            String slot = "Slot" + itemInfos[0].trim();	//Strings in benötigte Formate umwandeln und überflüssige Sacehn wie Leerstellen entfernen
 	            int itemId = Integer.parseInt(itemInfos[1].trim());
 	            int count = Integer.parseInt(itemInfos[2].trim());
 	            
-	            Logger.logInfo("item: "+items[i]+"  Slot:"+slot+" itemID:"+itemId+" count:"+count);
+	            ItemTemplate item = CreateItem.getItembyID(itemId);		//Item anhand der IT generieren
 	            
-	            ItemTemplate item = CreateItem.getItembyID(itemId);
-	            
-	            if(count>item.maxStackSize){count=item.maxStackSize;}
+	            if(count>item.maxStackSize){count=item.maxStackSize;}	//überprüfen und auf maximale Stacksize begrenzen
 
-	            inventory.put(slot, new Pair<>(item, count));
+	            inventory.put(slot, new Pair<>(item, count));		//in Inventar einfügen
 	        } catch (NumberFormatException e) {
 	            Logger.logError("Failed to parse item data: " + items[i], e);
 	        } catch (Exception e) {

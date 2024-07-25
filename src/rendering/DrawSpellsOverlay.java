@@ -11,6 +11,7 @@ import game.GameLogic;
 import gameObject.CollisionRechteck;
 import gameObject.Column;
 import gameObject.SwordAttack;
+import gui.GameScreen;
 import interactions.InteractableTemplate;
 import gameObject.Rechteck;
 import spells.SpellManager;
@@ -80,6 +81,11 @@ public class DrawSpellsOverlay extends JLabel {
 		}
 		if(SpellManager.cooldowns[2]> 0) {
 			g2d.fillRect(1098, 11, 50, (int) ((float) SpellManager.cooldowns[2] / SpellManager.maxCooldowns[2]* 50));
+		}
+		
+		if(GameScreen.hasDialog) {
+			g2d.setColor(new Color(79,79,79,225));
+			g2d.fillRect(0, (getHeight()/100)*70, getWidth(), (getHeight()/100)*100);
 		}
 		
 		

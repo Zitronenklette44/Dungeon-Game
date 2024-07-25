@@ -6,6 +6,7 @@ import entitys.MobTemplate;
 import game.CreateObjects;
 import game.GameLogic;
 import rooms.RoomTemplate;
+import translation.Translation;
 
 public class Spawn extends RoomTemplate{
 	

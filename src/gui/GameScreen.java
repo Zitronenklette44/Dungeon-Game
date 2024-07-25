@@ -52,10 +52,13 @@ public class GameScreen extends JFrame {
 	static GameScreen frame;
 	private static JLabel lbBackground;
 	private JPanel pauseMenue;
-	private static JPanel dialogMenue;
+//	private static JPanel dialogMenue;
 	public static boolean settingExists = false;
 	private JLabel lblNewLabel;
 	private static JLabel textJLabelSender;
+	private static DialogButton btnNext;
+	private static DialogButton btnSkip;
+	private static JLabel textJLabel;
 	private static JLabel lbSpell3;
 	private static JLabel lbSpell2;
 	private static JLabel lbSpell1;
@@ -66,10 +69,7 @@ public class GameScreen extends JFrame {
 	private static JButton btnNewButton;
 	public static String currentDialog = "";
 	public static boolean hasDialog = false;
-	private static DialogButton btnNext;
-	private static JLabel textJLabel;
 	private static Draw draw;
-	private static DialogButton btnSkip;
 	public static boolean paintRoomNum;
 	public static Inventory inventory;
 	
@@ -168,42 +168,48 @@ public class GameScreen extends JFrame {
 		pauseMenue.setLayout(null);
 		contentPane.add(pauseMenue);
 		
-		dialogMenue = new JPanel();
-		dialogMenue.setBounds(0, (int) (getHeight()/1.25), 1184, (int) (getHeight()-(getHeight()/1.25)));
-		dialogMenue.setVisible(false);
-//		dialogMenue.setBackground(new Color(0,0,0, 150));
-		dialogMenue.setBackground(Color.gray.darker());
-		dialogMenue.setLayout(null);
-		dialogMenue.setDoubleBuffered(true); 
-		contentPane.add(dialogMenue);
+//		dialogMenue = new JPanel();
+//		dialogMenue.setBounds(0, (int) (getHeight()/1.25), 1184, (int) (getHeight()-(getHeight()/1.25)));
+//		dialogMenue.setVisible(false);
+////		dialogMenue.setBackground(new Color(0,0,0, 150));
+//		dialogMenue.setBackground(Color.gray.darker());
+//		dialogMenue.setLayout(null);
+//		dialogMenue.setDoubleBuffered(true); 
+//		contentPane.add(dialogMenue);
 		
 		textJLabel = new JLabel();
-		textJLabel.setBounds(0, dialogMenue.getHeight()/5, dialogMenue.getWidth(), (int) (dialogMenue.getHeight()-dialogMenue.getHeight()/5));
+		textJLabel.setBounds(0, (getHeight()/100)*75, getWidth(), (int) ((getHeight()/100)*25));
 		textJLabel.setVerticalAlignment(SwingConstants.TOP);
 		textJLabel.setForeground(Color.white.darker());
 		textJLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+//		textJLabel.setBackground(Color.blue);
+//		textJLabel.setOpaque(true);
 		textJLabel.setDoubleBuffered(true);
+		textJLabel.setVisible(false);
 		
 		textJLabelSender = new JLabel();
-		textJLabelSender.setBounds(0, 0, dialogMenue.getWidth(), dialogMenue.getHeight()-textJLabel.getHeight());
+		textJLabelSender.setBounds(0, (getHeight()/100)*70, getWidth(), (getHeight()/100)*5);
 		textJLabelSender.setVerticalAlignment(SwingConstants.TOP);
 		textJLabelSender.setForeground(Color.gray.darker().darker().darker());
 		textJLabelSender.setFont(new Font("Tahoma", Font.BOLD, 25));
 		textJLabelSender.setDoubleBuffered(true);
-		dialogMenue.add(textJLabelSender);
-		dialogMenue.add(textJLabel);
+		textJLabelSender.setVisible(false);
+//		textJLabelSender.setBackground(Color.green);
+//		textJLabelSender.setOpaque(true);
+		contentPane.add(textJLabelSender);
+		contentPane.add(textJLabel);
 		
 		btnSkip = new DialogButton((byte) 1, textJLabel);
-		btnSkip.setBounds(1000, dialogMenue.getHeight()-80, 170, 30);
+		btnSkip.setBounds(1000, (getHeight()/100)*85, 170, 30);
 		btnSkip.setVisible(true);
 		btnSkip.setDoubleBuffered(true);
-		dialogMenue.add(btnSkip);
+		contentPane.add(btnSkip);
 		
 		btnNext = new DialogButton((byte) 0, textJLabel);
-		btnNext.setBounds(800, dialogMenue.getHeight()-80, 170, 30);
+		btnNext.setBounds(800, (getHeight()/100)*85, 170, 30);
 		btnNext.setVisible(true);
 		btnNext.setDoubleBuffered(true);
-		dialogMenue.add(btnNext);
+		contentPane.add(btnNext);
 		
 		lbTitle = new JLabel(Translation.get("game.pause"));
 		lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -297,6 +303,7 @@ public class GameScreen extends JFrame {
 		spells[2] = lbSpell3;
 	
 		contentPane.setComponentZOrder(inventory, 0);
+		endDialog();
 	}
 
 	public static int getScreenHoehe() {
@@ -360,7 +367,11 @@ public class GameScreen extends JFrame {
 		Logger.logInfo("started Dialog");
 		draw.setIgnoreRepaint(true);
 		hasDialog=true;
-		dialogMenue.setVisible(true);
+		textJLabelSender.setVisible(true);
+		btnNext.setVisible(true);
+		btnSkip.setVisible(true);
+		textJLabel.setVisible(true);
+		
 		GameLogic.paused = true;
 		btnNext.setDialogStrings(currentDialog);
 		btnNext.dialogSource = sender;
@@ -379,7 +390,10 @@ public class GameScreen extends JFrame {
 	public static void endDialog() {
 		hasDialog=false;
 		draw.setIgnoreRepaint(false);
-		dialogMenue.setVisible(false);
+		textJLabelSender.setVisible(false);
+		btnNext.setVisible(false);
+		btnSkip.setVisible(false);
+		textJLabel.setVisible(false);
 		GameLogic.paused = false;
 	}
 	

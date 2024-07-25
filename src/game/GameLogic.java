@@ -144,11 +144,6 @@ public class GameLogic {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				for (int i = 0; i < items.size(); i++) {
-					if(items.get(i).pickUpCooldown != 0 && !paused) {
-						items.get(i).pickUpCooldown--;
-					}
-				}
 //				System.out.println("floor: "+floorObject.size());
 //				System.out.println("cloums: "+columns.size());
 //				System.out.println("collisionRectangles: "+collisionRectangles.size());
@@ -202,7 +197,7 @@ public class GameLogic {
 		}
 	}
 	
-	private void decreaseCooldowns() {
+	private void decreaseCooldowns() {	//5ms
 		if(player.HitCooldown>0) {player.HitCooldown--;}		//Cooldown verringern
 		if(player.AtkCooldown>0) {player.AtkCooldown--;}
 		
@@ -211,6 +206,12 @@ public class GameLogic {
 				mobs.get(i).HitCooldown--;
 			}else {
 				mobs.get(i).HitCooldown = 0;
+			}
+		}
+		
+		for (int i = 0; i < items.size(); i++) {
+			if(items.get(i).pickUpCooldown != 0 && !paused) {
+				items.get(i).pickUpCooldown-=5;
 			}
 		}
 	}
