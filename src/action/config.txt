@@ -9,7 +9,7 @@ dungeonKey = 4
 
 // Debug Modus
 // Default false
-debug = false
+debug = true
 
 // player speed
 // Default 2
@@ -25,7 +25,7 @@ spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 // Frame position
 // Default (0,0)
-frameLocation = 398,114
+frameLocation = 100,100
 
 // Language
 // Default Deutsch

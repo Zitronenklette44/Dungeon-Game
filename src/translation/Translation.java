@@ -159,8 +159,17 @@ public class Translation {
 		englishTranslationMap.put("dialogs.log1.part3", "This is the last Message");
 		
 			//Gilde
-		germanTranslationMap.put("dialogs.log2.part1", "AHH, Ein Fremder");
-		englishTranslationMap.put("dialogs.log2.part1", "AHH, a Stranger");
+		germanTranslationMap.put("dialogs.log2.part1", "AHH, Ein Fremder. Zumindest hab ich dich hier noch nie gesehen. Was wollen Sie hier?");
+		englishTranslationMap.put("dialogs.log2.part1", "AHH, a stranger. At least I've never seen you here. What do you want here?. Meth??");
+		
+		germanTranslationMap.put("dialogs.log2.part2", "AHH, Du willst dich in der Gilde anmelden. Weißt du, wir lassen hier nicht Jeden rein. Du musst schon was drauf haben, um hier rein zu kommen.");
+		englishTranslationMap.put("dialogs.log2.part2", "AHH, you want to sign up for the guild. You know, we don't let everyone in here. You have to have what it takes to get in here. Asshole");
+		
+		germanTranslationMap.put("dialogs.log2.part3", "Ich sehe. Du willst es also versuchen?");
+		englishTranslationMap.put("dialogs.log2.part3", "I see. So you want to give it a try?");
+		
+		germanTranslationMap.put("dialogs.log2.part4", "Ok, gehe zum Feld und besiege die dort existierenden Monster, wenn du es schaffst nehmen wir dich auf.");
+		englishTranslationMap.put("dialogs.log2.part4", "Ok, go to the field and defeat the monsters that exist there, if you make it we will take you in.");
 		
 		Logger.logInfo("Loaded Translations");
 	}
