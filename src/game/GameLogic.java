@@ -66,6 +66,7 @@ public class GameLogic {
 
 	public static DungeonCore dungeon;
 	public static float playerSpeed = 1F;
+	public static boolean currentQuestDone;
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();

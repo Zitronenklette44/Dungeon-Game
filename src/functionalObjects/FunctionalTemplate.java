@@ -3,7 +3,6 @@ package functionalObjects;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import action.Logger;
 import interactions.InteractableTemplate;
 import loot.LootTableTemplate;
 

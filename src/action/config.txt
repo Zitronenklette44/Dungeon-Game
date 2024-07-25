@@ -13,7 +13,7 @@ debug = true
 
 // player speed
 // Default 2
-playerSpeed = 1.0
+playerSpeed = 2.0
 
 // player jump hight
 // Default 70
