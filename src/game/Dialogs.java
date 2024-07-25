@@ -17,7 +17,16 @@ public class Dialogs {
             Translation.get("dialogs.log1.part2"),
             Translation.get("dialogs.log1.part3")
         });
-        Logger.logInfo("Finished loading Dialogs");
+        
+        dialogs.put("log2", new String[]{
+                Translation.get("dialogs.log2.part1"),
+                Translation.get("dialogs.log2.part2"),
+                Translation.get("dialogs.log2.part3")
+            });
+        
+            Logger.logInfo("Finished loading Dialogs");
+            
+       
     }
 
     public static String[] get(String key) {

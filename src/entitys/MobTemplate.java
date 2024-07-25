@@ -34,6 +34,7 @@ public class MobTemplate extends Rechteck{
 	public boolean spawnedLootTable = false;
 	public boolean isSlowed = false;
 	public boolean isStuned = false;
+	public boolean invulnerable = false;
     
     public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana) {
         super(hoehe, breite, posX, posY);

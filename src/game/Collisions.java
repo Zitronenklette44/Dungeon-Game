@@ -198,7 +198,7 @@ public class Collisions {
 	                && futurePosY < mob.posY + mob.hoehe
 	                && futurePosY + akuellemob.hoehe > mob.posY) {
 	            // Kollision gefunden
-	        	if(DealDamage && mob.HitCooldown==0) {
+	        	if(DealDamage && mob.HitCooldown==0 && !mob.invulnerable) {
 					mob.Hp -= akuellemob.damage;
 					mob.HitCooldown = akuellemob.maxHitCooldown;
 				}
@@ -223,7 +223,7 @@ public class Collisions {
 	                && futurePosY < mob.posY + mob.hoehe
 	                && futurePosY + akuellerSpell.hoehe > mob.posY) {
 	            // Kollision gefunden
-	        	if(DealDamage && mob.HitCooldown==0) {
+	        	if(DealDamage && mob.HitCooldown==0 && !mob.invulnerable) {
 					mob.Hp -= akuellerSpell.damage;
 					mob.HitCooldown = mob.maxHitCooldown;
 				}

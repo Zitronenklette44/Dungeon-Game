@@ -13,7 +13,7 @@ public class Translation {
 	static Map<String, String> englishTranslationMap;
 	
 	public static void init(){
-		
+	
 		Logger.logInfo("Loading Translations...");
 		
 		germanTranslationMap = new HashMap<String, String>();
@@ -88,8 +88,11 @@ public class Translation {
 		germanTranslationMap.put("dialogs.emptySender", "Weltsprache");
 		englishTranslationMap.put("dialogs.emptySender", "Voice of the world");
 		
-		germanTranslationMap.put("interaction.testDialog", "Lesen");
-		englishTranslationMap.put("interaction.testDialog", "read");
+		germanTranslationMap.put("dialogs.gildenSender", "Gilden Meister, Meister Kleister");
+		englishTranslationMap.put("dialogs.gildenSender", "Guild master, Master waster");
+		
+		germanTranslationMap.put("interaction.testDialog", "Reden");
+		englishTranslationMap.put("interaction.testDialog", "talk");
 		
 		germanTranslationMap.put("gilde.title", "Gilde");
 		englishTranslationMap.put("gilde.title", "Guild");
@@ -128,6 +131,9 @@ public class Translation {
 		germanTranslationMap.put("dialogs.log1.part3", "Das ist die letzte Nachricht");
 		englishTranslationMap.put("dialogs.log1.part3", "This is the last Message");
 		
+			//Gilde
+		germanTranslationMap.put("dialogs.log2.part1", "AHH, Ein Fremder");
+		englishTranslationMap.put("dialogs.log2.part1", "AHH, a Stranger");
 		
 		Logger.logInfo("Loaded Translations");
 	}

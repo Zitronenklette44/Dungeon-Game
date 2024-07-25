@@ -23,7 +23,7 @@ public class Dungeon extends RoomTemplate{
 	public void createObjects(int CurrentRoom) {
 		super.createObjects(CurrentRoom);
 		CreateObjects.createDungeonChooser(200, 700);
-		CreateObjects.createDialogInteraction(500, 700, Translation.get("interaction.testDialog"), 1);
+		CreateObjects.createDialogInteraction(500, 700, Translation.get("interaction.testDialog"), 1, Translation.get("dialogs.gildenSender"));
 	}
 	
 	@Override

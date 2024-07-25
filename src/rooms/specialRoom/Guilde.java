@@ -1,15 +1,20 @@
 package rooms.specialRoom;
 
+import java.awt.Color;
+
 import action.Logger;
+import entitys.MobTemplate;
 import game.CreateObjects;
 import game.GameLogic;
 import interactions.GildSwitchInteraction;
 import rooms.RoomTemplate;
+import translation.Translation;
 
 public class Guilde extends RoomTemplate{
 
 	public Guilde(String name) {
 		super(name, "/resources/rooms/backgrounds/Gilde.png");
+		createEntitys();
 	}
 	
 	@Override
@@ -33,7 +38,7 @@ public class Guilde extends RoomTemplate{
 		for (int i = 0; i < functional.size(); i++) {
 			GameLogic.functionalObjects.add(functional.get(i));
 		}
-		
+		CreateObjects.createDialogInteraction(581, 103, Translation.get("interaction.testDialog") , 2, Translation.get("dialogs.gildenSender"));
 	}
 	
 	@Override
@@ -41,5 +46,25 @@ public class Guilde extends RoomTemplate{
 		super.createFunctionable();
 		functional.add(CreateObjects.createChestPoint(600, 400, true, 100));
 	}
-	
+	protected void createEntitys() {
+		Entitys = new MobTemplate[1];
+
+		Entitys[0] = CreateObjects.createTestMob(25, 25, 0.0F, 581, 103, 0, 1);
+		Entitys[0].typeColor = Color.blue;
+		Entitys[0].invulnerable = true;
+		super.createEntitys();
+	}
+	public void spawnEntitys() {
+		for(int i=0; i<1;i++) {
+			if(Entitys[i] == null) {
+				break;
+			}
+			if(!Entitys[i].defeated) {
+				GameLogic.mobs.add(Entitys[i]);		//der Liste für bewegungen hinzufügen
+				Entitys[i].posX = Entitys[i].SpawnX;	//Position zurücksetzen
+				Entitys[i].posY = Entitys[i].SpawnY;
+			}
+		}
+			}
+			
 }

@@ -36,7 +36,7 @@ public class SwordAttack extends CollisionRechteck{
 	                && posY < mob.posY + mob.hoehe
 	                && posY + hoehe > mob.posY) {
 	            // Kollision gefunden
-	        	if(mob.HitCooldown == 0) {
+	        	if(mob.HitCooldown == 0 && !mob.invulnerable) {
 	        		mob.Hp-= damage;
 	        		mob.HitCooldown = mob.maxHitCooldown;
 	        		

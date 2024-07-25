@@ -77,8 +77,8 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 		GameLogic.interactables.add(new DungeonExit(10, 10, posX, posY));
 	}
 	
-	public static void createDialogInteraction(int posX, int posY, String action, int DialogNum) {
-		GameLogic.interactables.add(new InteractableDialog(posX, posY, action, DialogNum));
+	public static void createDialogInteraction(int posX, int posY, String action, int DialogNum, String sender) {
+		GameLogic.interactables.add(new InteractableDialog(posX, posY, action, DialogNum, sender));
 	}
 	
 	public static void createGildSwitchInteraction(int posX, int posY) {
