@@ -21,7 +21,7 @@ import translation.Language;
 import translation.Translation;
 
 public class SaveLoad {
-	private static final String CONFIG_FILE = "src/action/config.txt";
+	private static final String CONFIG_FILE = "src/saveFiles/config.txt";
 	private static boolean startedGame;
 
 	
