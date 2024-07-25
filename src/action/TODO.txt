@@ -37,8 +37,8 @@ TODO List:
 	
 	Allgemein:
 		1.Dialog möglichkeit					Done
-		2.Drop Items
-		3.Inventar
+		2.Drop Items							Done
+		3.Inventar								Done
 		4.Crafting möglichkeit
 			-Item Icons
 			-GUI für craften erstellen
@@ -47,7 +47,6 @@ TODO List:
 		7.crafting Items
 		8.Skilltree
 		9.evt bossRoom
-		10.Inventar						Done
 		
 	Bugfixes:
 		1.evt DialogMenue durchsichtig 	--> flackern der icons von Draw methode			Done

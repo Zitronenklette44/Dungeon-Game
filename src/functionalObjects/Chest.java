@@ -12,9 +12,6 @@ import spells.SpellIcons;
 import translation.Translation;
 
 public class Chest extends FunctionalTemplate{
-	LootTableTemplate lootTableTemplate;
-	public boolean isPermanent;
-	
 
 	public Chest(int posX, int posY, boolean isExisting, LootTableTemplate lootTable) {
 		super(50, 75, posX, posY, 50, Translation.get("interaction.chestOpen"), getImage(), false, isExisting);

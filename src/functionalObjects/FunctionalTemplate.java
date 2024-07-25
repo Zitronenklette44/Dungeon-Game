@@ -5,8 +5,10 @@ import java.awt.image.BufferedImage;
 
 import action.Logger;
 import interactions.InteractableTemplate;
+import loot.LootTableTemplate;
 
 public class FunctionalTemplate extends InteractableTemplate{
+	public LootTableTemplate lootTableTemplate;
 	public BufferedImage image;
 	public boolean vanishAfterInteraction;
 	public boolean isExisting;
@@ -23,7 +25,7 @@ public class FunctionalTemplate extends InteractableTemplate{
 	public void performAction() {
 		super.performAction();
 		if(vanishAfterInteraction) {
-			Logger.logInfo(this +" sollte jetzt verschwinden");
+			isExisting = false;
 		}
 	}
 	

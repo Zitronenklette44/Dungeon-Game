@@ -30,7 +30,9 @@ public class RoomTemplate implements Cloneable{
 	@Override
 	protected RoomTemplate clone() {
 		try {
-            return (RoomTemplate) super.clone();
+            RoomTemplate roomTemplate =(RoomTemplate) super.clone();
+            roomTemplate.createFunctionable();
+            return roomTemplate;
         } catch (CloneNotSupportedException e) {
         	Logger.logError("Cloning from Room failed: ", e);
 //            throw new AssertionError("Cloning not supported", e);
@@ -38,7 +40,11 @@ public class RoomTemplate implements Cloneable{
 		return null;
 	}
 	
-	public void createObjects(int currentRoom) {}
+	public void createObjects(int currentRoom) {
+		for (int i = 0; i < functional.size(); i++) {
+			GameLogic.functionalObjects.add(functional.get(i));
+		}
+	}
 	
 	public void DrawImage(Graphics2D g) {}
 	
@@ -58,5 +64,5 @@ public class RoomTemplate implements Cloneable{
 	
 	public void update() {}
 	
-	protected void createFunctionable() {}
+	protected void createFunctionable() {functional.clear();}
 }

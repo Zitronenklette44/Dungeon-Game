@@ -106,7 +106,8 @@ public class Translation {
 		germanTranslationMap.put("interaction.chestOpen", "Kiste öffnen");
 		englishTranslationMap.put("interaction.chestOpen", "open Chest");
 		
-		
+		germanTranslationMap.put("interaction.grabBush", "Busch durchsuchen");
+		englishTranslationMap.put("interaction.grabBush", "search Bush");
 		
 		
 		//Items

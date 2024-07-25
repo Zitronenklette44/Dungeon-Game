@@ -35,14 +35,12 @@ public class Guilde extends RoomTemplate{
 		super.createObjects(currentRoom);
 		CreateObjects.createGildSwitchInteraction(550, 750);
 //		GameLogic.functionalObjects.add(CreateObjects.createPernamentChest(600, 400, true));
-		for (int i = 0; i < functional.size(); i++) {
-			GameLogic.functionalObjects.add(functional.get(i));
-		}
 		CreateObjects.createDialogInteraction(581, 103, Translation.get("interaction.testDialog") , 2, Translation.get("dialogs.gildenSender"));
 	}
 	
 	@Override
 	protected void createFunctionable() {
+		Logger.logInfo("new Functionable");
 		super.createFunctionable();
 		functional.add(CreateObjects.createChestPoint(600, 400, true, 100));
 	}

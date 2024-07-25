@@ -7,6 +7,7 @@ import entitys.MobTemplate;
 import entitys.Player;
 import entitys.TestMob;
 import entitys.village.Swordmen;
+import functionalObjects.Bush;
 import functionalObjects.Chest;
 import functionalObjects.FunctionalTemplate;
 import gameObject.CollisionRechteck;
@@ -88,8 +89,13 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 	public static FunctionalTemplate createPernamentChest(int posX, int posY, boolean isExisting) {	//feste Kiste immer da
 		return new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5));
 	}
+	
 	public static FunctionalTemplate createChestPoint(int posX, int posY, boolean isExisting, int spawnChance) {	//variable Kiste kann generieren muss aber nicht
 		return new Chest(posX, posY, isExisting, LootTabels.createChestCoinLoot(5), false, spawnChance);
+	}
+	
+	public static FunctionalTemplate createBushPoint(int posX, int posY, boolean isExisting, int spawnChance) {	//variabler Busch kann generieren muss aber nicht
+		return new Bush(posX, posY, isExisting, spawnChance, LootTabels.createHerbs(5));
 	}
 	public static MobTemplate createSwordmen(int hoehe,int breite, float speed, int SpawnX, int SpawnY, int damage, int Hp, LootTableTemplate loot) {
 		MobTemplate template = new Swordmen(hoehe, breite, SpawnX, SpawnY, 0, 0, speed, SpawnX, SpawnY, damage, Hp, loot);

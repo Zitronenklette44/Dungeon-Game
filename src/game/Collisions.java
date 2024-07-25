@@ -274,7 +274,7 @@ public class Collisions {
 			float distanceSquared = dx * dx + dy * dy;
 			int rangeSquared = interactable.range * interactable.range;
 
-			if (distanceSquared <= rangeSquared) {
+			if (distanceSquared <= rangeSquared && interactable.isExisting) {
 				interactable.actionEnabled = true;
 				g.setColor(color);
 				g.drawString("[E] "+interactable.interactionString, interactable.posX, interactable.posY-10);

@@ -1,5 +1,6 @@
 package rooms.Village;
 
+import action.Logger;
 import entitys.MobTemplate;
 import game.CreateObjects;
 import game.GameLogic;
@@ -61,11 +62,18 @@ public class Spawn extends RoomTemplate{
 //		Entitys[2].maxHitCooldown = 200;
 		
 		Entitys = new MobTemplate[1];	//maximale anzahl an gegnern die gespawnt werden
-		Entitys[0] = CreateObjects.createSwordmen(25, 25, 0.5F, 1035, 300, 1, 1, LootTabels.createVillagerLoot(100));
+		Entitys[0] = CreateObjects.createSwordmen(25, 25, 0.5F, 1035, 300, 1, 1, LootTabels.createVillagerLoot(5));
 		Entitys[0].maxHitCooldown = 200;
 		
 		super.createEntitys();
 		//killAllEntitys();
+	}
+	
+	@Override
+	protected void createFunctionable() {
+		Logger.logInfo("new Functionable");
+		super.createFunctionable();
+		functional.add(CreateObjects.createBushPoint(500, 400, true, 50));
 	}
 	
 	@Override
