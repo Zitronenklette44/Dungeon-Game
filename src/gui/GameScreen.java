@@ -33,6 +33,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -133,6 +135,23 @@ public class GameScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public GameScreen() {
+		addComponentListener(new ComponentListener() {
+			@Override
+			public void componentShown(ComponentEvent e) {}
+			@Override
+			public void componentResized(ComponentEvent e) {}
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				GameLogic.moveDown = false;
+				GameLogic.moveUp = false;
+				GameLogic.moveRight = false;
+				GameLogic.moveLeft = false;
+				GameLogic.jump = false;
+				GameLogic.isSpacePressed = false;
+			}
+			@Override
+			public void componentHidden(ComponentEvent e) {}
+		});
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
