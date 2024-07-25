@@ -47,20 +47,7 @@ public class Spawn extends RoomTemplate{
 	}
 	
 	@Override
-	protected void createEntitys() {
-//		Entitys = new MobTemplate[3];	//maximale anzahl an gegnern die gespawnt werden
-//		Entitys[0] = CreateObjects.createTestMob(25, 25, 0.5F, 1035, 300, 1, 1);
-//		Entitys[0].typeColor = Color.blue;
-//		Entitys[0].maxHitCooldown = 200;
-//		
-//		Entitys[1] = CreateObjects.createTestMob(25, 25, 0.7F, 1035, 400, 1, 9);
-//		Entitys[1].typeColor = Color.white;
-//		Entitys[1].maxHitCooldown = 200;
-//		
-//		Entitys[2] = CreateObjects.createTestMob(30, 30, 0.3F, 1035, 500, 1, 90);
-//		Entitys[2].typeColor = Color.white;
-//		Entitys[2].maxHitCooldown = 200;
-		
+	protected void createEntitys() {		
 		Entitys = new MobTemplate[1];	//maximale anzahl an gegnern die gespawnt werden
 		Entitys[0] = CreateObjects.createSwordmen(25, 25, 0.5F, 1035, 300, 1, 1, LootTabels.createVillagerLoot(5));
 		Entitys[0].maxHitCooldown = 200;
