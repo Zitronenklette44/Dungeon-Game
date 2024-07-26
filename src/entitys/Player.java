@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import action.Logger;
+import game.GameLogic;
 import test.SpriteTest;
 
 public class Player extends MobTemplate {
@@ -40,6 +40,7 @@ public class Player extends MobTemplate {
     }
     
     public void playAnimation() {
+    	if(GameLogic.paused) return;
         BufferedImage[] currentAnimation = sprites[animation];
 
         if (currentFrame >= currentAnimation.length || currentAnimation[currentFrame] == null) {

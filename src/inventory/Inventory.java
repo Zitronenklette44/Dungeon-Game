@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JLabel;
 
-import action.Logger;
 import components.CustomeGraphics;
 import game.GameLogic;
 import loot.LootTableTemplate;
@@ -29,8 +28,8 @@ public class Inventory extends JLabel {
     private static final int SLOT_ROWS = 8;
     private static final int SLOT_COLUMNS = 5;
 
-    private static final Color BUTTON_COLOR_UNPRESSED = Color.white;
-    private static final Color BUTTON_COLOR_PRESSED = Color.blue.brighter().brighter().brighter();
+    private static final Color BUTTON_COLOR_UNPRESSED = Color.gray;
+    private static final Color BUTTON_COLOR_PRESSED = new Color(34, 139, 34);
 
     private int draggedSlot = -1;
     private ItemTemplate draggedItem = null;
@@ -255,33 +254,39 @@ public class Inventory extends JLabel {
         g.drawRoundRect(getWidth() / 10, getHeight() / 16, width, (getHeight() / 100) * 5, 40, 40);
         g.setStroke(new BasicStroke(5));
         // Buttons
-        int height = (int) ((getHeight() / 100) * 4.25);
+        int height = (int) ((getHeight() / 100) * 5);
         int posY = getHeight() / 16;
         int buttonWidth = width / 3;
 
         button1X = getWidth() / 10;
-        button1Y = posY + 3;
+        button1Y = posY;
         button1Width = buttonWidth;
         button1Height = height;
 
         button2X = button1X + buttonWidth;
-        button2Y = posY + 3;
+        button2Y = posY;
         button2Width = buttonWidth;
         button2Height = height;
 
         button3X = button2X + buttonWidth;
-        button3Y = posY + 3;
+        button3Y = posY;
         button3Width = buttonWidth;
         button3Height = height;
         
         if (Interface == 0) g.setColor(BUTTON_COLOR_PRESSED); else g.setColor(BUTTON_COLOR_UNPRESSED);
 //        g.fillRect(button1X, button1Y, button1Width, button1Height);
         g.fill(CustomeGraphics.createRoundedLeftCorners(button1X+2, button1Y, button1Width-2, button1Height, 15));
+        g.setColor(Color.black);
+        g.draw(CustomeGraphics.createRoundedLeftCorners(button1X+2, button1Y, button1Width-2, button1Height, 15));
         if (Interface == 1) g.setColor(BUTTON_COLOR_PRESSED); else g.setColor(BUTTON_COLOR_UNPRESSED);
         g.fillRect(button2X, button2Y, button2Width, button2Height);
+        g.setColor(Color.black);
+        g.drawRect(button2X, button2Y, button2Width, button2Height);
         if (Interface == 2) g.setColor(BUTTON_COLOR_PRESSED); else g.setColor(BUTTON_COLOR_UNPRESSED);
 //        g.fillRect(button3X, button3Y, button3Width, button3Height);
         g.fill(CustomeGraphics.createRoundedRightCorners(button3X, button3Y, button3Width-2, button3Height, 15));
+        g.setColor(Color.black);
+        g.draw(CustomeGraphics.createRoundedRightCorners(button3X, button3Y, button3Width-2, button3Height, 15));
     }
 
     private boolean isWithinButton(int mouseX, int mouseY, int buttonX, int buttonY, int buttonWidth, int buttonHeight) {
