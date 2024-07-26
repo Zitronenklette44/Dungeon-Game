@@ -36,9 +36,8 @@ public class Spawn extends RoomTemplate{
 	
 	@Override
 	public void setSpawns(int currentRoom) {
-		GameLogic.player.breite = 25;
-		GameLogic.player.hoehe = 25;
-		GameLogic.floor = 725;
+		GameLogic.player.breite = 30;
+		GameLogic.player.hoehe = 30;
 		GameLogic.resetPos[0] =250;
 		GameLogic.resetPos[1] = 100;
 		GameLogic.resetPos1[0]= 1150;
@@ -58,7 +57,6 @@ public class Spawn extends RoomTemplate{
 	
 	@Override
 	protected void createFunctionable() {
-		Logger.logInfo("new Functionable");
 		super.createFunctionable();
 		functional.add(CreateObjects.createBushPoint(500, 400, true, 50));
 	}

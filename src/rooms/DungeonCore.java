@@ -268,7 +268,7 @@ public class DungeonCore {
 //			thisRooms.get(currentRoom).createObjects(currentRoom);
 			thisRooms.get(currentRoom).DrawImage(g2d);
 		}else{
-			GameLogic.floor = 700;
+			if(!(thisRooms.get(currentRoom) instanceof Field)) { GameLogic.floor = 700;}else {GameLogic.floor = 725;}
 			thisRooms.get(currentRoom).changeColors();
 			g2d.setFont(new Font("Arial", Font.BOLD, 20));
 			if(GameLogic.debug) {

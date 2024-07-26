@@ -1,6 +1,5 @@
 package loot;
 
-import action.Logger;
 import loot.items.EmptyItem;
 
 public class SpawnLoot {
@@ -21,7 +20,6 @@ public class SpawnLoot {
 				loot.lastGeneratedLoot.get(i).changeToObject(posX+addX, posY+addY); 
 			}
 		}
-		Logger.logInfo("Loot spawned");
 	}
 
 }

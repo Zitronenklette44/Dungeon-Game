@@ -21,7 +21,7 @@ public class SpriteTest extends JPanel {
     public SpriteTest() {
         try {
             // Bild laden
-            spriteSheet = ImageIO.read(SpriteTest.class.getResource("/resources/Entitys/Player/test.png"));
+            spriteSheet = ImageIO.read(SpriteTest.class.getResource("/resources/Entitys/Player/PlayerAnimations.png"));
             // Sprites extrahieren
             int rows = 8; // Anzahl der Zeilen im Sprite Sheet
             int cols = 10; // Anzahl der Spalten im Sprite Sheet

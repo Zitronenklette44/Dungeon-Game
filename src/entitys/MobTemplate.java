@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import action.Logger;
 import gameObject.Rechteck;
 import loot.LootTableTemplate;
 import loot.SpawnLoot;

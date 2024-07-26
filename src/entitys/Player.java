@@ -29,7 +29,6 @@ public class Player extends MobTemplate {
         maxHitCooldown = 100;
         reach = 50;
         loadSprites();
-        Logger.logWarning("animationNum: "+sprites.length);
     }
 
     public void setAtkCooldown() {
@@ -85,7 +84,7 @@ public class Player extends MobTemplate {
     private void loadSprites() {
         try {
             // Bild laden
-            spriteSheet = ImageIO.read(SpriteTest.class.getResource("/resources/Entitys/Player/test.png"));
+            spriteSheet = ImageIO.read(SpriteTest.class.getResource("/resources/Entitys/Player/PlayerAnimations.png"));
             // Sprites extrahieren
             int rows = 8; // Anzahl der Zeilen im Sprite Sheet
             int cols = 10; // Anzahl der Spalten im Sprite Sheet

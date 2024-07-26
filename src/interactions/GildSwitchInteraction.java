@@ -42,7 +42,7 @@ public class GildSwitchInteraction extends InteractableTemplate{
 			GameLogic.resetLevel();
 			GameLogic.player.posX = 490;
 			GameScreen.paintRoomNum = false;
-			GameScreen.updateRoomNr(DungeonCore.currentRoom);
+			GameScreen.updateRoomNr(DungeonCore.currentRoom+1);
 			
 		}
 		Logger.logInfo(interactionString);

@@ -58,7 +58,6 @@ public class Herbs extends ItemTemplate{
 	private void generateRandomVariant() {
 	    setImage();
 	    int random = (int) (Math.random() * 100);
-	    Logger.logInfo(random+"");
 	    if (random >= 0 && random <= 50) {
 	        itemName = Translation.get("item.mondtau");
 	        itemImage = mondtau;

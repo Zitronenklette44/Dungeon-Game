@@ -34,7 +34,7 @@ public class Bush extends FunctionalTemplate{
 		try {
 			return ImageIO.read(SpellIcons.class.getResource("/resources/objects/Bush.png"));
 		} catch (IOException e) {
-			Logger.logError("Chest Image Error: ", e);
+			Logger.logError("Bush Image Error: ", e);
 		}
 		return null;
 	}
