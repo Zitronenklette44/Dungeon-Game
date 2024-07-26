@@ -9,13 +9,25 @@ public class Movement {
 		boolean mRight = GameLogic.moveRight;
 		boolean mUp = GameLogic.moveUp;
 		boolean mDown = GameLogic.moveDown;
-
+		
+		if(GameLogic.attacking) {
+			return;
+		}
+		
+		if(!mLeft && !mRight && !mUp&&! mDown) {
+			if(GameLogic.player.lastdx>=0&&GameLogic.player.lastdy<=0)
+				GameLogic.player.setAnimation(0);
+			else 
+				GameLogic.player.setAnimation(5);
+		}
+		
 		// Spielerbewegung
 		if(GameLogic.vertikalAxis) {
 			if(mLeft && mUp && !mRight && !mDown) {
 				if(!Collisions.checkCollision(GameLogic.player, -(GameLogic.player.speed+1), 0)) {
 					GameLogic.player.posX -= GameLogic.player.speed;
 					GameLogic.player.dx = -GameLogic.player.speed;
+					GameLogic.player.forceSetAnimation(6);
 				}
 				if(!Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.player.speed+1))&& !(GameLogic.player.posY < 0)) {
 					GameLogic.player.posY -= GameLogic.player.speed;
@@ -26,6 +38,7 @@ public class Movement {
 				if (!Collisions.checkCollision(GameLogic.player, -(GameLogic.player.speed+1), 0)) {
 					GameLogic.player.posX -= GameLogic.player.speed ;
 					GameLogic.player.dx = -GameLogic.player.speed;
+					GameLogic.player.forceSetAnimation(6);
 				}
 				if (!Collisions.checkCollision(GameLogic.player, 0, (GameLogic.player.speed+1))&& !(GameLogic.player.posY > GameLogic.floor)) {
 					GameLogic.player.posY += GameLogic.player.speed ;
@@ -36,6 +49,7 @@ public class Movement {
 				if (!Collisions.checkCollision(GameLogic.player, (GameLogic.player.speed+1), 0)) {
 					GameLogic.player.posX += GameLogic.player.speed ;
 					GameLogic.player.dx = GameLogic.player.speed;
+					GameLogic.player.forceSetAnimation(1);
 				}
 				if (!Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.player.speed+1))&& !(GameLogic.player.posY < 0)) {
 					GameLogic.player.posY -= GameLogic.player.speed ;
@@ -46,6 +60,7 @@ public class Movement {
 				if (!Collisions.checkCollision(GameLogic.player, (GameLogic.player.speed+1), 0)) {
 					GameLogic.player.posX += GameLogic.player.speed ;
 					GameLogic.player.dx = GameLogic.player.speed;
+					GameLogic.player.forceSetAnimation(1);
 				}
 				if (!Collisions.checkCollision(GameLogic.player, 0, (GameLogic.player.speed+1)) && !(GameLogic.player.posY > GameLogic.floor)) {
 					GameLogic.player.posY += GameLogic.player.speed ;
@@ -61,21 +76,25 @@ public class Movement {
 			GameLogic.player.posX -= GameLogic.player.speed;
 			GameLogic.player.dx = -GameLogic.player.speed;
 			GameLogic.player.dy = 0;
+			GameLogic.player.forceSetAnimation(6);
 		}
 		if (mRight && !Collisions.checkCollision(GameLogic.player, (GameLogic.player.speed+1), 0)&&!mLeft&&!mUp&&!mDown) {
 			GameLogic.player.posX += GameLogic.player.speed;
 			GameLogic.player.dx = GameLogic.player.speed;
 			GameLogic.player.dy = 0;
+			GameLogic.player.forceSetAnimation(1);
 		}
 		if (mUp && !Collisions.checkCollision(GameLogic.player, 0, -(GameLogic.player.speed+1))&&GameLogic.vertikalAxis&&GameLogic.player.posY>0&&!mDown&&!mLeft&&!mRight) {
 			GameLogic.player.posY -= GameLogic.player.speed;
 			GameLogic.player.dy = -GameLogic.player.speed;
 			GameLogic.player.dx = 0;
+			GameLogic.player.forceSetAnimation(1);
 		}
 		if (mDown && !Collisions.checkCollision(GameLogic.player, 0, (GameLogic.player.speed+1))&&GameLogic.vertikalAxis&&GameLogic.player.posY<GameLogic.floor&&!mUp&&!mLeft&&!mRight) {
 			GameLogic.player.posY += GameLogic.player.speed;
 			GameLogic.player.dy = GameLogic.player.speed;
 			GameLogic.player.dx = 0;
+			GameLogic.player.forceSetAnimation(6);
 		}	
 
 		GameLogic.player.lastdx = GameLogic.player.dx;

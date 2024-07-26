@@ -2,6 +2,7 @@ package entitys;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import action.Logger;
 import gameObject.Rechteck;
@@ -35,6 +36,7 @@ public class MobTemplate extends Rechteck{
 	public boolean isSlowed = false;
 	public boolean isStuned = false;
 	public boolean invulnerable = false;
+	public BufferedImage image;
     
     public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana) {
         super(hoehe, breite, posX, posY);

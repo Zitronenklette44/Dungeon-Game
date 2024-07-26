@@ -70,6 +70,7 @@ public class SwordAttack extends CollisionRechteck{
 		boolean remove = false;
 		if(existingTime <= 0) {
 			remove = true;
+			if(!damagePlayer) GameLogic.attacking = false;
 		}else {
 			existingTime--;
 		}

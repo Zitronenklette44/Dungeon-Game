@@ -47,6 +47,7 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 	public static void createSwordAttack(int reach, float posX, float posY, int height , int damage, int duration, boolean damagePlayer, boolean damageMobs) {
 		SwordAttack swordAttack = new SwordAttack(reach, posX, posY, height, damage, duration, damagePlayer, damageMobs);
 		swordAttack.isVisible=false;
+		GameLogic.attacking = true;
 		GameLogic.swordAttacks.add(swordAttack);
 	}
 

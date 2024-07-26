@@ -29,6 +29,7 @@ public class GameLogic {
 	public static boolean jump = false;
 	public static boolean Interact = false;
 	public static boolean fireSpell = false;
+	public static boolean attacking = false;
 	public static ArrayList<Rechteck> floorObject;
 	public static ArrayList<Column> columns;
 	public static ArrayList<CollisionRechteck> collisionRectangles;

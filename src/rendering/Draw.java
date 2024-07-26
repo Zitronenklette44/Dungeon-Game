@@ -190,8 +190,9 @@ public class Draw extends JLabel {
 		
 
 		//player
-		g.setColor(playerColor);
-		g.fillRect((int)player.posX,(int) player.posY, player.breite, player.hoehe);
+//		g.setColor(playerColor);
+//		g.fillRect((int)player.posX,(int) player.posY, player.breite, player.hoehe);
+		GameLogic.player.drawMob(g2d);
 		if(GameLogic.debug) {
 			g2d.drawString(player.posX+"", player.posX, player.posY-5);
 			g2d.drawString(player.posY+"", player.posX-40, player.posY+(player.hoehe/2));

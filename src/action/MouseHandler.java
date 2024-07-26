@@ -27,19 +27,23 @@ public class MouseHandler implements MouseListener{
             if (GameLogic.player.lastdx > 0) { // Angriff nach rechts
                 attackPosX += playerWidth;
                 attackPosY -= playerHeight / 2; // Angriff vertikal zentrieren
-                CreateObjects.createSwordAttack(reach, attackPosX, attackPosY, (int) (reach / 1.5), GameLogic.player.damage, 40, false ,true);
+                CreateObjects.createSwordAttack(reach, attackPosX, attackPosY, (int) (reach / 1.5), GameLogic.player.damage, 100, false ,true);
+                GameLogic.player.forceSetAnimation(2);
             } else if (GameLogic.player.lastdx < 0) { // Angriff nach links
                 attackPosX = GameLogic.player.posX-reach/2;
                 attackPosY -= playerHeight / 2; // Angriff vertikal zentrieren
-                CreateObjects.createSwordAttack(reach, attackPosX, attackPosY, (int) (reach / 1.5), GameLogic.player.damage, 40, false ,true);
+                CreateObjects.createSwordAttack(reach, attackPosX, attackPosY, (int) (reach / 1.5), GameLogic.player.damage, 100, false ,true);
+                GameLogic.player.forceSetAnimation(7);
             } else if (GameLogic.player.lastdy > 0) { // Angriff nach unten
                 attackPosY += playerHeight;
                 attackPosX -= reach / 2 - playerWidth / 2; // Angriff horizontal zentrieren
-                CreateObjects.createSwordAttack((int) (reach/1.5), attackPosX, attackPosY, reach, GameLogic.player.damage, 40, false ,true);
+                CreateObjects.createSwordAttack((int) (reach/1.5), attackPosX, attackPosY, reach, GameLogic.player.damage, 100, false ,true);
+                GameLogic.player.forceSetAnimation(7);
             } else if (GameLogic.player.lastdy < 0) { // Angriff nach oben
                 attackPosY -= reach/2;
                 attackPosX -= reach / 2 - playerWidth / 2; // Angriff horizontal zentrieren
-                CreateObjects.createSwordAttack((int) (reach/1.5), attackPosX, attackPosY, reach, GameLogic.player.damage, 40, false ,true);
+                CreateObjects.createSwordAttack((int) (reach/1.5), attackPosX, attackPosY, reach, GameLogic.player.damage, 100, false ,true);
+                GameLogic.player.forceSetAnimation(2);
             }
             MusicPlayer.playSound(3, false);	//spoundeffect abspielen
             MusicPlayer.setVolume(3, MusicPlayer.sfxVolume);

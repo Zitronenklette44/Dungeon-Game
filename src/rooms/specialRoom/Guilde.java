@@ -23,8 +23,8 @@ public class Guilde extends RoomTemplate{
 		GameLogic.resetPos1[0] = 550;
 		GameLogic.resetPos1[1] = 725;
 		GameLogic.vertikalAxis = true;
-		GameLogic.player.hoehe = 25;
-		GameLogic.player.breite = 25;
+		GameLogic.player.hoehe = 30;
+		GameLogic.player.breite = 30;
 		GildSwitchInteraction.isInGuild = true;
 	}
 	

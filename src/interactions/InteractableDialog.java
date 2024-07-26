@@ -27,7 +27,7 @@ public class InteractableDialog extends InteractableTemplate{
 		if(GameLogic.currentQuestDone) {
 			currentDialog ++;
 		}
-		Dialog = Dialogs[currentDialog];
+//		Dialog = Dialogs[currentDialog];
 		Logger.logInfo("interacted");
 		super.performAction();
 		GameScreen.currentDialog = "log"+Dialog;
