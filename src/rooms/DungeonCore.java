@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import action.Logger;
 import game.GameLogic;
+import gui.GameScreen;
 import rooms.Castle.*;
 import rooms.Dungeon.*;
 import rooms.Forest.*;
@@ -89,13 +90,10 @@ public class DungeonCore {
 
 			DungeonLength+=2;
 			thisRooms.clear();
-			String dungeonString = "";
 			for (int i = 0; i < DungeonLength; i++) {
-			    dungeonString += DungeonRooms.get(i) + ", ";
 				rooms[dungeonType][DungeonRooms.get(i)].resetRoom();
 				thisRooms.add((RoomTemplate) rooms[dungeonType][DungeonRooms.get(i)].clone()); 
 			}
-			Logger.logWarning("Dungeon Lenght: "+DungeonLength+" with following Rooms: "+dungeonString);
 			Logger.logInfo("new Dungeon created");
 		}
 		
@@ -245,7 +243,7 @@ public class DungeonCore {
 		if (!homeVillageBuild && !specialRoomBuild) {
 			thisRooms.get(currentRoom).VariantExists(currentRoom);
 			GameLogic.floor = 725;
-			thisRooms.get(currentRoom).changeColors();
+			thisRooms.get(currentRoom).changeColors(); 
 			g2d.setFont(new Font("Arial", Font.BOLD, 20));
 			if(GameLogic.debug) {
 				g2d.drawString(thisRooms.get(currentRoom).name, 200, 300);
@@ -288,5 +286,16 @@ public class DungeonCore {
 		}
 		thisRooms.get(currentRoom).setSpawns(currentRoom);
 		thisRooms.get(currentRoom).spawnEntitys();
+	}
+	
+	
+	public static void changeRoom(int newRoom) {
+			GameLogic.directionRoom = 0;		//setze richtung auf links nach rechts
+			DungeonCore.currentRoom = newRoom;	//aktuellen Raum um 1 nach hinten verscheieben
+			GameLogic.resetLevel();		//Level reseten
+			GameScreen.updateRoomNr(DungeonCore.currentRoom+1);		//Raum Nummer updaten
+		try {
+			GameScreen.changeBackground(DungeonCore.getImage(0));
+		} catch (Exception e) {}
 	}
 }

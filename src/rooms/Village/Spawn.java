@@ -48,8 +48,8 @@ public class Spawn extends RoomTemplate{
 	@Override
 	protected void createEntitys() {		
 		Entitys = new MobTemplate[1];	//maximale anzahl an gegnern die gespawnt werden
-		Entitys[0] = CreateObjects.createSwordmen(25, 25, 0.5F, 1035, 300, 1, 1, LootTabels.createVillagerLoot(5));
-		Entitys[0].maxHitCooldown = 200;
+		getEntitys()[0] = CreateObjects.createSwordmen(25, 25, 0.5F, 1035, 300, 1, 1, LootTabels.createVillagerLoot(5));
+		getEntitys()[0].maxHitCooldown = 200;
 		
 		super.createEntitys();
 		//killAllEntitys();
@@ -58,20 +58,20 @@ public class Spawn extends RoomTemplate{
 	@Override
 	protected void createFunctionable() {
 		super.createFunctionable();
-		functional.add(CreateObjects.createBushPoint(500, 400, true, 50));
+		getFunctional().add(CreateObjects.createBushPoint(500, 400, true, 50));
 	}
 	
 	@Override
 	public void spawnEntitys() {
 		super.spawnEntitys();	//Liste wird geleert
-		for(int i=0; i<Entitys.length;i++) {
-			if(Entitys[i] == null) {
+		for(int i=0; i<getEntitys().length;i++) {
+			if(getEntitys()[i] == null) {
 				break;
 			}
-			if(!Entitys[i].defeated) {
-				GameLogic.mobs.add(Entitys[i]);		//der Liste für bewegungen hinzufügen
-				Entitys[i].posX = Entitys[i].SpawnX;	//Position zurücksetzen
-				Entitys[i].posY = Entitys[i].SpawnY;
+			if(!getEntitys()[i].defeated) {
+				GameLogic.mobs.add(getEntitys()[i]);		//der Liste für bewegungen hinzufügen
+				getEntitys()[i].posX = getEntitys()[i].SpawnX;	//Position zurücksetzen
+				getEntitys()[i].posY = getEntitys()[i].SpawnY;
 			}
 			
 		}
@@ -88,8 +88,8 @@ public class Spawn extends RoomTemplate{
 	
 	@SuppressWarnings("unused")
 	private void killAllEntitys() {
-		for(int i = 0; i<Entitys.length ; i++) {
-			Entitys[i].defeated = true;
+		for(int i = 0; i<getEntitys().length ; i++) {
+			getEntitys()[i].defeated = true;
 		}
 
 	}

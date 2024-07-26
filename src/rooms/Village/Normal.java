@@ -2,6 +2,7 @@ package rooms.Village;
 
 import java.util.ArrayList;
 
+import action.Logger;
 import game.CreateObjects;
 import game.GameLogic;
 import rooms.RoomTemplate;
@@ -19,7 +20,11 @@ public class Normal extends RoomTemplate {
 		dungeonPaths.add(currentRoom);
 		int variante = (int) (Math.random() * image.length);
 		dungeonPaths.add(variante);
+		this.RoomVariant = variante;
 		setImagePath(variante);
+		createObjects(currentRoom);
+		createEntitys();
+		createFunctionable();
 	}
 
 	@Override
@@ -29,7 +34,7 @@ public class Normal extends RoomTemplate {
 
 		int variantIndex = getVariantIndex(currentRoom);
 		if (variantIndex == -1) {
-			System.out.println("No variant found for currentRoom: " + currentRoom);
+			Logger.logInfo("no avalible Room Variant for Room "+currentRoom);
 			return;
 		}
 

@@ -8,6 +8,7 @@ import gui.GameScreen;
 import gui.SpellChooser;
 import inventory.InventoryManager;
 import rooms.DungeonCore;
+import test.DungeonInfos;
 
 public class KeyHandler implements KeyListener {
 
@@ -56,6 +57,9 @@ public class KeyHandler implements KeyListener {
 		}
 		if(e.getKeyChar() == 'm' || e.getKeyChar() == 'M') {	//temporär
 			SpellChooser.erstellen();
+		}
+		if(e.getKeyChar() == 'n' || e.getKeyChar() == 'n') {	//temporär
+			DungeonInfos.erstellen();
 		}
 		if((e.getKeyChar() == 'i' || e.getKeyChar() == 'I') && !GameLogic.paused) {	
 			GameScreen.inventory.setVisible(!GameScreen.inventory.isVisible());

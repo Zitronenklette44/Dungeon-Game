@@ -51,24 +51,24 @@ public class Guilde extends RoomTemplate{
 	protected void createEntitys() {
 		Entitys = new MobTemplate[2];
 
-		Entitys[0] = CreateObjects.createTestMob(25, 25, 0.0F, 189, 79, 0, 1);
-		Entitys[0].typeColor = Color.blue;
-		Entitys[0].invulnerable = true;
+		getEntitys()[0] = CreateObjects.createTestMob(25, 25, 0.0F, 189, 79, 0, 1);
+		getEntitys()[0].typeColor = Color.blue;
+		getEntitys()[0].invulnerable = true;
 		
-		Entitys[1] = CreateObjects.createTestMob(25, 25, 0.0F, 581, 103, 0, 1);
-		Entitys[1].typeColor = Color.gray;
-		Entitys[1].invulnerable = true;
+		getEntitys()[1] = CreateObjects.createTestMob(25, 25, 0.0F, 581, 103, 0, 1);
+		getEntitys()[1].typeColor = Color.gray;
+		getEntitys()[1].invulnerable = true;
 		super.createEntitys();
 	}
 	public void spawnEntitys() {
 		for(int i=0; i<2;i++) {
-			if(Entitys[i] == null) {
+			if(getEntitys()[i] == null) {
 				break;
 			}
-			if(!Entitys[i].defeated) {
-				GameLogic.mobs.add(Entitys[i]);		//der Liste für bewegungen hinzufügen
-				Entitys[i].posX = Entitys[i].SpawnX;	//Position zurücksetzen
-				Entitys[i].posY = Entitys[i].SpawnY;
+			if(!getEntitys()[i].defeated) {
+				GameLogic.mobs.add(getEntitys()[i]);		//der Liste für bewegungen hinzufügen
+				getEntitys()[i].posX = getEntitys()[i].SpawnX;	//Position zurücksetzen
+				getEntitys()[i].posY = getEntitys()[i].SpawnY;
 			}
 		}
 			}

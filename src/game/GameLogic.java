@@ -199,6 +199,15 @@ public class GameLogic {
 		}
 	}
 	
+	public static void resetControlls() {
+		GameLogic.moveDown = false;
+		GameLogic.moveUp = false;
+		GameLogic.moveRight = false;
+		GameLogic.moveLeft = false;
+		GameLogic.jump = false;
+		GameLogic.isSpacePressed = false;
+	}
+
 	private void decreaseCooldowns() {	//5ms
 		if(player.HitCooldown>0) {player.HitCooldown--;}		//Cooldown verringern
 		if(player.AtkCooldown>0) {player.AtkCooldown--;}

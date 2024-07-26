@@ -10,7 +10,7 @@ import game.GameLogic;
 
 public class RoomTemplate implements Cloneable{
 	public String name;
-	public String ImagePath;
+	public String ImagePath = "/resources/rooms/backgrounds/Empty.png";
 	protected int RoomVariant;
 	public boolean EntitysSpawned = false;
 	protected MobTemplate[] Entitys;
@@ -65,4 +65,16 @@ public class RoomTemplate implements Cloneable{
 	public void update() {}
 	
 	protected void createFunctionable() {functional.clear();}
+
+	public int getRoomVariant() {
+		return RoomVariant;
+	}
+
+	public MobTemplate[] getEntitys() {
+		return Entitys;
+	}
+
+	public ArrayList<FunctionalTemplate> getFunctional() {
+		return functional;
+	}
 }

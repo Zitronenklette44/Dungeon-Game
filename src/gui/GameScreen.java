@@ -352,7 +352,7 @@ public class GameScreen extends JFrame {
 	    try {
 	        lbBackground.setIcon(new ImageIcon(GameScreen.class.getResource(ImagePath)));
 	    } catch (NullPointerException e) {
-	        e.printStackTrace();
+	        Logger.logWarning("GUI not fully initialized", e);
 	    }
 	}
 	

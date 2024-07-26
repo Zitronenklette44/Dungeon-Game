@@ -274,7 +274,6 @@ public class Inventory extends JLabel {
         button3Height = height;
         
         if (Interface == 0) g.setColor(BUTTON_COLOR_PRESSED); else g.setColor(BUTTON_COLOR_UNPRESSED);
-//        g.fillRect(button1X, button1Y, button1Width, button1Height);
         g.fill(CustomeGraphics.createRoundedLeftCorners(button1X+2, button1Y, button1Width-2, button1Height, 15));
         g.setColor(Color.black);
         g.draw(CustomeGraphics.createRoundedLeftCorners(button1X+2, button1Y, button1Width-2, button1Height, 15));
@@ -283,10 +282,15 @@ public class Inventory extends JLabel {
         g.setColor(Color.black);
         g.drawRect(button2X, button2Y, button2Width, button2Height);
         if (Interface == 2) g.setColor(BUTTON_COLOR_PRESSED); else g.setColor(BUTTON_COLOR_UNPRESSED);
-//        g.fillRect(button3X, button3Y, button3Width, button3Height);
         g.fill(CustomeGraphics.createRoundedRightCorners(button3X, button3Y, button3Width-2, button3Height, 15));
         g.setColor(Color.black);
         g.draw(CustomeGraphics.createRoundedRightCorners(button3X, button3Y, button3Width-2, button3Height, 15));
+        
+        //Button Strings
+        g.setFont(new Font("Tahoma", Font.BOLD, 20));
+        g.drawString("Inventar", (int) (button1X+button1Width/2.75), (int) (button1Y+button1Height/1.5));
+        g.drawString("Crafting", (int) (button2X+button2Width/2.75), (int) (button2Y+button2Height/1.5));
+        g.drawString("Quest Log", (int) (button3X+button3Width/2.75), (int) (button3Y+button3Height/1.5));
     }
 
     private boolean isWithinButton(int mouseX, int mouseY, int buttonX, int buttonY, int buttonWidth, int buttonHeight) {
