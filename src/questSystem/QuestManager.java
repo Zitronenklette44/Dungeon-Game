@@ -13,7 +13,7 @@ public class QuestManager {
 	
 	public static void init(){
 		
-		quests.add(new QuestTemplate("FieldMobs", 7, "Das ist eine Lustige Quest", LootTabels.createValuebles(2), 0, 1, 1));		//Test
+		quests.add(new QuestTemplate("FieldMobs", 7, "Das ist eine Lustige Quest", LootTabels.createValuebles(2), 'S', 1, 1));		//Test
 		
 		
 	}

@@ -14,7 +14,7 @@ public class QuestTemplate implements Cloneable{
 	public int questType;
 	public String description;
 	public LootTableTemplate reward;
-	public int difficulty;
+	public char difficulty;
 	public int rarity;
 	public int MobID;
 	public ItemTemplate item;
@@ -23,7 +23,7 @@ public class QuestTemplate implements Cloneable{
 	public int currentKilledMobs = 0;
 	public int currentCollectedItems = 0;
 
-	public QuestTemplate(String name, int Numbers, String description, LootTableTemplate reward, int difficulty, int rarity, int MobID) {
+	public QuestTemplate(String name, int Numbers, String description, LootTableTemplate reward, char difficulty, int rarity, int MobID) {
 		this.name = name;
 		this.Numbers = Numbers;
 		this.questType = 0;
@@ -34,7 +34,7 @@ public class QuestTemplate implements Cloneable{
 		this.MobID = MobID;
 	}
 
-	public QuestTemplate(String name, int Numbers, String description, LootTableTemplate reward, int difficulty, int rarity, ItemTemplate item) {
+	public QuestTemplate(String name, int Numbers, String description, LootTableTemplate reward, char difficulty, int rarity, ItemTemplate item) {
 		this.name = name;
 		this.Numbers = Numbers;
 		this.questType = 1;
@@ -45,7 +45,7 @@ public class QuestTemplate implements Cloneable{
 		this.item = item;
 	}
 
-	public QuestTemplate(String name, int Numbers, String description, LootTableTemplate reward, int difficulty, int rarity, ItemTemplate[] itemGroup) {
+	public QuestTemplate(String name, int Numbers, String description, LootTableTemplate reward, char difficulty, int rarity, ItemTemplate[] itemGroup) {
 		this.name = name;
 		this.Numbers = Numbers;
 		this.questType = 2;

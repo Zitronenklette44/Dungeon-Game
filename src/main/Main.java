@@ -31,6 +31,8 @@ public class Main {
         Dialogs.init();						//Dialoge laden
         LoadingGUI.nextLoadingStage("Loading Music...");
         MusicPlayer.init();					//Musik Listen erstellen
+        LoadingGUI.nextLoadingStage("Loading Quests...");
+        QuestManager.init();
         LoadingGUI.nextLoadingStage("Creating Game Screen...");
         GameScreen.erstellen();				//Fenster erstellen
         LoadingGUI.nextLoadingStage("Creating Dungeons...");
@@ -42,8 +44,6 @@ public class Main {
         MusicPlayer.playSound(0, true);		//Background Musik abspielen
         LoadingGUI.nextLoadingStage("Loading Spells...");
         SpellManager.init();				//Zauber system erstellen und Zauber vorladen
-        LoadingGUI.nextLoadingStage("Loading Quests...");
-        QuestManager.init();
         LoadingGUI.nextLoadingStage("Finalizing...");
         GameScreen.updateSpells();			//Spells in Slots laden
         GameScreen.showFrame();
