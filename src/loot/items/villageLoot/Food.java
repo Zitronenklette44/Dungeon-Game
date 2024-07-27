@@ -15,7 +15,7 @@ public class Food extends ItemTemplate{
 	private static BufferedImage bread;
 	private static BufferedImage apple;
 	private static BufferedImage potato;
-	
+
 	public int healthRegeneration = 0;
 
 	public Food(int dropChance) {
@@ -23,12 +23,13 @@ public class Food extends ItemTemplate{
 		interactable = true;
 		generateRandomVariant();
 	}
-	
+
 	public Food(int dropChance, int variant) {
 		super(4, dropChance, "", null);
+		interactable = true;
 		generateVariant(variant);
 	}
-	
+
 	private void generateVariant(int variant) {
 		setImage();
 		switch (variant) {
@@ -58,9 +59,9 @@ public class Food extends ItemTemplate{
 			this.variant = 0;
 			break;
 		}
-		
+
 	}
-	
+
 	private void generateRandomVariant() {
 		setImage();
 		int random = (int) (Math.random()*100);
@@ -78,7 +79,7 @@ public class Food extends ItemTemplate{
 			itemName = Translation.get("item.bread");
 			itemImage = bread;
 			healthRegeneration = 5;
-			
+
 			variant = 2;	
 		} else {
 			Logger.logError("invalid food variant: "+random, new IllegalArgumentException());
@@ -87,10 +88,10 @@ public class Food extends ItemTemplate{
 			itemImage = potato;
 			variant = 0;
 		}
-		
-		
+
+
 	}
-	
+
 	private static void setImage() {
 		try {
 			bread = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Bread.png"));
@@ -100,14 +101,23 @@ public class Food extends ItemTemplate{
 			Logger.logError("Food Image Error: ", e);
 		}
 	}
-	
+
 	@Override
 	public void onInteraction() {
 		super.onInteraction();
+
 		if(GameLogic.player.Hp+healthRegeneration <= GameLogic.player.maxHp)
 			GameLogic.player.Hp+=healthRegeneration;
 		else 
 			GameLogic.player.Hp= GameLogic.player.maxHp;
-	}
 
+	}
+	
+	@Override
+	public boolean canInteract() {
+		boolean canInteract = false;
+		if(GameLogic.player.Hp < GameLogic.player.maxHp) canInteract = true;
+		return canInteract;
+	}
+	
 }

@@ -59,7 +59,7 @@ public class Field extends RoomTemplate{
 		getEntitys()[5].typeColor = Color.white;
 		getEntitys()[5].maxHitCooldown = 200;
 
-		getEntitys()[6] = CreateObjects.createTestMob(30, 30, 0.3F, 1035, 500, 1, 90);
+		getEntitys()[6] = CreateObjects.createTestMob(30, 30, 0.3F, 1035, 500, 1, 5);
 		getEntitys()[6].typeColor = Color.white;
 		getEntitys()[6].maxHitCooldown = 200;
 		super.createEntitys();

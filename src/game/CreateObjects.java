@@ -17,6 +17,7 @@ import gameObject.SwordAttack;
 import interactions.DungeonChooser;
 import interactions.DungeonExit;
 import interactions.GildSwitchInteraction;
+import interactions.GuildMasterDialogInteraction;
 import interactions.InteractableDialog;
 import interactions.ShopOpenPotions;
 import interactions.ShopOpenTools;
@@ -81,6 +82,14 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 	
 	public static void createDialogInteraction(int posX, int posY, String action, int DialogNum, String sender) {
 		GameLogic.interactables.add(new InteractableDialog(posX, posY, action, DialogNum, sender));
+	}
+	
+	public static void createDialogInteraction(int posX, int posY, String action, int[] DialogsNum, String sender) {
+		GameLogic.interactables.add(new InteractableDialog(posX, posY, action, DialogsNum, sender));
+	}
+	
+	public static void createGuildMasterDialogInteraction(int posX, int posY, String action, int[] DialogsNum, String sender) {
+		GameLogic.interactables.add(new GuildMasterDialogInteraction(posX, posY, action, DialogsNum, sender));
 	}
 	
 	public static void createGildSwitchInteraction(int posX, int posY) {

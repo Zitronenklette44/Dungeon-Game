@@ -33,7 +33,7 @@ public class Guilde extends RoomTemplate{
 		super.createObjects(currentRoom);
 		CreateObjects.createGildSwitchInteraction(550, 750);
 //		GameLogic.functionalObjects.add(CreateObjects.createPernamentChest(600, 400, true));
-		CreateObjects.createDialogInteraction(581, 103, Translation.get("interaction.testDialog") , 2, Translation.get("dialogs.gildenSender"));
+		CreateObjects.createGuildMasterDialogInteraction(581, 103, Translation.get("interaction.testDialog") , new int[] {2 ,3, 4, 5, 6}, Translation.get("dialogs.gildenSender"));
 	
 		
 		CreateObjects.createHitbox(57,1160, 0, 0);	//hohe breite posX posY

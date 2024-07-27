@@ -50,3 +50,11 @@ TODO List:
 		
 	Bugfixes:
 		1.evt DialogMenue durchsichtig 	--> flackern der icons von Draw methode			Done
+		
+		
+	MobIds:
+		Player = 0;
+		TestMob = 1;
+		Arrow = 2;
+		Swordmen = 3;
+			

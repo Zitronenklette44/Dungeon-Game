@@ -15,6 +15,7 @@ import gameObject.SwordAttack;
 import gameObject.Rechteck;
 import gui.GameScreen;
 import interactions.InteractableTemplate;
+import loot.GenerateLoot;
 import loot.items.ItemTemplate;
 import questSystem.quests.QuestTemplate;
 import rendering.Draw;
@@ -69,9 +70,10 @@ public class GameLogic {
 	public static DungeonCore dungeon;
 	public static float playerSpeed = 1F;
 	
-	public static boolean currentQuestDone;
+	public static boolean currentQuestDone = false;
 	public static boolean haveQuest = false;
 	public static QuestTemplate currentQuest;
+	public static QuestTemplate choosenQuest;
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();
@@ -150,6 +152,7 @@ public class GameLogic {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				checkQuests();
 //				System.out.println("floor: "+floorObject.size());
 //				System.out.println("cloums: "+columns.size());
 //				System.out.println("collisionRectangles: "+collisionRectangles.size());
@@ -231,5 +234,16 @@ public class GameLogic {
 		}
 	}
 
+	private void checkQuests() {
+		if(currentQuest == null) return;
+		
+		if(currentQuest.isCompleted()) {
+			currentQuestDone = true;
+			GenerateLoot.intoIntentory(currentQuest.reward);
+			currentQuest = null;
+			Logger.logInfo("Quest completed");
+		}
+	}
+	
 
 }

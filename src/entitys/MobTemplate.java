@@ -86,12 +86,14 @@ public class MobTemplate extends Rechteck{
 	}
     
     public void onDeath() {
+    	if(GameLogic.currentQuest != null) {
+    		if(GameLogic.currentQuest.questType == 0 && GameLogic.currentQuest.MobID == MobID) {
+        		GameLogic.currentQuest.currentKilledMobs++;
+        	}
+    	}
     	if(!defeated || spawnedLootTable || loot == null) {return;}
     	SpawnLoot.around(posX, posY, 20, loot);
     	spawnedLootTable = true;
-    	if(GameLogic.currentQuest.questType == 0 && GameLogic.currentQuest.MobID == MobID) {
-    		GameLogic.currentQuest.currentKilledMobs++;
-    	}
     }
     
     public void resetPos() {

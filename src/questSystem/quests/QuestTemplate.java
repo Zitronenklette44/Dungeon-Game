@@ -61,7 +61,7 @@ public class QuestTemplate implements Cloneable{
 	public QuestTemplate clone() {
 		try {
 			QuestTemplate questTemplate;
-			questTemplate = (QuestTemplate) clone();
+			questTemplate = (QuestTemplate) super.clone();
 			return questTemplate;
 		} catch (Exception e) {
 			Logger.logError("Error cloning Quest: ", e);
@@ -70,29 +70,29 @@ public class QuestTemplate implements Cloneable{
 	}
 
 	public boolean isCompleted() {
-		boolean isCompleted = false;
+        boolean isCompleted = false;
 
-		switch (questType) {
-		case 0:{
-			
-			
-
-		}break;
-		case 1:{
-
-		}break;
-		case 2:{
-
-		}break;
-
-		default:
-			Logger.logError("invalid QuestType: "+ questType, new IllegalArgumentException());
-		}
-
-
-
-		return isCompleted;
-	}
+        switch (questType) {
+        case 0: {
+            if(currentKilledMobs == Numbers) {
+                isCompleted = true;
+            }
+        }break;
+        case 1: {
+            if(currentCollectedItems == Numbers) {
+                isCompleted = true;
+            }
+        }break;
+        case 2: {
+            if(currentCollectedItems == Numbers) {
+                isCompleted = true;
+            }
+        }break;
+        default:
+            Logger.logError("invalid QuestType: " + questType, new IllegalArgumentException());
+        }
+        return isCompleted;
+    }
 	
 	public boolean isRequiredItem(ItemTemplate item) {
 		boolean isItem = false;

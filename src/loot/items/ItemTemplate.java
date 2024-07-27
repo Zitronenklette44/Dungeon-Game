@@ -18,6 +18,7 @@ public class ItemTemplate implements Cloneable {
 	public int pickUpCooldown;
 	public int maxStackSize = 99;
 	public int variant = -1;
+	private boolean wasInInventory = false;
 
 	public float posX;
 	public float posY;
@@ -59,6 +60,7 @@ public class ItemTemplate implements Cloneable {
 	}
 
 	public void pickedUp() {
+		wasInInventory = true;
 		if (pickUpCooldown <= 0) {
 			pickUpCooldown = 0;
 			isObject = false;
@@ -68,6 +70,12 @@ public class ItemTemplate implements Cloneable {
 					isObject = false;
 					posX = 100;
 					InventoryManager.add(this, stackSize);
+					if(GameLogic.currentQuest != null) {
+						if(GameLogic.currentQuest.isRequiredItem(this) && ! wasInInventory) {
+							GameLogic.currentQuest.currentCollectedItems += stackSize;
+						}
+					}
+					
 					break;
 				}
 			}
@@ -100,5 +108,7 @@ public class ItemTemplate implements Cloneable {
 	}
 	
 	public void onInteraction() {}
+	
+	public boolean canInteract() {return false;};
 
 }

@@ -8,11 +8,11 @@ public class InteractableDialog extends InteractableTemplate{
 	int Dialog;
 	int[] Dialogs;
 	int currentDialog;
-	private String sender;
+	protected String sender;
 	
 	public InteractableDialog(int posX, int posY, String Action, int Dialog, String sender ) {
 		super(10, 10, posX, posY, 100, Action);
-		this.Dialog = Dialog;
+		this.Dialogs = new int[] {Dialog};
 		this.sender = sender;
 	}
 	public InteractableDialog(int posX, int posY, String Action, int[] Dialogs, String sender ) {
@@ -24,10 +24,11 @@ public class InteractableDialog extends InteractableTemplate{
 	
 	@Override
 	public void performAction() {
-		if(GameLogic.currentQuestDone) {
+		if(GameLogic.currentQuestDone && Dialogs.length-1 > currentDialog) {
 			currentDialog ++;
 		}
-//		Dialog = Dialogs[currentDialog];
+		Logger.logInfo("current Dialog: "+currentDialog +" max Dialog: "+ Dialogs.length);
+		Dialog = Dialogs[currentDialog];
 		Logger.logInfo("interacted");
 		super.performAction();
 		GameScreen.currentDialog = "log"+Dialog;

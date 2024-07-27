@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JLabel;
 
+import action.Logger;
 import components.CustomeGraphics;
 import game.GameLogic;
 import loot.LootTableTemplate;
@@ -105,7 +106,7 @@ public class Inventory extends JLabel {
                     if (slot != -1) {
                         if (e.getButton() == MouseEvent.BUTTON2) {
                             ItemTemplate item = InventoryManager.getSlot(getSlotAt(e.getX(), e.getY())).getItem();
-                            if (item.interactable) {
+                            if (item.interactable && item.canInteract()) {
                                 item.onInteraction();
                                 int count = InventoryManager.getSlot(getSlotAt(e.getX(), e.getY())).getCount();
                                 if (count > 1) {

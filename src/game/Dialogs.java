@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import action.Logger;
+import questSystem.QuestManager;
 import translation.Translation;
 
 public class Dialogs {
@@ -25,6 +26,24 @@ public class Dialogs {
                 Translation.get("dialogs.log2.part4")
             });
         
+        dialogs.put("log3", new String[]{
+                Translation.get("dialogs.log3.part1"),
+                Translation.get("dialogs.log3.part2"),
+                Translation.get("dialogs.log3.part3"),
+                Translation.get("dialogs.log3.part4")
+            });
+        
+        dialogs.put("log4", new String[]{
+                Translation.get("dialogs.log4.part1")
+            });
+        
+        dialogs.put("log5", new String[]{
+                Translation.get("dialogs.log5.part1")
+            });
+        dialogs.put("log6", new String[]{
+                Translation.get("dialogs.log6.part1")
+            });
+        
             Logger.logInfo("Finished loading Dialogs");
             
        
@@ -41,8 +60,9 @@ public class Dialogs {
     public static void setQuest(String dialog) {
     	
     	switch (dialog) {
-		case "log1": 
-			Logger.logWarning("new Quest for dialog: log1");
+		case "log2": 
+			QuestManager.setNewQuest(0);
+			QuestManager.approveQuest();
 			break;
 			
 		default:

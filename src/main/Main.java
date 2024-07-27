@@ -8,6 +8,7 @@ import gameMusik.MusicPlayer;
 import gui.GameScreen;
 import gui.LoadingGUI;
 import inventory.InventoryManager;
+import questSystem.QuestManager;
 import rooms.DungeonCore;
 import spells.SpellIcons;
 import spells.SpellManager;
@@ -38,6 +39,8 @@ public class Main {
         MusicPlayer.playSound(0, true);		//Background Musik abspielen
         LoadingGUI.nextLoadingStage("Loading Spells...");
         SpellManager.init();				//Zauber system erstellen und Zauber vorladen
+        LoadingGUI.nextLoadingStage("Loading Quests...");
+        QuestManager.init();
         LoadingGUI.nextLoadingStage("Finalizing...");
         GameScreen.updateSpells();			//Spells in Slots laden
         GameScreen.showFrame();
