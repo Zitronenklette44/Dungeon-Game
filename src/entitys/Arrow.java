@@ -11,7 +11,7 @@ public class Arrow extends MobTemplate {
 	public float range;
 
 	public Arrow(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage, float range) {
-		super(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, 1,2);
+		super(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, 1, 2);
 		this.range = range;
 	}
 

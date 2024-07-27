@@ -9,6 +9,7 @@ import loot.items.EmptyItem;
 import loot.items.ItemTemplate;
 import loot.items.villageLoot.Food;
 import loot.items.villageLoot.Herbs;
+import loot.items.villageLoot.Valuebles;
 
 public class InventoryManager {
 
@@ -49,7 +50,7 @@ public class InventoryManager {
 		boolean hasItem = false;
 		for (int i = 0; i < maxInventorySlots; i++) {
 			if (inventory.get("Slot" + i).getItem().getClass() == item.getClass()) {
-				if(item instanceof Food || item instanceof Herbs) {
+				if(item instanceof Food || item instanceof Herbs || item instanceof Valuebles) {
 					if(inventory.get("Slot" + i).getItem().variant == item.variant) {
 						hasItem = true;
 						break;
@@ -67,7 +68,7 @@ public class InventoryManager {
 		for (int i = 0; i < maxInventorySlots; i++) {
 			if (inventory.get("Slot" + i).getItem().getClass() == item.getClass()) {
 				if (inventory.get("Slot" + i).getCount() <= item.maxStackSize - count) {
-					if(item instanceof Food || item instanceof Herbs) {
+					if(item instanceof Food || item instanceof Herbs || item instanceof Valuebles) {
 						if(inventory.get("Slot" + i).getItem().variant == item.variant) {
 							return i;
 						}

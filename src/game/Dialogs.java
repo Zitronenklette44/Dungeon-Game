@@ -37,12 +37,20 @@ public class Dialogs {
         }
         return result;
     }
+
     public static void setQuest(String dialog) {
+    	
     	switch (dialog) {
-		case "log2": { GameLogic.haveQuest = true;
-		}
+		case "log1": 
+			Logger.logWarning("new Quest for dialog: log1");
+			break;
+			
 		default:
 			
 		}
-    }
+    	
+    	
+	}
+    
+    
 }

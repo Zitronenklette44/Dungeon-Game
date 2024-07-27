@@ -10,12 +10,12 @@ public class Swordmen extends MobTemplate{
 
 	public Swordmen(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX,
 			int SpawnY, int damage, int Hp) {
-		super(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp,3);
+		super(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, 3);
 	}
 	
 	public Swordmen(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX,
 			int SpawnY, int damage, int Hp, LootTableTemplate loot) {
-		super(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, loot,3);
+		super(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, loot, 3);
 	}
 	
 	@Override

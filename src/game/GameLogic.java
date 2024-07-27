@@ -16,6 +16,7 @@ import gameObject.Rechteck;
 import gui.GameScreen;
 import interactions.InteractableTemplate;
 import loot.items.ItemTemplate;
+import questSystem.quests.QuestTemplate;
 import rendering.Draw;
 import rooms.DungeonCore;
 import spells.SpellManager;
@@ -67,8 +68,10 @@ public class GameLogic {
 
 	public static DungeonCore dungeon;
 	public static float playerSpeed = 1F;
+	
 	public static boolean currentQuestDone;
 	public static boolean haveQuest = false;
+	public static QuestTemplate currentQuest;
 
 	public GameLogic() {
 		Timer gameTimer = new Timer();

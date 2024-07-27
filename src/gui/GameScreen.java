@@ -414,6 +414,7 @@ public class GameScreen extends JFrame {
 		btnSkip.setVisible(false);
 		textJLabel.setVisible(false);
 		GameLogic.paused = false;
+		Dialogs.setQuest(currentDialog);
 	}
 	
 	public static void updateInventory() {
