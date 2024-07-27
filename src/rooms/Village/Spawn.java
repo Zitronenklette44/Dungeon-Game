@@ -1,16 +1,16 @@
 package rooms.Village;
 
-import action.Logger;
 import entitys.MobTemplate;
 import game.CreateObjects;
 import game.GameLogic;
 import loot.LootTabels;
+import rendering.Resources;
 import rooms.RoomTemplate;
 
 public class Spawn extends RoomTemplate{
 	
 	public Spawn(String name) {
-		super(name, "/resources/rooms/backgrounds/VillageSpawn.png");
+		super(name, Resources.bgVillageSpawnRoom);
 		createEntitys();
 	}
 	

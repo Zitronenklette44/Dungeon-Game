@@ -6,12 +6,13 @@ import action.Logger;
 import entitys.MobTemplate;
 import game.CreateObjects;
 import game.GameLogic;
+import rendering.Resources;
 import rooms.RoomTemplate;
 
 public class Field extends RoomTemplate{
 
 	public Field(String name) {
-		super(name, "/resources/rooms/backgrounds/Feld.png");
+		super(name, Resources.bgFieldRoom);
 		createEntitys();
 	}
 	private int wave  = 1;

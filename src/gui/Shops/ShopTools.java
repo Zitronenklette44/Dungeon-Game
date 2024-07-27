@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
+import rendering.Resources;
 import translation.Translation;
 
 import javax.swing.JLabel;
@@ -272,7 +273,7 @@ public class ShopTools extends JFrame {
 		tabbedPane.setSelectedIndex(0);
 		
 		JLabel lbMerchant = new JLabel("");
-		lbMerchant.setIcon(new ImageIcon(ShopTools.class.getResource("/resources/Merchant.png")));
+		lbMerchant.setIcon(new ImageIcon(Resources.merchant));
 		lbMerchant.setBounds(90, 152, 81, 100);
 		panel.add(lbMerchant);
 		
@@ -282,7 +283,7 @@ public class ShopTools extends JFrame {
 		panel.add(lbSpeechBubbleText);
 		
 		JLabel lbSpeechBubble = new JLabel("");
-		lbSpeechBubble.setIcon(new ImageIcon(ShopTools.class.getResource("/resources/SpeechBubble.png")));
+		lbSpeechBubble.setIcon(new ImageIcon(Resources.speechBubble));
 		lbSpeechBubble.setBounds(115, 25, 261, 150);
 		panel.add(lbSpeechBubble);
 		
@@ -293,7 +294,7 @@ public class ShopTools extends JFrame {
 			}
 		});
 		btnBuySelected.setContentAreaFilled(false);
-		btnBuySelected.setIcon(new ImageIcon(ShopTools.class.getResource("/resources/BuyButton.png")));
+		btnBuySelected.setIcon(new ImageIcon(Resources.buyButton));
 		btnBuySelected.setBorder(null);
 		btnBuySelected.setFocusTraversalKeysEnabled(false);
 		btnBuySelected.setFocusPainted(false);
@@ -307,7 +308,7 @@ public class ShopTools extends JFrame {
 				System.out.println("sell");
 			}
 		});
-		btnVerkaufen.setIcon(new ImageIcon(ShopTools.class.getResource("/resources/SellButton.png")));
+		btnVerkaufen.setIcon(new ImageIcon(Resources.sellButton));
 		btnVerkaufen.setContentAreaFilled(false);
 		btnVerkaufen.setBorder(null);
 		btnVerkaufen.setFocusTraversalKeysEnabled(false);
@@ -323,12 +324,12 @@ public class ShopTools extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(ShopTools.class.getResource("/resources/backgrounds/TableSmall.jpeg")));
+		lblNewLabel.setIcon(new ImageIcon(Resources.bgTableSmall));
 		lblNewLabel.setBackground(new Color(125, 67, 2));
 		lblNewLabel.setBounds(714, 211, 200, 400);
 		panel.add(lblNewLabel);
 		JLabel lbBackground = new JLabel("");
-		lbBackground.setIcon(new ImageIcon(ShopTools.class.getResource("/resources/backgrounds/TestBackground.jpeg")));
+		lbBackground.setIcon(new ImageIcon(Resources.bgTable));
 		lbBackground.setBounds(0, 0, 1200, 800);
 		contentPane.add(lbBackground);
 	}

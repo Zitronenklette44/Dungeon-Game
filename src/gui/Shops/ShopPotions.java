@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import gameMusik.MusicPlayer;
 import gui.GameScreen;
+import rendering.Resources;
 import translation.Translation;
 
 import javax.swing.JLabel;
@@ -137,7 +138,7 @@ public class ShopPotions extends JFrame {
         panel_6.add(lblNewLabel_2);
         
         JLabel lblNewLabel_3 = new JLabel("Icon 50x50");
-        lblNewLabel_3.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/Roter_HeilungsTrank.jpeg")));
+        lblNewLabel_3.setIcon(new ImageIcon(Resources.healthPotion));
         lblNewLabel_3.setBounds(0, 0, 50, 50);
         panel_6.add(lblNewLabel_3);
         
@@ -150,7 +151,7 @@ public class ShopPotions extends JFrame {
         panel_6.add(lblNewLabel_2_1);
         
         JLabel lblNewLabel_3_1 = new JLabel("Icon 50x50");
-        lblNewLabel_3_1.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/DamageBoost.jpg")));
+        lblNewLabel_3_1.setIcon(new ImageIcon(Resources.damagePotion));
         lblNewLabel_3_1.setBounds(0, 50, 50, 50);
         panel_6.add(lblNewLabel_3_1);
         
@@ -163,7 +164,7 @@ public class ShopPotions extends JFrame {
         panel_6.add(lblNewLabel_2_2);
         
         JLabel lblNewLabel_3_2 = new JLabel("Icon 50x50");
-        lblNewLabel_3_2.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/SppedBoost.jpg")));
+        lblNewLabel_3_2.setIcon(new ImageIcon(Resources.speedPotion));
         lblNewLabel_3_2.setBounds(0, 100, 50, 50);
         panel_6.add(lblNewLabel_3_2);
         
@@ -176,7 +177,7 @@ public class ShopPotions extends JFrame {
         panel_6.add(lblNewLabel_2_3);
         
         JLabel lblNewLabel_3_3 = new JLabel("Icon 50x50");
-        lblNewLabel_3_3.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/Roter_HeilungsTrank.jpeg")));
+        lblNewLabel_3_3.setIcon(new ImageIcon(Resources.healthPotion));
         lblNewLabel_3_3.setBounds(0, 150, 50, 50);
         panel_6.add(lblNewLabel_3_3);
         
@@ -189,7 +190,7 @@ public class ShopPotions extends JFrame {
         panel_6.add(lblNewLabel_2_4);
         
         JLabel lblNewLabel_3_4 = new JLabel("Icon 50x50");
-        lblNewLabel_3_4.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/DamageBoost.jpg")));
+        lblNewLabel_3_4.setIcon(new ImageIcon(Resources.damagePotion));
         lblNewLabel_3_4.setBounds(0, 200, 50, 50);
         panel_6.add(lblNewLabel_3_4);
         
@@ -202,7 +203,7 @@ public class ShopPotions extends JFrame {
         panel_6.add(lblNewLabel_2_5);
         
         JLabel lblNewLabel_3_5 = new JLabel("Icon 50x50");
-        lblNewLabel_3_5.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/SppedBoost.jpg")));
+        lblNewLabel_3_5.setIcon(new ImageIcon(Resources.speedPotion));
         lblNewLabel_3_5.setBounds(0, 250, 50, 50);
         panel_6.add(lblNewLabel_3_5);
         
@@ -614,7 +615,7 @@ public class ShopPotions extends JFrame {
 		tabbedPane.setSelectedIndex(0);
 		
 		JLabel lbMerchant = new JLabel("");
-		lbMerchant.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/Merchant.png")));
+		lbMerchant.setIcon(new ImageIcon(Resources.merchant));
 		lbMerchant.setBounds(90, 152, 81, 100);
 		panel.add(lbMerchant);
 		
@@ -624,7 +625,7 @@ public class ShopPotions extends JFrame {
 		panel.add(lbSpeechBubbleText);
 		
 		JLabel lbSpeechBubble = new JLabel("");
-		lbSpeechBubble.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/SpeechBubble.png")));
+		lbSpeechBubble.setIcon(new ImageIcon(Resources.speechBubble));
 		lbSpeechBubble.setBounds(115, 25, 261, 150);
 		panel.add(lbSpeechBubble);
 		
@@ -635,7 +636,7 @@ public class ShopPotions extends JFrame {
 			}
 		});
 		btnBuySelected.setContentAreaFilled(false);
-		btnBuySelected.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/BuyButton.png")));
+		btnBuySelected.setIcon(new ImageIcon(Resources.buyButton));
 		btnBuySelected.setBorder(null);
 		btnBuySelected.setFocusTraversalKeysEnabled(false);
 		btnBuySelected.setFocusPainted(false);
@@ -649,7 +650,7 @@ public class ShopPotions extends JFrame {
 				System.out.println("sell");
 			}
 		});
-		btnVerkaufen.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/SellButton.png")));
+		btnVerkaufen.setIcon(new ImageIcon(Resources.sellButton));
 		btnVerkaufen.setContentAreaFilled(false);
 		btnVerkaufen.setBorder(null);
 		btnVerkaufen.setFocusTraversalKeysEnabled(false);
@@ -665,12 +666,12 @@ public class ShopPotions extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/backgrounds/TableSmall.jpeg")));
+		lblNewLabel.setIcon(new ImageIcon(Resources.bgTableSmall));
 		lblNewLabel.setBackground(new Color(125, 67, 2));
 		lblNewLabel.setBounds(714, 211, 200, 400);
 		panel.add(lblNewLabel);
 		JLabel lbBackground = new JLabel("");
-		lbBackground.setIcon(new ImageIcon(ShopPotions.class.getResource("/resources/backgrounds/TestBackground.jpeg")));
+		lbBackground.setIcon(new ImageIcon(Resources.bgTable));
 		lbBackground.setBounds(0, 0, 1200, 800);
 		contentPane.add(lbBackground);
 	}

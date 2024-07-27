@@ -1,15 +1,17 @@
 package rooms.Village;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import action.Logger;
 import game.CreateObjects;
 import game.GameLogic;
+import rendering.Resources;
 import rooms.RoomTemplate;
 
 public class Normal extends RoomTemplate {
-	private String[] image = { "/resources/rooms/backgrounds/VillagePath1.png",
-	"/resources/rooms/backgrounds/VillagePath2.png" };
+	private BufferedImage[] image = { Resources.bgVillagePathRoom0,
+	Resources.bgVillagePathRoom1};
 	private ArrayList<Integer> dungeonPaths = new ArrayList<Integer>();
 
 	public Normal(String name) {
@@ -143,18 +145,18 @@ public class Normal extends RoomTemplate {
 	}
 
 	@Override
-	public String getImage(int currentRoom) {
+	public BufferedImage getImage(int currentRoom) {
 		int variantIndex = getVariantIndex(currentRoom);
 		if (variantIndex == -1) {
-			return "";
+			return null;
 		}
 		setImagePath(dungeonPaths.get(variantIndex + 1));
-		return ImagePath;
+		return Image;
 	}
 
 	private void setImagePath(int variant) {
 		if (variant >= 0 && variant < image.length) {
-			ImagePath = image[variant];
+			Image = image[variant];
 		} else {
 			throw new IllegalArgumentException("Invalid variant: " + variant);
 		}
