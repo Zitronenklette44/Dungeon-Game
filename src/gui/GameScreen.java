@@ -257,9 +257,6 @@ public class GameScreen extends JFrame {
 		btnNewButton.setBounds(459, 198, 278, 42);
 		pauseMenue.add(btnNewButton);
 		
-		quests = new DrawQuests();
-		quests.setBounds(0,0,1184,764);
-		quests.setVisible(false);
 		
 		DrawSpellsOverlay drawSpellsOverlay = new DrawSpellsOverlay(screenBreite,screenHoehe, spiellogik);
 		drawSpellsOverlay.setBounds(0,0,screenBreite,screenHoehe);
@@ -313,13 +310,16 @@ public class GameScreen extends JFrame {
 		lblNewLabel_1.setBounds(322, 0, 50, 50);
 		contentPane.add(lblNewLabel_1);
 		
-		
-		
 		inventory = new Inventory(InventoryManager.maxInventorySlots);
 		inventory.setBounds(0,0,1184,764);
 		inventory.setVisible(false);
 		contentPane.add(inventory);
 		
+		quests = new DrawQuests();
+		quests.setBounds(0,0,1184,764);
+		quests.setVisible(false);
+		contentPane.add(quests);
+
 		setContentPane(contentPane);
 		
 		lbBackground = new JLabel("");
@@ -331,6 +331,7 @@ public class GameScreen extends JFrame {
 		spells[2] = lbSpell3;
 	
 		contentPane.setComponentZOrder(inventory, 0);
+		contentPane.setComponentZOrder(quests, 1);
 		endDialog();
 	}
 
@@ -427,6 +428,6 @@ public class GameScreen extends JFrame {
 		inventory.maxInventarSlots = InventoryManager.maxInventorySlots;
 	}
 	public static void toggleQuests() {
-		quests.setVisible(true);
+		quests.setVisible(!quests.isVisible());
 	}
 }
