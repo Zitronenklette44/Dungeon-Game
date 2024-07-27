@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import inventory.Inventory;
+import rendering.DrawQuests;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -45,7 +46,7 @@ public class InventoryTest extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Inventory lbtest = new Inventory(40);
+		DrawQuests lbtest = new DrawQuests();
 		lbtest.setBounds(0, 0, 1184, 761);
 		contentPane.add(lbtest);
 		

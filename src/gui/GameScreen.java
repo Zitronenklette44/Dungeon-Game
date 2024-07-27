@@ -16,6 +16,7 @@ import game.GameLogic;
 import inventory.Inventory;
 import inventory.InventoryManager;
 import rendering.Draw;
+import rendering.DrawQuests;
 import rendering.DrawSpells;
 import rendering.DrawSpellsOverlay;
 import rooms.DungeonCore;
@@ -74,6 +75,7 @@ public class GameScreen extends JFrame {
 	private static Draw draw;
 	public static boolean paintRoomNum;
 	public static Inventory inventory;
+	private static DrawQuests quests;
 	
 	
 	
@@ -254,6 +256,10 @@ public class GameScreen extends JFrame {
 		btnNewButton.setBounds(459, 198, 278, 42);
 		pauseMenue.add(btnNewButton);
 		
+		quests = new DrawQuests();
+		quests.setBounds(0,0,1184,764);
+		quests.setVisible(false);
+		
 		DrawSpellsOverlay drawSpellsOverlay = new DrawSpellsOverlay(screenBreite,screenHoehe, spiellogik);
 		drawSpellsOverlay.setBounds(0,0,screenBreite,screenHoehe);
 		drawSpellsOverlay.setVisible(true);
@@ -305,6 +311,8 @@ public class GameScreen extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/spear.png")));
 		lblNewLabel_1.setBounds(322, 0, 50, 50);
 		contentPane.add(lblNewLabel_1);
+		
+		
 		
 		inventory = new Inventory(InventoryManager.maxInventorySlots);
 		inventory.setBounds(0,0,1184,764);
@@ -419,5 +427,8 @@ public class GameScreen extends JFrame {
 	
 	public static void updateInventory() {
 		inventory.maxInventarSlots = InventoryManager.maxInventorySlots;
+	}
+	public static void toggleQuests() {
+		quests.setVisible(true);
 	}
 }
