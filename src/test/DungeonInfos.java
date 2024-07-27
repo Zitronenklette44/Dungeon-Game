@@ -184,7 +184,7 @@ public class DungeonInfos {
                 case 1:
                     return room.getRoomVariant();
                 case 2:
-                    return room.ImagePath.substring(room.ImagePath.lastIndexOf('/') + 1);
+                    return room.Image.toString().substring(room.Image.toString().lastIndexOf('/') + 1);
                 case 3:
                     return room.getEntitys() != null ? room.getEntitys().length : 0;
                 case 4:

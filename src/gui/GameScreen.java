@@ -18,6 +18,7 @@ import inventory.InventoryManager;
 import rendering.Draw;
 import rendering.DrawSpells;
 import rendering.DrawSpellsOverlay;
+import rendering.Resources;
 import rooms.DungeonCore;
 import spells.SpellIcons;
 import translation.Translation;
@@ -280,7 +281,7 @@ public class GameScreen extends JFrame {
 				togglePause();
 			}
 		});
-		lblNewLabel.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/PauseButton.png")));
+		lblNewLabel.setIcon(new ImageIcon(Resources.pauseButton));
 		lblNewLabel.setBounds(0, 0, 50, 50);
 		contentPane.add(lblNewLabel);
 		
@@ -302,7 +303,7 @@ public class GameScreen extends JFrame {
 		contentPane.add(drawSpells);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(GameScreen.class.getResource("/resources/Icons/spear.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Resources.ATKCooldown));
 		lblNewLabel_1.setBounds(322, 0, 50, 50);
 		contentPane.add(lblNewLabel_1);
 		
@@ -345,12 +346,9 @@ public class GameScreen extends JFrame {
 	}
 	
 	
-	public static void changeBackground(String ImagePath) {
-	    if(ImagePath == null) {
-	        return;
-	    }
+	public static void changeBackground(BufferedImage image) {
 	    try {
-	        lbBackground.setIcon(new ImageIcon(GameScreen.class.getResource(ImagePath)));
+	        lbBackground.setIcon(new ImageIcon(image));
 	    } catch (NullPointerException e) {
 	        Logger.logWarning("GUI not fully initialized", e);
 	    }

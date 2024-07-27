@@ -1,16 +1,18 @@
 package rooms;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import action.Logger;
 import entitys.MobTemplate;
 import functionalObjects.FunctionalTemplate;
 import game.GameLogic;
+import rendering.Resources;
 
 public class RoomTemplate implements Cloneable{
 	public String name;
-	public String ImagePath = "/resources/rooms/backgrounds/Empty.png";
+	public BufferedImage Image = Resources.bgEmptyRoom;
 	protected int RoomVariant;
 	public boolean EntitysSpawned = false;
 	protected MobTemplate[] Entitys;
@@ -21,9 +23,9 @@ public class RoomTemplate implements Cloneable{
 		createFunctionable();
 	}
 	
-	public RoomTemplate(String name, String Image) {
+	public RoomTemplate(String name, BufferedImage Image) {
 		this.name = name;
-		this.ImagePath = Image;
+		this.Image = Image;
 		createFunctionable();
 	}
 	
@@ -50,7 +52,7 @@ public class RoomTemplate implements Cloneable{
 	
 	public void changeColors() {}
 	
-	public String getImage(int currentRoom) {return ImagePath;}
+	public BufferedImage getImage(int currentRoom) {return Image;}
 	
 	public void setSpawns(int currentRoom) {}
 	

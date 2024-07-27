@@ -5,13 +5,14 @@ import entitys.MobTemplate;
 import game.CreateObjects;
 import game.GameLogic;
 import interactions.GildSwitchInteraction;
+import rendering.Resources;
 import rooms.RoomTemplate;
 import translation.Translation;
 
 public class Guilde extends RoomTemplate{
 
 	public Guilde(String name) {
-		super(name, "/resources/rooms/backgrounds/Gilde.png");
+		super(name, Resources.bgGuildRoom);
 		createEntitys();
 	}
 	

@@ -10,6 +10,9 @@ import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 
 import action.Logger;
@@ -19,6 +22,8 @@ import loot.LootTableTemplate;
 import loot.SpawnLoot;
 import loot.items.EmptyItem;
 import loot.items.ItemTemplate;
+import rendering.Resources;
+import test.SpriteTest;
 
 public class Inventory extends JLabel {
     private static final long serialVersionUID = 1L;
@@ -228,7 +233,7 @@ public class Inventory extends JLabel {
 
         // player
         g.setColor(Color.white);
-        g.fillRect((getWidth() / 100) * 80, (getHeight() / 100) * 60, 50, 50);
+        g.drawImage(Resources.player, (getWidth() / 100) * 72, (getHeight() / 100) * 45, 200, 200, null);
     }
 
     private void paintSimpleCrafting(Graphics2D g) {

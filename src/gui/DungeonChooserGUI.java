@@ -17,6 +17,7 @@ import javax.swing.border.LineBorder;
 
 import game.GameLogic;
 import rendering.Draw;
+import rendering.Resources;
 import rooms.DungeonCore;
 
 import java.awt.event.ActionListener;
@@ -113,21 +114,21 @@ public class DungeonChooserGUI extends JFrame {
 		});
 
 		lbLock4 = new JLabel("");
-		lbLock4.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/Icons/lock.png")));
+		lbLock4.setIcon(new ImageIcon(Resources.lock));
 		lbLock4.setOpaque(true);
 		lbLock4.setBackground(new Color(0, 0, 0, 100));
 		lbLock4.setBounds(975, 308, 150, 150);
 		panel.add(lbLock4);
 
 		lbLock3 = new JLabel("");
-		lbLock3.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/Icons/lock.png")));
+		lbLock3.setIcon(new ImageIcon(Resources.lock));
 		lbLock3.setOpaque(true);
 		lbLock3.setBackground(new Color(0, 0, 0, 100));
 		lbLock3.setBounds(675, 308, 150, 150);
 		panel.add(lbLock3);
 
 		lbLock2 = new JLabel("");
-		lbLock2.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/Icons/lock.png")));
+		lbLock2.setIcon(new ImageIcon(Resources.lock));
 		lbLock2.setOpaque(true);
 		lbLock2.setBackground(new Color(0, 0, 0, 100));
 		lbLock2.setBounds(375, 308, 150, 150);
@@ -136,7 +137,7 @@ public class DungeonChooserGUI extends JFrame {
 		lbLock1 = new JLabel("");
 		lbLock1.setOpaque(true);
 		lbLock1.setBackground(new Color(0, 0, 0,100));
-		lbLock1.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/Icons/lock.png")));
+		lbLock1.setIcon(new ImageIcon(Resources.lock));
 		lbLock1.setBounds(75, 308, 150, 150);
 		panel.add(lbLock1);
 
@@ -146,12 +147,12 @@ public class DungeonChooserGUI extends JFrame {
 		btnVillage.setFocusTraversalKeysEnabled(false);
 		btnVillage.setFocusPainted(false);
 		btnVillage.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		btnVillage.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/DungeonIcons/Village.png")));
+		btnVillage.setIcon(new ImageIcon(Resources.villageIcon));
 		btnVillage.setBounds(75, 308, 150, 150);
 		panel.add(btnVillage);
 
 		btnForest = new JButton("");
-		btnForest.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/DungeonIcons/Forest.png")));
+		btnForest.setIcon(new ImageIcon(Resources.forestIcon));
 		btnForest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(dungeonKey>=2) {
@@ -172,7 +173,7 @@ public class DungeonChooserGUI extends JFrame {
 		panel.add(btnForest);
 
 		btnCastle = new JButton("");
-		btnCastle.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/DungeonIcons/Castle.png")));
+		btnCastle.setIcon(new ImageIcon(Resources.castleIcon));
 		btnCastle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(dungeonKey>=3) {
@@ -193,7 +194,7 @@ public class DungeonChooserGUI extends JFrame {
 		panel.add(btnCastle);
 
 		btnDungeon = new JButton("");
-		btnDungeon.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/DungeonIcons/Dungeon.png")));
+		btnDungeon.setIcon(new ImageIcon(Resources.dungeonIcon));
 		btnDungeon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(dungeonKey>=4) {
@@ -227,7 +228,7 @@ public class DungeonChooserGUI extends JFrame {
 		btnNewButton.setFocusTraversalKeysEnabled(false);
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/Icons/ArrowBack.png")));
+		btnNewButton.setIcon(new ImageIcon(Resources.arrowBack));
 		btnNewButton.setBounds(10, 11, 98, 23);
 		panel.add(btnNewButton);
 
@@ -265,18 +266,18 @@ public class DungeonChooserGUI extends JFrame {
 		btnConfirm.setFocusTraversalKeysEnabled(false);
 		btnConfirm.setFocusPainted(false);
 		btnConfirm.setFocusable(false);
-		btnConfirm.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/Icons/ConfirmChoise.png")));
+		btnConfirm.setIcon(new ImageIcon(Resources.confirmButton));
 		btnConfirm.setBounds(0, 0, 200, 50);
 		btnConfirm.setVisible(false);
 		panel_1.add(btnConfirm);
 
 		lbsomething = new JLabel("New label");
-		lbsomething.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/backgrounds/black_Something.png")));
+		lbsomething.setIcon(new ImageIcon(Resources.blackSomething));
 		lbsomething.setBounds(0, -2, 200, 59);
 		panel_1.add(lbsomething);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(DungeonChooserGUI.class.getResource("/resources/backgrounds/DungeonChooserBackground.jpeg")));
+		lblNewLabel.setIcon(new ImageIcon(Resources.bgDungeonChooser));
 		lblNewLabel.setBounds(0, 0, 1200, 800);
 		contentPane.add(lblNewLabel);
 		checkKey();

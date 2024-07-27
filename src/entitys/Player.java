@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import game.GameLogic;
+import rendering.Resources;
 import test.SpriteTest;
 
 public class Player extends MobTemplate {
@@ -83,32 +84,28 @@ public class Player extends MobTemplate {
     
 
     private void loadSprites() {
-        try {
-            // Bild laden
-            spriteSheet = ImageIO.read(SpriteTest.class.getResource("/resources/Entitys/Player/PlayerAnimations.png"));
-            // Sprites extrahieren
-            int rows = 8; // Anzahl der Zeilen im Sprite Sheet
-            int cols = 10; // Anzahl der Spalten im Sprite Sheet
-            sprites = new BufferedImage[rows][cols];
+        // Bild laden
+		spriteSheet = Resources.playerAnimation;
+		// Sprites extrahieren
+		int rows = 8; // Anzahl der Zeilen im Sprite Sheet
+		int cols = 10; // Anzahl der Spalten im Sprite Sheet
+		sprites = new BufferedImage[rows][cols];
 
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col < cols; col++) {
-                    BufferedImage sprite = spriteSheet.getSubimage(
-                        col * spriteWidth,
-                        row * spriteHeight,
-                        spriteWidth,
-                        spriteHeight
-                    );
-                    if (!isSpriteEmpty(sprite)) {
-                        sprites[row][col] = sprite;
-                    } else {
-                        sprites[row][col] = null;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		for (int row = 0; row < rows; row++) {
+		    for (int col = 0; col < cols; col++) {
+		        BufferedImage sprite = spriteSheet.getSubimage(
+		            col * spriteWidth,
+		            row * spriteHeight,
+		            spriteWidth,
+		            spriteHeight
+		        );
+		        if (!isSpriteEmpty(sprite)) {
+		            sprites[row][col] = sprite;
+		        } else {
+		            sprites[row][col] = null;
+		        }
+		    }
+		}
     }
 
     private boolean isSpriteEmpty(BufferedImage sprite) {
@@ -128,6 +125,6 @@ public class Player extends MobTemplate {
     public void drawMob(Graphics2D g) {
     	super.drawMob(g);
     	playAnimation();
-    	g.drawImage(image,(int) posX-10,(int) posY-hoehe, breite*2, hoehe*2, null);
+    	g.drawImage(image,(int) posX-breite/2,(int) posY-hoehe, breite*2, hoehe*2, null);
     }
 }

@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import action.SaveLoad;
 import game.GameLogic;
 import gameMusik.MusicPlayer;
+import rendering.Resources;
 import translation.Translation;
 
 import javax.swing.JLabel;
@@ -180,7 +181,7 @@ public class Settings extends JDialog {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(Color.LIGHT_GRAY);
-		lblNewLabel.setIcon(new ImageIcon(Settings.class.getResource("/resources/backgrounds/settings.png")));
+		lblNewLabel.setIcon(new ImageIcon(Resources.bgSettings));
 		lblNewLabel.setBounds(-90, -63, 665, 502);
 		contentPanel.add(lblNewLabel);
 

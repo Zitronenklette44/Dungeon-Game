@@ -1,29 +1,13 @@
 package loot.items.coins;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import action.Logger;
 import game.GameLogic;
-import spells.SpellIcons;
+import rendering.Resources;
 import translation.Translation;
 
 public class CopperCoin extends CoinTemplate{
 	
 	public CopperCoin(int dropChance) {
-		super(1, dropChance, Translation.get("item.copperCoin"), getImage(), 1);
-	}
-	
-	
-	private static BufferedImage getImage() {
-		try {
-			return ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/CopperCoin.png"));
-		} catch (IOException e) {
-			Logger.logError("CopperCoin Image Error: ", e);
-		}
-		return null;
+		super(1, dropChance, Translation.get("item.copperCoin"), Resources.copperCoin, 1);
 	}
 	
 	@Override

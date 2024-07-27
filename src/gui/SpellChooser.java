@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import components.SpellButton;
 import components.SpellChooseable;
 import game.GameLogic;
+import rendering.Resources;
 import spells.SpellIcons;
 
 import javax.swing.JLabel;
@@ -88,7 +89,7 @@ public class SpellChooser extends JFrame {
 		panel_1_1.add(btnChooseable);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("");
-		lblNewLabel_1_1.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/backgrounds/ScrollPaperBackground.jpg")));
+		lblNewLabel_1_1.setIcon(new ImageIcon(Resources.scrollPaper));
 		lblNewLabel_1_1.setBounds(0, 0, 240, 732);
 		panel_1_1.add(lblNewLabel_1_1);
 		
@@ -102,7 +103,7 @@ public class SpellChooser extends JFrame {
 		panel_1_1_1.add(btnChooseable1);
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("");
-		lblNewLabel_1_1_1.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/backgrounds/ScrollPaperBackground.jpg")));
+		lblNewLabel_1_1_1.setIcon(new ImageIcon(Resources.scrollPaper));
 		lblNewLabel_1_1_1.setBounds(-202, 0, 492, 732);
 		panel_1_1_1.add(lblNewLabel_1_1_1);
 		
@@ -112,17 +113,17 @@ public class SpellChooser extends JFrame {
 		panel.add(panel_1_1_2);
 		
 		JLabel lblNewLabel_1_1_2 = new JLabel("");
-		lblNewLabel_1_1_2.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/backgrounds/ScrollPaperBackground.jpg")));
+		lblNewLabel_1_1_2.setIcon(new ImageIcon(Resources.scrollPaper));
 		lblNewLabel_1_1_2.setBounds(-710, 0, 1000, 732);
 		panel_1_1_2.add(lblNewLabel_1_1_2);
 		
 		JLabel questionMark = new JLabel("New label");
-		questionMark.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/Icons/questionMark.png")));
+		questionMark.setIcon(new ImageIcon(Resources.questionMark));
 		questionMark.setBounds(0, 0, 50, 50);
 		panel.add(questionMark);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(SpellChooser.class.getResource("/resources/backgrounds/SpellChooserBackground.png")));
+		lblNewLabel.setIcon(new ImageIcon(Resources.bgSpellChooser));
 		lblNewLabel.setBounds(0, 0, 1200, 800);
 		contentPane.add(lblNewLabel);
 		

@@ -9,6 +9,7 @@ import gui.GameScreen;
 import gui.LoadingGUI;
 import inventory.InventoryManager;
 import questSystem.QuestManager;
+import rendering.Resources;
 import rooms.DungeonCore;
 import spells.SpellIcons;
 import spells.SpellManager;
@@ -20,6 +21,8 @@ public class Main {
     	Logger.logSeperation();
     	LoadingGUI.erstellen(); 			//Ladebildschirm
     	try {Thread.sleep(1000);} catch (Exception e) {}
+    	LoadingGUI.nextLoadingStage("Loading Ressources Icons...");
+    	Resources.init();					//Spell Icons erstellen und fürs laden bereitstellen
     	LoadingGUI.nextLoadingStage("Loading Spell Icons...");
     	SpellIcons.init();					//Spell Icons erstellen und fürs laden bereitstellen
     	LoadingGUI.nextLoadingStage("Loading translations...");

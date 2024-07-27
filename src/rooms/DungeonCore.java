@@ -2,11 +2,13 @@ package rooms;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import action.Logger;
 import game.GameLogic;
 import gui.GameScreen;
+import rendering.Resources;
 import rooms.Castle.*;
 import rooms.Dungeon.*;
 import rooms.Forest.*;
@@ -200,37 +202,37 @@ public class DungeonCore {
 		return DungeonLength;
 	}
 
-	public static String getImage(int addToRoom) {
+	public static BufferedImage getImage(int addToRoom) {
 	    if(dungeonType != 0 && dungeonType != 5) {
 	        try {
 	        	thisRooms.get(currentRoom).VariantExists(currentRoom);
 	        	thisRooms.get(currentRoom+addToRoom).getImage(currentRoom);
-	            if(thisRooms.get(currentRoom+addToRoom).ImagePath == null) {
-	            	return "/resources/rooms/backgrounds/Empty.png";
+	            if(thisRooms.get(currentRoom+addToRoom).Image == null) {
+	            	return Resources.bgEmptyRoom;
 	            }
-	            return thisRooms.get(currentRoom+addToRoom).ImagePath;
+	            return thisRooms.get(currentRoom+addToRoom).Image;
 	        } catch (NullPointerException e) {
-	        	return "/resources/rooms/backgrounds/Empty.png";
+	        	return Resources.bgEmptyRoom;
 	        }
 	    } else  if(dungeonType == 5) {
 	    	try {
-	            if(thisRooms.get(currentRoom+addToRoom).ImagePath == null) {
+	            if(thisRooms.get(currentRoom+addToRoom).Image == null) {
 	            }
-	            return thisRooms.get(currentRoom+addToRoom).ImagePath;
+	            return thisRooms.get(currentRoom+addToRoom).Image;
 	        } catch (NullPointerException  e ) {
-	        	return "/resources/rooms/backgrounds/Empty.png";
+	        	return Resources.bgEmptyRoom;
 	        }
 	        catch (IndexOutOfBoundsException e) {
 	        	Logger.logWarning("Rooms not fully initialized: Index error");
 			}
 	    }else{
 	        try {
-	            if(thisRooms.get(currentRoom+addToRoom).ImagePath == null) {
+	            if(thisRooms.get(currentRoom+addToRoom).Image == null) {
 	            	//Logger.logWarning("Image missing");
 	            }
-	            return thisRooms.get(currentRoom+addToRoom).ImagePath;
+	            return thisRooms.get(currentRoom+addToRoom).Image;
 	        } catch (NullPointerException  e ) {
-	        	return "/resources/rooms/backgrounds/Empty.png";
+	        	return Resources.bgEmptyRoom;
 	        }
 	        catch (IndexOutOfBoundsException e) {
 	        	Logger.logWarning("Rooms not fully initialized: Index error");
