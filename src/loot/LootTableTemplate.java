@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import action.Logger;
 import loot.items.ItemTemplate;
+import questSystem.quests.QuestTemplate;
 
 public class LootTableTemplate {
 	public final int rolls;

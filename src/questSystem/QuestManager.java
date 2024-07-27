@@ -29,6 +29,10 @@ public class QuestManager {
 		GameLogic.choosenQuest = null;
 	}
 	
+	public static QuestTemplate get(int quest){
+		return quests.get(quest);
+	}
+	
 	
 
 }
