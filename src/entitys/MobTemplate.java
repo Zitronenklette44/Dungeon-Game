@@ -36,8 +36,9 @@ public class MobTemplate extends Rechteck{
 	public boolean isStuned = false;
 	public boolean invulnerable = false;
 	public BufferedImage image;
+	public int MobID;
     
-    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana) {
+    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana, int MobID) {
         super(hoehe, breite, posX, posY);
         this.dx = dx;
         this.SpawnX = SpawnX;
@@ -49,9 +50,10 @@ public class MobTemplate extends Rechteck{
         this.maxMana = MaxMana;
         mana = maxMana;
         this.restoreMana = restoreMana;
+        this.MobID = MobID;
     }
     
-    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp) {
+    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp,int MobID) {
         super(hoehe, breite, posX, posY);
         this.dx = dx;
         this.SpawnX = SpawnX;
@@ -63,15 +65,16 @@ public class MobTemplate extends Rechteck{
         this.maxMana = 0;
         mana = maxMana;
         this.restoreMana = 0;
+        this.MobID = MobID;
     }
     
-    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana, LootTableTemplate loot) {
-        this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, MaxMana, restoreMana);
+    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana, LootTableTemplate loot,int MobID) {
+        this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, MaxMana, restoreMana, MobID);
         this.loot = loot;
     }
     
-    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, LootTableTemplate loot) {
-        this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp);
+    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, LootTableTemplate loot,int MobID) {
+        this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, MobID);
         this.loot = loot;
     }
     
