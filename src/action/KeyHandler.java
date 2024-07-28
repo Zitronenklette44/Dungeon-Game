@@ -66,10 +66,7 @@ public class KeyHandler implements KeyListener {
 			GameLogic.currentQuestDone = !GameLogic.currentQuestDone;
 			if(GameLogic.currentQuestDone == false) GameLogic.currentQuest = null;
 		}
-		if(e.getKeyChar() == 'f' || e.getKeyChar() == 'F') {	//temporär
-			GameScreen.toggleQuests();
-		}
-		
+	
 		if((e.getKeyChar() == 'i' || e.getKeyChar() == 'I') && !GameLogic.paused) {	
 			GameScreen.inventory.setVisible(!GameScreen.inventory.isVisible());
 			GameLogic.paused = GameScreen.inventory.isVisible();

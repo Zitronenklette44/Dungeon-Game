@@ -22,6 +22,9 @@ public class Translation {
 		germanTranslationMap.put("interaction.dungeonEnter", "Dungeon betreten");
 		englishTranslationMap.put("interaction.dungeonEnter", "Enter dungeon");
 		
+		germanTranslationMap.put("interaction.questBoard", "Missionen auswählen");
+		englishTranslationMap.put("interaction.questBoard", "Choose quest");
+		
 		germanTranslationMap.put("interaction.dungeonExit", "Dungeon verlassen");
 		englishTranslationMap.put("interaction.dungeonExit", "Exit dungeon");
 		

@@ -19,6 +19,7 @@ import interactions.DungeonExit;
 import interactions.GildSwitchInteraction;
 import interactions.GuildMasterDialogInteraction;
 import interactions.InteractableDialog;
+import interactions.QuestBoard;
 import interactions.ShopOpenPotions;
 import interactions.ShopOpenTools;
 import loot.LootTabels;
@@ -111,6 +112,9 @@ public class CreateObjects {		//Allgemeine Methoden zum erstellen verschiedener 
 		MobTemplate template = new Swordmen(hoehe, breite, SpawnX, SpawnY, 0, 0, speed, SpawnX, SpawnY, damage, Hp, loot);
 		GameLogic.mobs.add(template);
 		return template;
+	}
+	public static void createQuestBoard(int posX, int posY) {
+		GameLogic.interactables.add(new QuestBoard(10, 10, posX, posY));
 	}
 	
 

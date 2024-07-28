@@ -33,6 +33,7 @@ public class Guilde extends RoomTemplate{
 	public void createObjects(int currentRoom) {
 		super.createObjects(currentRoom);
 		CreateObjects.createGildSwitchInteraction(550, 750);
+		CreateObjects.createQuestBoard(388, 100);
 //		GameLogic.functionalObjects.add(CreateObjects.createPernamentChest(600, 400, true));
 		CreateObjects.createGuildMasterDialogInteraction(581, 103, Translation.get("interaction.testDialog") , new int[] {2 ,3, 4, 5, 6}, Translation.get("dialogs.gildenSender"));
 	
