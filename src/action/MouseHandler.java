@@ -53,7 +53,7 @@ public class MouseHandler implements MouseListener{
 		
 		if(e.getButton() == 3) {	//rechte Maustaste
 			if(GameLogic.vertikalAxis && GameLogic.player.AtkCooldown == 0) {	//wenn in Dungeon und kein ATK Cooldown
-				CreateObjects.createArrow(10, 25, GameLogic.player.posX, GameLogic.player.posY, 0.5F, 0, 0, 1, 300);	//Pfeil erstellen
+				CreateObjects.createArrow(10, 25, GameLogic.player.posX, GameLogic.player.posY, 0.8F, 0, 0, 1, 500);	//Pfeil erstellen
 				GameLogic.player.setAtkCooldown();	//ATK Cooldown setzen
 				 MusicPlayer.playSound(4, false);	//soundeffect abspielen
 				 MusicPlayer.setVolume(4, MusicPlayer.sfxVolume);

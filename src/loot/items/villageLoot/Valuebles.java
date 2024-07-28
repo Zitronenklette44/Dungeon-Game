@@ -39,7 +39,7 @@ public class Valuebles extends ItemTemplate{
 			itemName = Translation.get("item.armreif");
 			itemImage = Resources.armreif;
 			this.variant = 2;	
-			maxStackSize = 5;
+			maxStackSize = 50;
 			break;
 		default:
 			Logger.logError("invalid Valuebles variant: " + variant, new IllegalArgumentException());
@@ -48,7 +48,7 @@ public class Valuebles extends ItemTemplate{
 	        itemImage = Resources.ring;
 	        this.variant = 0;
 	        maxStackSize = 20;
-	        sellValue = 50;
+	        sellValue = 10;
 			break;
 		}
 		
@@ -74,6 +74,7 @@ public class Valuebles extends ItemTemplate{
 	        itemImage = Resources.armreif;
 	        variant = 2;
 	        maxStackSize = 5;
+	        sellValue = 50;
 	    } else {
 	        Logger.logError("invalid Valuebles variant: " + random, new IllegalArgumentException());
 	        Logger.logWarning("Valuebles Variant has been set to ring");
@@ -81,7 +82,7 @@ public class Valuebles extends ItemTemplate{
 	        itemImage = Resources.ring;
 	        variant = 0;
 	        maxStackSize = 5;
-	        sellValue = 50;
+	        sellValue = 10;
 	    }
 	}
 	

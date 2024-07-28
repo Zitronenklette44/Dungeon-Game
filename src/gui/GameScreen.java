@@ -428,6 +428,7 @@ public class GameScreen extends JFrame {
 		inventory.maxInventarSlots = InventoryManager.maxInventorySlots;
 	}
 	public static void toggleQuests() {
+		GameLogic.paused = !quests.isVisible();
 		quests.setVisible(!quests.isVisible());
 	}
 }

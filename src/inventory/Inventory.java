@@ -66,7 +66,7 @@ public class Inventory extends JLabel {
                             item.stackSize = InventoryManager.getSlot(getSlotAt(e.getX(), e.getY())).getCount();
                             item.dropChance = 1;
                             if (item != null) {
-                                LootTableTemplate dropItem = new LootTableTemplate(1, new ItemTemplate[]{item});
+                                LootTableTemplate dropItem = new LootTableTemplate(1, new ItemTemplate[]{item}, "simgle Item");
                                 SpawnLoot.at(GameLogic.player.posX, GameLogic.player.posY, dropItem);
                                 InventoryManager.setSlot(new Pair<>(new EmptyItem(0), 0), slot);
                                 repaint();

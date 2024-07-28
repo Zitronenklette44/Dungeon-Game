@@ -239,7 +239,7 @@ public class GameLogic {
 		
 		if(currentQuest.isCompleted()) {
 			currentQuestDone = true;
-			GenerateLoot.intoIntentory(currentQuest.reward);
+			currentQuest.getReward();
 			currentQuest = null;
 			Logger.logInfo("Quest completed");
 		}

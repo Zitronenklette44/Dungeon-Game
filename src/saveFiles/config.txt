@@ -25,11 +25,11 @@ spells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 // Frame position
 // Default (0,0)
-frameLocation = -1339,241
+frameLocation = 100,100
 
 // Language
 // Default Deutsch
-activLanguage = Deutsch
+activLanguage = English
 
 // was the game started bevor
 // Default true

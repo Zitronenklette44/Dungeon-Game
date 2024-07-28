@@ -1,6 +1,7 @@
 package questSystem.quests;
 
 import action.Logger;
+import loot.GenerateLoot;
 import loot.LootTableTemplate;
 import loot.items.ItemTemplate;
 import loot.items.villageLoot.Food;
@@ -10,6 +11,7 @@ import loot.items.villageLoot.Valuebles;
 public class QuestTemplate implements Cloneable{
 
 	public String name;
+	public String nameGroup;
 	public int Numbers;
 	public int questType;
 	public String description;
@@ -19,6 +21,7 @@ public class QuestTemplate implements Cloneable{
 	public int MobID;
 	public ItemTemplate item;
 	public ItemTemplate[] itemGroup;
+	public String specialRewardString;
 	
 	public int currentKilledMobs = 0;
 	public int currentCollectedItems = 0;
@@ -45,7 +48,7 @@ public class QuestTemplate implements Cloneable{
 		this.item = item;
 	}
 
-	public QuestTemplate(String name, int Numbers, String description, LootTableTemplate reward, char difficulty, int rarity, ItemTemplate[] itemGroup) {
+	public QuestTemplate(String name, int Numbers, String description, LootTableTemplate reward, char difficulty, int rarity, ItemTemplate[] itemGroup, String groupName) {
 		this.name = name;
 		this.Numbers = Numbers;
 		this.questType = 2;
@@ -54,7 +57,25 @@ public class QuestTemplate implements Cloneable{
 		this.difficulty = difficulty;
 		this.rarity = rarity;
 		this.itemGroup = itemGroup;
+		this.nameGroup = groupName;
 	}
+	
+	public QuestTemplate(String name, int Numbers, String description, String reward, char difficulty, int rarity, int MobID) {
+		this(name, Numbers, description,(LootTableTemplate) null, difficulty, rarity, MobID);
+		this.specialRewardString = reward;
+	}
+
+	public QuestTemplate(String name, int Numbers, String description, String reward, char difficulty, int rarity, ItemTemplate item) {
+		this(name, Numbers, description,(LootTableTemplate) null, difficulty, rarity, item);
+		this.specialRewardString = reward;
+	}
+
+	public QuestTemplate(String name, int Numbers, String description, String reward, char difficulty, int rarity, ItemTemplate[] itemGroup, String groupName) {
+		this(groupName, Numbers, description,(LootTableTemplate) null, difficulty, rarity, itemGroup, groupName);
+		this.specialRewardString = reward;
+	}
+	
+	
 
 
 	@Override
@@ -124,5 +145,5 @@ public class QuestTemplate implements Cloneable{
 		return isItem;
 	}
 
-
+	public void getReward() {GenerateLoot.intoIntentory(reward);}
 }

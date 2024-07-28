@@ -73,73 +73,75 @@ public class Resources {
 	public static BufferedImage bgVillagePathRoom0;
 	public static BufferedImage bgVillagePathRoom1;
 	
+	
+	
 	public static void init(){
 		Logger.logInfo("started Loading Images...");
 		try {
-			playerAnimation = ImageIO.read(SpriteTest.class.getResource("/resources/Entitys/Player/PlayerAnimations.png"));
+			playerAnimation = ImageIO.read(Resources.class.getResource("/resources/Entitys/Player/PlayerAnimations.png"));
 			
-			bush = ImageIO.read(SpellIcons.class.getResource("/resources/objects/Bush.png"));
+			bush = ImageIO.read(Resources.class.getResource("/resources/objects/Bush.png"));
 			
-			chest = ImageIO.read(SpellIcons.class.getResource("/resources/objects/chest.png"));
+			chest = ImageIO.read(Resources.class.getResource("/resources/objects/chest.png"));
 			
-			healthPotion = ImageIO.read(ShopPotions.class.getResource("/resources/Roter_HeilungsTrank.jpeg"));
-			damagePotion = ImageIO.read(ShopPotions.class.getResource("/resources/DamageBoost.jpg"));
-			speedPotion = ImageIO.read(ShopPotions.class.getResource("/resources/SppedBoost.jpg"));
+			healthPotion = ImageIO.read(Resources.class.getResource("/resources/Roter_HeilungsTrank.jpeg"));
+			damagePotion = ImageIO.read(Resources.class.getResource("/resources/DamageBoost.jpg"));
+			speedPotion = ImageIO.read(Resources.class.getResource("/resources/SppedBoost.jpg"));
 			
-			merchant = ImageIO.read(ShopPotions.class.getResource("/resources/Merchant.png"));
+			merchant = ImageIO.read(Resources.class.getResource("/resources/Merchant.png"));
 			
-			speechBubble = ImageIO.read(ShopPotions.class.getResource("/resources/SpeechBubble.png"));
+			speechBubble = ImageIO.read(Resources.class.getResource("/resources/SpeechBubble.png"));
 			
-			buyButton = ImageIO.read(ShopPotions.class.getResource("/resources/BuyButton.png"));
-			sellButton = ImageIO.read(ShopPotions.class.getResource("/resources/SellButton.png"));
+			buyButton = ImageIO.read(Resources.class.getResource("/resources/BuyButton.png"));
+			sellButton = ImageIO.read(Resources.class.getResource("/resources/SellButton.png"));
 			
-			bgTable = ImageIO.read(ShopPotions.class.getResource("/resources/backgrounds/TestBackground.jpeg"));
-			bgTableSmall = ImageIO.read(ShopPotions.class.getResource("/resources/backgrounds/TableSmall.jpeg"));
+			bgTable = ImageIO.read(Resources.class.getResource("/resources/backgrounds/TestBackground.jpeg"));
+			bgTableSmall = ImageIO.read(Resources.class.getResource("/resources/backgrounds/TableSmall.jpeg"));
 			
-			lock = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/Icons/lock.png"));
+			lock = ImageIO.read(Resources.class.getResource("/resources/Icons/lock.png"));
 			
-			villageIcon = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/DungeonIcons/Village.png"));
-			forestIcon = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/DungeonIcons/Forest.png"));
-			castleIcon = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/DungeonIcons/Castle.png"));
-			dungeonIcon = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/DungeonIcons/Dungeon.png"));
+			villageIcon = ImageIO.read(Resources.class.getResource("/resources/DungeonIcons/Village.png"));
+			forestIcon = ImageIO.read(Resources.class.getResource("/resources/DungeonIcons/Forest.png"));
+			castleIcon = ImageIO.read(Resources.class.getResource("/resources/DungeonIcons/Castle.png"));
+			dungeonIcon = ImageIO.read(Resources.class.getResource("/resources/DungeonIcons/Dungeon.png"));
 			
-			arrowBack = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/Icons/ArrowBack.png"));
+			arrowBack = ImageIO.read(Resources.class.getResource("/resources/Icons/ArrowBack.png"));
 			
-			confirmButton = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/Icons/ConfirmChoise.png"));
+			confirmButton = ImageIO.read(Resources.class.getResource("/resources/Icons/ConfirmChoise.png"));
 			
-			blackSomething = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/backgrounds/black_Something.png"));
+			blackSomething = ImageIO.read(Resources.class.getResource("/resources/backgrounds/black_Something.png"));
 			
-			bgDungeonChooser = ImageIO.read(DungeonChooserGUI.class.getResource("/resources/backgrounds/DungeonChooserBackground.jpeg"));
+			bgDungeonChooser = ImageIO.read(Resources.class.getResource("/resources/backgrounds/DungeonChooserBackground.jpeg"));
 			
-			pauseButton = ImageIO.read(GameScreen.class.getResource("/resources/Icons/PauseButton.png"));
+			pauseButton = ImageIO.read(Resources.class.getResource("/resources/Icons/PauseButton.png"));
 			
-			ATKCooldown = ImageIO.read(GameScreen.class.getResource("/resources/Icons/spear.png"));
+			ATKCooldown = ImageIO.read(Resources.class.getResource("/resources/Icons/spear.png"));
 			
-			bgSettings = ImageIO.read(Settings.class.getResource("/resources/backgrounds/settings.png"));
+			bgSettings = ImageIO.read(Resources.class.getResource("/resources/backgrounds/settings.png"));
 			
-			scrollPaper = ImageIO.read(SpellChooser.class.getResource("/resources/backgrounds/ScrollPaperBackground.jpg"));
+			scrollPaper = ImageIO.read(Resources.class.getResource("/resources/backgrounds/ScrollPaperBackground.jpg"));
 			
-			questionMark = ImageIO.read(SpellChooser.class.getResource("/resources/Icons/questionMark.png"));
+			questionMark = ImageIO.read(Resources.class.getResource("/resources/Icons/questionMark.png"));
 			
-			bgSpellChooser = ImageIO.read(SpellChooser.class.getResource("/resources/backgrounds/SpellChooserBackground.png"));
+			bgSpellChooser = ImageIO.read(Resources.class.getResource("/resources/backgrounds/SpellChooserBackground.png"));
 			
-			player = ImageIO.read(SpriteTest.class.getResource("/resources/Entitys/Player/Player.png"));
+			player = ImageIO.read(Resources.class.getResource("/resources/Entitys/Player/Player.png"));
 			
-			copperCoin = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/CopperCoin.png"));
-			silverCoin = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/SilverCoin.png"));
-			goldCoin = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/GoldCoin.png"));
+			copperCoin = ImageIO.read(Resources.class.getResource("/resources/Icons/items/CopperCoin.png"));
+			silverCoin = ImageIO.read(Resources.class.getResource("/resources/Icons/items/SilverCoin.png"));
+			goldCoin = ImageIO.read(Resources.class.getResource("/resources/Icons/items/GoldCoin.png"));
 			
-			bread = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Bread.png"));
-			apple = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Apple.png"));
-			potato = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Potato.png"));
+			bread = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Bread.png"));
+			apple = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Apple.png"));
+			potato = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Potato.png"));
 			
-			mondtau = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Mondtau.png"));
-			daemmerungswurz = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Daemerungswurz.png"));
-			schattenkraut = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Schattenkraut.png"));
+			mondtau = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Mondtau.png"));
+			daemmerungswurz = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Daemerungswurz.png"));
+			schattenkraut = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Schattenkraut.png"));
 
-			ring = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Ring.png"));
-			kette = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Kette.png"));
-			armreif = ImageIO.read(SpellIcons.class.getResource("/resources/Icons/items/Armreif.png"));
+			ring = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Ring.png"));
+			kette = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Kette.png"));
+			armreif = ImageIO.read(Resources.class.getResource("/resources/Icons/items/Armreif.png"));
 
 			bgEmptyRoom = ImageIO.read(Resources.class.getResource("/resources/rooms/backgrounds/Empty.png"));
 			bgFieldRoom = ImageIO.read(Resources.class.getResource("/resources/rooms/backgrounds/Feld.png"));
@@ -147,6 +149,8 @@ public class Resources {
 			bgVillageSpawnRoom = ImageIO.read(Resources.class.getResource("/resources/rooms/backgrounds/VillageSpawn.png"));
 			bgVillagePathRoom0 = ImageIO.read(Resources.class.getResource("/resources/rooms/backgrounds/VillagePath1.png"));
 			bgVillagePathRoom1 = ImageIO.read(Resources.class.getResource("/resources/rooms/backgrounds/VillagePath2.png"));
+			
+			
 			
 			
 			

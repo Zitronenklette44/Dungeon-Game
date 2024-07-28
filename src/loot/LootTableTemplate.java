@@ -11,13 +11,15 @@ import questSystem.quests.QuestTemplate;
 
 public class LootTableTemplate {
 	public final int rolls;
+	public String name;
 	private ItemTemplate[] possibleItems;
 	private ArrayList<ItemTemplate> itemPool = new ArrayList<ItemTemplate>();
 	public ArrayList<ItemTemplate> lastGeneratedLoot = new ArrayList<ItemTemplate>();
 	
-	public LootTableTemplate(int rolls, ItemTemplate[] possibleItems ) {
+	public LootTableTemplate(int rolls, ItemTemplate[] possibleItems , String name) {
 		this.rolls = rolls;
 		this.possibleItems = possibleItems;
+		this.name = name;
 		initPool();
 	}
 	
