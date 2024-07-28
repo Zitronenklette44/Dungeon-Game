@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -18,16 +19,20 @@ import javax.swing.JLabel;
 import action.Logger;
 import components.CustomeGraphics;
 import game.GameLogic;
+import gameObject.Rechteck;
 import loot.LootTableTemplate;
 import loot.SpawnLoot;
 import loot.items.EmptyItem;
 import loot.items.ItemTemplate;
+import questSystem.quests.QuestTemplate;
 import rendering.Resources;
 import test.SpriteTest;
 
 public class Inventory extends JLabel {
     private static final long serialVersionUID = 1L;
     private int Interface = 0;
+    
+    //Inventory
     public int maxInventarSlots;
     private static final int SLOT_SIZE = 60;
     private static final int SLOT_PADDING = 70;
@@ -43,11 +48,19 @@ public class Inventory extends JLabel {
     private int button1X, button1Y, button1Width, button1Height;
     private int button2X, button2Y, button2Width, button2Height;
     private int button3X, button3Y, button3Width, button3Height;
+    
+    //Quest Log
+    private final int QUEST_SLOT_SIZEX = 1184 / 100 * 32;
+    private final int QUEST_SLOT_SIZEY = 60;
+    private int forceQuest = 0;
+    private int normalQuests = 0;
+    private ArrayList<Rechteck> quests = new ArrayList<Rechteck>();
 
     public Inventory(int maxInventarSlots) {
         this.maxInventarSlots = maxInventarSlots;
         setLayout(null); // Ensure we are using absolute positioning
         initMouseListeners();
+        getQuestNumbers();
     }
 
     private void initMouseListeners() {
@@ -140,7 +153,11 @@ public class Inventory extends JLabel {
         });
         addComponentListener(new ComponentListener() {
 			@Override
-			public void componentShown(ComponentEvent e) {}
+			public void componentShown(ComponentEvent e) {
+				forceQuest = 0;
+				normalQuests = 0;
+				getQuestNumbers();
+			}
 			@Override
 			public void componentResized(ComponentEvent e) {}
 			@Override
@@ -241,7 +258,40 @@ public class Inventory extends JLabel {
     }
 
     private void paintQuestLog(Graphics2D g) {
-        // Implementiere das Zeichnen der Crafting-Tabelle hier
+    	//quest Auswahl bereich
+        g.setColor(Color.gray.darker().darker());
+        g.fillRoundRect(getWidth() / 100 * 14, getHeight() / 100 * 14, 373, 575, 20, 20);
+        g.setColor(new Color(255, 215, 0).darker());
+        g.fillRoundRect(getWidth() / 100 * 14, getHeight() / 100 * 14, 373, 50, 20, 20);	//gold Top
+        
+        g.setColor(Color.black);
+        g.drawRoundRect(getWidth() / 100 * 14, getHeight() / 100 * 14, 373, 575, 20, 20);
+        g.drawRoundRect(getWidth() / 100 * 14, getHeight() / 100 * 14, 373, 50, 20, 20);	//gold Tops rahmen
+    	
+        int posY = getHeight() / 100 * 23;
+        int padding = QUEST_SLOT_SIZEY + 10;
+        
+        for(int i = 0; i < forceQuest; i++) {
+        	g.setColor(new Color(119, 136, 153).darker());
+        	g.fillRect(getWidth() / 100 * 14 + 10, posY + padding*i, QUEST_SLOT_SIZEX, QUEST_SLOT_SIZEY);
+        	g.setColor(Color.black);
+        	g.drawRect(getWidth() / 100 * 14 + 10, posY + padding*i, QUEST_SLOT_SIZEX, QUEST_SLOT_SIZEY);
+        	quests.add(new Rechteck(QUEST_SLOT_SIZEX, QUEST_SLOT_SIZEY, getWidth() / 100 * 14 + 10, posY+padding*i));
+        }
+        g.setColor(new Color(192, 192, 192).darker());
+        g.fillRoundRect(getWidth() / 100 * 14, posY + padding * forceQuest, 373, 50, 20, 20);	//silver Middel
+        g.setColor(Color.black);
+        g.drawRoundRect(getWidth() / 100 * 14, posY + padding * forceQuest, 373, 50, 20, 20);	//silver Middel rahmen
+        
+        posY = posY + padding * (forceQuest+1);
+        
+        for(int i = 0; i < normalQuests; i++) {		//normal Quests
+        	g.setColor(new Color(119, 136, 153).darker());
+        	g.fillRect(getWidth() / 100 * 14 + 10, posY + padding*i, QUEST_SLOT_SIZEX, QUEST_SLOT_SIZEY);
+        	g.setColor(Color.black);
+        	g.drawRect(getWidth() / 100 * 14 + 10, posY + padding*i, QUEST_SLOT_SIZEX, QUEST_SLOT_SIZEY);
+        }
+        
     }
 
     private void paintUniversal(Graphics2D g) {
@@ -315,4 +365,17 @@ public class Inventory extends JLabel {
     public void setMaxInventarSlots(int maxInventarSlots) {
         this.maxInventarSlots = maxInventarSlots;
     }
+    
+    public void getQuestNumbers(){
+    	ArrayList<QuestTemplate> currentQuests = new ArrayList<QuestTemplate>(GameLogic.currentQuest);    	
+    	
+    	for(int i = 0; i < currentQuests.size(); i++) {
+    		if(currentQuests.get(i).forceQuest) {
+    			forceQuest++;
+    		}else {
+    			normalQuests++;
+    		}
+    	}
+    }
+    
 }

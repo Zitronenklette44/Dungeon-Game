@@ -70,9 +70,11 @@ public class ItemTemplate implements Cloneable {
 					isObject = false;
 					posX = 100;
 					InventoryManager.add(this, stackSize);
-					if(GameLogic.currentQuest != null) {
-						if(GameLogic.currentQuest.isRequiredItem(this) && ! wasInInventory) {
-							GameLogic.currentQuest.currentCollectedItems += stackSize;
+					for (int j = 0; j < GameLogic.currentQuest.size(); j++) {
+						if(GameLogic.currentQuest.get(i) != null) {
+							if(GameLogic.currentQuest.get(i).isRequiredItem(this) && ! wasInInventory) {
+								GameLogic.currentQuest.get(i).currentCollectedItems += stackSize;
+							}
 						}
 					}
 					

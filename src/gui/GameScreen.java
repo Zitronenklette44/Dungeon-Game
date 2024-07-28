@@ -76,7 +76,7 @@ public class GameScreen extends JFrame {
 	private static Draw draw;
 	public static boolean paintRoomNum;
 	public static Inventory inventory;
-	private static DrawQuests quests;
+	public static DrawQuests quests;
 	
 	
 	
@@ -173,6 +173,7 @@ public class GameScreen extends JFrame {
 					if(hasDialog) {btnNext.finishDialog();return;}
 					GameLogic.paused = !GameLogic.paused;
 					if(inventory.isVisible()) {inventory.setVisible(false);}
+					if(quests.isVisible()) {quests.setVisible(false);}
 					togglePause();
 				}
 			}
@@ -365,8 +366,8 @@ public class GameScreen extends JFrame {
 	
 	private void togglePause() {
 		if(!settingExists) {
-		boolean paused = GameLogic.paused;
-		pauseMenue.setVisible(paused);
+			boolean paused = GameLogic.paused;
+			pauseMenue.setVisible(paused);
 		}
 	}
 	

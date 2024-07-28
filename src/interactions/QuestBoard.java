@@ -1,5 +1,6 @@
 package interactions;
 
+import game.GameLogic;
 import gui.GameScreen;
 import translation.Translation;
 
@@ -14,6 +15,7 @@ public class QuestBoard extends InteractableTemplate {
 		@Override
 		public void performAction() {
 			super.performAction();
-			GameScreen.toggleQuests();
+			GameLogic.paused = true;
+			GameScreen.quests.setVisible(true);
 		}
 }

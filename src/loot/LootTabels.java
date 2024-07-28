@@ -28,7 +28,8 @@ public class LootTabels {
 	}
 	
 	public static QuestTable createNewFQuest() {
-		return new QuestTable(new QuestTemplate[] {QuestManager.get(1)});
+		int temp = QuestManager.LAST_SLOT_FORCE_QUESTS;
+		return new QuestTable(new QuestTemplate[] {QuestManager.get(temp+1), QuestManager.get(temp+2), QuestManager.get(temp+3), QuestManager.get(temp+4)});
 	}
 	
 	

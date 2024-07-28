@@ -55,8 +55,9 @@ public class DrawQuests extends JLabel {
 						QuestManager.setNewQuest(quest);
 					}
 
-					if(triggerButton2) {
+					if(triggerButton2) {		//ablehnen
 						quest = GenerateLoot.generateQuest(questTable);
+						splitDescription(quest.description);
 					}
 				}
 

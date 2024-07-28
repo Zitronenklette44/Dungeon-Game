@@ -22,6 +22,7 @@ public class QuestTemplate implements Cloneable{
 	public ItemTemplate item;
 	public ItemTemplate[] itemGroup;
 	public String specialRewardString;
+	public boolean forceQuest = false;
 	
 	public int currentKilledMobs = 0;
 	public int currentCollectedItems = 0;

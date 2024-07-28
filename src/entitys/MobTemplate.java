@@ -15,9 +15,9 @@ public class MobTemplate extends Rechteck{
 	public float dy;
 	public float lastdx;
 	public float lastdy;
-    public int SpawnX;
-    public int SpawnY;
-    public float speed;
+	public int SpawnX;
+	public int SpawnY;
+	public float speed;
 	public int damage;
 	public int Hp;
 	public int maxHp;
@@ -38,66 +38,68 @@ public class MobTemplate extends Rechteck{
 	public boolean invulnerable = false;
 	public int MobID;
 	public BufferedImage image;
-    
-    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana, int MobID) {
-        super(hoehe, breite, posX, posY);
-        this.dx = dx;
-        this.SpawnX = SpawnX;
-        this.SpawnY = SpawnY;
-        this.speed = speed;
-        this.damage = damage;
-        this.Hp = Hp;
-        this.maxHp = Hp;
-        this.maxMana = MaxMana;
-        mana = maxMana;
-        this.restoreMana = restoreMana;
-        this.MobID = MobID;
-    }
-    
-    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MobID) {
-        super(hoehe, breite, posX, posY);
-        this.dx = dx;
-        this.SpawnX = SpawnX;
-        this.SpawnY = SpawnY;
-        this.speed = speed;
-        this.damage = damage;
-        this.Hp = Hp;
-        this.maxHp = Hp;
-        this.maxMana = 0;
-        mana = maxMana;
-        this.restoreMana = 0;
-        this.MobID = MobID;
-    }
-    
-    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana, LootTableTemplate loot, int MobID) {
-        this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, MaxMana, restoreMana, MobID);
-        this.loot = loot;
-    }
-    
-    public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, LootTableTemplate loot, int MobID) {
-        this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, MobID);
-        this.loot = loot;
-    }
-    
-    public void drawMob(Graphics2D g) {}
-    
-    public void setHitCooldown() {
+
+	public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana, int MobID) {
+		super(hoehe, breite, posX, posY);
+		this.dx = dx;
+		this.SpawnX = SpawnX;
+		this.SpawnY = SpawnY;
+		this.speed = speed;
+		this.damage = damage;
+		this.Hp = Hp;
+		this.maxHp = Hp;
+		this.maxMana = MaxMana;
+		mana = maxMana;
+		this.restoreMana = restoreMana;
+		this.MobID = MobID;
+	}
+
+	public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MobID) {
+		super(hoehe, breite, posX, posY);
+		this.dx = dx;
+		this.SpawnX = SpawnX;
+		this.SpawnY = SpawnY;
+		this.speed = speed;
+		this.damage = damage;
+		this.Hp = Hp;
+		this.maxHp = Hp;
+		this.maxMana = 0;
+		mana = maxMana;
+		this.restoreMana = 0;
+		this.MobID = MobID;
+	}
+
+	public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, int MaxMana, int restoreMana, LootTableTemplate loot, int MobID) {
+		this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, MaxMana, restoreMana, MobID);
+		this.loot = loot;
+	}
+
+	public MobTemplate(int hoehe, int breite, float posX, float posY, float dx, float dy, float speed, int SpawnX, int SpawnY, int damage ,int Hp, LootTableTemplate loot, int MobID) {
+		this(hoehe, breite, posX, posY, dx, dy, speed, SpawnX, SpawnY, damage, Hp, MobID);
+		this.loot = loot;
+	}
+
+	public void drawMob(Graphics2D g) {}
+
+	public void setHitCooldown() {
 		this.HitCooldown = maxHitCooldown;
 	}
-    
-    public void onDeath() {
-    	if(GameLogic.currentQuest != null) {
-    		if(GameLogic.currentQuest.questType == 0 && GameLogic.currentQuest.MobID == MobID) {
-        		GameLogic.currentQuest.currentKilledMobs++;
-        	}
-    	}
-    	if(!defeated || spawnedLootTable || loot == null) {return;}
-    	SpawnLoot.around(posX, posY, 20, loot);
-    	spawnedLootTable = true;
-    }
-    
-    public void resetPos() {
-        this.posX = SpawnX;
-        this.posY = SpawnY;
-    }
+
+	public void onDeath() {
+		for (int i = 0; i < GameLogic.currentQuest.size(); i++) {
+			if(GameLogic.currentQuest.get(i) != null) {
+				if(GameLogic.currentQuest.get(i).questType == 0 && GameLogic.currentQuest.get(i).MobID == MobID) {
+					GameLogic.currentQuest.get(i).currentKilledMobs++;
+				}
+			}
+		}
+		if(!defeated || spawnedLootTable || loot == null) {return;}
+		SpawnLoot.around(posX, posY, 20, loot);
+		spawnedLootTable = true;
+	}
+
+	public void resetPos() {
+		this.posX = SpawnX;
+		this.posY = SpawnY;
+	}
 }
