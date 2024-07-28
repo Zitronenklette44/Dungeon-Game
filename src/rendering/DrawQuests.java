@@ -49,7 +49,7 @@ public class DrawQuests extends JLabel {
 					
 					if(e.getX()>=btn1X&&e.getX()<=btn1X+btn1width && e.getY()>=btn1Y && e.getY() <=btn1Y+btn1hight) triggerButton1 = true;
 
-//					if() triggerButton2 = true;
+					if(e.getX()>=btn2X&&e.getX()<=btn2X+btn2width && e.getY()>=btn2Y && e.getY()<=btn2Y+btn2hight) triggerButton2 = true;
 					
 					if(triggerButton1) {			//annhemen
 						QuestManager.setNewQuest(quest);
@@ -182,6 +182,26 @@ public class DrawQuests extends JLabel {
 		g2D.drawString("Reward:", getWidth() / 3 + 3,  (int) (getHeight() / 2 + 90));
 		g2D.drawString("- "+quest.reward.rolls+"x "+quest.reward.name, getWidth() / 3 + 20,  (int) (getHeight() / 2 + 115));
 
+		btn1X =  getWidth() / 3 + 30;
+		btn1Y = (int) (getHeight() / 2 + 170);
+		btn1hight = 25;
+		btn1width = 120;
+		
+		btn2X =  getWidth() / 3 + 210;
+		btn2Y = (int) (getHeight() / 2 + 170);
+		btn2hight = 25;
+		btn2width = 120;
+		
+		g2D.setColor(Color.gray);
+		g2D.fillRect(btn1X,btn1Y, btn1width, btn1hight);
+		g2D.fillRect(btn2X,btn2Y, btn2width, btn2hight);
+		
+		g.setFont(new Font("Tahoma", Font.BOLD, 15));
+		g2D.setColor(Color.black);
+        g.drawString("Annehmen", (int) (btn1X+btn1width/5+1), (int) (btn1Y+btn1hight/1.5));
+        g.drawString("Ablehnen", (int) (btn2X+btn2width/4), (int) (btn2Y+btn2hight/1.5));
+	
+		
 	}
 
 	public String MobID() {
@@ -198,21 +218,6 @@ public class DrawQuests extends JLabel {
 		}
 		return name;
 	}
-
-	public void ItemID() {
-
-
-
-
-	}
-
-
-
-
-
-
-
-
 
 
 }
