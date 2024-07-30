@@ -1,5 +1,6 @@
 package action;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 public class Logger {
 
@@ -56,4 +57,17 @@ public class Logger {
 	public static void logSeperation() {
 		Logger.logInfo("---------------------------------------------------------");
 	}
+	
+	public static <T> void logArray(T[] array) {
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        for (int i = 0; i < array.length; i++) {
+            stringBuilder.append(array[i]);
+            if (i < array.length - 1) {
+                stringBuilder.append(", "); // Optional: add a separator for readability
+            }
+        }
+        
+        logInfo(stringBuilder.toString());
+    }
 }

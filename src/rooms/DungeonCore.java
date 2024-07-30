@@ -250,8 +250,6 @@ public class DungeonCore {
 			if(GameLogic.debug) {
 				g2d.drawString(thisRooms.get(currentRoom).name, 200, 300);
 			}
-//			Draw.clearObjects();
-//			thisRooms.get(currentRoom).createObjects(currentRoom);
 			thisRooms.get(currentRoom).DrawImage(g2d);
 		} else if (specialRoomBuild){
 			GameLogic.floor = 725;
@@ -264,8 +262,6 @@ public class DungeonCore {
 			if(GameLogic.debug) {
 				g2d.drawString(thisRooms.get(currentRoom).name, 200, 300);
 			}
-//			Draw.clearObjects();
-//			thisRooms.get(currentRoom).createObjects(currentRoom);
 			thisRooms.get(currentRoom).DrawImage(g2d);
 		}else{
 			if(!(thisRooms.get(currentRoom) instanceof Field)) { GameLogic.floor = 700;}else {GameLogic.floor = 725;}
@@ -274,8 +270,6 @@ public class DungeonCore {
 			if(GameLogic.debug) {
 				g2d.drawString(thisRooms.get(currentRoom).name, 200, 300);
 			}
-//			Draw.clearObjects();
-//			thisRooms.get(currentRoom).createObjects(currentRoom);
 			thisRooms.get(currentRoom).DrawImage(g2d);
 		}
 	}

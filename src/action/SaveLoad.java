@@ -208,13 +208,13 @@ public class SaveLoad {
 			DungeonCore.currentRoom = 1;
 			DungeonCore.dungeonType = 5;
 			DungeonCore.init();
-			GameScreen.updateRoomNr(1);
+//			GameScreen.updateRoomNr(1);
 			GameLogic.vertikalAxis=true;
-			GameScreen.updateRoomNr(1);
+//			GameScreen.updateRoomNr(1);
 			GameLogic.player.breite = 25;
 			GameLogic.player.hoehe = 25;
 			Draw.playerColor = Color.gray;
-			GameLogic.resetLevel();
+//			GameLogic.resetLevel();
 			
 			//Noch weitere Anweisungen für werte bei Spielstart
 			

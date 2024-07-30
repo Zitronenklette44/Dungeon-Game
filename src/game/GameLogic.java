@@ -69,7 +69,7 @@ public class GameLogic {
 	public static DungeonCore dungeon = new DungeonCore();
 	public static float playerSpeed = 1F;
 
-	public static boolean currentQuestDone = false;
+	public static ArrayList<Boolean> currentQuestDone = new ArrayList<Boolean>();
 	public static boolean haveQuest = false;
 	public static final int MAX_ACCAPTABLE_QUESTS = 3;
 	public static int current_Accapted_Quests = 0;
@@ -258,7 +258,7 @@ public class GameLogic {
 
 		for (int i = 0; i < currentQuest.size(); i++) {
 			if (currentQuest.get(i).isCompleted()) {
-				currentQuestDone = true;
+				currentQuestDone.set(i, true);
 				currentQuest.get(i).getReward();
 				currentQuest.remove(i);
 				Logger.logInfo("Quest completed");

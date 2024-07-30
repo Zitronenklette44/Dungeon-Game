@@ -90,7 +90,7 @@ public class Draw extends JLabel {
 			GameLogic.dungeon.drawRoom(g2d);
 		} catch (Exception e) {
 			Logger.logError("unable to draw Room", e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 
 

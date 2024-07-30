@@ -54,7 +54,6 @@ public class MusicPlayer {
 		Logger.logInfo("finished loading Music");
 	}
 
-
 	public static void playSound(int fileNR, boolean loop) {		//Abspielen einer Sound Datei	evt wenn gewünscht mit loop
 		if(!GameLogic.musicEnabled) {	//wenn keine musik
 			return;

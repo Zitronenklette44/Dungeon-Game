@@ -1,13 +1,14 @@
 package loot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import action.Logger;
 import loot.items.ItemTemplate;
-import questSystem.quests.QuestTemplate;
 
 public class LootTableTemplate {
 	public final int rolls;
@@ -53,5 +54,20 @@ public class LootTableTemplate {
 	        seenUUIDs.add(item.id);
 	        lastGeneratedLoot.add(item);
 	    }
+	}
+	
+	public ItemTemplate[] getPossibleItems() {
+	    HashMap<String, ItemTemplate> uniqueItemsMap = new HashMap<>();
+
+	    for (ItemTemplate item : possibleItems) {
+	    	if(item.itemName == "") {
+	    		continue;
+	    	}
+	        String uniqueKey = item.itemName + ":" + item.variant;
+	        if (!uniqueItemsMap.containsKey(uniqueKey)) {
+	            uniqueItemsMap.put(uniqueKey, item);
+	        }
+	    }
+	    return uniqueItemsMap.values().toArray(new ItemTemplate[0]);
 	}
 }

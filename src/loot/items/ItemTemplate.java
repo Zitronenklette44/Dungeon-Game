@@ -1,6 +1,7 @@
 package loot.items;
 
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 import java.util.UUID;
 
 import action.Logger;
@@ -88,17 +89,19 @@ public class ItemTemplate implements Cloneable {
 	// Equals und HashCode überschreiben, wenn UUID verwendet wird
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null || getClass() != obj.getClass())
-			return false;
-		ItemTemplate that = (ItemTemplate) obj;
-		return id.equals(that.id);
+	    if (this == obj)
+	        return true;
+	    if (obj == null || getClass() != obj.getClass())
+	        return false;
+	    ItemTemplate that = (ItemTemplate) obj;
+	    return  variant == that.variant &&
+	    		itemName.equals(that.itemName) &&
+	            id.equals(that.id);
 	}
 
 	@Override
 	public int hashCode() {
-		return id.hashCode();
+	    return Objects.hash(id, itemName, variant);
 	}
 
 	public void changeToObject(float posX, float posY) {

@@ -1,6 +1,7 @@
 package questSystem.quests;
 
 import action.Logger;
+import game.GameLogic;
 import loot.GenerateLoot;
 import loot.LootTableTemplate;
 import loot.items.ItemTemplate;
@@ -146,5 +147,5 @@ public class QuestTemplate implements Cloneable{
 		return isItem;
 	}
 
-	public void getReward() {GenerateLoot.intoIntentory(reward);}
+	public void getReward() {GenerateLoot.intoIntentory(reward); if(!forceQuest) GameLogic.current_Accapted_Quests--;}
 }

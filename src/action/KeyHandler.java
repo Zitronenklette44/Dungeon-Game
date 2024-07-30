@@ -62,10 +62,6 @@ public class KeyHandler implements KeyListener {
 		if(e.getKeyChar() == 'n' || e.getKeyChar() == 'N') {	//temporär
 			DungeonInfos.erstellen();
 		}
-		if(e.getKeyChar() == 'b' || e.getKeyChar() == 'B') {	//temporär
-			GameLogic.currentQuestDone = !GameLogic.currentQuestDone;
-			if(GameLogic.currentQuestDone == false) GameLogic.currentQuest = null;
-		}
 	
 		if((e.getKeyChar() == 'i' || e.getKeyChar() == 'I') && !GameLogic.paused) {	
 			GameScreen.inventory.setVisible(!GameScreen.inventory.isVisible());

@@ -3,6 +3,7 @@ package interactions;
 import action.Logger;
 import game.GameLogic;
 import gui.GameScreen;
+import questSystem.quests.GuildEntryQuest;
 
 public class InteractableDialog extends InteractableTemplate{
 	int Dialog;
@@ -24,7 +25,18 @@ public class InteractableDialog extends InteractableTemplate{
 	
 	@Override
 	public void performAction() {
-		if(GameLogic.currentQuestDone && Dialogs.length-1 > currentDialog) {
+		int index = -1;
+		for(int i = 0; i<GameLogic.currentQuest.size(); i++) {
+			if(GameLogic.currentQuest.get(i) instanceof GuildEntryQuest) {
+				index = i;
+				break;
+			}
+			
+		}
+		
+		if(index == -1) return;
+		
+		if(GameLogic.currentQuestDone.get(index) && Dialogs.length-1 > currentDialog) {
 			currentDialog ++;
 		}
 		Logger.logInfo("current Dialog: "+currentDialog +" max Dialog: "+ Dialogs.length);

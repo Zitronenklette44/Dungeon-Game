@@ -22,7 +22,7 @@ public class QuestManager {
 		
 		quests.add(new DefeatFirstBoss());
 
-		quests.add(new QuestTemplate("FieldMobs", 7, "Das ist eine Lustige Quest die eine lange beschreibung hat", LootTabels.createValuebles(2), 'F', 1, CreateItem.createCopperCoin(0)));		//Test
+		quests.add(new QuestTemplate("FieldMobs", 7, "Das ist eine Lustige Quest die eine extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem extrem lange beschreibung hat", LootTabels.createValuebles(2), 'F', 1, CreateItem.createCopperCoin(0)));		//Test
 		
 		quests.add(new QuestTemplate("NichtFieldMobs", 3, "Das ist keine Lustige Quest mit keiner langen beschreibung", LootTabels.createValuebles(2), 'E', 1, 1));		//Test
 		
@@ -51,6 +51,7 @@ public class QuestManager {
 	public static void approveQuest() {
 		if(GameLogic.current_Accapted_Quests >= GameLogic.MAX_ACCAPTABLE_QUESTS && !GameLogic.choosenQuest.forceQuest) return;
 		Logger.logInfo("approved New Quest");
+		GameLogic.currentQuestDone.set(GameLogic.currentQuest.size(), true);
 		GameLogic.currentQuest.add(GameLogic.choosenQuest);
 		if(!GameLogic.choosenQuest.forceQuest) GameLogic.current_Accapted_Quests++;
 		GameLogic.choosenQuest = null;
